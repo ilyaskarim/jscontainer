@@ -36,7 +36,7 @@ const menu = (
 export default function () {
   return (
     <StyledNavbar>
-      <a>
+      <a href="/" >
         <StyledNavbarHeader>JSContainer</StyledNavbarHeader>
       </a>
       <StyledNavbarSearch>

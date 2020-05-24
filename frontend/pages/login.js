@@ -1,14 +1,17 @@
-import { StyledLoginPageContainer, StyledLoginPageInput, StyledLoginPageSubmitButton, StyledLoginPageFormSocialSeparator,StyledLoginPageSocialButtonsContainer } from "./../src/styles/login.styles";
+import { StyledLoginPageContainer, StyledLoginPageInput, StyledLoginPageSubmitButton, StyledLoginPageFormSocialSeparator, StyledLoginPageSocialButtonsContainer, StyledLoginPageForgetPasswordText, StyledLoginPageHeadingText, StyledLoginPageNewToAppText } from "./../src/styles/login.styles";
 import { GoogleSocialbutton, GithubSocialButton } from "./../components/SocialButtons";
 
-import { Input, Button } from "antd";
 export default function () {
   return (
     <StyledLoginPageContainer>
-      <h1>Login</h1>
+      <StyledLoginPageHeadingText>Login to your account</StyledLoginPageHeadingText>
       <StyledLoginPageInput placeholder="Email"></StyledLoginPageInput>
       <StyledLoginPageInput placeholder="Password"></StyledLoginPageInput>
-      <StyledLoginPageSubmitButton>Login</StyledLoginPageSubmitButton>
+      <StyledLoginPageForgetPasswordText>Forget Password?</StyledLoginPageForgetPasswordText>
+      <StyledLoginPageSubmitButton type="primary">Login</StyledLoginPageSubmitButton>
+      <StyledLoginPageNewToAppText>
+        New to JSContainer? <a href="/signup" >Signup</a>
+      </StyledLoginPageNewToAppText>
       <StyledLoginPageFormSocialSeparator>Or</StyledLoginPageFormSocialSeparator>
       <StyledLoginPageSocialButtonsContainer>
         <GithubSocialButton></GithubSocialButton>
