@@ -2,6 +2,10 @@ import Head from "next/head";
 import Navbar from "../components/Navbar";
 import AppFooter from "../components/AppFooter";
 import GlobalStyle from "./../src/styles/GlobalStyle";
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/material.css";
+import "codemirror/theme/eclipse.css";
+
 function MyApp({ Component, pageProps }) {
   return (
     <html>

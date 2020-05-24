@@ -8,7 +8,7 @@ export default function () {
       <StyledLoginPageInput placeholder="Email"></StyledLoginPageInput>
       <StyledLoginPageInput placeholder="Password"></StyledLoginPageInput>
       <StyledLoginPageInput placeholder="Confirm Password"></StyledLoginPageInput>
-      <StyledLoginPageSubmitButton type="primary">Login</StyledLoginPageSubmitButton>
+      <StyledLoginPageSubmitButton type="primary">Signup</StyledLoginPageSubmitButton>
       <StyledLoginPageNewToAppText>
         Already have an account? <a href="/login" >Login</a>
       </StyledLoginPageNewToAppText>

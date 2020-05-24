@@ -1,3 +1,4 @@
+import Playground from "./../components/Playground/Index";
 export default function Home() {
-  return <div>asd</div>;
+  return <Playground></Playground>;
 }
