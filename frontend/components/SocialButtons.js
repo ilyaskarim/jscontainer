@@ -1,8 +1,9 @@
-import { GithubSocialbuttonStyle, GoogleSocialbuttonStyle } from "./SocialButtonsStyles";
+import { GithubSocialbuttonStyle, GoogleSocialbuttonStyle, SocialButtonIcon, SocialButtonText } from "./SocialButtonsStyles";
 export const GithubSocialButton = () => {
   return (
     <GoogleSocialbuttonStyle>
-      <span class="mdi mdi-google"></span>Sign in with Google
+      <SocialButtonIcon className="mdi mdi-google"></SocialButtonIcon>
+      <SocialButtonText>Sign in with Google</SocialButtonText>
     </GoogleSocialbuttonStyle>
   );
 };
@@ -10,7 +11,8 @@ export const GithubSocialButton = () => {
 export const GoogleSocialbutton = () => {
   return (
     <GithubSocialbuttonStyle>
-      <span class="mdi mdi-github"></span> Sign in with GitHub
+      <SocialButtonIcon className="mdi mdi-github"></SocialButtonIcon>
+      <SocialButtonText>Sign in with GitHub</SocialButtonText>
     </GithubSocialbuttonStyle>
   );
 };
