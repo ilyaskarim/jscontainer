@@ -12,7 +12,7 @@ export const PlaygroundLayoutSidebar = styled.div`
 `;
 
 export const PlaygroundEditorContainer = styled.div`
-  width: 50%;
+  width: 42%;
   border-right: 1px solid #eee;
 `;
 
@@ -29,3 +29,6 @@ export const PlaygroundCodeMirrorContainer = styled.div`
     height: calc(100vh - 95px);
   }
 `;
+
+
+export const PlaygroundPreview = styled.div``

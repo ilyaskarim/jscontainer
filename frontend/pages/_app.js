@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
       <body style={{ fontFamily: "Open Sans" }}>
         <Navbar></Navbar>
         <Component {...pageProps} />
-        <AppFooter></AppFooter>
+        {/* <AppFooter></AppFooter> */}
       </body>
     </html>
   );

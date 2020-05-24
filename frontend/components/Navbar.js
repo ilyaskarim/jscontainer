@@ -40,7 +40,7 @@ export default function () {
         <StyledNavbarHeader>JSContainer</StyledNavbarHeader>
       </a>
       <StyledNavbarSearch>
-        <Input placeholder="Search containers"></Input>
+        <Input placeholder="Search public containers"></Input>
       </StyledNavbarSearch>
       <StyledNavbarLink className="space-to-right">Create Organization</StyledNavbarLink>
       <Dropdown overlay={menu}>

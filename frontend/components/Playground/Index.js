@@ -1,5 +1,5 @@
-import { PlaygroundLayoutContainer, PlaygroundLayoutSidebar, PlaygroundEditorContainer, PlaygroundEditorTabscontainer, PlaygroundCodeMirrorContainer } from "./PlaygroundLayoutStyles";
-import { Tabs } from "antd";
+import { Tabs, Input } from "antd";
+import { Collapse } from "antd";
 
 let CodeMirror = null;
 if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
@@ -11,11 +11,17 @@ if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
 
 const { TabPane } = Tabs;
 
+import { PlaygroundLayoutContainer, PlaygroundLayoutSidebar, PlaygroundEditorContainer, PlaygroundEditorTabscontainer, PlaygroundCodeMirrorContainer,PlaygroundPreview } from "./PlaygroundLayoutStyles";
+
+import PlaygroundSidebar from "./PlaygroundSidebar";
+
 export default function () {
   return (
     <div>
       <PlaygroundLayoutContainer>
-        <PlaygroundLayoutSidebar>Sidebar</PlaygroundLayoutSidebar>
+        <PlaygroundLayoutSidebar>
+          <PlaygroundSidebar></PlaygroundSidebar>
+        </PlaygroundLayoutSidebar>
         <PlaygroundEditorContainer>
           <PlaygroundEditorTabscontainer animated={false} defaultActiveKey="2">
             <TabPane tab={<span>HTML</span>} key="html">
@@ -48,7 +54,7 @@ export default function () {
                 </PlaygroundCodeMirrorContainer>
               )}
             </TabPane>
-            <TabPane tab={<span>JS</span>} key="js">
+            <TabPane tab={<span>Javascript</span>} key="javascript">
               {CodeMirror && (
                 <PlaygroundCodeMirrorContainer>
                   <CodeMirror
@@ -65,6 +71,9 @@ export default function () {
             </TabPane>
           </PlaygroundEditorTabscontainer>
         </PlaygroundEditorContainer>
+        <PlaygroundPreview>
+          Preview
+        </PlaygroundPreview>
       </PlaygroundLayoutContainer>
     </div>
   );
