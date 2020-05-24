@@ -6,6 +6,9 @@ import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "codemirror/theme/eclipse.css";
 
+import store from "../store/store";
+import { Provider } from "react-redux";
+
 function MyApp({ Component, pageProps }) {
   return (
     <html>
@@ -17,9 +20,11 @@ function MyApp({ Component, pageProps }) {
         <title>JS Container</title>
       </Head>
       <body style={{ fontFamily: "Open Sans" }}>
-        <Navbar></Navbar>
-        <Component {...pageProps} />
-        {/* <AppFooter></AppFooter> */}
+        <Provider store={store}>
+          <Navbar></Navbar>
+          <Component {...pageProps} />
+          {/* <AppFooter></AppFooter> */}
+        </Provider>
       </body>
     </html>
   );

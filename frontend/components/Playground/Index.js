@@ -11,11 +11,18 @@ if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
 
 const { TabPane } = Tabs;
 
-import { PlaygroundLayoutContainer, PlaygroundLayoutSidebar, PlaygroundEditorContainer, PlaygroundEditorTabscontainer, PlaygroundCodeMirrorContainer,PlaygroundPreview } from "./PlaygroundLayoutStyles";
+import { PlaygroundLayoutContainer, PlaygroundLayoutSidebar, PlaygroundEditorContainer, PlaygroundEditorTabscontainer, PlaygroundCodeMirrorContainer, PlaygroundPreview } from "./PlaygroundLayoutStyles";
 
 import PlaygroundSidebar from "./PlaygroundSidebar";
 
+import { useSelector, useDispatch } from "react-redux";
+import { getPlaygroundInstance, setPlaygroundInstance } from "../../store/modules/playground";
+
+import Preview from "./Preview";
+
 export default function () {
+  const dispatch = useDispatch();
+  const playgroundInstance = useSelector(getPlaygroundInstance);
   return (
     <div>
       <PlaygroundLayoutContainer>
@@ -34,7 +41,13 @@ export default function () {
                       theme: "eclipse",
                       lineNumbers: true,
                     }}
-                    onChange={(editor, data, value) => {}}
+                    onChange={(editor, data, value) => {
+                      dispatch(
+                        setPlaygroundInstance({
+                          raw_html: value,
+                        })
+                      );
+                    }}
                   />
                 </PlaygroundCodeMirrorContainer>
               )}
@@ -49,7 +62,13 @@ export default function () {
                       theme: "eclipse",
                       lineNumbers: true,
                     }}
-                    onChange={(editor, data, value) => {}}
+                    onChange={(editor, data, value) => {
+                      dispatch(
+                        setPlaygroundInstance({
+                          raw_css: value,
+                        })
+                      );
+                    }}
                   />
                 </PlaygroundCodeMirrorContainer>
               )}
@@ -64,7 +83,13 @@ export default function () {
                       theme: "eclipse",
                       lineNumbers: true,
                     }}
-                    onChange={(editor, data, value) => {}}
+                    onChange={(editor, data, value) => {
+                      dispatch(
+                        setPlaygroundInstance({
+                          raw_js: value,
+                        })
+                      );
+                    }}
                   />
                 </PlaygroundCodeMirrorContainer>
               )}
@@ -72,7 +97,7 @@ export default function () {
           </PlaygroundEditorTabscontainer>
         </PlaygroundEditorContainer>
         <PlaygroundPreview>
-          Preview
+          <Preview></Preview>
         </PlaygroundPreview>
       </PlaygroundLayoutContainer>
     </div>

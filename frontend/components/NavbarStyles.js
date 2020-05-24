@@ -13,6 +13,7 @@ export const StyledNavbarHeader = styled.h3`
   font-weight: bold;
   position: relative;
   top: 12px;
+  width: 134px;
 `;
 
 export const StyledNavbarSearch = styled.div`

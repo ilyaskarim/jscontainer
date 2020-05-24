@@ -1,6 +1,8 @@
 import { StyledNavbar, StyledNavbarHeader, StyledNavbarSearch, StyledNavbarLink, StyledNavbarUserContainer, StyledNavbarUserDropdownInfo, StyledNavbarUserDropdownMenu } from "./NavbarStyles";
+import Link from "next/link";
+import Router from "next/router";
 
-import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, message } from "antd";
 
 import { Input } from "antd";
 
@@ -11,22 +13,28 @@ const menu = (
       <h5>ilyas.datoo@gmail.com</h5>
     </StyledNavbarUserDropdownInfo>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-        Your Containers
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+      <Link target="_blank" rel="noopener noreferrer" href="/organization/list">
         Organizations
-      </a>
+      </Link>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+      <Link target="_blank" rel="noopener noreferrer" href="/profile/containers">
+        Your Containers
+      </Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link target="_blank" rel="noopener noreferrer" href="/profile/settings">
         Settings
-      </a>
+      </Link>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+      <a
+        onClick={() => {
+          localStorage.clear();
+          message.info("Logout successfull.");
+          Router.push("/login");
+        }}
+      >
         Logout
       </a>
     </Menu.Item>
@@ -36,9 +44,9 @@ const menu = (
 export default function () {
   return (
     <StyledNavbar>
-      <a href="/" >
+      <Link href="/">
         <StyledNavbarHeader>JSContainer</StyledNavbarHeader>
-      </a>
+      </Link>
       <StyledNavbarSearch>
         <Input placeholder="Search public containers"></Input>
       </StyledNavbarSearch>
