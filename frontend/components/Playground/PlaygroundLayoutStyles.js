@@ -25,4 +25,7 @@ export const PlaygroundEditorTabscontainer = styled(Tabs)`
 export const PlaygroundCodeMirrorContainer = styled.div`
   position: relative;
   top: -16px;
+  .CodeMirror {
+    height: calc(100vh - 95px);
+  }
 `;
