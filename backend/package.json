@@ -1,0 +1,20 @@
+{
+  "name": "jscontainer_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run watch-ts\"  \"nodemon  build/index.js\" ",
+    "production": "nodemon build/index.js",
+    "watch-ts": "tsc -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "wertik-js": "^1.8.9",
+    "concurrently": "^5.1.0",
+    "sequelize": "^5.21.4",
+    "nodemon": "^2.0.2"
+  }
+}
