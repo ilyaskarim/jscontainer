@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getPlaygroundInstance } from "../../store/modules/playground";
-import { StyledIframe, StyledPreviewToolbar, StyledRunAutomaticallyCheckbox } from "./PreviewStyles";
+import { StyledIframe, StyledPreviewToolbar, StyledRunAutomaticallyCheckbox, StyledPreviewSaveButton } from "./PreviewStyles";
 import { Button } from "antd";
 
 const getBlobURL = (code, type) => {
@@ -82,7 +82,6 @@ export default function () {
   return (
     <div>
       <StyledPreviewToolbar>
-        <Button>Save</Button>
         <Button onClick={generatePreview}>Run</Button>
         <StyledRunAutomaticallyCheckbox
           value
@@ -93,6 +92,7 @@ export default function () {
         >
           Run automatically
         </StyledRunAutomaticallyCheckbox>
+        <StyledPreviewSaveButton>Save</StyledPreviewSaveButton>
       </StyledPreviewToolbar>
       <StyledIframe src={url}></StyledIframe>
     </div>

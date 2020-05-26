@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Checkbox } from "antd";
+import { Checkbox, Button } from "antd";
 
 export const StyledIframe = styled.iframe`
   height: calc(100vh - 50px);
@@ -16,8 +16,8 @@ export const StyledPreviewToolbar = styled.div`
   }
 `;
 
-export const StyledRunAutomaticallyCheckbox = styled(Checkbox)`
+export const StyledRunAutomaticallyCheckbox = styled(Checkbox)``;
+
+export const StyledPreviewSaveButton = styled(Button)`
   float: right;
-  position: relative;
-  top: 5px;
 `;
