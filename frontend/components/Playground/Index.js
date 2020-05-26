@@ -35,7 +35,7 @@ export default function () {
               {CodeMirror && (
                 <PlaygroundCodeMirrorContainer>
                   <CodeMirror
-                    value="<h1>I ♥ react-codemirror2</h1>"
+                    value=""
                     options={{
                       mode: "xml",
                       theme: "eclipse",
@@ -56,7 +56,7 @@ export default function () {
               {CodeMirror && (
                 <PlaygroundCodeMirrorContainer>
                   <CodeMirror
-                    value="body {font-family: Arial;}"
+                    value=""
                     options={{
                       mode: "css",
                       theme: "eclipse",
@@ -77,7 +77,7 @@ export default function () {
               {CodeMirror && (
                 <PlaygroundCodeMirrorContainer>
                   <CodeMirror
-                    value="const a = 12;"
+                    value=""
                     options={{
                       mode: "javascript",
                       theme: "eclipse",
