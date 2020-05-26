@@ -35,7 +35,7 @@ export default function () {
               {CodeMirror && (
                 <PlaygroundCodeMirrorContainer>
                   <CodeMirror
-                    value=""
+                    value="asd"
                     options={{
                       mode: "xml",
                       theme: "eclipse",

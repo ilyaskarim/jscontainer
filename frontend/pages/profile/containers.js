@@ -28,7 +28,7 @@ export default function () {
         {[1, 2, 3, 4, 5, 6, 7, 8, 1, 1, 1].map(() => {
           return (
             <Col span={4}>
-              <StyledUserContainer style={{ width: 300 }} actions={[<Button>View</Button>]}>
+              <StyledUserContainer  actions={[<Button>View</Button>]}>
                 <Meta title="Untitled container" description="created: 2 years ago" />
               </StyledUserContainer>
             </Col>

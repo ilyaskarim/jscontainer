@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Row, Col, Pagination, Button, Card } from "antd";
+import Router from "next/router"
 
 import { StyledProfileContainersHeader, StyledProfileContainersSearchInput, StyledUserContainer } from "./../profile/containers.styles";
 import { StyledContainer } from "../../src/styles/GlobalStyle";
@@ -28,7 +29,9 @@ export default function () {
         {["Uconnect", "Wapgee", "jSDevs", "Froala"].map((a) => {
           return (
             <Col span={4}>
-              <StyledUserContainer style={{ width: 300 }} actions={[<Button>View</Button>]}>
+              <StyledUserContainer actions={[<Button onClick={ () =>{
+                Router.push(`/organization/12`)
+              } } >View</Button>]}>
                 <Meta title={`${a}`} description={`https://${a}.com`} />
               </StyledUserContainer>
             </Col>

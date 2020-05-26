@@ -77,6 +77,9 @@ export default function () {
 
   useEffect(() => {
     generatePreview();
+    setTimeout(() => {
+      generatePreview();
+    }, 1000);
   }, []);
 
   return (
