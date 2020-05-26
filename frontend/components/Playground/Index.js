@@ -22,7 +22,7 @@ import Preview from "./Preview";
 
 export default function () {
   const dispatch = useDispatch();
-  const playgroundInstance = useSelector(getPlaygroundInstance);
+  const playground = useSelector(getPlaygroundInstance);
   return (
     <div>
       <PlaygroundLayoutContainer>
@@ -35,7 +35,7 @@ export default function () {
               {CodeMirror && (
                 <PlaygroundCodeMirrorContainer>
                   <CodeMirror
-                    value="asd"
+                    value={playground ? playground.html_raw : ""}
                     options={{
                       mode: "xml",
                       theme: "eclipse",
@@ -44,7 +44,7 @@ export default function () {
                     onChange={(editor, data, value) => {
                       dispatch(
                         setPlaygroundInstance({
-                          raw_html: value,
+                          html_raw: value,
                         })
                       );
                     }}
@@ -65,7 +65,7 @@ export default function () {
                     onChange={(editor, data, value) => {
                       dispatch(
                         setPlaygroundInstance({
-                          raw_css: value,
+                          css_raw: value,
                         })
                       );
                     }}
@@ -86,7 +86,7 @@ export default function () {
                     onChange={(editor, data, value) => {
                       dispatch(
                         setPlaygroundInstance({
-                          raw_js: value,
+                          js_raw: value,
                         })
                       );
                     }}

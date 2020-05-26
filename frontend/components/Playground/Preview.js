@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPlaygroundInstance, saveContainer } from "../../store/modules/playground";
 import { StyledIframe, StyledPreviewToolbar, StyledRunAutomaticallyCheckbox, StyledPreviewSaveButton } from "./PreviewStyles";
 import { Button, message } from "antd";
-import { ValidateContainer } from "../../src/helpers/object-validation";
 
 const getBlobURL = (code, type) => {
   const blob = new Blob([code], { type });
@@ -63,9 +62,9 @@ export default function () {
   const generatePreview = () => {
     if (playground) {
       const blobUrl = getGeneratedPageURL({
-        html: playground.raw_html,
-        css: playground.raw_css,
-        js: playground.raw_js,
+        html: playground.html_raw,
+        css: playground.css_raw,
+        js: playground.js_raw,
         css_links: playground.css_links,
         js_links: playground.js_links,
       });
@@ -84,8 +83,9 @@ export default function () {
   useEffect(() => {
     generatePreview();
     setTimeout(() => {
+      console.log(playground)
       generatePreview();
-    }, 1000);
+    }, 5);
   }, []);
 
   return (
@@ -103,22 +103,8 @@ export default function () {
         </StyledRunAutomaticallyCheckbox>
         <StyledPreviewSaveButton
           onClick={() => {
-            if (playground.raw_html) {
-              ValidateContainer(playground)
-                .then((res) => {
-                  console.log(res);
-                })
-                .catch((err) => {
-                  console.log(err);
-                  if (err.forEach) {
-                    err.forEach((element) => {
-                      message.error(element.message);
-                    });
-                  }
-                });
-            } else {
-              message.error("Markup is required.");
-            }
+            console.log(playground);
+            // dispatch(saveContainer());
           }}
         >
           Save

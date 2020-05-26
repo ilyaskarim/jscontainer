@@ -4,7 +4,27 @@ import ApolloClient from "../../src/apollo/index";
 export const playgroundReducer = createSlice({
   name: "playground",
   initialState: {
-    instance: {},
+    instance: {
+      title: "",
+      description: "",
+      forked_from_container_id: null,
+      version: "",
+      js_links: "",
+      css_links: "",
+      js_compiler: "",
+      js_raw: "",
+      js_compiled: "",
+      css_compiler: "",
+      css_raw: "",
+      css_compiled: "",
+      html_compiler: "",
+      html_raw: "<span>wow</span>",
+      html_compiled: "",
+      organization_id: "",
+      show_in_search: true,
+      private: false,
+      created_by_id: ""
+    },
   },
   reducers: {
     setPlaygroundInstance: (state, payload) => {
