@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPlaygroundInstance, saveContainer } from "../../store/modules/playground";
 import { StyledIframe, StyledPreviewToolbar, StyledRunAutomaticallyCheckbox, StyledPreviewSaveButton } from "./PreviewStyles";
-import { Button } from "antd";
+import { Button, message } from "antd";
+import { ValidateContainer } from "../../src/helpers/object-validation";
 
 const getBlobURL = (code, type) => {
   const blob = new Blob([code], { type });
@@ -60,14 +61,18 @@ export default function () {
   const dispatch = useDispatch();
 
   const generatePreview = () => {
-    const blobUrl = getGeneratedPageURL({
-      html: playground.raw_html,
-      css: playground.raw_css,
-      js: playground.raw_js,
-      css_links: playground.css_links,
-      js_links: playground.js_links,
-    });
-    setUrl(blobUrl);
+    if (playground) {
+      const blobUrl = getGeneratedPageURL({
+        html: playground.raw_html,
+        css: playground.raw_css,
+        js: playground.raw_js,
+        css_links: playground.css_links,
+        js_links: playground.js_links,
+      });
+      setUrl(blobUrl);
+    } else {
+      console.log(playground);
+    }
   };
 
   useEffect(() => {
@@ -98,7 +103,22 @@ export default function () {
         </StyledRunAutomaticallyCheckbox>
         <StyledPreviewSaveButton
           onClick={() => {
-            dispatch(saveContainer());
+            if (playground.raw_html) {
+              ValidateContainer(playground)
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  if (err.forEach) {
+                    err.forEach((element) => {
+                      message.error(element.message);
+                    });
+                  }
+                });
+            } else {
+              message.error("Markup is required.");
+            }
           }}
         >
           Save
