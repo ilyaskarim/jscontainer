@@ -45,7 +45,7 @@ export default function () {
   return (
     <StyledNavbar>
       <Link href="/">
-        <StyledNavbarHeader>js<span>Container</span></StyledNavbarHeader>
+        <StyledNavbarHeader>&lt;js<span>Container</span>></StyledNavbarHeader>
       </Link>
       <StyledNavbarSearch>
         <Input placeholder="Search public containers"></Input>

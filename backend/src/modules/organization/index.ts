@@ -45,7 +45,7 @@ export default {
   },
   database: {
     sql: {
-      tableName: "storage",
+      tableName: "organization",
       fields: {
         title: {
           type: "STRING",

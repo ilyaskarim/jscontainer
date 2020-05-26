@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import ApolloClient from "../../src/apollo/index";
 
 export const playgroundReducer = createSlice({
   name: "playground",
@@ -14,10 +15,13 @@ export const playgroundReducer = createSlice({
       });
       state.instance = instance;
     },
+    saveContainer: (state) => {
+      alert("saving")
+    }
   },
 });
 
-export const { setPlaygroundInstance } = playgroundReducer.actions;
+export const { setPlaygroundInstance, saveContainer } = playgroundReducer.actions;
 
 export const getPlaygroundInstance = (state) => {
   return state.playground.instance || null;

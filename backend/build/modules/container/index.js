@@ -21,6 +21,8 @@ exports.default = {
         forked_from_container_id: Int
         forked_from_container: Container
         version: String
+        js_links: String
+        css_links: String
         js_compiler: String
         js_raw: String
         js_compiled: String
@@ -32,6 +34,8 @@ exports.default = {
         html_compiled: String
         organization_id: Int
         organization: Organization
+        show_in_search: Boolean
+        private: Boolean
         created_by_id: Int
         created_by: User
         created_at: String
@@ -71,7 +75,7 @@ exports.default = {
     },
     database: {
         sql: {
-            tableName: "storage",
+            tableName: "container",
             fields: {
                 title: {
                     type: "STRING",
@@ -83,6 +87,12 @@ exports.default = {
                     type: "INTEGER",
                 },
                 version: {
+                    type: "STRING",
+                },
+                css_links: {
+                    type: "STRING",
+                },
+                js_link: {
                     type: "STRING",
                 },
                 js_compiler: {
@@ -114,6 +124,12 @@ exports.default = {
                 },
                 organization_id: {
                     type: "INTEGER",
+                },
+                show_in_search: {
+                    type: "BOOLEAN",
+                },
+                private: {
+                    type: "BOOLEAN",
                 },
                 created_by_id: {
                     type: "INTEGER",

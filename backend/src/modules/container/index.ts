@@ -74,7 +74,7 @@ export default {
   },
   database: {
     sql: {
-      tableName: "storage",
+      tableName: "container",
       fields: {
         title: {
           type: "STRING",

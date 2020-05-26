@@ -1,13 +1,15 @@
 import Head from "next/head";
 import Navbar from "../components/Navbar";
-import AppFooter from "../components/AppFooter";
+import { Provider } from "react-redux";
 import GlobalStyle from "./../src/styles/GlobalStyle";
+import AppFooter from "../components/AppFooter";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "codemirror/theme/eclipse.css";
 
 import store from "../store/store";
-import { Provider } from "react-redux";
+import { withApollo, initApolloClient } from '../src/apollo'
+
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -29,4 +31,4 @@ function MyApp({ Component, pageProps }) {
     </html>
   );
 }
-export default MyApp;
+export default withApollo(MyApp)

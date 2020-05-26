@@ -50,7 +50,7 @@ exports.default = {
     },
     database: {
         sql: {
-            tableName: "storage",
+            tableName: "container_comment",
             fields: {
                 comment_raw: {
                     type: "STRING"

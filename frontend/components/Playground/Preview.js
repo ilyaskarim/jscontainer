@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { getPlaygroundInstance } from "../../store/modules/playground";
+import { useSelector, useDispatch } from "react-redux";
+import { getPlaygroundInstance, saveContainer } from "../../store/modules/playground";
 import { StyledIframe, StyledPreviewToolbar, StyledRunAutomaticallyCheckbox, StyledPreviewSaveButton } from "./PreviewStyles";
 import { Button } from "antd";
 
@@ -57,6 +57,7 @@ export default function () {
   const [url, setUrl] = useState("");
   const [automaticallyRun, setAutomaticallyRun] = useState(true);
   const playground = useSelector(getPlaygroundInstance);
+  const dispatch = useDispatch();
 
   const generatePreview = () => {
     const blobUrl = getGeneratedPageURL({
@@ -95,7 +96,13 @@ export default function () {
         >
           Run automatically
         </StyledRunAutomaticallyCheckbox>
-        <StyledPreviewSaveButton>Save</StyledPreviewSaveButton>
+        <StyledPreviewSaveButton
+          onClick={() => {
+            dispatch(saveContainer());
+          }}
+        >
+          Save
+        </StyledPreviewSaveButton>
       </StyledPreviewToolbar>
       <StyledIframe src={url}></StyledIframe>
     </div>
