@@ -14,6 +14,14 @@ export const StyledNavbarHeader = styled.h3`
   position: relative;
   top: 12px;
   width: 134px;
+  cursor: pointer;
+  -webkit-border-bottom-left-radius: 1px;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01);
+  -webkit-font-smoothing: antialiased;
+  text-shadow: #9b9b9b91 0 0 1px;
+  span {
+    color: #1890ff;
+  }
 `;
 
 export const StyledNavbarSearch = styled.div`
