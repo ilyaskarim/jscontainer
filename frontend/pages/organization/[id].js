@@ -10,11 +10,14 @@ const { Meta } = Card;
 export default function () {
   return (
     <StyledContainer>
-      <Row>
+      <Row gutter={16} >
         <Col span={24}>
           <StyledProfileContainersHeader>
             <div style={{ display: "flex" }}>
-              <h3>uConnect Pvt</h3>
+              <div>
+                <h3>uConnect Pvt</h3>
+                <h5>Showing all organization containers.</h5>
+              </div>
               <StyledOrgaizationViewNewContainerButton
                 onClick={() => {
                   Router.push("/?organization=12");
@@ -26,7 +29,7 @@ export default function () {
           </StyledProfileContainersHeader>
         </Col>
       </Row>
-      <Row>
+      <Row gutter={16} >
         <Col span={24}>
           <StyledProfileContainersSearchInput
             placeholder="Search a container"
