@@ -8,10 +8,7 @@ import "codemirror/theme/material.css";
 import "codemirror/theme/eclipse.css";
 
 import store from "../store/store";
-<<<<<<< HEAD
 import { withApollo } from "../src/apollo";
-=======
-import { withApollo, initApolloClient } from "../src/apollo";
 import { useEffect } from "react";
 
 if (process.browser == true) {
@@ -20,7 +17,6 @@ if (process.browser == true) {
     account: "xD3R8y",
   };
 }
->>>>>>> a55264d870999c9954174e0393f6ecf0138adf6a
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
