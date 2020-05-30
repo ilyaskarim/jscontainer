@@ -8,8 +8,7 @@ import "codemirror/theme/material.css";
 import "codemirror/theme/eclipse.css";
 
 import store from "../store/store";
-import { withApollo, initApolloClient } from '../src/apollo'
-
+import { withApollo } from "../src/apollo";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -31,4 +30,4 @@ function MyApp({ Component, pageProps }) {
     </html>
   );
 }
-export default withApollo(MyApp)
+export default withApollo(MyApp);

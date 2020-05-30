@@ -1,5 +1,5 @@
-import { Tabs, Input } from "antd";
-import { Collapse } from "antd";
+import { Tabs } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 
 let CodeMirror = null;
 if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
@@ -15,14 +15,17 @@ import { PlaygroundLayoutContainer, PlaygroundLayoutSidebar, PlaygroundEditorCon
 
 import PlaygroundSidebar from "./PlaygroundSidebar";
 
-import { useSelector, useDispatch } from "react-redux";
 import { getPlaygroundInstance, setPlaygroundInstance } from "../../store/modules/playground";
 
 import Preview from "./Preview";
 
-export default function () {
+
+
+export default function (props) {
   const dispatch = useDispatch();
   const playground = useSelector(getPlaygroundInstance);
+  
+
   return (
     <div>
       <PlaygroundLayoutContainer>

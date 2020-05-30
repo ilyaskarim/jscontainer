@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPlaygroundInstance, saveContainer } from "../../store/modules/playground";
+
+import { getPlaygroundInstance, saveContainer, setPlaygroundInstance } from "../../store/modules/playground";
 import { StyledIframe, StyledPreviewToolbar, StyledRunAutomaticallyCheckbox, StyledPreviewSaveButton } from "./PreviewStyles";
 import { Button, message } from "antd";
+import validateBeforeSave from "../../src/helpers/validateBeforeSave";
+import { createApolloClient } from "../../src/apollo/index";
+import changeVersion from "../../src/helpers/changeVersion";
+import { CreateContainerMutation } from "../../src/graphql/container-queries";
 
 const getBlobURL = (code, type) => {
   const blob = new Blob([code], { type });
@@ -58,6 +63,7 @@ export default function () {
   const [automaticallyRun, setAutomaticallyRun] = useState(true);
   const playground = useSelector(getPlaygroundInstance);
   const dispatch = useDispatch();
+  const apolloClient = createApolloClient();
 
   const generatePreview = () => {
     if (playground) {
@@ -69,8 +75,6 @@ export default function () {
         js_links: playground.js_links,
       });
       setUrl(blobUrl);
-    } else {
-      console.log(playground);
     }
   };
 
@@ -83,7 +87,6 @@ export default function () {
   useEffect(() => {
     generatePreview();
     setTimeout(() => {
-      console.log(playground)
       generatePreview();
     }, 5);
   }, []);
@@ -103,8 +106,17 @@ export default function () {
         </StyledRunAutomaticallyCheckbox>
         <StyledPreviewSaveButton
           onClick={() => {
-            console.log(playground);
-            // dispatch(saveContainer());
+            let playgroundInstance = { ...playground };
+            if (validateBeforeSave(playground)) {
+              playgroundInstance.version = changeVersion(playground.version);
+              dispatch(setPlaygroundInstance(playgroundInstance));
+              apolloClient.mutate({
+                mutation: CreateContainerMutation,
+                variables: {
+                  input: playgroundInstance,
+                },
+              });
+            }
           }}
         >
           Save

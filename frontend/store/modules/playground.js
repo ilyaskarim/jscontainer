@@ -20,10 +20,10 @@ export const playgroundReducer = createSlice({
       html_compiler: "",
       html_raw: "<span>wow</span>",
       html_compiled: "",
-      organization_id: "",
+      organization_id: null,
       show_in_search: true,
       private: false,
-      created_by_id: ""
+      created_by_id: null
     },
   },
   reducers: {

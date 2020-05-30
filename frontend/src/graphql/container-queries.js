@@ -1,5 +1,5 @@
 import { gql } from "apollo-boost";
-export const CreateContainer = gql`
+export const CreateContainerMutation = gql`
   mutation CreateContainer($input: ContainerInput) {
     createContainer(input: $input) {
       id

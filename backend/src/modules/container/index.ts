@@ -45,6 +45,8 @@ export default {
         description: String
         forked_from_container_id: Int
         version: String
+        js_links: String
+        css_links: String
         js_compiler: String
         js_raw: String
         js_compiled: String
@@ -55,6 +57,8 @@ export default {
         html_raw: String
         html_compiled: String
         organization_id: Int
+        show_in_search: Boolean
+        private: Boolean
         created_by_id: Int
         is_deleted: Int
       }
@@ -91,7 +95,7 @@ export default {
         css_links: {
           type: "STRING",
         },
-        js_link: {
+        js_links: {
           type: "STRING",
         },
         js_compiler: {
