@@ -1,4 +1,13 @@
-import { StyledNavbar, StyledNavbarHeader, StyledNavbarSearch, StyledNavbarLink, StyledNavbarUserContainer, StyledNavbarUserDropdownInfo, StyledNavbarUserDropdownMenu } from "./NavbarStyles";
+import {
+  StyledNavbar,
+  StyledNavbarHeader,
+  StyledNavbarSearch,
+  StyledNavbarLink,
+  StyledNavbarUserContainer,
+  StyledUpdatesContainer,
+  StyledNavbarUserDropdownInfo,
+  StyledNavbarUserDropdownMenu,
+} from "./NavbarStyles";
 import Link from "next/link";
 import Router from "next/router";
 
@@ -45,11 +54,14 @@ export default function () {
   return (
     <StyledNavbar>
       <Link href="/">
-        <StyledNavbarHeader>&lt;js<span>Container</span>></StyledNavbarHeader>
+        <StyledNavbarHeader>
+          &lt;js<span>Container</span>>
+        </StyledNavbarHeader>
       </Link>
       <StyledNavbarSearch>
         <Input placeholder="Search public containers"></Input>
       </StyledNavbarSearch>
+      <StyledUpdatesContainer className="mdi mdi-bell jscontainer-updates"></StyledUpdatesContainer>
       <StyledNavbarLink className="space-to-right">Create Organization</StyledNavbarLink>
       <Dropdown overlay={menu}>
         <StyledNavbarUserContainer className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>

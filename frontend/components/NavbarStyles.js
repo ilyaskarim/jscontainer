@@ -72,3 +72,13 @@ export const StyledNavbarUserDropdownInfo = styled.div`
     margin: 0;
   }
 `;
+
+export const StyledUpdatesContainer = styled.span`
+  position: relative;
+  top: 14px;
+  left: 18px;
+  #HW_badge_cont {
+    position: absolute;
+    top: -14px;
+  }
+`;

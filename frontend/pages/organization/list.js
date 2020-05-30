@@ -17,7 +17,7 @@ export default function () {
           </StyledProfileContainersHeader>
         </Col>
       </Row>
-      <Row>
+      <Row gutter={16} >
         <Col span={24}>
           <StyledProfileContainersSearchInput
             placeholder="Search your organization"

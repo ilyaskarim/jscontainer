@@ -8,14 +8,35 @@ import "codemirror/theme/material.css";
 import "codemirror/theme/eclipse.css";
 
 import store from "../store/store";
+<<<<<<< HEAD
 import { withApollo } from "../src/apollo";
+=======
+import { withApollo, initApolloClient } from "../src/apollo";
+import { useEffect } from "react";
+
+if (process.browser == true) {
+  window.HW_config = {
+    selector: ".jscontainer-updates", // CSS selector where to inject the badge
+    account: "xD3R8y",
+  };
+}
+>>>>>>> a55264d870999c9954174e0393f6ecf0138adf6a
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    // <script async src="https://cdn.headwayapp.co/widget.js"></script>
+    let s = document.createElement("script");
+    s.src = "https://cdn.headwayapp.co/widget.js";
+    document.body.append(s);
+  }, []);
   return (
     <html>
       <Head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.2.4/antd.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.2.45/css/materialdesignicons.min.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.2.45/css/materialdesignicons.min.css"
+        />
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"></link>
         <GlobalStyle></GlobalStyle>
         <title>JS Container</title>
