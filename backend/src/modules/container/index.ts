@@ -15,6 +15,7 @@ export default {
       type Container {
         id: Int
         title: String
+        slug: String
         description: String
         forked_from_container_id: Int
         forked_from_container: Container
@@ -42,6 +43,7 @@ export default {
       input ContainerInput {
         id: Int
         title: String
+        slug: String
         description: String
         forked_from_container_id: Int
         version: String
@@ -81,6 +83,9 @@ export default {
       tableName: "container",
       fields: {
         title: {
+          type: "STRING",
+        },
+        slug: {
           type: "STRING",
         },
         description: {

@@ -4,6 +4,7 @@ export const CreateContainerMutation = gql`
     createContainer(input: $input) {
       id
       title
+      slug
       description
       forked_from_container_id
       version
