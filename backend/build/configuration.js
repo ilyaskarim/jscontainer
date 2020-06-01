@@ -21,7 +21,7 @@ exports.default = {
     database: {
         dbDialect: "mysql",
         dbUsername: "root",
-        dbPassword: "pass",
+        dbPassword: "",
         dbName: "jscontainer",
         dbHost: "localhost",
         dbPort: "3306",
