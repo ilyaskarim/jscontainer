@@ -110,7 +110,7 @@ export default function () {
             let playgroundInstance = { ...playground };
             if (validateBeforeSave(playground)) {
               playgroundInstance.version = changeVersion(playground.version);
-              playgroundInstance.slug = generateContainerSlug(playground.title);
+              playgroundInstance.slug = generateContainerSlug();
               dispatch(setPlaygroundInstance(playgroundInstance));
               apolloClient.mutate({
                 mutation: CreateContainerMutation,
