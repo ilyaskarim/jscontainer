@@ -38,7 +38,7 @@ export default function (props) {
               {CodeMirror && (
                 <PlaygroundCodeMirrorContainer>
                   <CodeMirror
-                    value={playground ? playground.html_raw : ""}
+                    // value={playground ? playground.html_raw : ""}
                     options={{
                       mode: "xml",
                       theme: "eclipse",

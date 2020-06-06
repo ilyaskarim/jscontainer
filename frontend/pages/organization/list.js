@@ -28,7 +28,7 @@ export default function () {
         </Col>
         {["Uconnect", "Wapgee", "jSDevs", "Froala"].map((a) => {
           return (
-            <Col span={4}>
+            <Col span={24}>
               <StyledUserContainer actions={[<Button onClick={ () =>{
                 Router.push(`/organization/12`)
               } } >View</Button>]}>
