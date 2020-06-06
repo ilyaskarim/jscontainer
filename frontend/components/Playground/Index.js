@@ -11,7 +11,14 @@ if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
 
 const { TabPane } = Tabs;
 
-import { PlaygroundLayoutContainer, PlaygroundLayoutSidebar, PlaygroundEditorContainer, PlaygroundEditorTabscontainer, PlaygroundCodeMirrorContainer, PlaygroundPreview } from "./PlaygroundLayoutStyles";
+import {
+  PlaygroundLayoutContainer,
+  PlaygroundLayoutSidebar,
+  PlaygroundEditorContainer,
+  PlaygroundEditorTabscontainer,
+  PlaygroundCodeMirrorContainer,
+  PlaygroundPreview,
+} from "./PlaygroundLayoutStyles";
 
 import PlaygroundSidebar from "./PlaygroundSidebar";
 
@@ -19,12 +26,10 @@ import { getPlaygroundInstance, setPlaygroundInstance } from "../../store/module
 
 import Preview from "./Preview";
 
-
-
 export default function (props) {
   const dispatch = useDispatch();
   const playground = useSelector(getPlaygroundInstance);
-  
+  const containerId = props.containerId;
 
   return (
     <div>

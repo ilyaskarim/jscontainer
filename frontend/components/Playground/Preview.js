@@ -7,7 +7,7 @@ import { Button, message } from "antd";
 import validateBeforeSave from "../../src/helpers/validateBeforeSave";
 import { createApolloClient } from "../../src/apollo/index";
 import changeVersion from "../../src/helpers/changeVersion";
-import generateSlug from "../../src/helpers/generateSlug";
+import generateContainerSlug from "../../src/helpers/generateContainerSlug";
 import { CreateContainerMutation } from "../../src/graphql/container-queries";
 
 const getBlobURL = (code, type) => {
@@ -110,7 +110,7 @@ export default function () {
             let playgroundInstance = { ...playground };
             if (validateBeforeSave(playground)) {
               playgroundInstance.version = changeVersion(playground.version);
-              playgroundInstance.slug = generateSlug(playground.title);
+              playgroundInstance.slug = generateContainerSlug();
               dispatch(setPlaygroundInstance(playgroundInstance));
               apolloClient.mutate({
                 mutation: CreateContainerMutation,
