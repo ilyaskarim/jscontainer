@@ -1,4 +1,32 @@
-backend/node_modules
-frontend/node_modules
-frontend/.next
+# dependencies
+/frontend/node_modules
+/frontend/.pnp
+/frontend/.pnp.js
 
+# testing
+/frontend/coverage
+
+/frontend/# next.js
+/frontend/.next/
+/frontend/out/
+
+# production
+/frontend/build
+
+# misc
+/frontend/.DS_Store
+/frontend/*.pem
+
+# debug
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+# local env files
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+
+# vercel
+/frontend/.vercel
