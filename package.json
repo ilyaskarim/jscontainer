@@ -1,0 +1,36 @@
+{
+  "name": "jscontainer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "less": "less-watch-compiler",
+    "dev": "concurrently -n TS,Server,Less  \"npm run watch-ts\"  \"nodemon lib/index.js\" \"npm run less\"",
+    "production": "node lib/index.js",
+    "watch-ts": "tsc -w",
+    "build": "yarn tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilyaskarim/jscontainer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilyaskarim/jscontainer/issues"
+  },
+  "homepage": "https://github.com/ilyaskarim/jscontainer#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express-handlebars": "^5.3.2",
+    "express-session": "^1.17.2",
+    "nodemon": "^2.0.7",
+    "wertik-js": "^2.0.70"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "less-watch-compiler": "^1.14.1",
+    "typescript": "^3.5.1"
+  }
+}
