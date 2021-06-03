@@ -43,14 +43,39 @@
     padding: 15px 15px 11px 15px;
     background: #fff;
     border-bottom: 1px solid #ececec;
-    .url_link {
+    
+    .url_box {
         display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 50%;
         a {
           max-width: 430px;
           overflow: hidden;
           text-overflow: ellipsis;
+          font-size: 11px;
+        }
+        .url_icons{
+          display: flex;
+        }
+        .fa-times {
+          color: #f11a1a;
+          margin-right: 10px;
+          font-size: 12px;
+        }
+        .fa-plus {
+          color: #41ef16;
+          font-size: 12px;
+        }
+        .url_link {
+          margin-right: 40px;
+
         }
       }
+  }
+
+  .setting-body {
+    padding-top: 9px;
   }
 
   .row1 {
@@ -84,5 +109,14 @@
     width: 50%;
     padding: 18px 18px 25px 18px;
    
+  }
+}
+@media (max-width:767px){
+  .url_box{
+    width: 100% !important;
+    .url_link {
+      margin-right: 10px !important;
+
+    }
   }
 }
