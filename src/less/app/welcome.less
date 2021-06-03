@@ -30,6 +30,16 @@
         outline: none;
       }
     }
+    textarea {
+      transition: box-shadow 0.25s, outline 0.25s;
+      &:focus-visible {
+        outline: none;
+      }
+      &:focus {
+      box-shadow: 1px 4px 4px 0px #00000040;
+      background: #f6f6f6;
+    }
+    }
   }
   textarea {
     background: #f6f6f6;
@@ -39,12 +49,9 @@
     font-size: 12px;
     border-radius: 0s;
     resize: none;
-    transition: box-shadow 0.25s, outline 0.25s;
-      &:focus-visible {
-        outline: none;
-      }
-      &:focus {
-      box-shadow: 1px 4px 4px 0px #00000040;
+    
+    &:focus {
+      box-shadow: none;
       background: #f6f6f6;
     }
   }
