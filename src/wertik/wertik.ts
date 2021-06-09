@@ -55,7 +55,7 @@ export default {
     showWertik404Page: true,
     beforeStart: (obj) => {},
     restApi404Handler: (req, res) => {
-      res.render("app/includes/errors/404", {
+      res.render("errors/404", {
         seo: {
           title: "Page Not Found | Wapgee",
           description:

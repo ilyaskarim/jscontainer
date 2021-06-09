@@ -6,10 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "less": "less-watch-compiler",
-    "dev": "concurrently -n TS,Server,Less  \"npm run watch-ts\"  \"nodemon lib/index.js\" \"npm run less\"",
+    "dev": "concurrently -n Webpack,TS,Server,Less \"yarn webpack\"  \"yarn watch-ts\"  \"nodemon lib/index.js\" \"yarn less\"",
     "production": "node lib/index.js",
+    "webpack-watch": "webpack watch",
+    "webpack-build": "webpack",
     "watch-ts": "tsc -w",
-    "build": "yarn tsc"
+    "build": "concurrently -n Webpack,TS \"yarn tsc\" \" yarn webpack-build \" "
   },
   "repository": {
     "type": "git",
@@ -22,17 +24,21 @@
   },
   "homepage": "https://github.com/ilyaskarim/jscontainer#readme",
   "dependencies": {
+    "babel-loader": "^8.2.2",
     "cookie-parser": "^1.4.5",
-    "dotenv": "^10.0.0",
+    "cross-env": "^7.0.3",
     "express-flash": "^0.0.2",
     "express-handlebars": "^5.3.2",
     "express-session": "^1.17.2",
-    "nodemon": "^2.0.7",
     "wertik-js": "^2.0.70"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
+    "dotenv": "^10.0.0",
     "less-watch-compiler": "^1.14.1",
-    "typescript": "^3.5.1"
+    "nodemon": "^2.0.7",
+    "typescript": "^3.5.1",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
   }
 }
