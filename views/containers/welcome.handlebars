@@ -9,23 +9,31 @@
             </div>
         </div>
         <div class="item-2 comn_pd">
-            <div class="tabs bg-gray">
+            <div class="tabs bg-gray tabs-menu">
                 <div class="tab-header">
                     <ul>
-                        <li><a class="tab-header-item active" href="">Assets</a></li>
-                        <li><a class="tab-header-item" href="">Settings</a></li>
-                        <li><a class="tab-header-item" href="">Access</a></li>
+                        <li><a data-tab="assets" class="tab-header-item" href="#">Assets</a></li>
+                        <li><a data-tab="Settings" class="tab-header-item" href="#">Settings</a></li>
+                        <li><a data-tab="Access" class="tab-header-item" href="#">Access</a></li>
                     </ul>
                 </div>
                 <div class="tab-content">
-                    <div class="url_box">
-                        <a class="url_link" href="" >
-                            https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
-                        </a>
-                        <div class="url_icons">
-                            <a href=""><i class="fas fa-times"></i></a>
-                            <a href=""> <i class="fas fa-plus"></i></a>
+                    <div class="tab-content-item" data-tab-content="assets">
+                        <div class="url_box">
+                            <a class="url_link" href="">
+                                https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
+                            </a>
+                            <div class="url_icons">
+                                <a href=""><i class="fas fa-times"></i></a>
+                                <a href=""> <i class="fas fa-plus"></i></a>
+                            </div>
                         </div>
+                    </div>
+                    <div class="tab-content-item" data-tab-content="settings">
+                        settings
+                    </div>
+                    <div class="tab-content-item" data-tab-content="access">
+                        access
                     </div>
                 </div>
             </div>
@@ -33,17 +41,25 @@
     </div>
 
     <div class="row1">
-        <div class="item-3 comn_pd ">
-            <div class="tabs bg-gray">
+        <div class="item-3 comn_pd">
+            <div class="tabs bg-gray tabs-language">
                 <div class="tab-header">
                     <ul>
-                        <li><a class="tab-header-item active" href="">Html</a></li>
-                        <li><a class="tab-header-item" href="">Css</a></li>
-                        <li><a class="tab-header-item" href="">Javascript</a></li>
+                        <li><a data-tab="html" class="tab-header-item" href="#">Html</a></li>
+                        <li><a data-tab="css" class="tab-header-item" href="#">Css</a></li>
+                        <li><a data-tab="javascript" class="tab-header-item" href="#">Javascript</a></li>
                     </ul>
                 </div>
-                <div class="form-floating">
-                    <textarea class="form-control" placeholder="write your code" id="floatingTextarea"></textarea>
+                <div class="tab-content">
+                    <div class="tab-content-item" data-tab-content="html">
+                        <textarea class="form-control" placeholder="html" id="floatingTextarea"></textarea>
+                    </div>
+                    <div class="tab-content-item" data-tab-content="css">
+                        <textarea class="form-control" placeholder="css" id="floatingTextarea"></textarea>
+                    </div>
+                    <div class="tab-content-item" data-tab-content="javascript">
+                        <textarea class="form-control" placeholder="javascript" id="floatingTextarea"></textarea>
+                    </div>
                 </div>
             </div>
         </div>

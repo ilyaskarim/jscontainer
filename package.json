@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "less": "less-watch-compiler",
-    "dev": "concurrently -n Webpack,TS,Server,Less \"yarn webpack\"  \"yarn watch-ts\"  \"nodemon lib/index.js\" \"yarn less\"",
+    "dev": "concurrently -n Webpack,TS,Server,Less \"yarn webpack-watch\"  \"yarn watch-ts\"  \"nodemon lib/index.js\" \"yarn less\"",
     "production": "node lib/index.js",
     "webpack-watch": "webpack watch",
     "webpack-build": "webpack",
