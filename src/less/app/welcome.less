@@ -8,7 +8,7 @@
     position: relative;
     height: 100%;
     width: 100%;
-    padding: 4px 16px;
+    padding: 10px 16px;
   }
   .item-1 {
     padding: 15px 15px 11px 15px;
@@ -30,6 +30,10 @@
       &:focus-visible {
         outline: none;
       }
+    }
+    .form-floating {
+      height: 75%;
+      
     }
     textarea {
       transition: box-shadow 0.25s, outline 0.25s;
@@ -58,11 +62,14 @@
   }
   .item-2 {
     width: 50%;
-    padding: 8px 16px;
+    
     padding: 15px 15px 11px 15px;
     background: #fff;
     border-bottom: 1px solid #ececec;
-    
+    .check_settings {
+      padding: 10px;
+      background-color: #fff;
+    }
     .url_box {
         display: flex;
         align-items: center;
@@ -124,9 +131,161 @@
   }
 
   .item-4 {
-    width: 50%;
+    width: 50%; 
     padding: 18px 18px 25px 18px;
-   
+  }
+
+
+  .switch_btn {
+    display: flex;
+    align-items: center;
+  }
+
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 28px;
+    height: 18px;
+  }
+  .form-switch {
+    padding-left: 0;
+  }
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsl(0deg 0% 77%);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 0px;
+    bottom: 0px;
+    border: 1px solid #81b9e6;
+    background-color: #2196f3;
+    box-shadow: rgb(0 0 0 / 15%) -1px 0 10px 0, rgb(0 0 0 / 5%) 0 4px 6px -2px;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(12px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  
+  .access {
+    padding: 10px 10px 10px 10px;
+    background-color: #fff;
+    .list_emails {
+      list-style-type: none;
+      margin: 0;
+      padding-left: 0;
+      height: 67px;
+      overflow-y: scroll;
+      margin-bottom: 20px;
+      
+    }
+    .scroll-bar::-webkit-scrollbar-track{
+      background-color: hsl(0deg 0% 83%);
+    }
+
+    .scroll-bar::-webkit-scrollbar
+    {
+      width: 5px;
+    }
+
+    .scroll-bar::-webkit-scrollbar-thumb
+    {
+      background-color: hsl(0deg 0% 27%);
+      -webkit-box-shadow: inset 0 0 6px hsl(0deg 0% 45%);
+    }
+
+
+    li {
+      margin: 0 5px 8px 0;
+      background: #fff;
+      list-style-type: none;
+      background-color: #f6f6f6;
+      padding: 3px 12px;
+      padding-right: 35px;
+      border-radius: 50px;
+      font-size: 14px;
+      position: relative;
+      display: inline-block;
+    }
+
+    li:hover {
+      background-color: #eee;
+    }
+
+    .close {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      right: 0%;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      height: 27px;
+      width: 27px;
+      font-weight: 900;
+      line-height: 27px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .close:hover {
+      background: #bbb;
+    }
+
+    input {
+      background: #f6f6f6;
+      border: none;
+      padding: 9px;
+      font-size: 12px;
+      width: 100%;
+      transition: box-shadow 0.25s,;
+      &:focus {
+        box-shadow: rgb(0 0 0 / 10%) 0px 2px 5px 0, rgb(0 0 0 / 10%) 0 0 1px 0;
+      }
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
   }
 }
 @media (max-width:767px){

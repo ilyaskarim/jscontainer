@@ -2,7 +2,7 @@
 
     {{> navbar}}
     <div class="xyz">
-        <div class="item-1 comn_pd  ">
+        <div class="item-1  comn_pd  ">
             <input type="text" class="bg-gray" placeholder="title">
             <div class="form-floating">
                 <textarea class="form-control" placeholder="description" id="floatingTextarea"></textarea>
@@ -29,25 +29,40 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-content-item" data-tab-content="settings">
-                        <div>
-                            <input type="checkbox" name="html5snippet" id=""> html5 snippet
+                    <div class="tab-content-item check_settings" data-tab-content="settings">
+                        <div class="form-check form-switch">
+                            <div class="switch_btn">
+                                <label class="switch mr-2">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span class="switch_label"  id="flexSwitchCheckChecked">Html5 snippet</span>
+                            </div>
                         </div>
-                        <div>
-                            <input type="checkbox" name="html5snippet" id=""> Private
-                        </div>
+                            <div class="switch_btn">
+                                <label class="switch mr-2">
+                                    <input type="checkbox" name="html5snippet">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span class="switch_label">Private</span>
+                            </div>
+                         {{!-- <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked />
+                        </div> --}}
                     </div>
                     <div class="tab-content-item" data-tab-content="access">
-                        <div>
-                            <div>ilyas@gmail.com</div>
-                            <div>ilyas@wm4d.com</div>
-                            <div>ilyas@froala.com</div>
-                            <div>ilyas@wapgee.com</div>
-                            <div>ilyas@google.com</div>
-                            <div>ilyas@facebook.com</div>
-                            <div>ilyas@yt.com</div>
+                        <div class="access">
+                            <ul class="list_emails scroll-bar">
+                                <li>ilyas@gmail.com<span class="close">&times;</span></li>
+                                <li>ilyas@gmail.com<span class="close">&times;</span></li>
+                                <li>ilyas@gmail.com<span class="close">&times;</span></li>
+                                <li>ilyas@gmail.com<span class="close">&times;</span></li>
+                                <li>ilyas@gmail.com<span class="close">&times;</span></li>
+                                <li>ilyas@gmail.com<span class="close">&times;</span></li>
+                                <li>ilyas@gmail.com<span class="close">&times;</span></li>
+                            </ul>
+                            <input type="email" name="email" placeholder="User email address" id="">
                         </div>
-                        <input width="400px" type="email" name="" placeholder="User email address" id="">
                     </div>
                 </div>
             </div>
@@ -99,3 +114,14 @@
 
 {{>cmCSSAssets}}
 {{>cmAssets}}
+
+<script>
+var closebtns = document.getElementsByClassName("close");
+var i;
+
+for (i = 0; i < closebtns.length; i++) {
+  closebtns[i].addEventListener("click", function() {
+    this.parentElement.style.display = 'none';
+  });
+}
+</script>
