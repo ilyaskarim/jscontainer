@@ -22,6 +22,7 @@ const allowedOrigins = [
 ];
 
 app.use("/pb", express.static("public"));
+app.use("/node_modules", express.static("node_modules"));
 app.use(
   session({
     maxAge: 24 * 60 * 60 * 1000,

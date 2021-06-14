@@ -1,8 +1,10 @@
-const path =require("path")
+const path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: "./javascript/index.js",
+  entry: {
+    app: "./javascript/index.js",
+  },
   output: {
     path: path.resolve(__dirname, "public/js"),
     filename: "index.js",

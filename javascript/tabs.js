@@ -14,6 +14,10 @@ export default function (el, options) {
         tabContentItem.style.display = "none";
         if (tabContentItem.getAttribute("data-tab-content") === tab) {
           tabContentItem.style.display = "block";
+
+          oldTab = newTab;
+          newTab = tab;
+          options.onChange && options.onChange(newTab, oldTab);
         }
       });
     };
@@ -36,9 +40,6 @@ export default function (el, options) {
             clickedLink.getAttribute("data-tab")
           ) {
             link.classList.add("active");
-            oldTab = newTab;
-            newTab = clickedLink.getAttribute("data-tab");
-            options.onChange && options.onChange(newTab, oldTab);
           } else {
             link.classList.remove("active");
           }
