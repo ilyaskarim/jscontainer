@@ -42,7 +42,7 @@ export default {
                 <title>Document</title>
             </head>
             <body>
-                Test
+                This is a preview from previewer
             </body>
             </html>
           `);

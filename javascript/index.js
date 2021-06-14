@@ -1,4 +1,5 @@
 import Tabs from "./tabs";
+import Container from "./container";
 import {
   setupHTMLEditor,
   setupCSSEditor,
@@ -21,8 +22,8 @@ import {
 
   Tabs(".tabs-menu", {
     byDefaultTab: "assets",
-    onChange: (newTab, previousTab) => {
-      console.log(newTab, previousTab);
-    },
+    onChange: (newTab, previousTab) => {},
   });
+
+  new Container();
 })();

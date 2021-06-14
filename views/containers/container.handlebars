@@ -30,10 +30,24 @@
                         </div>
                     </div>
                     <div class="tab-content-item" data-tab-content="settings">
-                        settings
+                        <div>
+                            <input type="checkbox" name="html5snippet" id=""> html5 snippet
+                        </div>
+                        <div>
+                            <input type="checkbox" name="html5snippet" id=""> Private
+                        </div>
                     </div>
                     <div class="tab-content-item" data-tab-content="access">
-                        access
+                        <div>
+                            <div>ilyas@gmail.com</div>
+                            <div>ilyas@wm4d.com</div>
+                            <div>ilyas@froala.com</div>
+                            <div>ilyas@wapgee.com</div>
+                            <div>ilyas@google.com</div>
+                            <div>ilyas@facebook.com</div>
+                            <div>ilyas@yt.com</div>
+                        </div>
+                        <input width="400px" type="email" name="" placeholder="User email address" id="">
                     </div>
                 </div>
             </div>
@@ -67,7 +81,21 @@
             </div>
         </div>
         <div class="item-4 comn_pd ">
-            <iframe src="/preview/asdf8aSd" />
+            <div class="preview-frame"></div>
         </div>
     </div>
+
+    <form action="/" method="post" class="container-form">
+        <input type="hidden" name="html" value="">
+        <input type="hidden" name="css" value="">
+        <input type="hidden" name="javascript" value="">
+        <input type="hidden" name="title" value="">
+        <input type="hidden" name="description" value="">
+        <input type="hidden" name="access" value="">
+        <input type="hidden" name="is_private" value="">
+        <input type="hidden" name="inclue_html_5_snippet" value="">
+    </form>
 </div>
+
+{{>cmCSSAssets}}
+{{>cmAssets}}

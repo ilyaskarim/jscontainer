@@ -11,14 +11,13 @@ export const setupHTMLEditor = () => {
         value: "<!-- Write your html -->",
         language: "html",
         automaticLayout: true,
+        theme: "vs",
       }
     );
     isHTMLInitialize = true;
   }
 };
 export const setupCSSEditor = () => {
-  console.log("setupCSSEditor");
-
   if (isCSSInitialize === false) {
     document.getElementById("css-container").innerHTML = "";
     var editor = monaco.editor.create(
@@ -27,6 +26,7 @@ export const setupCSSEditor = () => {
         value: "/* Write your css */",
         language: "css",
         automaticLayout: true,
+        theme: "vs",
       }
     );
     isCSSInitialize = true;
@@ -34,8 +34,6 @@ export const setupCSSEditor = () => {
 };
 
 export const setupJavascriptEditor = () => {
-  console.log("setupJavascriptEditor");
-
   if (isJSInitialize === false) {
     document.getElementById("javascript-container").innerHTML = "";
     var editor = monaco.editor.create(
@@ -44,6 +42,7 @@ export const setupJavascriptEditor = () => {
         value: "/* Write your javascript */",
         language: "javascript",
         automaticLayout: true,
+        theme: "vs",
       }
     );
     isJSInitialize = true;
