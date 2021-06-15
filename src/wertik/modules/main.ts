@@ -27,7 +27,7 @@ export default {
       {
         path: "/",
         handler: async (req, res) => {
-          res.render("containers/welcome");
+          res.render("containers/container");
         },
       },
       {

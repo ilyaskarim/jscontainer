@@ -26,7 +26,7 @@ export default {
     },
   },
   email: {
-    disable: false,
+    disable: true,
     configuration: {
       service: "gmail",
       auth: {
