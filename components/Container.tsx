@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import Tabs from "./../utils/tabs";
+import MonacoEditor from "react-monaco-editor";
+import Editor from "./Editor";
 
 export default function () {
   useEffect(() => {
     Tabs(".tabs-language", {
       byDefaultTab: "html",
-      onChange: ()=> {},
+      onChange: () => {},
     });
 
     Tabs(".tabs-menu", {
@@ -188,19 +190,22 @@ export default function () {
             </div>
             <div className="tab-content">
               <div className="tab-content-item" data-tab-content="html">
-                <div id="html-container" className="content-editor">
-                  loading...
-                </div>
+                <Editor
+                  defaultLanguage="html"
+                  defaultValue="<!-- write somthing -->"
+                ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="css">
-                <div id="css-container" className="content-editor">
-                  loading...
-                </div>
+                <Editor
+                  defaultLanguage="css"
+                  defaultValue="/* Write Something */"
+                ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="javascript">
-                <div id="javascript-container" className="content-editor">
-                  loading...
-                </div>
+                <Editor
+                  defaultLanguage="javascript"
+                  defaultValue="/* Write something */"
+                ></Editor>
               </div>
             </div>
           </div>
