@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import Tabs from "./../utils/tabs";
-import MonacoEditor from "react-monaco-editor";
 import Editor from "./Editor";
+import ContainerNavbar from "./../components/ContainerNavbar";
 
 export default function () {
+
   useEffect(() => {
     Tabs(".tabs-language", {
       byDefaultTab: "html",
@@ -18,44 +19,7 @@ export default function () {
 
   return (
     <div className="home_section">
-      <nav className="navbar ">
-        <div className="list_left">
-          <a className="navbar-brand primary-clr " href="#">
-            Js <span>Container</span>
-          </a>
-          <a className="primary-clr link" href="">
-            Run
-          </a>
-          <button type="button" className="btn btn-primary btn-sm custom-btn">
-            Save
-          </button>
-        </div>
-
-        <div className=" form-inline" id="navbarTogglerDemo02">
-          <ul className="d-flex listRight">
-            <li className="nav-item ">
-              <a className="nav-link link" href="#">
-                Terms and Condition
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link link" href="#">
-                Playgrounds
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link link" href="#">
-                About Us
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link link" href="#">
-                <i className="far fa-user"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <ContainerNavbar></ContainerNavbar>
       <div className="xyz">
         <div className="item-1  comn_pd  ">
           <input type="text" className="bg-gray" placeholder="title" />
