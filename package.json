@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.2.1",
+    "@szhsin/react-menu": "^1.10.1",
     "next": "11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-modal": "^3.14.3",
     "react-monaco-editor": "^0.43.0",
     "sass": "^1.35.1"
   },

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Tabs from "./../utils/tabs";
 import Editor from "./Editor";
 import ContainerNavbar from "./../components/ContainerNavbar";
+import Button from "./UI/Button";
 
 export default function () {
 
@@ -55,7 +56,7 @@ export default function () {
             <div className="tab-content">
               <div className="tab-content-item" data-tab-content="assets">
                 <div className="url_box">
-                  <a className="url_link" href="">
+                  <a className="url_link" href="#">
                     https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
                   </a>
                   <div className="url_icons">
@@ -94,35 +95,19 @@ export default function () {
               </div>
               <div className="tab-content-item" data-tab-content="access">
                 <div className="access">
-                  <ul className="list_emails scroll-bar">
-                    <li>
-                      ilyas@gmail.com<span className="close">&times;</span>
-                    </li>
-                    <li>
-                      ilyas@gmail.com<span className="close">&times;</span>
-                    </li>
-                    <li>
-                      ilyas@gmail.com<span className="close">&times;</span>
-                    </li>
-                    <li>
-                      ilyas@gmail.com<span className="close">&times;</span>
-                    </li>
-                    <li>
-                      ilyas@gmail.com<span className="close">&times;</span>
-                    </li>
-                    <li>
-                      ilyas@gmail.com<span className="close">&times;</span>
-                    </li>
-                    <li>
-                      ilyas@gmail.com<span className="close">&times;</span>
-                    </li>
-                  </ul>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="User email address"
-                    id=""
-                  />
+                  <div className="scroll-bar">
+                    {[1, 2, 3, 4, 5].map((c) => {
+                      return (
+                        <div className="d-inline-block p-10 mr-2 p-1 invited-user">
+                          ilyas@gmail.com
+                          <span className="close d-inline-block ml-1 text-sm p-1 ">
+                            &times;
+                          </span>
+                        </div>
+                      );
+                    })}
+                    <Button className="btn btn-primary btn-xs" >Invite</Button>
+                  </div>
                 </div>
               </div>
             </div>
