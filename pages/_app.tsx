@@ -9,6 +9,7 @@ import "../scss/app/welcome.scss";
 import "monaco-editor/esm/vs/base/browser/ui/actionbar/actionbar.css";
 import Head from "next/head";
 import { useEffect } from "react";
+import Navbar from "../components/Navbar/Navbar";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -33,6 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <body>
+        <Navbar></Navbar>
         <Component {...pageProps} />
       </body>
     </div>

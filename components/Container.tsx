@@ -1,10 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Tabs from "./../utils/tabs";
 import Editor from "./Editor";
-import ContainerNavbar from "./../components/ContainerNavbar";
-import Button from "./UI/Button";
+import ContainerNavbar from "./Navbar/ContainerNavbar";
+import Assets from "./Container/Assets";
+import Settings from "./Container/Settings";
+import Access from "./Container/Access";
+import Navbar from "./Navbar/Navbar";
 
 export default function () {
+
+  const [container, setContainer] = useState({
+    title: "",
+    description: "",  
+    html: "",
+    css: "",
+    javascript: "",
+    assets: [],
+    html_5_snippet: false,
+    private: false,
+    access: [],
+  });
 
   useEffect(() => {
     Tabs(".tabs-language", {
@@ -20,7 +35,6 @@ export default function () {
 
   return (
     <div className="home_section">
-      <ContainerNavbar></ContainerNavbar>
       <div className="xyz">
         <div className="item-1  comn_pd  ">
           <input type="text" className="bg-gray" placeholder="title" />
@@ -55,60 +69,16 @@ export default function () {
             </div>
             <div className="tab-content">
               <div className="tab-content-item" data-tab-content="assets">
-                <div className="url_box">
-                  <a className="url_link" href="#">
-                    https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
-                  </a>
-                  <div className="url_icons">
-                    <a href="">
-                      <i className="fas fa-times"></i>
-                    </a>
-                    <a href="">
-                      {" "}
-                      <i className="fas fa-plus"></i>
-                    </a>
-                  </div>
-                </div>
+                <Assets></Assets>
               </div>
               <div
                 className="tab-content-item check_settings"
                 data-tab-content="settings"
               >
-                <div className="form-check form-switch">
-                  <div className="switch_btn">
-                    <label className="switch mr-2">
-                      <input type="checkbox" />
-                      <span className="slider round"></span>
-                    </label>
-                    <span className="switch_label" id="flexSwitchCheckChecked">
-                      Html5 snippet
-                    </span>
-                  </div>
-                </div>
-                <div className="switch_btn">
-                  <label className="switch mr-2">
-                    <input type="checkbox" name="html5snippet" />
-                    <span className="slider round"></span>
-                  </label>
-                  <span className="switch_label">Private</span>
-                </div>
+                <Settings></Settings>
               </div>
               <div className="tab-content-item" data-tab-content="access">
-                <div className="access">
-                  <div className="scroll-bar">
-                    {[1, 2, 3, 4, 5].map((c) => {
-                      return (
-                        <div className="d-inline-block p-10 mr-2 p-1 invited-user">
-                          ilyas@gmail.com
-                          <span className="close d-inline-block ml-1 text-sm p-1 ">
-                            &times;
-                          </span>
-                        </div>
-                      );
-                    })}
-                    <Button className="btn btn-primary btn-xs" >Invite</Button>
-                  </div>
-                </div>
+                <Access></Access>
               </div>
             </div>
           </div>

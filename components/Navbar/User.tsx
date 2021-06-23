@@ -1,3 +1,7 @@
 export default function () {
-  return <div>User</div>;
+    return (
+      <a className="nav-link link" href="#">
+        <i className="far fa-user"></i>
+      </a>
+    );
 }

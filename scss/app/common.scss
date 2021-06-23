@@ -11,7 +11,8 @@
   color: #665858;
   text-decoration: none;
   transition: 0.25s color;
-  &:hover {
+  &:hover,
+  &.active {
     color: #227de8;
   }
 }
