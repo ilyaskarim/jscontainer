@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import "../scss/app/buttons.scss";
+import "@szhsin/react-menu/dist/index.css";
 import "../scss/app/common.scss";
 import "../scss/app/layout.scss";
 import "../scss/app/navbar.scss";
@@ -10,8 +11,11 @@ import "monaco-editor/esm/vs/base/browser/ui/actionbar/actionbar.css";
 import Head from "next/head";
 import { useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer";
+import { useRouter } from "next/dist/client/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router=  useRouter()
   return (
     <div>
       <Head>
@@ -35,7 +39,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <body>
         <Navbar></Navbar>
-        <Component {...pageProps} />
+        <div className="app-container">
+          <Component {...pageProps} />
+        </div>
+        {router.route !== "/" ? <Footer></Footer> : <></>}
       </body>
     </div>
   );

@@ -3,7 +3,6 @@
 }
 
 .link {
-  font-family: "Lato";
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
@@ -18,7 +17,6 @@
 }
 
 .tab-header-item {
-  font-family: "Lato";
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
@@ -43,4 +41,15 @@
   right: 14px;
   top: 45px;
   bottom: 0px;
+}
+
+
+.footer {
+  background: #eee;
+  padding: 6px;
+text-align: center;
+}
+
+.app-container {
+  min-height: 100vh;
 }
