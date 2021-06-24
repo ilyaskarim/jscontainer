@@ -1,0 +1,37 @@
+.navbar {
+  background: #ececec;
+  padding: 0 20px;
+  height: 45px;
+
+  .listRight {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li a {
+      padding: 0.5rem 0.6rem;
+    }
+  }
+  .list_left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a {
+      margin-right: 50px;
+      text-decoration: none;
+      text-decoration: none;
+    }
+  }
+  .navbar-brand {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    color: #000000;
+    span {
+      color: #227de8;
+    }
+  }
+  .nav-link.active {
+    border-bottom-width: 0px;
+  }
+}

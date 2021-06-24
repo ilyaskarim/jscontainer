@@ -1,46 +1,30 @@
 {
-  "name": "jscontainer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "less": "less-watch-compiler",
-    "dev": "concurrently -n Webpack,TS,Server,Less \"yarn webpack-watch\"  \"yarn watch-ts\"  \"nodemon lib/index.js\" \"yarn less\"",
-    "production": "node lib/index.js",
-    "webpack-watch": "webpack watch",
-    "webpack-build": "webpack",
-    "watch-ts": "tsc -w",
-    "build": "concurrently -n Webpack,TS \"yarn tsc\" \" yarn webpack-build \" "
+    "adev": "next dev",
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ilyaskarim/jscontainer.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ilyaskarim/jscontainer/issues"
-  },
-  "homepage": "https://github.com/ilyaskarim/jscontainer#readme",
   "dependencies": {
-    "@babel/core": "^7.14.6",
-    "babel-loader": "^8.2.2",
-    "cookie-parser": "^1.4.5",
-    "cross-env": "^7.0.3",
-    "express-flash": "^0.0.2",
-    "express-handlebars": "^5.3.2",
-    "express-session": "^1.17.2",
-    "monaco-editor": "^0.25.0",
-    "wertik-js": "^2.0.70"
+    "@monaco-editor/react": "^4.2.1",
+    "@szhsin/react-menu": "^1.10.1",
+    "@types/react-modal": "^3.12.0",
+    "express": "^4.17.1",
+    "next": "11.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-modal": "^3.14.3",
+    "react-monaco-editor": "^0.43.0",
+    "sass": "^1.35.1"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0",
-    "dotenv": "^10.0.0",
-    "less-watch-compiler": "^1.14.1",
-    "nodemon": "^2.0.7",
-    "typescript": "^3.5.1",
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.2"
+    "@types/react": "17.0.11",
+    "eslint": "7.29.0",
+    "eslint-config-next": "11.0.0",
+    "typescript": "4.3.4"
   }
 }
