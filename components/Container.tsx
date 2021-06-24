@@ -35,8 +35,8 @@ export default function () {
 
   return (
     <div className="home_section">
-      <div className="xyz">
-        <div className="item-1  comn_pd  ">
+      <div className="home_content">
+        <div className="form-section  section_comn_pd">
           <input type="text" className="bg-gray" placeholder="title" />
           <div className="form-floating">
             <textarea
@@ -46,7 +46,7 @@ export default function () {
             ></textarea>
           </div>
         </div>
-        <div className="item-2 comn_pd">
+        <div className="action_section section_comn_pd">
           <div className="tabs bg-gray tabs-menu">
             <div className="tab-header">
               <ul>
@@ -77,7 +77,7 @@ export default function () {
               >
                 <Settings></Settings>
               </div>
-              <div className="tab-content-item" data-tab-content="access">
+              <div className="tab-content-item scroll-bar" data-tab-content="access">
                 <Access></Access>
               </div>
             </div>
@@ -86,7 +86,7 @@ export default function () {
       </div>
 
       <div className="row1">
-        <div className="item-3 comn_pd">
+        <div className="code-section section_comn_pd">
           <div className="tabs bg-gray tabs-language">
             <div className="tab-header">
               <ul>
@@ -129,7 +129,7 @@ export default function () {
             </div>
           </div>
         </div>
-        <div className="item-4 comn_pd ">
+        <div className="code-section section_comn_pd ">
           <div className="preview-frame"></div>
         </div>
       </div>
