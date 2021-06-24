@@ -4,17 +4,18 @@
   .home_content {
     display: flex;
   }
+  .home_content {
+    display: flex;
+  }
   .tabs {
     position: relative;
     height: 100%;
     width: 100%;
     padding: 5px 16px;
   }
-  .item-1 {
-    padding: 15px 15px 11px 15px;
+  .form-section {
     border-right: 1px solid #ececec;
     border-bottom: 1px solid #ececec;
-    width: 50%;
     input {
       margin-bottom: 10px;
       background: #f6f6f6;
@@ -58,12 +59,31 @@
       background: #f6f6f6;
     }
   }
-  .item-2 {
-    width: 50%;
-
-    padding: 15px 15px 11px 15px;
+  .action_section {
     background: #fff;
     border-bottom: 1px solid #ececec;
+    .invited-user {
+      font-size: 12px;
+      background: #E0E0E0;
+      border-radius: 64px;
+      padding-left: 12px;
+      .close {
+        font-size: 12px;
+        cursor: pointer;
+        background: #D6D6D6;
+
+        border-radius: 50%;
+        height: 22px;
+        width: 22px;
+        line-height: 22px;
+        text-align: center;
+
+        &:hover {
+          background: transparent;
+          color: red;
+        }
+      }
+    }
     .url_box {
       display: flex;
       align-items: center;
@@ -94,15 +114,15 @@
 
   .tab-content {
     padding-top: 9px;
+    background-color: #fff;
+
   }
 
   .row1 {
     display: flex;
     height: calc(100vh - 172px);
   }
-  .item-3 {
-    width: 50%;
-    padding: 18px 18px 25px 18px;
+  .code-section {
     border-right: 1px solid #ececec;
     .form-floating {
       height: 95%;
@@ -123,10 +143,7 @@
     }
   }
 
-  .item-4 {
-    width: 50%;
-    padding: 18px 18px 25px 18px;
-  }
+  
 
   .switch_btn {
     display: flex;
@@ -214,7 +231,7 @@
     -webkit-box-shadow: inset 0 0 6px hsl(0deg 0% 45%);
   }
   .access {
-    max-height: 67px;
+    max-height: 64px;
     overflow-y: scroll;
     .list_emails {
       list-style-type: none;
