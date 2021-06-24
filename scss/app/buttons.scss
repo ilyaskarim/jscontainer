@@ -16,6 +16,10 @@
     opacity: .8;
     pointer-events: none;
   }
+  &.disabled {
+    pointer-events: none;
+    opacity: .6;
+  }
 }
 .custom-btn {
   background: #227de8;

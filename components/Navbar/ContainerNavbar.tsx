@@ -12,8 +12,6 @@ export default function () {
           Run
         </a>
         <Button
-          loading={false}
-          type="button"
           className="btn btn-primary btn-sm custom-btn"
         >
           Save

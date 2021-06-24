@@ -34,6 +34,16 @@ export default function NavLink() {
           About Us
         </a>
       </li>
+      <li className="nav-item">
+        <a
+          className={`nav-link link ${
+            router.route.includes("blog") ? "active" : ""
+          }`}
+          href="/blog"
+        >
+          Blog
+        </a>
+      </li>
     </>
   );
 }
