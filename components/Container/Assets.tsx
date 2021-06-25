@@ -24,8 +24,8 @@ export default function () {
           </span>
         </div>
         <Modal  className="assets-modal invite-modal " isOpen={open} onRequestClose={() => setOpen(false)}>
-            <div className="modal-header border-0">
-              <a href="">CDN JS</a>
+            <div className="modal-header pt-0 pl-0 border-0">
+              <a href="" className="mr-3 ">CDN JS</a>
               <a href="">Link</a>
             </div>
             <div className="assets-content invite-content">

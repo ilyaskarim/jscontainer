@@ -40,8 +40,6 @@
         line-height: 22px;
         color: #505050;
         margin-bottom: 30px;
-        
-        
     }
     button {
         width: 81px;
@@ -56,13 +54,21 @@
     text-align: left;
     align-items: flex-start;
     padding: 14px 18px;
-    
+    .modal-header  {
+        a {
+            color:  #5E5A5A;
+            &:focus {
+                color: #227DE8;
+
+            }
+        }
+    }
     .assets-content{
         width: 100%;
         p {
-
             text-align: left;
         }
+
         
     }
 }
