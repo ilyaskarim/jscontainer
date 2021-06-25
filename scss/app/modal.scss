@@ -1,0 +1,74 @@
+
+.invite-modal{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    height: 333px;
+    max-width: 466px;
+    position: absolute;
+    inset: 0;
+    border: 1px solid #cccccc;
+    background: white;
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    margin: auto;
+    padding-top: 40px;
+
+}
+.invite-content {
+    max-width: 263px;
+    
+    h4 {
+        font-size: 24px;
+        line-height: 28px;
+        color: #227DE8;
+    }
+    p {
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #000000;
+    }
+    input{
+        background: #F6F6F6;
+        padding: 12px 8px;
+        width: 100%;
+        border: none;
+        font-size: 19px;
+        line-height: 22px;
+        color: #505050;
+        margin-bottom: 30px;
+    }
+    button {
+        width: 81px;
+        background: #227DE8;
+        &:focus{
+            box-shadow: none;
+        }
+    }
+}
+
+.assets-modal {
+    text-align: left;
+    align-items: flex-start;
+    padding: 14px 18px;
+    .modal-header  {
+        a {
+            color:  #5E5A5A;
+            &:focus {
+                color: #227DE8;
+
+            }
+        }
+    }
+    .assets-content{
+        width: 100%;
+        p {
+            text-align: left;
+        }
+
+        
+    }
+}

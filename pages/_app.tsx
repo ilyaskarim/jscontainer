@@ -7,6 +7,8 @@ import "../scss/app/layout.scss";
 import "../scss/app/navbar.scss";
 import "../scss/app/tabs.scss";
 import "../scss/app/welcome.scss";
+import "../scss/app/modal.scss";
+import "../scss/app/inputField.scss";
 import "monaco-editor/esm/vs/base/browser/ui/actionbar/actionbar.css";
 import Head from "next/head";
 import { useEffect } from "react";
