@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import type { AppProps } from "next/app";
 import "../scss/app/buttons.scss";
 import "@szhsin/react-menu/dist/index.css";
@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
-    if (window.location.href.startsWith("http:")) {
+    if (window.location.hostname.includes("jscontainer.com") && window.location.href.startsWith("http:")) {
       window.location.href = window.location.href.replace("http:", "https:");
     }
   }, [])

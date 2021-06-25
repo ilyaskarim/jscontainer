@@ -29,3 +29,15 @@ a {
 .ReactModal__Overlay--before-close{
   opacity: 0;
 }
+
+.react-menu-reset {
+  padding: 0;
+  .rc-menu__item {
+    padding: 0;
+    &:hover,
+    &:focus {
+      cursor: inherit;
+      background: transparent;
+    }
+  }
+}

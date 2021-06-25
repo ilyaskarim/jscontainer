@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.2.1",
+    "@reduxjs/toolkit": "^1.6.0",
     "@szhsin/react-menu": "^1.10.1",
     "@types/react-modal": "^3.12.0",
     "express": "^4.17.1",
