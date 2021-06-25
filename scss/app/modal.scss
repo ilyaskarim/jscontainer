@@ -38,9 +38,23 @@
         border: none;
         font-size: 19px;
         line-height: 22px;
-        color: #505050;
-        margin-bottom: 30px;
+        color: #000000;
+        &:focus {
+            outline: none;
+        }
     }
+    input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #505050;
+      }
+      input::-moz-placeholder { /* Firefox 19+ */
+        color: #505050;
+      }
+      input:-ms-input-placeholder { /* IE 10+ */
+        color: #505050;
+      }
+      input:-moz-placeholder { /* Firefox 18- */
+        color: #505050;
+      }
     button {
         width: 81px;
         background: #227DE8;
@@ -64,11 +78,22 @@
         }
     }
     .assets-content{
+        max-width: 100%;
         width: 100%;
         p {
             text-align: left;
         }
-
+        input {
+            margin-bottom: 7px;
+            
+                
+        }
+        .cdn-links {
+            padding: 17px 14px 16px 9px;
+            background: #F8F8F8;
+            display: flex;
+            justify-content: space-between;
+        }
         
     }
 }

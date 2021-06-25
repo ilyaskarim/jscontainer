@@ -29,12 +29,12 @@ export default function () {
               <a href="">Link</a>
             </div>
             <div className="assets-content invite-content">
-              <InputField placeholder="Search a library from cdnjs" className=""/>
-              <p className="mb-3">Invite to your container</p>
-              <p className="mb-4">Inviting users to your container only works <br /> when you have a private container</p>
               <form action="" onSubmit={handlerSubmit} >
-                <Button className="btn btn-primary btn-xs">Invite</Button>
+                <InputField placeholder="Search a library from cdnjs" className=""/>
               </form>
+              <p className="mb-3">Tip: To directly insert, enter url and press enter</p>
+              <div className="cdn-links mb-2"><a href="">https://wapgee.com/cdn/path/to/file.js</a> <span>Vue @ 2.5.6</span></div>
+              <div className="cdn-links"><a href="">https://wapgee.com/cdn/path/to/file.js</a> <span>Vue @ 2.5.6</span></div>
             </div>
           </Modal>
       </div>

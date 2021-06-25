@@ -96,6 +96,10 @@
       }
       .url_icons {
         display: flex;
+        i {
+        cursor: pointer;
+
+        }
       }
       .fa-times {
         color: #f11a1a;
