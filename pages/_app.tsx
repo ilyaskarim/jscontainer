@@ -18,6 +18,13 @@ import { useRouter } from "next/dist/client/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+
+  useEffect(() => {
+    if (window.location.href.startsWith("http:")) {
+      window.location.href = window.location.href.replace("http:", "https:");
+    }
+  }, [])
+
   return (
     <div>
       <Head>
