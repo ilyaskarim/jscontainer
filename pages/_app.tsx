@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         {router.route !== "/" ? <Footer></Footer> : <></>}
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-W5P9HVY0C7"
+          src="https://www.googletagmanager.com/gtag/js?id=UA-64991398-3"
         ></script>
         <script
           dangerouslySetInnerHTML={{
@@ -56,7 +56,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-W5P9HVY0C7');
+            gtag('config', 'UA-64991398-3');
             `,
           }}
         />
