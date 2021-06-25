@@ -17,7 +17,9 @@ export default function () {
           https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
         </a>
         <div className="url_icons">
-          <span >
+          <span  onClick={ () => {
+            toast.success("Removed successfully")
+          } } >
             <i className="fas fa-times"></i>
           </span>
           <span onClick={() => setOpen(true)}>
