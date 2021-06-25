@@ -15,7 +15,7 @@ import Footer from "../components/Footer";
 import { useRouter } from "next/dist/client/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router=  useRouter()
+  const router = useRouter();
   return (
     <div>
       <Head>
@@ -43,6 +43,21 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
         {router.route !== "/" ? <Footer></Footer> : <></>}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-W5P9HVY0C7"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-W5P9HVY0C7');
+            `,
+          }}
+        />
       </body>
     </div>
   );
