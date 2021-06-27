@@ -2,7 +2,7 @@ import Button from "./../UI/Button";
 import Modal from "../../components/UI/InviteModal";
 import InputField from "../../components/UI/InputField";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export default function () {
   const [open, setOpen] = useState(false);
@@ -20,7 +20,9 @@ export default function () {
         <div className="url_icons">
           <span
             onClick={() => {
-              toast.success("Removed");
+              toast.success("Asset removed", {
+                duration: 2000
+              });
             }}
           >
             <i className="fas fa-times"></i>
@@ -61,7 +63,6 @@ export default function () {
           </div>
         </div>
       </Modal>
-      <Toaster></Toaster>
     </>
   );
 }

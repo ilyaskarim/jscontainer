@@ -2,7 +2,7 @@ import Button from "./../UI/Button";
 import Modal from "../../components/UI/InviteModal";
 import InputField from "../../components/UI/InputField";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export default function () {
   const [open, setOpen] = useState(false);
@@ -23,7 +23,9 @@ export default function () {
                 <span
                   className="close d-inline-block ml-1 text-sm"
                   onClick={() => {
-                    toast.success("User removed");
+                    toast.success("User removed", {
+                      duration: 2000
+                    });
                   }}
                 >
                   &times;
@@ -57,7 +59,6 @@ export default function () {
           </form>
         </div>
       </Modal>
-      <Toaster></Toaster>
     </>
   );
 }

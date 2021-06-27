@@ -111,19 +111,19 @@ export default function () {
               <div className="tab-content-item" data-tab-content="html">
                 <Editor
                   defaultLanguage="html"
-                  defaultValue="<!-- Write Something -->"
+                  defaultValue="<!-- Write HTML -->"
                 ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="css">
                 <Editor
                   defaultLanguage="css"
-                  defaultValue="/* Write Something */"
+                  defaultValue="/* Write CSS */"
                 ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="javascript">
                 <Editor
                   defaultLanguage="javascript"
-                  defaultValue="/* Write Something */"
+                  defaultValue="/* Write Javascript */"
                 ></Editor>
               </div>
             </div>

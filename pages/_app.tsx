@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer";
 import { useRouter } from "next/dist/client/router";
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -68,6 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
         />
       </body>
+      <Toaster></Toaster>
     </div>
   );
 }

@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "adev": "next dev",
-    "dev": "node server.js",
+    "dev": "NODE_ENV=local node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
+    "oldstart": "next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -14,14 +15,17 @@
     "@reduxjs/toolkit": "^1.6.0",
     "@szhsin/react-menu": "^1.10.1",
     "@types/react-modal": "^3.12.0",
+    "dot-env": "^0.0.1",
     "express": "^4.17.1",
+    "mysql2": "^2.2.5",
     "next": "11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hot-toast": "^2.0.0",
     "react-modal": "^3.14.3",
     "react-monaco-editor": "^0.43.0",
-    "sass": "^1.35.1"
+    "sass": "^1.35.1",
+    "sequelize": "^6.6.4"
   },
   "devDependencies": {
     "@types/react": "17.0.11",
