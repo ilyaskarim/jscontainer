@@ -1,21 +1,22 @@
 .home_section {
+  display: flex;
   height: calc(100vh - 45px);
   font-family: "Lato";
   .home_content {
     display: flex;
-  }
-  .home_content {
-    display: flex;
+    flex-direction: column;
+    width: 50%;
+    border-right: 1px solid #ECECEC;
+
   }
   .tabs {
     position: relative;
     height: 100%;
     width: 100%;
-    padding: 5px 16px;
   }
   .form-section {
-    border-right: 1px solid #ececec;
     border-bottom: 1px solid #ececec;
+    height: 128px;
     input {
       margin-bottom: 10px;
       background: #f6f6f6;
@@ -62,6 +63,7 @@
   .action_section {
     background: #fff;
     border-bottom: 1px solid #ececec;
+    height: 128px;
     .invited-user {
       font-size: 12px;
       background: #E0E0E0;
@@ -123,10 +125,13 @@
 
   .row1 {
     display: flex;
-    height: calc(100vh - 172px);
+    width: 50%;
+    flex-direction: column;
+    // height: calc(100vh - 172px);
+
   }
   .code-section {
-    border-right: 1px solid #ececec;
+    // height: calc(100vh - 45px);
     .form-floating {
       height: 95%;
       textarea {

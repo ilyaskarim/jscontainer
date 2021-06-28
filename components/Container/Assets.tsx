@@ -4,6 +4,12 @@ import InputField from "../../components/UI/InputField";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
+const customStyles = {
+  height: "280px",
+  maxWidth: "366px",
+  
+};
+
 export default function () {
   const [open, setOpen] = useState(false);
 
@@ -36,6 +42,15 @@ export default function () {
         className="assets-modal invite-modal "
         isOpen={open}
         onRequestClose={() => setOpen(false)}
+      
+
+          style={{
+            
+            content: {
+              height: '333px',
+              maxWidth: '466px',
+            }
+          }}
       >
         <div className="modal-header pt-0 pl-0 border-0">
           <a href="" className="mr-3 ">

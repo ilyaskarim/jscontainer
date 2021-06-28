@@ -45,6 +45,12 @@ export default function () {
         className="invite-modal"
         isOpen={open}
         onRequestClose={() => setOpen(false)}
+        style={{
+          content: {
+            height: "280px",
+            maxWidth: "366px",
+          }
+        }}
       >
         <div className="invite-content">
           <h4 className="mb-3">Invite to your container</h4>

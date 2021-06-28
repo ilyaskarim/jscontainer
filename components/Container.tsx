@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import Tabs from "./../utils/tabs";
 import Editor from "./Editor";
-import ContainerNavbar from "./Navbar/ContainerNavbar";
 import Assets from "./Container/Assets";
 import Settings from "./Container/Settings";
 import Access from "./Container/Access";
-import Navbar from "./Navbar/Navbar";
 
 export default function () {
 
@@ -46,46 +44,6 @@ export default function () {
             ></textarea>
           </div>
         </div>
-        <div className="action_section section_comn_pd">
-          <div className="tabs bg-gray tabs-menu">
-            <div className="tab-header">
-              <ul>
-                <li>
-                  <a data-tab="assets" className="tab-header-item" href="#">
-                    Assets
-                  </a>
-                </li>
-                <li>
-                  <a data-tab="settings" className="tab-header-item" href="#">
-                    Settings
-                  </a>
-                </li>
-                <li>
-                  <a data-tab="access" className="tab-header-item" href="#">
-                    Access
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="tab-content">
-              <div className="tab-content-item" data-tab-content="assets">
-                <Assets></Assets>
-              </div>
-              <div
-                className="tab-content-item check_settings"
-                data-tab-content="settings"
-              >
-                <Settings></Settings>
-              </div>
-              <div className="tab-content-item scroll-bar" data-tab-content="access">
-                <Access></Access>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="row1">
         <div className="code-section section_comn_pd">
           <div className="tabs bg-gray tabs-language">
             <div className="tab-header">
@@ -129,8 +87,50 @@ export default function () {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="row1">
+        
+
+        <div className="action_section section_comn_pd">
+          <div className="tabs bg-gray tabs-menu">
+            <div className="tab-header">
+              <ul>
+                <li>
+                  <a data-tab="assets" className="tab-header-item" href="#">
+                    Assets
+                  </a>
+                </li>
+                <li>
+                  <a data-tab="settings" className="tab-header-item" href="#">
+                    Settings
+                  </a>
+                </li>
+                <li>
+                  <a data-tab="access" className="tab-header-item" href="#">
+                    Access
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="tab-content">
+              <div className="tab-content-item" data-tab-content="assets">
+                <Assets></Assets>
+              </div>
+              <div
+                className="tab-content-item check_settings"
+                data-tab-content="settings"
+              >
+                <Settings></Settings>
+              </div>
+              <div className="tab-content-item scroll-bar" data-tab-content="access">
+                <Access></Access>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="code-section section_comn_pd ">
-          <div className="preview-frame"></div>
+          <div className="preview-frame">sdasdsd</div>
         </div>
       </div>
     </div>
