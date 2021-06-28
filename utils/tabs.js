@@ -1,4 +1,4 @@
-export default function (el, options) {
+export default function Tabs(el, options) {
   let oldTab = options.byDefaultTab;
   let newTab = options.byDefaultTab;
   const mainEl = document.querySelector(el);
