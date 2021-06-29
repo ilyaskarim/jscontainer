@@ -52,16 +52,18 @@ export default function () {
           }
         }}
       >
+        
+        <button className="closeBtn" onClick={() => setOpen(false)}><i className="fas fa-times"></i></button>
         <div className="invite-content">
           <h4 className="mb-3">Invite to your container</h4>
           <p className="mb-4">
-            Inviting users to your container only works <br /> when you have a
+            Inviting users to your container only works when you have a
             private container
           </p>
           <form action="" onSubmit={handlerSubmit}>
-            <InputField placeholder="Enter email address" className="mb-4" />{" "}
+            <InputField placeholder="Enter email address"/>{" "}
             <br />
-            <Button className="btn btn-primary btn-xs">Invite</Button>
+            <Button className="invite-btn btn btn-primary btn-xs">Invite</Button>
           </form>
         </div>
       </Modal>

@@ -47,11 +47,12 @@ export default function () {
           style={{
             
             content: {
-              height: '333px',
+              height: '315px',
               maxWidth: '466px',
             }
           }}
       >
+        <button className="closeBtn" onClick={() => setOpen(false)}><i className="fas fa-times"></i></button>
         <div className="modal-header pt-0 pl-0 border-0">
           <a href="" className="mr-3 ">
             CDN JS

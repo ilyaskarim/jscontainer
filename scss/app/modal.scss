@@ -13,7 +13,19 @@
     border-radius: 4px;
     outline: none;
     margin: auto;
-    padding-top: 40px;
+    padding: 40px 0;
+    .closeBtn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: transparent;
+        border: none;
+        color: #979797;
+
+        &:focus {
+            outline: none;
+        }
+    }
 
 }
 .invite-content {
@@ -37,6 +49,7 @@
         border: none;
         font-size: 19px;
         line-height: 22px;
+        margin-bottom: 33px;
         color: #000000;
         &:focus {
             outline: none;
@@ -54,8 +67,16 @@
       input:-moz-placeholder { /* Firefox 18- */
         color: #505050;
       }
+    .invite-btn {
+        padding: 9px 36px;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        &:active {
+            box-shadow: none;
+        }
+    }
     button {
-        width: 81px;
         background: #227DE8;
         &:focus{
             box-shadow: none;

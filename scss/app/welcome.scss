@@ -1,7 +1,7 @@
 .home_section {
   display: flex;
   height: calc(100vh - 45px);
-  font-family: "Lato";
+
   .home_content {
     display: flex;
     flex-direction: column;
@@ -25,9 +25,7 @@
       font-size: 12px;
       width: 100%;
       transition: box-shadow 0.25s, outline 0.25s;
-      &:focus {
-        box-shadow: rgb(0 0 0 / 10%) 0px 2px 5px 0, rgb(0 0 0 / 10%) 0 0 1px 0;
-      }
+      
       &:focus-visible {
         outline: none;
       }
@@ -42,7 +40,6 @@
         outline: none;
       }
       &:focus {
-        box-shadow: rgb(0 0 0 / 10%) 0px 2px 5px 0, rgb(0 0 0 / 10%) 0 0 1px 0;
         background: #f6f6f6;
       }
     }
@@ -260,9 +257,6 @@
       font-size: 12px;
       width: 100%;
       transition: box-shadow 0.25s;
-      // &:focus {
-      //   box-shadow: rgb(0 0 0 / 10%) 0px 2px 5px 0, rgb(0 0 0 / 10%) 0 0 1px 0;
-      // }
       &:focus-visible {
         outline: none;
       }
