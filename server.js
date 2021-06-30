@@ -8,7 +8,7 @@ const passport = require("passport");
 const handle = app.getRequestHandler();
 const GitHubStrategy = require("passport-github2");
 const session = require("express-session");
-
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
 app.prepare().then(async () => {
   const useRedis = process.env.USE_REDIS === "yes" ? true : false
@@ -51,6 +51,26 @@ app.prepare().then(async () => {
   server.use(passport.session());
 
   passport.use(
+    new GoogleStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL:
+          process.env.NODE_ENV === "local"
+            ? "http://localhost:3000/auth/google/callback"
+            : "http://jscontainer.com/auth/google/callback",
+        passReqToCallback: true,
+      },
+      function (req, accessToken, refreshToken, profile, done) {
+        console.log(profile)
+        req.login(profile, () => {
+          return done(null, profile);
+        });
+      }
+    )
+  );
+
+  passport.use(
     new GitHubStrategy(
       {
         clientID: process.env.CLIENT_ID,
@@ -65,8 +85,9 @@ app.prepare().then(async () => {
       }
     )
   );
-  // await sequelize.authenticate();
-  // sequelize.sync({force: true})
+  // const database = require("./api/database.js").default
+  // await database.authenticate();
+  // database.sync({force: true})
   // console.log("Connection to the database has been established successfully.");
 
   server.get(
@@ -90,11 +111,34 @@ app.prepare().then(async () => {
     }
   );
 
+  server.get(
+    "/auth/google",
+    passport.authenticate("google", {
+      scope: [
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/userinfo.email",
+      ],
+    })
+  );
+
+  server.get(
+    "/auth/google/callback",
+    passport.authenticate("google", { failureRedirect: "/login", session: true }),
+    function (req, res) {
+      res.redirect("/");
+    }
+  );
+
   server.get("/api/me", (req, res) => {
     res.json({
       user: req.user ? req.user : {},
       isAuthenticated: req.isAuthenticated(),
     });
+  });
+  
+  server.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/")
   });
 
   server.all("*", (req, res) => {
