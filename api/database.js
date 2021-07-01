@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: "mysql",
-    logging: false,
+    logging: true,
   }
 );
 
@@ -44,6 +44,7 @@ const ContainerAsset = sequelize.define("container_asset", {
 User.hasMany(Container);
 Container.belongsTo(User);
 Container.hasMany(ContainerInvite);
+Container.hasMany(ContainerAsset);
 User.hasMany(ContainerInvite);
 ContainerInvite.belongsTo(User);
 ContainerInvite.belongsTo(Container);

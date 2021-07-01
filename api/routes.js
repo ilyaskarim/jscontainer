@@ -1,5 +1,6 @@
 const faker = require("faker");
 const randomstring = require("randomstring");
+const sequelize = require("sequelize")
 
 exports.default = function (server) {
   return new Promise((resolve, reject) => {
@@ -32,6 +33,31 @@ exports.default = function (server) {
       res.send("Fake data inserted");
     });
 
+    server.get("/api/containers", async (req, res) => {
+      const search = req.query.search;
+      if (!req.query.limit || !req.query.offset) {
+        res.status(405).json({
+          message: "Limit and offset required",
+        });
+      }
+      res.status(200).json({
+        containers: await req.models.Container.findAndCountAll({
+          offset: +req.query.offset,
+          limit: +req.query.limit,
+          where: search ? {
+            title: {
+              [sequelize.Op.like]: `%${search}%`,
+            }
+          } :{}
+        }),
+        pagination: {
+          offset: +req.query.offset,
+          limit: +req.query.limit,
+        },
+        message: "Containers",
+      });
+    });
+
     server.get("/api/container/:slug", async (req, res) => {
       res.status(200).json({
         container: await req.models.Container.findOne({
@@ -39,6 +65,10 @@ exports.default = function (server) {
             slug: req.params.slug,
           },
           include: [
+            {
+              model: req.models.ContainerAsset,
+              attributes: ["id", "url"],
+            },
             {
               model: req.models.ContainerInvite,
               include: [
@@ -59,6 +89,26 @@ exports.default = function (server) {
         where: {
           slug: req.params.slug,
         },
+        include: [
+          {
+            model: req.models.ContainerAsset
+          }
+        ]
+      });
+      if (!container) {
+        res.send("Container not found");
+      }
+      const css = [];
+      const js = [];
+      container && container.container_assets.forEach(({ url }) => {
+        if (!url) {
+          return;
+        }
+        if (url.endsWith(".js")) {
+          js.push(`<script src='${url}' ></script>`);
+        } else if (url.endsWith(".css")) {
+          css.push(`<link rel="stylesheet" href="${url}">`);
+        }
       });
       res.send(`
         <!DOCTYPE html>
@@ -69,6 +119,7 @@ exports.default = function (server) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>${container.title}</title>
             <meta name="description" content="${container.description}">
+            ${css.join("\n")}
         </head>
         <style>
             ${container.css}
@@ -76,6 +127,7 @@ exports.default = function (server) {
         <body>
             ${container.html}
         </body>
+        ${js.join("\n")}
         <script>
             ${container.javascript}
         <script>
@@ -123,6 +175,22 @@ exports.default = function (server) {
       });
     });
 
+    server.post("/api/container/:slug/add-asset", async (req, res) => {
+      const container = await req.models.Container.findOne({
+        where: {
+          slug: req.params.slug,
+        },
+      });
+      const asset = await req.models.ContainerAsset.create({
+        url: req.body.url,
+        containerId: container.id,
+      });
+      res.status(200).json({
+        message: "Asset successfully created.",
+        asset: asset,
+      });
+    });
+
     server.post("/api/container/:slug/remove-invite/:id", async (req, res) => {
       await req.models.ContainerInvite.destroy({
         where: {
@@ -131,6 +199,16 @@ exports.default = function (server) {
       });
       res.status(200).json({
         message: "User removed",
+      });
+    });
+    server.post("/api/remove-asset/:id", async (req, res) => {
+      await req.models.ContainerAsset.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.status(200).json({
+        message: "Asset Removed",
       });
     });
 

@@ -57,7 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         /> */}
         </Head>
-        <body>
+        <div>
           <Navbar></Navbar>
           <div className="app-container">
             <Component {...pageProps} />
@@ -83,7 +83,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               />
             </>
           )}
-        </body>
+        </div>
         <Toaster></Toaster>
       </div>
     </Provider>
