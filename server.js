@@ -9,9 +9,8 @@ const handle = app.getRequestHandler();
 const GitHubStrategy = require("passport-github2");
 const session = require("express-session");
 
-
 app.prepare().then(async () => {
-  const useRedis = process.env.USE_REDIS === "yes" ? true : false
+  const useRedis = process.env.USE_REDIS === "yes" ? true : false;
   const server = express();
 
   server.use(require("cookie-parser")());
@@ -65,9 +64,21 @@ app.prepare().then(async () => {
       }
     )
   );
+
+  // const sequelize = require("./api/database").default;
+  // const models = require("./api/database").models;
   // await sequelize.authenticate();
-  // sequelize.sync({force: true})
+  // sequelize.sync();
   // console.log("Connection to the database has been established successfully.");
+
+  // server.use((req, res, next) => {
+  //   req.models = models;
+  //   req.sequelize = sequelize;
+  //   next();
+  // });
+
+  // const routes = require("./api/routes").default;
+  // await routes(server);
 
   server.get(
     "/auth/github",

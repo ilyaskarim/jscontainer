@@ -1,4 +1,3 @@
-require("dotenv").config();
 const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
@@ -28,22 +27,33 @@ const Container = sequelize.define("container", {
   javascript: DataTypes.TEXT,
   parent: DataTypes.INTEGER,
   assets: DataTypes.TEXT,
-  isPrivate: DataTypes.BOOLEAN,
-  htmlSnippet: DataTypes.BOOLEAN,
+  is_private: DataTypes.BOOLEAN,
+  html_snippet: DataTypes.BOOLEAN,
+  slug: DataTypes.STRING,
+  forkedFrom: DataTypes.INTEGER,
 });
 
 const ContainerInvite = sequelize.define("container_invite", {
-  name: DataTypes.TEXT
+  name: DataTypes.TEXT,
+  invited_by: DataTypes.INTEGER,
+});
+const ContainerAsset = sequelize.define("container_asset", {
+  url: DataTypes.TEXT,
 });
 
 User.hasMany(Container);
 Container.belongsTo(User);
-Container.hasMany(ContainerInvite)
-User.hasMany(ContainerInvite)
-ContainerInvite.belongsTo(User)
-ContainerInvite.belongsTo(Container)
+Container.hasMany(ContainerInvite);
+User.hasMany(ContainerInvite);
+ContainerInvite.belongsTo(User);
+ContainerInvite.belongsTo(Container);
+ContainerAsset.belongsTo(User);
+ContainerAsset.belongsTo(Container);
 
 exports.default = sequelize;
-exports.User = User;
-exports.Container = Container;
-exports.ContainerInvite = ContainerInvite;
+exports.models = {
+  Container,
+  User,
+  ContainerInvite,
+  ContainerAsset
+};
