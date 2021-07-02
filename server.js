@@ -89,7 +89,9 @@ app.prepare().then(async () => {
   // const sequelize = require("./api/database").default;
   // const models = require("./api/database").models;
   // await sequelize.authenticate();
-  // sequelize.sync();
+  // sequelize.sync({
+  //   force: true
+  // });
   // console.log("Connection to the database has been established successfully.");
   // server.use((req, res, next) => {
   //   req.models = models;
