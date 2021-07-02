@@ -11,7 +11,7 @@ const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
 app.prepare().then(async () => {
-  const useRedis = process.env.USE_REDIS === "yes" ? true : false
+  const useRedis = process.env.USE_REDIS === "yes" ? true : false;
   const server = express();
 
   server.use(require("cookie-parser")());
@@ -85,10 +85,20 @@ app.prepare().then(async () => {
       }
     )
   );
-  // const database = require("./api/database.js").default
-  // await database.authenticate();
-  // database.sync({force: true})
+
+  // const sequelize = require("./api/database").default;
+  // const models = require("./api/database").models;
+  // await sequelize.authenticate();
+  // sequelize.sync();
   // console.log("Connection to the database has been established successfully.");
+  // server.use((req, res, next) => {
+  //   req.models = models;
+  //   req.sequelize = sequelize;
+  //   next();
+  // });
+
+  const routes = require("./api/routes").default;
+  await routes(server);
 
   server.get(
     "/auth/github",

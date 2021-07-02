@@ -90,8 +90,6 @@ export default function () {
       </div>
 
       <div className="row1">
-        
-
         <div className="action_section section_comn_pd">
           <div className="tabs bg-gray tabs-menu">
             <div className="tab-header">
@@ -123,14 +121,19 @@ export default function () {
               >
                 <Settings></Settings>
               </div>
-              <div className="tab-content-item scroll-bar" data-tab-content="access">
+              <div
+                className="tab-content-item scroll-bar"
+                data-tab-content="access"
+              >
                 <Access></Access>
               </div>
             </div>
           </div>
         </div>
         <div className="code-section section_comn_pd ">
-          <div className="preview-frame">sdasdsd</div>
+          <div className="preview-frame">
+            <iframe src="/preview/x3ad793sgxz3i2" frameBorder="0"></iframe>
+          </div>
         </div>
       </div>
     </div>
