@@ -1,7 +1,7 @@
 import Modal from "../components/UI/Modal";
 import { useState } from "react";
 
-export default function () {
+export default function TermsAndConditions() {
   const [open, setOpen] = useState(false);
   return (
     <div>
