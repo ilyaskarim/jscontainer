@@ -34,4 +34,37 @@
             color: #313131;
         }
     }
+    .cards-section{
+        padding: 50px 21px;
+        .playgrounds-card {
+            width: 408px;
+            height: 314px;
+            background: #FBFBFB;
+            display: inline-block;
+            text-align: center;
+            padding: 28px 35px;
+            margin-right: 35px;
+            h3{
+                font-weight: bold;
+                font-size: 27px;
+                line-height: 37px;
+                color: #000000;
+            }
+            p {
+                font-weight: 600;
+                font-size: 19px;
+                line-height: 26px;
+                text-align: center;
+
+                color: #6F6F6F;
+            }
+            button {
+                background: #227DE8;
+                border-radius: 12px;
+                color: #fff;
+                width: 228px;
+                padding: 14px 0;
+            }
+        }
+    }
 }

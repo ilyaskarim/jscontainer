@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PlaygroundItem from "../components/UI/playgroundItem";
 
 export default function () {
   useEffect(() => {
@@ -49,6 +50,18 @@ export default function () {
     });
   });
 
+  const cardsData = [
+    {
+      title: "Moment JS",
+      para: "Moment Js playground to easily work with dates, format date and play with timezone",
+    },
+    {
+      title: "Slugify",
+      para: "Convert any string into slugify. Slugify is used to convert strings into readable URL’s.",
+    }
+  ]
+
+
   return (
     <div className="playgrounds_section">
       <div className="playgrounds_image">
@@ -58,6 +71,15 @@ export default function () {
             <p>Playgrounds to ehance your productivty:</p>
         </div>
       </div>
+      <div className="cards-section">
+        {cardsData.map((item) => {
+        return(
+          <PlaygroundItem item={item}/>
+          )
+        })
+        }
+      </div>
+     
     </div>
   );
 }
