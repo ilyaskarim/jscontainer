@@ -79,8 +79,8 @@ export default function () {
         </a>
       }
     >
-      {/* {UserlogOut(logoutMenu)} */}
-      {Userlogin(loginMenu)}
+      {console.log({isLoggedIn})}
+      {isLoggedIn ? Userlogin(loginMenu) : UserlogOut(logoutMenu)}
     </Menu>
   );
 }
