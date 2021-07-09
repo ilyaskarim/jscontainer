@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Modal from "../../components/UI/InviteModal";
 import Brand from "./Brand";
-import Icon from "../Svg/SvgIcons";
+import Icon from "../Icons/SvgIcons";
 
 export default function () {
   
