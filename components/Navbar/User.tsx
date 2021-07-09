@@ -4,8 +4,10 @@ import { useState } from "react";
 
 import Modal from "../../components/UI/InviteModal";
 import Brand from "./Brand";
+import Icon from "../Svg/SvgIcons";
 
 export default function () {
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -104,8 +106,17 @@ export default function () {
         </div>
         <div className="signup-content">
           <p>login in to your by using your<br/> Google or Github account.<br/><br/>Save containers, Invite friends.</p>
-          <div className="social-btn google-btn "><i className="fab fa-google"></i><button>Login with Google</button></div>
-          <div className="social-btn github-btn"><i className="fab fa-github"></i><button>Login with Github</button></div>
+          <div className="social-btn google-btn ">
+            <span>
+
+            <Icon  google width="28px" height="28px"/>
+            </span>
+            <button>Login with Google</button></div>
+          <div className="social-btn github-btn">
+            <span>
+            <i className="fab fa-github"></i>
+            </span>
+            <button>Login with Github</button></div>
           <p className="signup-footer">by continuing you are agree with our <br /><span>Terms and Conditions</span></p>
         </div>
       </Modal>

@@ -3,7 +3,7 @@ import PlaygroundItem from "../components/UI/playgroundItem";
 
 export default function () {
   useEffect(() => {
-    let ball = document.createElement("div");
+    // let ball = document.createElement("div");
     let dd = document.querySelector(".bubbles")
     // Some random colors
     const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
@@ -20,6 +20,7 @@ export default function () {
       ball.style.transform = `scale(${Math.random()})`;
       ball.style.width = `${Math.random()}em`;
       ball.style.height = ball.style.width;
+      // ball.style.opacity = `0`;
 
       balls.push(ball);
       dd?.append(ball)
@@ -35,8 +36,8 @@ export default function () {
       let anim = el.animate(
         [
           { transform: "translate(40rem)" },
-          { animation: "fadeIn ease 5s"},
-
+          { animation: "fadeIn ease 8s"},
+          
           { transform: `translate(${to.x}rem, ${to.y}rem)` },
         ],
         {
@@ -45,6 +46,8 @@ export default function () {
           fill: "both",
           iterations: Infinity,
           easing: "ease-in-out",
+          opacity: '1',
+          
         }
       );
     });

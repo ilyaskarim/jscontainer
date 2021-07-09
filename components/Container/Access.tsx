@@ -47,7 +47,7 @@ export default function () {
         onRequestClose={() => setOpen(false)}
         style={{
           content: {
-            height: "310px",
+            height: "314px",
             maxWidth: "366px",
           }
         }}
