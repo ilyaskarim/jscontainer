@@ -1,5 +1,5 @@
 export default function Icon(props: any) {
-  const { onClick, className, arrow, width, height, color, google } = props;
+  const { onClick, className, width, height, color, google } = props;
    if (google) {
     return (
        
@@ -7,6 +7,7 @@ export default function Icon(props: any) {
         onClick={onClick}
         height={height}
         width={width}
+        color={color}
         xmlns="http://www.w3.org/2000/svg"
         className={`svg-inline--fa fa-heart fa-w-16 ${className}`}
         preserveAspectRatio="xMidYMid"

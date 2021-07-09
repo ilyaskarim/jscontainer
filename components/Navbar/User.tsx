@@ -108,8 +108,7 @@ export default function () {
           <p>login in to your by using your<br/> Google or Github account.<br/><br/>Save containers, Invite friends.</p>
           <div className="social-btn google-btn ">
             <span>
-
-            <Icon  google width="28px" height="28px"/>
+              <Icon google width="28px" height="28px"/>
             </span>
             <button>Login with Google</button></div>
           <div className="social-btn github-btn">
