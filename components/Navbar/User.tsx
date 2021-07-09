@@ -44,7 +44,7 @@ export default function () {
   ];
 
   const Userlogin = (loginMenu: any) => {
-    return loginMenu.map((item) => (
+    return loginMenu.map((item: any) => (
       <MenuItem className="menuList">
         <Link href={item.path}>
           {item.user ? (
