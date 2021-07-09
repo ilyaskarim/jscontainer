@@ -67,7 +67,7 @@ export default function () {
   };
 
   const UserlogOut = (logoutMenu: any) => {
-    return logoutMenu.map((item) => (
+    return logoutMenu.map((item: any) => (
       <MenuItem className="loginmenu" onClick={() => setOpen(true)}>
         <Link href={item.path} >{item.name}</Link>
       </MenuItem>
