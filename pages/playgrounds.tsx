@@ -73,13 +73,15 @@ export default function () {
       </div>
       <div className="cards-section">
         {cardsData.map((item) => {
-        return(
-          <PlaygroundItem item={item}/>
-          )
-        })
+          return(
+            <PlaygroundItem item={item}/>
+            )
+          })
         }
+        <div className="loadMore">
+          <a href="#">More playgounds coming soon...</a>
+        </div>
       </div>
-     
     </div>
   );
 }
