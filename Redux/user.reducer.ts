@@ -45,6 +45,8 @@ export interface iUserState {
     google_name: string | null;
     google_email: string | null;
     google_photo: string | null;
+
+    source: string | null;
   };
 }
 
@@ -93,6 +95,8 @@ const initialState: iUserState = {
     google_name: "",
     google_email: "",
     google_photo: "",
+
+    source: ""
   },
 };
 

@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: "mysql",
-    logging: false,
+    logging: true,
   }
 );
 
@@ -17,6 +17,46 @@ const User = sequelize.define("user", {
   password: DataTypes.STRING,
   is_activated: DataTypes.BOOLEAN,
   color_theme: DataTypes.STRING,
+  github_login: DataTypes.STRING,
+  github_id: DataTypes.INTEGER,
+  github_node_id: DataTypes.STRING,
+  github_avatar_url: DataTypes.STRING,
+  github_gravatar_id: DataTypes.STRING,
+  github_url: DataTypes.STRING,
+  github_html_url: DataTypes.STRING,
+  github_followers_url: DataTypes.STRING,
+  github_following_url: DataTypes.STRING,
+  github_gists_url: DataTypes.STRING,
+  github_starred_url: DataTypes.STRING,
+  github_subscriptions_url: DataTypes.STRING,
+  github_organizations_url: DataTypes.STRING,
+  github_repos_url: DataTypes.STRING,
+  github_events_url: DataTypes.STRING,
+  github_received_events_url: DataTypes.STRING,
+  github_type: DataTypes.STRING,
+  github_site_admin: DataTypes.BOOLEAN,
+  github_name: DataTypes.STRING,
+  github_company: DataTypes.STRING,
+  github_blog: DataTypes.STRING,
+  github_location: DataTypes.STRING,
+  github_email: DataTypes.STRING,
+  github_hireable: DataTypes.STRING,
+  github_bio: DataTypes.STRING,
+  github_twitter_username: DataTypes.STRING,
+  github_public_repos: DataTypes.INTEGER,
+  github_public_gists: DataTypes.INTEGER,
+  github_followers: DataTypes.INTEGER,
+  github_following: DataTypes.INTEGER,
+  github_created_at: DataTypes.STRING,
+  github_updated_at: DataTypes.STRING,
+
+  google_id: DataTypes.STRING,
+  google_displayName: DataTypes.STRING,
+  google_name: DataTypes.STRING,
+  google_email: DataTypes.STRING,
+  google_photo: DataTypes.STRING,
+
+  source: DataTypes.STRING
 });
 
 const Container = sequelize.define("container", {
@@ -39,6 +79,8 @@ const ContainerInvite = sequelize.define("container_invite", {
 });
 const ContainerAsset = sequelize.define("container_asset", {
   url: DataTypes.TEXT,
+  version: DataTypes.STRING,
+  name: DataTypes.STRING,
 });
 
 User.hasMany(Container);
@@ -52,9 +94,10 @@ ContainerAsset.belongsTo(User);
 ContainerAsset.belongsTo(Container);
 
 exports.default = sequelize;
+
 exports.models = {
   Container,
   User,
   ContainerInvite,
-  ContainerAsset
+  ContainerAsset,
 };

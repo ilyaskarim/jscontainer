@@ -59,8 +59,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         /> */}
         </Head>
         <div>
-          <Navbar></Navbar>
-          <div className="app-container">
+          <Navbar ></Navbar>
+          <div
+            className={`app-container ${
+              router.route === "/" ? "container-page" : ""
+            }`}
+          >
             <Component {...pageProps} />
           </div>
           {router.route !== "/" ? <Footer></Footer> : <></>}

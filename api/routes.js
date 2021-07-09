@@ -1,6 +1,6 @@
 const faker = require("faker");
 const randomstring = require("randomstring");
-const sequelize = require("sequelize")
+const sequelize = require("sequelize");
 
 exports.default = function (server) {
   return new Promise((resolve, reject) => {
@@ -44,11 +44,13 @@ exports.default = function (server) {
         containers: await req.models.Container.findAndCountAll({
           offset: +req.query.offset,
           limit: +req.query.limit,
-          where: search ? {
-            title: {
-              [sequelize.Op.like]: `%${search}%`,
-            }
-          } :{}
+          where: search
+            ? {
+                title: {
+                  [sequelize.Op.like]: `%${search}%`,
+                },
+              }
+            : {},
         }),
         pagination: {
           offset: +req.query.offset,
@@ -85,32 +87,34 @@ exports.default = function (server) {
     });
 
     server.get("/preview/:slug", async (req, res) => {
-      const container = await req.models.Container.findOne({
-        where: {
-          slug: req.params.slug,
-        },
-        include: [
-          {
-            model: req.models.ContainerAsset
-          }
-        ]
-      });
-      if (!container) {
-        res.send("Container not found");
-      }
-      const css = [];
-      const js = [];
-      container && container.container_assets.forEach(({ url }) => {
-        if (!url) {
-          return;
+      try {
+        const container = await req.models.Container.findOne({
+          where: {
+            slug: req.params.slug,
+          },
+          include: [
+            {
+              model: req.models.ContainerAsset,
+            },
+          ],
+        });
+        if (!container) {
+          res.send("Container not found");
         }
-        if (url.endsWith(".js")) {
-          js.push(`<script src='${url}' ></script>`);
-        } else if (url.endsWith(".css")) {
-          css.push(`<link rel="stylesheet" href="${url}">`);
-        }
-      });
-      res.send(`
+        const css = [];
+        const js = [];
+        container &&
+          container.container_assets.forEach(({ url }) => {
+            if (!url) {
+              return;
+            }
+            if (url.endsWith(".js")) {
+              js.push(`<script src='${url}' ></script>`);
+            } else if (url.endsWith(".css")) {
+              css.push(`<link rel="stylesheet" href="${url}">`);
+            }
+          });
+        res.send(`
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -133,6 +137,9 @@ exports.default = function (server) {
         <script>
         </html>
         `);
+      } catch (e) {
+        res.status(500).send(e.message);
+      }
     });
 
     server.post("/api/container/create", async (req, res) => {

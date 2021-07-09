@@ -7,7 +7,6 @@ import Brand from "./Brand";
 import Icon from "../Icons/SvgIcons";
 
 export default function () {
-  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -71,52 +70,66 @@ export default function () {
   const UserlogOut = (logoutMenu: any) => {
     return logoutMenu.map((item: any) => (
       <MenuItem className="loginmenu" onClick={() => setOpen(true)}>
-        <Link href={item.path} >{item.name}</Link>
+        <Link href={item.path}>{item.name}</Link>
       </MenuItem>
     ));
   };
 
   return (
     <>
-    <Menu
-      className="dropdown-menu p-0"
-      menuButton={
-        <a className="nav-link link" href="#">
-          <i className="far fa-user"></i>
-        </a>
-      }
-    >
-      {isLoggedIn ? Userlogin(loginMenu) : UserlogOut(logoutMenu)}
-    </Menu>
-    <Modal
+      <Menu
+        className="dropdown-menu p-0"
+        menuButton={
+          <a className="nav-link link" href="#">
+            <i className="far fa-user"></i>
+          </a>
+        }
+      >
+        {isLoggedIn ? Userlogin(loginMenu) : UserlogOut(logoutMenu)}
+      </Menu>
+      <Modal
         className="assets-modal invite-modal signup-modal"
         isOpen={open}
         onRequestClose={() => setOpen(false)}
-          style={{
-            
-            content: {
-              height: '419px',
-              maxWidth: '311px',
-            }
-          }}
+        style={{
+          content: {
+            height: "419px",
+            maxWidth: "311px",
+          },
+        }}
       >
-        <button className="closeBtn" onClick={() => setOpen(false)}><i className="fas fa-times"></i></button>
+        <button className="closeBtn" onClick={() => setOpen(false)}>
+          <i className="fas fa-times"></i>
+        </button>
         <div className="signup-header pl-0 border-0">
-          <h5>Continue to <Brand></Brand></h5>
+          <h5>
+            Continue to <Brand></Brand>
+          </h5>
         </div>
         <div className="signup-content">
-          <p>login in to your by using your<br/> Google or Github account.<br/><br/>Save containers, Invite friends.</p>
-          <div className="social-btn google-btn ">
+          <p>
+            login in to your by using your
+            <br /> Google or Github account.
+            <br />
+            <br />
+            Save containers, Invite friends.
+          </p>
+          <a className="social-btn google-btn " href="/auth/google/">
             <span>
-              <Icon google width="28px" height="28px"/>
+              <Icon google width="28px" height="28px" />
             </span>
-            <button>Login with Google</button></div>
-          <div className="social-btn github-btn">
+            <button>Login with Google</button>
+          </a>
+          <a className="social-btn github-btn" href="/auth/github/" >
             <span>
-            <i className="fab fa-github"></i>
+              <i className="fab fa-github"></i>
             </span>
-            <button>Login with Github</button></div>
-          <p className="signup-footer">by continuing you are agree with our <br /><span>Terms and Conditions</span></p>
+            <button>Login with Github</button>
+          </a>
+          <p className="signup-footer">
+            by continuing you are agree with our <br />
+            <span>Terms and Conditions</span>
+          </p>
         </div>
       </Modal>
     </>

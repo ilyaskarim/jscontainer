@@ -7,7 +7,7 @@ export default function () {
               <input type="checkbox" />
               <span className="slider round"></span>
             </label>
-            <span className="switch_label" id="flexSwitchCheckChecked">
+            <span className="switch-label" id="flexSwitchCheckChecked">
               Html5 snippet
             </span>
           </div>
@@ -17,7 +17,7 @@ export default function () {
             <input type="checkbox" name="html5snippet" />
             <span className="slider round"></span>
           </label>
-          <span className="switch_label">Private</span>
+          <span className="switch-label">Private</span>
         </div>
       </div>
     );

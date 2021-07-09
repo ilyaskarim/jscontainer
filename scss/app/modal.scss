@@ -1,205 +1,236 @@
-
-.invite-modal{
-    display: flex;
-    text-align: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 111;
+.invite-modal {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 111;
+  position: absolute;
+  inset: 0;
+  border: 0.5px solid #e5e5e5;
+  background: white;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  margin: auto;
+  padding: 40px 0;
+  .closeBtn {
     position: absolute;
-    inset: 0;
-    border: 0.5px solid #E5E5E5;
-    background: white;
-    overflow: auto;
-    border-radius: 4px;
-    outline: none;
-    margin: auto;
-    padding: 40px 0;
-    .closeBtn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: transparent;
-        border: none;
-        color: #979797;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    color: #979797;
 
-        &:focus {
-            outline: none;
-        }
+    &:focus {
+      outline: none;
     }
-
+  }
+  .modal-header {
+    a {
+      &.active,
+      &:hover {
+        color: #227de8;
+      }
+    }
+  }
+  .cdn-links,
+  .tip {
+    opacity: 1;
+    transition: all 0.13s ease-in-out;
+    position: relative;
+    top: 0px;
+  }
+  .hide {
+    opacity: 0;
+    top: -5px;
+    transition: all 0.13s ease-in-out;
+  }
+  .cdn-links {
+      overflow: auto;
+      height: 350px;
+  }
 }
 .invite-content {
-    max-width: 263px;
-    
-    h4 {
-        font-size: 24px;
-        line-height: 28px;
-        color: #227DE8;
-    }
-    p {
-        font-size: 14px;
-        line-height: 16px;
-        text-align: center;
-        color: #000000;
-    }
-    input{
-        background: #F6F6F6;
-        padding: 12px 8px;
-        width: 100%;
-        border: none;
-        font-size: 19px;
-        line-height: 22px;
-        margin-bottom: 33px;
-        color: #000000;
-        &:focus {
-            outline: none;
-        }
-    }
-    input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-        color: #505050;
-      }
-      input::-moz-placeholder { /* Firefox 19+ */
-        color: #505050;
-      }
-      input:-ms-input-placeholder { /* IE 10+ */
-        color: #505050;
-      }
-      input:-moz-placeholder { /* Firefox 18- */
-        color: #505050;
-      }
-    .invite-btn {
-        padding: 9px 36px;
-        font-size: 14px;
-        line-height: 16px;
-        border-radius: 4px;
-        &:active {
-            box-shadow: none;
-        }
-    }
-    button {
-        background: #227DE8;
-        &:focus{
-            box-shadow: none;
-        }
-    }
-}
+  max-width: 263px;
 
+  h4 {
+    font-size: 24px;
+    line-height: 28px;
+    color: #227de8;
+  }
+  p {
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #000000;
+  }
+  input {
+    background: #f6f6f6;
+    padding: 12px 8px;
+    width: 100%;
+    border: none;
+    font-size: 19px;
+    line-height: 22px;
+    margin-bottom: 33px;
+    color: #000000;
+    &:focus {
+      outline: none;
+    }
+  }
+  input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #505050;
+  }
+  input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #505050;
+  }
+  input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #505050;
+  }
+  input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #505050;
+  }
+  .invite-btn {
+    padding: 9px 36px;
+    font-size: 14px;
+    line-height: 16px;
+    border-radius: 4px;
+    &:active {
+      box-shadow: none;
+    }
+  }
+  button {
+    background: #227de8;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
 
 .assets-modal {
-    text-align: left;
-    align-items: flex-start;
-    padding: 14px 18px;
-    .modal-header  {
-        a {
-            color:  #5E5A5A;
-            &:focus {
-                color: #227DE8;
-
-            }
-        }
+  text-align: left;
+  align-items: flex-start;
+  padding: 14px 18px;
+  .modal-header {
+    a {
+      color: #5e5a5a;
+      &:focus {
+        color: #227de8;
+      }
     }
-    .assets-content{
-        max-width: 100%;
-        width: 100%;
-        p {
-            text-align: left;
-        }
-        input {
-            margin-bottom: 7px;
-        }
-        .cdn-links {
-            padding: 17px 14px 16px 9px;
-            background: #F8F8F8;
-            display: flex;
-            justify-content: space-between;
-        }
-        
+  }
+  .assets-content {
+    max-width: 100%;
+    width: 100%;
+    p {
+      text-align: left;
     }
+    input {
+      margin-bottom: 7px;
+    }
+    .cdn-link {
+      padding: 17px 14px 16px 9px;
+      background: #f8f8f8;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }
 
-
 .signup-modal {
-    padding: 34px 0 18px 0;
-    align-items: center;
+  padding: 34px 0 18px 0;
+  align-items: center;
+  text-align: center;
+  // .loginmenu {}
+  .signup-header {
+    width: 100%;
     text-align: center;
-    // .loginmenu {}
-    .signup-header{
-        width: 100%;
-        text-align: center;
-        margin-bottom: 28px;
-        h5 {
-            font-size: 16px;
-            line-height: 22px;
-            color: #000000;
-            a{
-                color: #000000;
-                font-weight: 700;
-                
-                span{
-                    color: #227de8;
-                }
-            }
-        }     
-    }
-    .signup-content {
-        width: 197px;
-        text-align: center;
-        p {
-            font-weight: normal;
-            font-size: 12px;
-            line-height: 16px;
-            text-align: center;
-            color: #575757;
-            width: 100%;
-        }
-    }
-    .google-btn {
-        margin-bottom: 22px;
-        i {
-            color: red;
-        }
-    }
-    .github-btn {
-        button {
-        background: #212121 !important;
-        }
-    }
-    .social-btn{
-        box-shadow: 0px 2px 13px -4px rgba(0, 0, 0, 0.25);
-        border-radius: 4px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        span{
-            width: 30%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-        }
-        button {
-            border: none;
-            color:  #F4F4F4;
-            width: 70%;
-            background: #518EF8;
-            padding: 14px 13px 15px 18px;
-            font-size: 13px;
-            line-height: 18px;
-            text-align: center;
-            font-weight: 300;
-            &:focus {
-                outline: none;
-            }
+    margin-bottom: 28px;
+    h5 {
+      font-size: 16px;
+      line-height: 22px;
+      color: #000000;
+      a {
+        color: #000000;
+        font-weight: 700;
 
-        }
-    }
-    .signup-footer{
-        position: absolute;
-        bottom: 0;
-        left: 0;
         span {
-            color: #227de8;
+          color: #227de8;
         }
+      }
     }
+  }
+  .signup-content {
+    width: 197px;
+    text-align: center;
+    p {
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      color: #575757;
+      width: 100%;
+    }
+  }
+  .google-btn {
+    margin-bottom: 22px;
+    i {
+      color: red;
+    }
+  }
+  .github-btn {
+    button {
+      background: #212121 !important;
+    }
+  }
+  .social-btn {
+    box-shadow: 0px 2px 13px -4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span {
+      width: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+    button {
+      border: none;
+      color: #f4f4f4;
+      width: 70%;
+      background: #518ef8;
+      padding: 14px 13px 15px 18px;
+      font-size: 13px;
+      line-height: 18px;
+      text-align: center;
+      font-weight: 300;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .signup-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    span {
+      color: #227de8;
+    }
+  }
+}
+
+.add-asset-modal {
+  .modal-header {
+    a {
+      &:hover {
+        color: red;
+      }
+    }
+  }
 }
