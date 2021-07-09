@@ -9,6 +9,7 @@ const handle = app.getRequestHandler();
 const GitHubStrategy = require("passport-github2");
 const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const { handleGoogleAuth, handleGithubAuth } = require("./api/auth");
 
 app.prepare().then(async () => {
   const useRedis = process.env.USE_REDIS === "yes" ? true : false;
@@ -50,47 +51,14 @@ app.prepare().then(async () => {
   server.use(passport.initialize());
   server.use(passport.session());
 
-  passport.use(
-    new GoogleStrategy(
-      {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL:
-          process.env.NODE_ENV === "local"
-            ? "http://localhost:3000/auth/google/callback"
-            : "http://jscontainer.com/auth/google/callback",
-        passReqToCallback: true,
-      },
-      function (req, accessToken, refreshToken, profile, done) {
-        console.log(profile)
-        req.login(profile, () => {
-          return done(null, profile);
-        });
-      }
-    )
-  );
-
-  passport.use(
-    new GitHubStrategy(
-      {
-        clientID: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/github/callback",
-        passReqToCallback: true,
-      },
-      function (req, accessToken, refreshToken, profile, done) {
-        req.login(profile, () => {
-          return done(null, profile);
-        });
-      }
-    )
-  );
+  handleGoogleAuth(passport, GoogleStrategy);
+  handleGithubAuth(passport, GitHubStrategy);
 
   // const sequelize = require("./api/database").default;
   // const models = require("./api/database").models;
   // await sequelize.authenticate();
   // sequelize.sync({
-  //   force: true
+  //   force: true,
   // });
   // console.log("Connection to the database has been established successfully.");
   // server.use((req, res, next) => {
@@ -135,7 +103,10 @@ app.prepare().then(async () => {
 
   server.get(
     "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login", session: true }),
+    passport.authenticate("google", {
+      failureRedirect: "/login",
+      session: true,
+    }),
     function (req, res) {
       res.redirect("/");
     }
@@ -147,10 +118,10 @@ app.prepare().then(async () => {
       isAuthenticated: req.isAuthenticated(),
     });
   });
-  
+
   server.get("/logout", (req, res) => {
     req.logout();
-    res.redirect("/")
+    res.redirect("/");
   });
 
   server.all("*", (req, res) => {
