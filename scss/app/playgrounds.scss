@@ -24,9 +24,9 @@
         background: #fbfbfb;
         display: flex;
         text-align: center;
-        margin-right: 35px;
         margin-bottom: 30px;
         border: 1px solid transparent;
+        
         &:hover {
           box-shadow: 0px 12px 26px -25px rgba(0, 0, 0, 0.25);
           border-color: lighten(#eee, 3%);
@@ -52,6 +52,11 @@
             width: 300px;
             margin: 0 auto;
             margin-bottom: 23px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            width: 100%;
           }
           button {
             background: #227de8;

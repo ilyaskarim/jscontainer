@@ -50,7 +50,7 @@ export default function () {
           "https://api.cdnjs.com/libraries?fields=filename,version,name&limit=50&search=" +
             query
         )
-        .then((resp) => {
+        .then((resp:ANY) => {
           setLinks(resp.data.results);
         })
         .finally(() => {

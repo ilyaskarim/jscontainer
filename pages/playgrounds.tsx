@@ -32,7 +32,6 @@ export default function () {
           {cardsData.map((item) => {
             return (
               <div className="col-sm-3">
-                {" "}
                 <PlaygroundItem item={item} />
               </div>
             );
