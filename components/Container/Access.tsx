@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 export default function () {
   const [open, setOpen] = useState(false);
 
-  const handlerSubmit = (e: any) => {
+  const handlerSubmit = (e: Event) => {
     console.log("submit");
     e.preventDefault();
   };
@@ -60,7 +60,7 @@ export default function () {
             Inviting users to your container only works when you have a
             private container
           </p>
-          <form action="" onSubmit={handlerSubmit}>
+          <form action="" onSubmit={(e) => handlerSubmit}>
             <InputField placeholder="Enter email address"/>{" "}
             <br />
             <Button className="invite-btn btn btn-primary btn-xs">Invite</Button>
