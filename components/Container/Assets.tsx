@@ -1,17 +1,11 @@
-import Button from "./../UI/Button";
 import Modal from "../../components/UI/InviteModal";
 import InputField from "../../components/UI/InputField";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import classNames from "classnames";
 import axios from "../../utils/axios";
-import link from "next/link";
 import ContentLoader from "react-content-loader";
 
-const customStyles = {
-  height: "280px",
-  maxWidth: "366px",
-};
 
 let debounce: any = null;
 
@@ -50,7 +44,7 @@ export default function () {
           "https://api.cdnjs.com/libraries?fields=filename,version,name&limit=50&search=" +
             query
         )
-        .then((resp:ANY) => {
+        .then((resp:any) => {
           setLinks(resp.data.results);
         })
         .finally(() => {
