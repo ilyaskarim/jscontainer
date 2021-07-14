@@ -52,8 +52,6 @@ function User (props: any) {
     },
   ];
 
-  console.log({currentUser})
-
   const Userlogin = (loginMenu: any) => {
     return loginMenu.map((item: any) => (
       <MenuItem className="menuList">

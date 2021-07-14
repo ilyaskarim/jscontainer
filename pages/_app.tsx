@@ -22,12 +22,9 @@ import store from "../Redux/store";
 import { setCurrentUser } from "../Redux/user.reducer";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // var {Islogin:any}  = pageProps;
   const dispatch = useDispatch();
-  console.log(pageProps);
   const router = useRouter();
   useEffect(() => {
-    console.log()
     if (
       window.location.hostname.includes("jscontainer.com") &&
       window.location.href.startsWith("http:")
