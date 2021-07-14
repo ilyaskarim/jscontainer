@@ -1,3 +1,4 @@
+const { datatype } = require("faker");
 const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
@@ -7,7 +8,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: "mysql",
-    logging: true,
+    logging: false,
   }
 );
 
@@ -15,8 +16,10 @@ const User = sequelize.define("user", {
   name: DataTypes.STRING,
   email: DataTypes.STRING,
   password: DataTypes.STRING,
-  is_activated: DataTypes.BOOLEAN,
+  last_login_trough: DataTypes.STRING,
+  is_activated: DataTypes.BOOLEAN,  
   color_theme: DataTypes.STRING,
+  github_photo: DataTypes.TEXT,
   github_login: DataTypes.STRING,
   github_id: DataTypes.INTEGER,
   github_node_id: DataTypes.STRING,
@@ -54,7 +57,7 @@ const User = sequelize.define("user", {
   google_displayName: DataTypes.STRING,
   google_name: DataTypes.STRING,
   google_email: DataTypes.STRING,
-  google_photo: DataTypes.STRING,
+  google_photo: DataTypes.TEXT,
 
   source: DataTypes.STRING
 });

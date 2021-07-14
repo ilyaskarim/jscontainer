@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "faker": "^5.5.3",
+    "lodash": "^4.17.21",
     "mysql2": "^2.2.5",
     "next": "11.0.0",
     "nodemon": "^2.0.9",

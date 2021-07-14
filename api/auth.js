@@ -26,6 +26,11 @@ exports.handleGoogleAuth = (passport, GoogleStrategy) => {
             google_email: profile.emails[0].value,
             google_photo: profile.photos[0].value,
             source: "google",
+            last_login_trough: "google",
+          });
+        } else {
+          await user.update({
+            last_login_trough: "google",
           });
         }
         req.login(user, () => {
@@ -46,14 +51,17 @@ exports.handleGithubAuth = (passport, GitHubStrategy) => {
         scope: "user:email",
         passReqToCallback: true,
       },
-      function (req, accessToken, refreshToken, profile, done) {
-        let user = req.user.findOne({
+      async function (req, accessToken, refreshToken, profile, done) {
+        let user = await req.models.User.findOne({
           where: {
-            email: profile.email,
+            email: profile.emails[0].value,
           },
         });
         if (!user) {
-          user.create({
+          user = await req.models.User.create({
+            source: "github",
+            email: profile.emails[0].value,
+            name: profile.displayName,
             github_id: profile.id,
             github_nodeId: profile.nodeId,
             github_displayName: profile.displayName,
@@ -91,10 +99,17 @@ exports.handleGithubAuth = (passport, GitHubStrategy) => {
             github_following: profile.json.following,
             github_created_at: profile.json.created_at,
             github_updated_at: profile.json.updated_at,
+            github_photo: profile.photos[0].value,
+            github_email: profile.emails[0].value,
+            last_login_trough: "github",
+          });
+        } else {
+          await user.update({
+            last_login_trough: "github",
           });
         }
-        req.login(profile, () => {
-          return done(null, profile);
+        req.login(user, () => {
+          return done(null, user);
         });
       }
     )

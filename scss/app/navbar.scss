@@ -34,12 +34,15 @@
   .nav-link.active {
     border-bottom-width: 0px;
   }
-
-  .menuList:last-child{
-    padding-bottom: 21px;
-  }
+  
   .menuList:first-child{
     padding-left: 17px;
+    background: #EEEEEE;
+
+  }
+  .menuList:last-child{
+    padding-bottom: 21px;
+
   }
   .menuList{
     padding: 11.5px 24px;
@@ -47,6 +50,11 @@
    img{
     height: 40px;
     margin-right: 12px;
+    border-radius: 50%;
+    }
+    .dropDown-content {
+      display: flex;
+      flex-direction: column;
     }
     h5{
       font-size: 16px;
@@ -54,6 +62,7 @@
     }
     span{
       font-size: 12px;
+      line-height: 16px;
       color: #4F4B4B;
 
     }

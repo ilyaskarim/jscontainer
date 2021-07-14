@@ -3,9 +3,8 @@ import AppNavbar from "./AppNavbar";
 import { useRouter } from "next/dist/client/router";
 import App from "next/app";
 
-export default function () {
-  const router = useRouter();
-
+export default function (props: any) {
+  const router = useRouter(); 
   return (
     <nav className="navbar ">
       {router.route === "/" ? (

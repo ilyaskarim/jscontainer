@@ -1,15 +1,22 @@
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import { NextPageContext } from 'next'
+
 import Link from "next/link";
 import { useState } from "react";
 
 import Modal from "../../components/UI/InviteModal";
 import Brand from "./Brand";
 import Icon from "../Icons/SvgIcons";
+import { getCurrentUser, getIsAuthenticated } from "../../Redux/user.reducer";
+import { useSelector } from "react-redux";
 
-export default function () {
+
+
+function User (props: any) {
+  const isAuthenticated = useSelector(getIsAuthenticated);
+  const currentUser = useSelector(getCurrentUser);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [open, setOpen] = useState(false);
-
   const logoutMenu = [
     {
       name: "Signup",
@@ -22,9 +29,10 @@ export default function () {
   ];
   const loginMenu = [
     {
-      name: "ilyas Karim",
+      name: currentUser.name,
       path: "/profiile",
-      userName: "@iamdattoo",
+      userName: currentUser.google_displayName,
+      userImage: currentUser.google_photo,
       user: true,
     },
     {
@@ -44,6 +52,8 @@ export default function () {
     },
   ];
 
+  console.log({currentUser})
+
   const Userlogin = (loginMenu: any) => {
     return loginMenu.map((item: any) => (
       <MenuItem className="menuList">
@@ -51,10 +61,10 @@ export default function () {
           {item.user ? (
             <>
               <img
-                src="https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-370-456322-512.png"
+                src={item.userImage}
                 alt="img"
               />
-              <div>
+              <div className="dropDown-content">
                 <h5 className="mb-0">{item.name}</h5>
                 <span>{item.userName}</span>
               </div>
@@ -74,7 +84,6 @@ export default function () {
       </MenuItem>
     ));
   };
-
   return (
     <>
       <Menu
@@ -85,7 +94,7 @@ export default function () {
           </a>
         }
       >
-        {isLoggedIn ? Userlogin(loginMenu) : UserlogOut(logoutMenu)}
+        {isAuthenticated ? Userlogin(loginMenu) : UserlogOut(logoutMenu)}
       </Menu>
       <Modal
         className="assets-modal invite-modal signup-modal"
@@ -135,3 +144,6 @@ export default function () {
     </>
   );
 }
+
+
+export default User

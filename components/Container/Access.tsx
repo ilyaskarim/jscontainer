@@ -8,7 +8,6 @@ export default function () {
   const [open, setOpen] = useState(false);
 
   const handlerSubmit = (e: Event) => {
-    console.log("submit");
     e.preventDefault();
   };
 
