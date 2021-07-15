@@ -5,9 +5,13 @@ import toast from "react-hot-toast";
 import classNames from "classnames";
 import axios from "../../utils/axios";
 import ContentLoader from "react-content-loader";
-import { addAsset, getcontainer } from "../../Redux/container.reducer";
+import {
+  addAsset,
+  getcontainer,
+  removeAsset,
+} from "../../Redux/container.reducer";
 import { useDispatch, useSelector } from "react-redux";
-
+import Button from "../UI/Button";
 
 let debounce: any = null;
 
@@ -32,11 +36,9 @@ const LoadingBar = () => (
 );
 
 export default function () {
-
   const dispatch = useDispatch();
   const containerFromRedux = useSelector(getcontainer);
-  const {assets} = containerFromRedux;
-
+  const assets = containerFromRedux.assets;
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("cdn");
@@ -51,7 +53,7 @@ export default function () {
           "https://api.cdnjs.com/libraries?fields=filename,version,name&limit=50&search=" +
             query
         )
-        .then((resp:any) => {
+        .then((resp: any) => {
           setLinks(resp.data.results);
         })
         .finally(() => {
@@ -65,12 +67,9 @@ export default function () {
       url.endsWith(".css") ||
       url.endsWith(".js") ||
       url.includes("fonts.google")
-      ) {
-      dispatch(
-        addAsset([url])
-        )
-        setOpen(false)
-        
+    ) {
+      dispatch(addAsset([url]));
+      setOpen(false);
     } else {
       toast.error("The link should be a CSS or Javascript link.");
     }
@@ -89,7 +88,7 @@ export default function () {
 
   return (
     <>
-      {assets.map((item: any) => (
+      {assets.map((item: any, index: number) => (
         <div className="url-box">
           <a className="url-link" href="#">
             {item}
@@ -97,11 +96,12 @@ export default function () {
           <div className="url_icons">
             <span
               onClick={() => {
+                dispatch(removeAsset(item));
                 toast.success("Asset removed", {
                   duration: 2000,
                 });
               }}
-              >
+            >
               <i className="fas fa-times"></i>
             </span>
             <span onClick={() => setOpen(true)}>
@@ -110,25 +110,14 @@ export default function () {
           </div>
         </div>
       ))}
-      <div className="url-box">
-          <a className="url-link" href="#">
-           https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
-          </a>
-          <div className="url_icons">
-            <span
-              onClick={() => {
-                toast.success("Asset removed", {
-                  duration: 2000,
-                });
-              }}
-              >
-              <i className="fas fa-times"></i>
-            </span>
-            <span onClick={() => setOpen(true)}>
-              <i className="fas fa-plus"></i>
-            </span>
-          </div>
-        </div>
+      {assets && assets.length === 0 && (
+        <Button
+          onClick={() => setOpen(true)}
+          className="btn btn-primary btn-xs"
+        >
+          Add Asset
+        </Button>
+      )}
       <Modal
         className="assets-modal invite-modal"
         isOpen={open}

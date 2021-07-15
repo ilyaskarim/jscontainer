@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootStateOrAny } from "react-redux";
 
 export interface iAsset {
   id: number;
@@ -44,19 +45,21 @@ export const containerSlice = createSlice({
   initialState: initialState,
   reducers: {
     setContainer(state, action) {
-      state.container = {...state.container, ...action.payload};
+      state.container = { ...state.container, ...action.payload };
     },
     addAsset(state, action) {
       state.assets = [...state.assets, ...action.payload];
     },
     removeAsset(state, action) {
-      state.assets = [...state.assets, ...action.payload];
+      const index = state.assets.findIndex((c: iAsset) => c == action.payload);
+      if (index > -1) state.assets.splice(index, 1);
     },
     addAccess(state, action) {
       state.access = [...state.access, action.payload];
     },
     removeAccess(state, action) {
-
+      const index = state.access.findIndex((c) => c == action.payload);
+      if (index > -1) state.access.splice(index, 1);
     },
     save() {},
   },
@@ -71,14 +74,7 @@ export const {
   save,
 } = containerSlice.actions;
 
-export const getcontainer = (state: iContainerState) => {
+export const getcontainer = (state: RootStateOrAny) => {
   return state.container;
 };
-export const getassets = (state: iContainerState) => {
-  return state.assets;
-};
-export const getaccess = (state: iContainerState) => {
-  return state.access;
-};
-
 export default containerSlice.reducer;
