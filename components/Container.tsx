@@ -22,7 +22,6 @@ export default function Container() {
     });
   }, []);
 
-  const containerProps = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const handleInputChange = (e: any) => {
@@ -39,8 +38,6 @@ export default function Container() {
     }
   };
 
-
-  
   const handleHtmlChange = (e: Event ) => {
     dispatch(
       setContainer({
@@ -163,7 +160,7 @@ export default function Container() {
               </ul>
             </div>
             <div className="tab-content">
-              <div className="tab-content-item" data-tab-content="assets">
+              <div className="tab-content-item scroll-bar assets-scroll" data-tab-content="assets">
                 <Assets></Assets>
               </div>
               <div

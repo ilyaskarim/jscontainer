@@ -3,29 +3,56 @@ import Modal from "../../components/UI/InviteModal";
 import InputField from "../../components/UI/InputField";
 import { useState } from "react";
 import toast from "react-hot-toast";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addAccess, getaccess, getassets, getcontainer, removeAccess } from "../../Redux/container.reducer";
+import { useEffect } from "react";
 export default function () {
+  const containerFromRedux = useSelector(getcontainer);
+  const { access } = containerFromRedux;
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+
+  const [email, setEmail] = useState();
+
+
+  const handlerChange = (e: Event) => {
+    let val = e.target.value;
+    setEmail(val)
+  }
 
   const handlerSubmit = (e: Event) => {
     e.preventDefault();
+    setEmail("")
+  
+    dispatch(
+      addAccess(email),
+    )
+    setOpen(false);
+  };
+
+  const handlerdelete = (item: Event) => {
+    console.log(item)
+    item.preventDefault();
+    dispatch(
+      removeAccess(item),
+    )
+    toast.success("User removed", {
+      duration: 2000
+    });
   };
 
   return (
     <>
       <div className="access scroll-bar">
         <div className="scroll-bar">
-          {[1, 2, 3, 4, 5].map((c) => {
+          {console.log(containerFromRedux)}
+          {access.map((item: any) => {
             return (
               <div className="d-inline-block p-10 mr-2 mb-2 pr-0 invited-user">
-                ilyas@gmail.com
+                {item}
                 <span
                   className="close d-inline-block ml-1 text-sm"
-                  onClick={() => {
-                    toast.success("User removed", {
-                      duration: 2000
-                    });
-                  }}
+                  onClick={(item) => handlerdelete(item)}
                 >
                   &times;
                 </span>
@@ -59,10 +86,10 @@ export default function () {
             Inviting users to your container only works when you have a
             private container
           </p>
-          <form action="" onSubmit={(e) => handlerSubmit}>
-            <InputField placeholder="Enter email address"/>
+          <form action="" onSubmit={(e: any) => handlerSubmit(e)}>
+            <InputField name="email" value={email} onChange={(e: Event) => handlerChange(e)} placeholder="Enter email address"/>
             <br />
-            <Button className="invite-btn btn btn-primary btn-xs">Invite</Button>
+            <Button onSubmit={(e: any) => handlerSubmit(e)} className="invite-btn btn btn-primary btn-xs" >Invite</Button>
           </form>
         </div>
       </Modal>

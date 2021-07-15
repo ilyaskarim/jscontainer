@@ -114,6 +114,10 @@
 
   .tab-content {
     padding-top: 9px;
+    .assets-scroll{
+      height: 55px;
+      overflow-y: scroll;
+    }
   }
 
   .row1 {

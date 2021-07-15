@@ -44,13 +44,20 @@ export const containerSlice = createSlice({
   initialState: initialState,
   reducers: {
     setContainer(state, action) {
-      console.log(state.container, action);
       state.container = {...state.container, ...action.payload};
     },
-    addAsset() {},
-    removeAsset() {},
-    addAccess() {},
-    removeAccess() {},
+    addAsset(state, action) {
+      state.assets = [...state.assets, ...action.payload];
+    },
+    removeAsset(state, action) {
+      state.assets = [...state.assets, ...action.payload];
+    },
+    addAccess(state, action) {
+      state.access = [...state.access, action.payload];
+    },
+    removeAccess(state, action) {
+
+    },
     save() {},
   },
 });

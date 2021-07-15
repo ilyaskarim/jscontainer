@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import classNames from "classnames";
 import axios from "../../utils/axios";
 import ContentLoader from "react-content-loader";
+import { addAsset, getcontainer } from "../../Redux/container.reducer";
+import { useDispatch, useSelector } from "react-redux";
 
 
 let debounce: any = null;
@@ -30,6 +32,11 @@ const LoadingBar = () => (
 );
 
 export default function () {
+
+  const dispatch = useDispatch();
+  const containerFromRedux = useSelector(getcontainer);
+  const {assets} = containerFromRedux;
+
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("cdn");
@@ -58,7 +65,12 @@ export default function () {
       url.endsWith(".css") ||
       url.endsWith(".js") ||
       url.includes("fonts.google")
-    ) {
+      ) {
+      dispatch(
+        addAsset([url])
+        )
+        setOpen(false)
+        
     } else {
       toast.error("The link should be a CSS or Javascript link.");
     }
@@ -74,27 +86,49 @@ export default function () {
   const handlerSubmit = (e: any) => {
     e.preventDefault();
   };
+
   return (
     <>
-      <div className="url-box">
-        <a className="url-link" href="#">
-          https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
-        </a>
-        <div className="url_icons">
-          <span
-            onClick={() => {
-              toast.success("Asset removed", {
-                duration: 2000,
-              });
-            }}
-          >
-            <i className="fas fa-times"></i>
-          </span>
-          <span onClick={() => setOpen(true)}>
-            <i className="fas fa-plus"></i>
-          </span>
+      {assets.map((item: any) => (
+        <div className="url-box">
+          <a className="url-link" href="#">
+            {item}
+          </a>
+          <div className="url_icons">
+            <span
+              onClick={() => {
+                toast.success("Asset removed", {
+                  duration: 2000,
+                });
+              }}
+              >
+              <i className="fas fa-times"></i>
+            </span>
+            <span onClick={() => setOpen(true)}>
+              <i className="fas fa-plus"></i>
+            </span>
+          </div>
         </div>
-      </div>
+      ))}
+      <div className="url-box">
+          <a className="url-link" href="#">
+           https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
+          </a>
+          <div className="url_icons">
+            <span
+              onClick={() => {
+                toast.success("Asset removed", {
+                  duration: 2000,
+                });
+              }}
+              >
+              <i className="fas fa-times"></i>
+            </span>
+            <span onClick={() => setOpen(true)}>
+              <i className="fas fa-plus"></i>
+            </span>
+          </div>
+        </div>
       <Modal
         className="assets-modal invite-modal"
         isOpen={open}
@@ -171,7 +205,7 @@ export default function () {
               return (
                 <div
                   className="cdn-link mb-2"
-                  onClick={(e: Event) => {
+                  onClick={(e) => {
                     e.preventDefault();
                     submit(item.latest);
                   }}
