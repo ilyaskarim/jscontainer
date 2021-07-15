@@ -60,7 +60,7 @@ export default function () {
             private container
           </p>
           <form action="" onSubmit={(e) => handlerSubmit}>
-            <InputField placeholder="Enter email address"/>{" "}
+            <InputField placeholder="Enter email address"/>
             <br />
             <Button className="invite-btn btn btn-primary btn-xs">Invite</Button>
           </form>

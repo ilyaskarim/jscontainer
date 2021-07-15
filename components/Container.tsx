@@ -4,20 +4,11 @@ import Editor from "./Editor";
 import Assets from "./Container/Assets";
 import Settings from "./Container/Settings";
 import Access from "./Container/Access";
+import { useDispatch, useSelector } from "react-redux";
+import { getcontainer, setContainer } from "../Redux/container.reducer";
 
-export default function () {
-
-  const [container, setContainer] = useState({
-    title: "",
-    description: "",  
-    html: "",
-    css: "",
-    javascript: "",
-    assets: [],
-    html_5_snippet: false,
-    private: false,
-    access: [],
-  });
+export default function Container() {
+  const containerFromRedux = useSelector(getcontainer);
 
   useEffect(() => {
     Tabs(".tabs-language", {
@@ -31,18 +22,73 @@ export default function () {
     });
   }, []);
 
+  const containerProps = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const handleInputChange = (e: any) => {
+    dispatch(
+      setContainer({
+        [e.target.name]: e.target.value,
+      })
+    );
+  };
+
+  const handleSubmit = (e: Event | null) => {
+    if (e) {
+      e.preventDefault();
+    }
+  };
+
+
+  
+  const handleHtmlChange = (e: Event ) => {
+    dispatch(
+      setContainer({
+        html: e,
+      })
+    );
+  }
+  const handleCssChange = (e: Event ) => {
+    dispatch(
+      setContainer({
+        css: e,
+      })
+    );
+  }
+
+  const handleJsChange = (e: Event ) => {
+    dispatch(
+      setContainer({
+        javascript: e,
+      })
+    );
+  }
+
+
+
   return (
     <div className="home_section">
+      <pre>{JSON.stringify(containerFromRedux, null, 2)}</pre>
       <div className="home_content">
         <div className="form-section  section_comn_pd">
-          <input type="text" className="bg-gray" placeholder="title" />
-          <div className="form-floating">
-            <textarea
-              className="form-control"
-              placeholder="description"
-              id="floatingTextarea"
-            ></textarea>
-          </div>
+          <form action="" onSubmit={(e) => handleSubmit(e)}>
+            <input
+              type="text"
+              name="title"
+              className="bg-gray"
+              placeholder="title"
+              onKeyUp={(e) => handleInputChange(e)}
+            />
+            <div className="form-floating">
+              <textarea
+                name="description"
+                className="form-control"
+                placeholder="description"
+                id="floatingTextarea"
+                onChange={(e) => handleInputChange(e)}
+              ></textarea>
+            </div>
+          </form>
         </div>
         <div className="code-section section_comn_pd">
           <div className="tabs bg-gray tabs-language">
@@ -66,23 +112,28 @@ export default function () {
               </ul>
             </div>
             <div className="tab-content">
+
               <div className="tab-content-item" data-tab-content="html">
                 <Editor
+                  name="html"
                   defaultLanguage="html"
                   defaultValue="<!-- Write HTML -->"
-                ></Editor>
+                  onChange={(e: Event) => handleHtmlChange(e)}
+                  ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="css">
                 <Editor
                   defaultLanguage="css"
                   defaultValue="/* Write CSS */"
-                ></Editor>
+                  onChange={(e: Event) => handleCssChange(e)}
+                  ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="javascript">
                 <Editor
                   defaultLanguage="javascript"
                   defaultValue="/* Write Javascript */"
-                ></Editor>
+                  onChange={(e: Event) => handleJsChange(e)}
+                  ></Editor>
               </div>
             </div>
           </div>

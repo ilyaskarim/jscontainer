@@ -24,7 +24,6 @@ import { setCurrentUser } from "../Redux/user.reducer";
 function MyApp({ Component, pageProps }: AppProps) {
   // var {Islogin:any}  = pageProps;
   const dispatch = useDispatch();
-  console.log(pageProps);
   const router = useRouter();
   useEffect(() => {
     console.log()
