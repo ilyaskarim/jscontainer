@@ -4,7 +4,7 @@ import InputField from "../../components/UI/InputField";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { addAccess, getaccess, getassets, getcontainer, removeAccess } from "../../Redux/container.reducer";
+import { addAccess, getcontainer, removeAccess, iAccess } from "../../Redux/container.reducer";
 import { useEffect } from "react";
 export default function () {
   const containerFromRedux = useSelector(getcontainer);
@@ -30,8 +30,7 @@ export default function () {
     setOpen(false);
   };
 
-  const handlerdelete = (item: Event) => {
-    item.preventDefault();
+  const handleDelete = (item: iAccess) => {
     dispatch(
       removeAccess(item),
     )
@@ -50,7 +49,7 @@ export default function () {
                 {item}
                 <span
                   className="close d-inline-block ml-1 text-sm"
-                  onClick={(item) => handlerdelete(item)}
+                  onClick={() => handleDelete(item)}
                 >
                   &times;
                 </span>

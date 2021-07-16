@@ -13,12 +13,12 @@ export default function Container() {
   useEffect(() => {
     Tabs(".tabs-language", {
       byDefaultTab: "html",
-      onChange: () => {},
+      onChange: () => { },
     });
 
     Tabs(".tabs-menu", {
       byDefaultTab: "assets",
-      onChange: () => {},
+      onChange: () => { },
     });
   }, []);
 
@@ -38,30 +38,28 @@ export default function Container() {
     }
   };
 
-  const handleHtmlChange = (e: Event ) => {
+  const handleHtmlChange = (e: Event) => {
     dispatch(
       setContainer({
-        html: e,
+        html: (event?.target as any).value,
       })
     );
   }
-  const handleCssChange = (e: Event ) => {
+  const handleCssChange = (e: Event) => {
     dispatch(
       setContainer({
-        css: e,
-      })
-    );
-  }
-
-  const handleJsChange = (e: Event ) => {
-    dispatch(
-      setContainer({
-        javascript: e,
+        css: (event?.target as any).value,
       })
     );
   }
 
-
+  const handleJsChange = (e: Event) => {
+    dispatch(
+      setContainer({
+        javascript: (event?.target as any).value,
+      })
+    );
+  }
 
   return (
     <div className="home_section">
@@ -116,21 +114,21 @@ export default function Container() {
                   defaultLanguage="html"
                   defaultValue="<!-- Write HTML -->"
                   onChange={(e: Event) => handleHtmlChange(e)}
-                  ></Editor>
+                ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="css">
                 <Editor
                   defaultLanguage="css"
                   defaultValue="/* Write CSS */"
                   onChange={(e: Event) => handleCssChange(e)}
-                  ></Editor>
+                ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="javascript">
                 <Editor
                   defaultLanguage="javascript"
                   defaultValue="/* Write Javascript */"
                   onChange={(e: Event) => handleJsChange(e)}
-                  ></Editor>
+                ></Editor>
               </div>
             </div>
           </div>

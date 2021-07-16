@@ -11,7 +11,7 @@ export default function () {
         <div className="bubbles"></div>
         <div className="content">
           <h1>Terms and Conditions</h1>
-          <p>Playgrounds to ehance your productivty:</p>
+          <p>JS container Terms and Conditions:</p>
         </div>
       </div>
     </div>
