@@ -41,14 +41,14 @@ export default function Container() {
   const handleHtmlChange = (e: Event) => {
     dispatch(
       setContainer({
-        html: (event?.target as any).value,
+        html: (e?.target as any).value,
       })
     );
   }
   const handleCssChange = (e: Event) => {
     dispatch(
       setContainer({
-        css: (event?.target as any).value,
+        css: (e?.target as any).value,
       })
     );
   }
@@ -56,7 +56,7 @@ export default function Container() {
   const handleJsChange = (e: Event) => {
     dispatch(
       setContainer({
-        javascript: (event?.target as any).value,
+        javascript: (e?.target as any).value,
       })
     );
   }
