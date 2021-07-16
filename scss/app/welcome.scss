@@ -160,8 +160,8 @@
   .switch {
     position: relative;
     display: inline-block;
-    width: 16px;
-    height: 10px;
+    width: 22px;
+    height: 12px;
   }
   .form-switch {
     padding-left: 0;
@@ -187,8 +187,8 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 10px;
-    width: 10px;
+    height: 12px;
+    width: 12px;
     left: 0px;
     bottom: 0px;
     border: 1px solid #81b9e6;
@@ -207,9 +207,9 @@
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(7px);
-    -ms-transform: translateX(7px);
-    transform: translateX(7px);
+    -webkit-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    transform: translateX(10px);
   }
 
   /* Rounded sliders */

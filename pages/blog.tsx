@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import animationPixelsAndBubbles from "../utils/animationPixelsAndBubbles";
+import BlogCard from "../components/UI/BlogCard";
 
 export default function () {
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function () {
           <p>Find the best blogs, articles and tutorials about frontend development from all over the web.</p>
         </div>
       </div>
+      <div className="blog-content"><BlogCard></BlogCard></div>
     </div>
   );
 }
