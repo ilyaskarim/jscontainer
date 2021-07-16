@@ -63,7 +63,6 @@ export default function Container() {
 
   return (
     <div className="home_section">
-      <pre>{JSON.stringify(containerFromRedux, null, 2)}</pre>
       <div className="home_content">
         <div className="form-section  section_comn_pd">
           <form action="" onSubmit={(e) => handleSubmit(null)}>
@@ -178,7 +177,8 @@ export default function Container() {
         </div>
         <div className="code-section section_comn_pd ">
           <div className="preview-frame">
-            <iframe src="/preview/x3ad793sgxz3i2" frameBorder="0"></iframe>
+            preview will be here.
+            {/* <iframe src="/preview/x3ad793sgxz3i2" frameBorder="0"></iframe> */}
           </div>
         </div>
       </div>
