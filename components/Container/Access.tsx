@@ -31,7 +31,6 @@ export default function () {
   };
 
   const handlerdelete = (item: Event) => {
-    console.log(item)
     item.preventDefault();
     dispatch(
       removeAccess(item),
@@ -45,7 +44,6 @@ export default function () {
     <>
       <div className="access scroll-bar">
         <div className="scroll-bar">
-          {console.log(containerFromRedux)}
           {access.map((item: any) => {
             return (
               <div className="d-inline-block p-10 mr-2 mb-2 pr-0 invited-user">
