@@ -32,20 +32,20 @@ export default function Container() {
     );
   };
 
-  const handleSubmit = (e: Event | null) => {
+  const handleSubmit = (e: any | null) => {
     if (e) {
       e.preventDefault();
     }
   };
 
-  const handleHtmlChange = (e: Event) => {
+  const handleHtmlChange = (e: any) => {
     dispatch(
       setContainer({
         html: (e?.target as any).value,
       })
     );
   }
-  const handleCssChange = (e: Event) => {
+  const handleCssChange = (e: any) => {
     dispatch(
       setContainer({
         css: (e?.target as any).value,
@@ -53,7 +53,7 @@ export default function Container() {
     );
   }
 
-  const handleJsChange = (e: Event) => {
+  const handleJsChange = (e: any) => {
     dispatch(
       setContainer({
         javascript: (e?.target as any).value,
@@ -113,21 +113,21 @@ export default function Container() {
                   name="html"
                   defaultLanguage="html"
                   defaultValue="<!-- Write HTML -->"
-                  onChange={(e: Event) => handleHtmlChange(e)}
+                  onChange={(e: any) => handleHtmlChange(e)}
                 ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="css">
                 <Editor
                   defaultLanguage="css"
                   defaultValue="/* Write CSS */"
-                  onChange={(e: Event) => handleCssChange(e)}
+                  onChange={(e: any) => handleCssChange(e)}
                 ></Editor>
               </div>
               <div className="tab-content-item" data-tab-content="javascript">
                 <Editor
                   defaultLanguage="javascript"
                   defaultValue="/* Write Javascript */"
-                  onChange={(e: Event) => handleJsChange(e)}
+                  onChange={(e: any) => handleJsChange(e)}
                 ></Editor>
               </div>
             </div>

@@ -84,7 +84,7 @@ export default function () {
             private container
           </p>
           <form action="" onSubmit={(e: any) => handlerSubmit(e)}>
-            <InputField name="email" value={email} onChange={(e: Event) => handlerChange(e)} placeholder="Enter email address"/>
+            <InputField name="email" value={email} onChange={(e: any) => handlerChange(e)} placeholder="Enter email address"/>
             <br />
             <Button onSubmit={(e: any) => handlerSubmit(e)} className="invite-btn btn btn-primary btn-xs" >Invite</Button>
           </form>
