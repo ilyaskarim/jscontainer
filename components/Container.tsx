@@ -66,7 +66,7 @@ export default function Container() {
       <pre>{JSON.stringify(containerFromRedux, null, 2)}</pre>
       <div className="home_content">
         <div className="form-section  section_comn_pd">
-          <form action="" onSubmit={(e) => handleSubmit(e)}>
+          <form action="" onSubmit={(e) => handleSubmit(null)}>
             <input
               type="text"
               name="title"
