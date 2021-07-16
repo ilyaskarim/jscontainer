@@ -12,7 +12,7 @@ export default function () {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState('');
 
 
   const handlerChange = (e: any) => {
