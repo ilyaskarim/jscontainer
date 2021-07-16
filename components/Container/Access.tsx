@@ -15,12 +15,12 @@ export default function () {
   const [email, setEmail] = useState();
 
 
-  const handlerChange = (e: Event) => {
+  const handlerChange = (e: any) => {
     let val = e.target.value;
     setEmail(val)
   }
 
-  const handlerSubmit = (e: Event) => {
+  const handlerSubmit = (e: any) => {
     e.preventDefault();
     setEmail("")
   
