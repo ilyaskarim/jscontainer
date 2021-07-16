@@ -5,7 +5,7 @@ import Switch from "../UI/Switch";
 export default function () {
   const dispatch = useDispatch();
 
-  const handleChange = (e: Event) => {
+  const handleChange = (e: any) => {
     if(e.target.name === 'snippet') {
       dispatch(
         setContainer({
