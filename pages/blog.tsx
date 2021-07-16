@@ -15,7 +15,11 @@ export default function () {
           <p>Find the best blogs, articles and tutorials about frontend development from all over the web.</p>
         </div>
       </div>
-      <div className="blog-content"><BlogCard></BlogCard></div>
+      <div className="blog-content">
+        {[1, 2, 3, 4, , , 3, 4, , 3, 4, , 3, 4, , 3, 4, , 3, 4, , 3, 4, , 3, 4, 5].map(() => {
+          return <BlogCard></BlogCard>
+        })}
+      </div>
     </div>
   );
 }

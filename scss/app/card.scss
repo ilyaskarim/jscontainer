@@ -1,53 +1,62 @@
 .blog-card {
-    height: 436px;
-    width: 302px;
-    background: #FFFFFF;
-    border-radius: 38px;
+  height: 436px;
+  width: 302px;
+  background: #f7f7f7;
+  border-radius: 38px;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 30px;
+  cursor: pointer;
+  margin-bottom: 35px;
+  transition: all 0.2s ease-in-out;
+  &:hover,
+  &:focus {
+    box-shadow: 0px 4px 25px -15px #8c8c8c;
+    transition: all 0.2s ease-in-out;
+  }
+  .blog-card-img {
+    height: 184px;
     overflow: hidden;
-    .blog-card-img {
-        height: 184px;
-        overflow: hidden;
-        border-radius: 31px;
-        margin-bottom: 2px;
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
+    border-radius: 31px;
+    margin-bottom: 2px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
     }
-    h4 {
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 24px;
-        color: #000000;
-        margin-bottom: 12px;
-    }
-    p {
-        margin-bottom: 13px;
-        font-size: 14px;
-        line-height: 19px;
-        color: #6D6D6D;
-        font-weight: 400;
-    }
-    .tags {
-        font-size: 14px;
-        line-height: 19px;
-        color: #518EF8;
-        margin-bottom: 7px;
-    }
+  }
+  .card-content {
+    padding: 7px 12px 20px 13px;
+  }
+  h4 {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 12px;
+  }
+  p {
+    margin-bottom: 13px;
+    font-size: 14px;
+    line-height: 19px;
+    color: #6d6d6d;
+    font-weight: 400;
+  }
+  .tags {
+    font-size: 14px;
+    line-height: 19px;
+    color: #518ef8;
+    margin-bottom: 7px;
+  }
 
-    .card-content {
-        padding: 0 12px 20px 13px;
-    }
-    .card-btn {
-        width: 100%;
-        background: #518EF8;
-        border-radius: 24px;
-        padding: 11px;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 24px;
-        color: #FFFFFF;
-    }
-    
+  .card-btn {
+    width: 100%;
+    background: #518ef8;
+    border-radius: 24px;
+    padding: 11px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    color: #ffffff;
+  }
 }
