@@ -34,6 +34,7 @@
     line-height: 24px;
     color: #000000;
     margin-bottom: 12px;
+    height: 46px;
   }
   p {
     margin-bottom: 13px;
@@ -41,12 +42,15 @@
     line-height: 19px;
     color: #6d6d6d;
     font-weight: 400;
+    height: 83px;
+    overflow: hidden;
   }
   .tags {
     font-size: 14px;
     line-height: 19px;
     color: #518ef8;
     margin-bottom: 7px;
+    display: inline-block;
   }
 
   .card-btn {
@@ -54,7 +58,7 @@
     background: #518ef8;
     border-radius: 24px;
     padding: 11px;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 18px;
     line-height: 24px;
     color: #ffffff;

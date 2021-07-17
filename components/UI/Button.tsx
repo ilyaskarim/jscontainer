@@ -15,7 +15,7 @@ export default function (props: any) {
   if (href) {
     return (
       <Link href={href} {...props}>
-        <a className={className}>
+        <a {...props} className={className}>
           <Loader></Loader>
           {props.children}
         </a>

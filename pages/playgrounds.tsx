@@ -31,7 +31,7 @@ export default function () {
         <div className="row">
           {cardsData.map((item) => {
             return (
-              <div className="col-sm-3">
+              <div className="col-sm-4 col-lg-3 col-xs-12">
                 <PlaygroundItem item={item} />
               </div>
             );

@@ -101,7 +101,7 @@ function User (props: any) {
         style={{
           content: {
             height: "419px",
-            maxWidth: "311px",
+            maxWidth: "331px",
           },
         }}
       >

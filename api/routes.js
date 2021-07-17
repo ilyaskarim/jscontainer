@@ -1,6 +1,7 @@
 const faker = require("faker");
 const randomstring = require("randomstring");
 const sequelize = require("sequelize");
+const { has } = require("lodash");
 
 exports.default = function (server) {
   return new Promise((resolve, reject) => {
@@ -86,7 +87,7 @@ exports.default = function (server) {
       });
     });
 
-    server.get("/preview/:slug", async (req, res) => {
+    server.get("/api/container/preview/:slug", async (req, res) => {
       try {
         const container = await req.models.Container.findOne({
           where: {
@@ -99,7 +100,13 @@ exports.default = function (server) {
           ],
         });
         if (!container) {
-          res.send("Container not found");
+          res.status(404).send("Container not found");
+        }
+        if (has(req.params, "json")) {
+          res.status(200).json({
+            container: container,
+          });
+          return;
         }
         const css = [];
         const js = [];

@@ -2,8 +2,12 @@ import Button from "../UI/Button";
 import User from "./User";
 import Brand from "./Brand";
 import NavLink from "./NavLinks";
+import { useDispatch } from "react-redux";
+import { saveContainer } from "../../Redux/container.reducer";
 
 export default function () {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="list_left">
@@ -13,6 +17,7 @@ export default function () {
         </a>
         <Button
           className="btn btn-primary btn-sm custom-btn"
+          onClick={() => dispatch(saveContainer)}
         >
           Save
         </Button>

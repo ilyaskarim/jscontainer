@@ -4,7 +4,7 @@ import animationPixelsAndBubbles from "../utils/animationPixelsAndBubbles";
 export default function () {
   useEffect(() => {
     animationPixelsAndBubbles();
-  });
+  },[]);
   return (
     <div>
       <div className="jumbotron bubble-header">

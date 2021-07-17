@@ -61,7 +61,9 @@ export const containerSlice = createSlice({
       const index = state.access.findIndex((c) => c == action.payload);
       if (index > -1) state.access.splice(index, 1);
     },
-    save() {},
+    saveContainer() {
+      console.log("saving container");
+    },
   },
 });
 
@@ -71,7 +73,7 @@ export const {
   addAsset,
   removeAsset,
   removeAccess,
-  save,
+  saveContainer,
 } = containerSlice.actions;
 
 export const getcontainer = (state: RootStateOrAny) => {
