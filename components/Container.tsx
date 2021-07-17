@@ -7,8 +7,9 @@ import Access from "./Container/Access";
 import { useDispatch, useSelector } from "react-redux";
 import { getcontainer, setContainer } from "../Redux/container.reducer";
 
-export default function Container() {
-  const containerFromRedux = useSelector(getcontainer);
+export default function Container(props: {
+  slug?: string | null;
+}) {
 
   useEffect(() => {
     Tabs(".tabs-language", {

@@ -1,6 +1,8 @@
 import createAxios from "../utils/axios";
+import { iContainerState } from "../Redux/container.reducer";
 
-export const saveContaienr = () => createAxios().post("/api/container/save");
+export const saveContainer = (container: iContainerState) =>
+  createAxios().post("/api/container/save", container);
 
 export const inviteToContainer = () =>
   createAxios().post("/api/container/:slug/invite");

@@ -17,6 +17,7 @@ app.prepare().then(async () => {
 
   server.use(require("cookie-parser")());
   server.use(require("body-parser").urlencoded({ extended: true }));
+  server.use(require("body-parser").json());
 
   if (useRedis) {
     const redis = require("redis");
@@ -58,7 +59,7 @@ app.prepare().then(async () => {
   // const models = require("./api/database").models;
   // await sequelize.authenticate();
   // sequelize.sync({
-  //   force: true,
+  //   force: false,
   // });
   // console.log("Connection to the database has been established successfully.");
   // server.use((req, res, next) => {

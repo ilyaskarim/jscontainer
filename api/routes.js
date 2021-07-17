@@ -52,6 +52,15 @@ exports.default = function (server) {
                 },
               }
             : {},
+            include: [
+              {
+                model: req.models.ContainerAsset,
+                attributes: ["id","url","name","version"]
+              },
+              {
+                model: req.models.ContainerInvite,
+              }
+            ]
         }),
         pagination: {
           offset: +req.query.offset,
@@ -149,17 +158,68 @@ exports.default = function (server) {
       }
     });
 
-    server.post("/api/container/create", async (req, res) => {
+    server.post("/api/container/save", async (req, res) => {
       const body = req.body;
-      const create = await req.models.Container.create({
-        ...body,
-        slug: randomstring.generate({
-          length: 14,
-          charset: "asdfghzxc12345679ia89sda8d9ad89",
-        }),
-      });
+      let assets = [];
+      let invites = [];
+      let create;
+
+
+        if (body.container && body.container.slug) {
+          create = await req.models.Container.findOne({
+            where: {
+              slug: req.body.container.slug,
+            },
+            include: [
+              { model: req.models.ContainerAsset },
+              { model: req.models.ContainerInvite },
+            ],
+          });
+        }else {
+          create = await req.models.Container.create({
+            ...body.container,
+            slug: randomstring.generate({
+              length: 14,
+              charset: "asdfghzxc12345679ia89sda8d9ad89",
+            }),
+          });
+        }
+
+      for (const link of body.assets || []) {
+        let createAsset = await req.models.ContainerAsset.create({
+          url: link,
+          containerId: create.id,
+        });
+        assets.push(createAsset);
+      }
+
+      for (const link of body.assets || []) {
+        let createAsset = await req.models.ContainerAsset.create({
+          url: link,
+          containerId: create.id,
+        });
+        assets.push(createAsset);
+      }
+
+      for (const email of body.access || []) {
+        const user = await req.models.User.findOne({
+          where: {
+            email: email,
+          },
+        });
+        if (user) {
+          let createInvite = await req.models.ContainerInvite.create({
+            containerId: create.id,
+            userId: user.id,
+          });
+          invites.push(createInvite);
+        }
+      }
+
       res.status(200).json({
         container: create,
+        assets: assets,
+        invites: invites,
         message: "Container created successfully",
       });
     });
@@ -215,6 +275,7 @@ exports.default = function (server) {
         message: "User removed",
       });
     });
+    
     server.post("/api/remove-asset/:id", async (req, res) => {
       await req.models.ContainerAsset.destroy({
         where: {

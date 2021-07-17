@@ -5,6 +5,11 @@ export default (props: { [key: string]: any }) => (
     height="calc(100vh - 280px)"
     defaultLanguage="javascript"
     loading="Loading editor please wait."
+    options={{
+      minimap: {
+        enabled: false
+      },
+    }}
     {...props}
   />
 );

@@ -2,11 +2,12 @@ import Button from "../UI/Button";
 import User from "./User";
 import Brand from "./Brand";
 import NavLink from "./NavLinks";
-import { useDispatch } from "react-redux";
-import { saveContainer } from "../../Redux/container.reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { getcontainer } from "../../Redux/container.reducer";
+import { saveContainer } from "../../services";
 
 export default function () {
-  const dispatch = useDispatch();
+  const container = useSelector(getcontainer)
 
   return (
     <>
@@ -17,7 +18,9 @@ export default function () {
         </a>
         <Button
           className="btn btn-primary btn-sm custom-btn"
-          onClick={() => dispatch(saveContainer())}
+          onClick={() => {
+            saveContainer(container);
+          }}
         >
           Save
         </Button>

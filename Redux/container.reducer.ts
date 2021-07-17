@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootStateOrAny } from "react-redux";
+import { saveContaienr } from "../services";
 
 export interface iAsset {
   id: number;
@@ -60,9 +61,6 @@ export const containerSlice = createSlice({
     removeAccess(state, action) {
       const index = state.access.findIndex((c) => c == action.payload);
       if (index > -1) state.access.splice(index, 1);
-    },
-    saveContainer() {
-      console.log("saving container");
     },
   },
 });
