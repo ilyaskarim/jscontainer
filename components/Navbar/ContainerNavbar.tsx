@@ -17,7 +17,7 @@ export default function () {
         </a>
         <Button
           className="btn btn-primary btn-sm custom-btn"
-          onClick={() => dispatch(saveContainer)}
+          onClick={() => dispatch(saveContainer())}
         >
           Save
         </Button>
