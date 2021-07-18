@@ -7,7 +7,7 @@ export default function (props: any) {
   const router = useRouter(); 
   return (
     <nav className="navbar ">
-      {router.route === "/" ? (
+      {router.route === "/" || router.route.startsWith("/c/") === true ? (
         <ContainerNavbar></ContainerNavbar>
       ) : (
         <AppNavbar></AppNavbar>

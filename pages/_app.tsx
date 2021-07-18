@@ -22,8 +22,9 @@ import { Toaster } from "react-hot-toast";
 import { Provider, useDispatch } from "react-redux";
 import store from "../Redux/store";
 import { setCurrentUser } from "../Redux/user.reducer";
+import {get} from "lodash"
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
@@ -80,7 +81,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         >
           <Component {...pageProps} />
         </div>
-        {router.route !== "/" ? <Footer></Footer> : <></>}
+        {router.route !== "/" && router.route.startsWith("/c/") === false ? <Footer></Footer> : <></>}
 
         {process.env.NODE_ENV === "production" && (
           <>
@@ -108,7 +109,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 
-const MyApp2 = (props: any) => {
+const AppContainer = (props: any) => {
   return (
     <Provider store={store}>
       <MyApp {...props} />
@@ -116,14 +117,17 @@ const MyApp2 = (props: any) => {
   );
 };
 
-MyApp2.getInitialProps = async (obj: any) => {
+AppContainer.getInitialProps = async (obj: any) => {
+  // let pageProps=  await obj.Component.getInitialProps(obj)
+  let pageProps = await get(obj,'Component.getInitialProps', () => {})(obj)
   return {
     pageProps: {
       user: obj.ctx.req.user,
       isAuthenticated: obj.ctx.req.isAuthenticated(),
+      ...pageProps
     },
   };
 };
 
 
-export default MyApp2;
+export default AppContainer;

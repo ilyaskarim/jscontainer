@@ -5,6 +5,7 @@ import NavLink from "./NavLinks";
 import { useDispatch, useSelector } from "react-redux";
 import { getcontainer } from "../../Redux/container.reducer";
 import { saveContainer } from "../../services";
+import toast from "react-hot-toast";
 
 export default function () {
   const container = useSelector(getcontainer)
@@ -19,7 +20,9 @@ export default function () {
         <Button
           className="btn btn-primary btn-sm custom-btn"
           onClick={() => {
-            saveContainer(container);
+            saveContainer(container).then(() => {}).catch((e) => {
+              toast.error(e.message);
+            })
           }}
         >
           Save
