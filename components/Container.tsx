@@ -6,10 +6,9 @@ import Settings from "./Container/Settings";
 import Access from "./Container/Access";
 import { useDispatch, useSelector } from "react-redux";
 import { getcontainer, setContainer } from "../Redux/container.reducer";
+import Head from "next/head";
 
-export default function Container(props: {
-  slug?: string | null;
-}) {
+export default function Container() {
 
   useEffect(() => {
     Tabs(".tabs-language", {
@@ -63,126 +62,131 @@ export default function Container(props: {
   }
 
   return (
-    <div className="home_section">
-      <div className="home_content">
-        <div className="form-section  section_comn_pd">
-          <form action="" onSubmit={(e) => handleSubmit(null)}>
-            <input
-              type="text"
-              name="title"
-              className="bg-gray"
-              placeholder="title"
-              onKeyUp={(e) => handleInputChange(e)}
-            />
-            <div className="form-floating">
-              <textarea
-                name="description"
-                className="form-control"
-                placeholder="description"
-                id="floatingTextarea"
-                onChange={(e) => handleInputChange(e)}
-              ></textarea>
-            </div>
-          </form>
-        </div>
-        <div className="code-section section_comn_pd">
-          <div className="tabs bg-gray tabs-language">
-            <div className="tab-header">
-              <ul>
-                <li>
-                  <a data-tab="html" className="tab-header-item" href="#">
-                    Html
+    <>
+      <Head>
+        <title>Untitled Container &middot; JS Container</title>
+      </Head>
+      <div className="home-section">
+        <div className="home-content">
+          <div className="form-section  section-comn-pd">
+            <form action="" onSubmit={(e) => handleSubmit(null)}>
+              <input
+                type="text"
+                name="title"
+                className="bg-gray"
+                placeholder="Untitled Container"
+                onKeyUp={(e) => handleInputChange(e)}
+              />
+              <div className="form-floating">
+                <textarea
+                  name="description"
+                  className="form-control"
+                  placeholder="description"
+                  id="floatingTextarea"
+                  onChange={(e) => handleInputChange(e)}
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div className="code-section section-comn-pd">
+            <div className="tabs bg-gray tabs-language">
+              <div className="tab-header">
+                <ul>
+                  <li>
+                    <a data-tab="html" className="tab-header-item" href="#">
+                      Html
                   </a>
-                </li>
-                <li>
-                  <a data-tab="css" className="tab-header-item" href="#">
-                    Css
+                  </li>
+                  <li>
+                    <a data-tab="css" className="tab-header-item" href="#">
+                      Css
                   </a>
-                </li>
-                <li>
-                  <a data-tab="javascript" className="tab-header-item" href="#">
-                    Javascript
+                  </li>
+                  <li>
+                    <a data-tab="javascript" className="tab-header-item" href="#">
+                      Javascript
                   </a>
-                </li>
-              </ul>
-            </div>
-            <div className="tab-content">
+                  </li>
+                </ul>
+              </div>
+              <div className="tab-content">
 
-              <div className="tab-content-item" data-tab-content="html">
-                <Editor
-                  name="html"
-                  defaultLanguage="html"
-                  defaultValue="<!-- Write HTML -->"
-                  onChange={(e: any) => handleHtmlChange(e)}
-                ></Editor>
-              </div>
-              <div className="tab-content-item" data-tab-content="css">
-                <Editor
-                  defaultLanguage="css"
-                  defaultValue="/* Write CSS */"
-                  onChange={(e: any) => handleCssChange(e)}
-                ></Editor>
-              </div>
-              <div className="tab-content-item" data-tab-content="javascript">
-                <Editor
-                  defaultLanguage="javascript"
-                  defaultValue="/* Write Javascript */"
-                  onChange={(e: any) => handleJsChange(e)}
-                ></Editor>
+                <div className="tab-content-item" data-tab-content="html">
+                  <Editor
+                    name="html"
+                    defaultLanguage="html"
+                    defaultValue="<!-- Write HTML -->"
+                    onChange={(e: any) => handleHtmlChange(e)}
+                  ></Editor>
+                </div>
+                <div className="tab-content-item" data-tab-content="css">
+                  <Editor
+                    defaultLanguage="css"
+                    defaultValue="/* Write CSS */"
+                    onChange={(e: any) => handleCssChange(e)}
+                  ></Editor>
+                </div>
+                <div className="tab-content-item" data-tab-content="javascript">
+                  <Editor
+                    defaultLanguage="javascript"
+                    defaultValue="/* Write Javascript */"
+                    onChange={(e: any) => handleJsChange(e)}
+                  ></Editor>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="row1">
-        <div className="action_section section_comn_pd">
-          <div className="tabs bg-gray tabs-menu">
-            <div className="tab-header">
-              <ul>
-                <li>
-                  <a data-tab="assets" className="tab-header-item" href="#">
-                    Assets
+        <div className="row1">
+          <div className="action-section section-comn-pd">
+            <div className="tabs bg-gray tabs-menu">
+              <div className="tab-header">
+                <ul>
+                  <li>
+                    <a data-tab="assets" className="tab-header-item" href="#">
+                      Assets
                   </a>
-                </li>
-                <li>
-                  <a data-tab="settings" className="tab-header-item" href="#">
-                    Settings
+                  </li>
+                  <li>
+                    <a data-tab="settings" className="tab-header-item" href="#">
+                      Settings
                   </a>
-                </li>
-                <li>
-                  <a data-tab="access" className="tab-header-item" href="#">
-                    Access
+                  </li>
+                  <li>
+                    <a data-tab="access" className="tab-header-item" href="#">
+                      Access
                   </a>
-                </li>
-              </ul>
-            </div>
-            <div className="tab-content">
-              <div className="tab-content-item scroll-bar assets-scroll" data-tab-content="assets">
-                <Assets></Assets>
+                  </li>
+                </ul>
               </div>
-              <div
-                className="tab-content-item check_settings"
-                data-tab-content="settings"
-              >
-                <Settings></Settings>
-              </div>
-              <div
-                className="tab-content-item scroll-bar"
-                data-tab-content="access"
-              >
-                <Access></Access>
+              <div className="tab-content">
+                <div className="tab-content-item scroll-bar assets-scroll" data-tab-content="assets">
+                  <Assets></Assets>
+                </div>
+                <div
+                  className="tab-content-item check_settings"
+                  data-tab-content="settings"
+                >
+                  <Settings></Settings>
+                </div>
+                <div
+                  className="tab-content-item scroll-bar"
+                  data-tab-content="access"
+                >
+                  <Access></Access>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="code-section section_comn_pd ">
-          <div className="preview-frame">
-            preview will be here.
+          <div className="code-section section-comn-pd ">
+            <div className="preview-frame">
+              preview will be here.
             {/* <iframe src="/preview/x3ad793sgxz3i2" frameBorder="0"></iframe> */}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

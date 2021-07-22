@@ -1,8 +1,8 @@
-.home_section {
+.home-section {
   display: flex;
   height: calc(100vh - 45px);
 
-  .home_content {
+  .home-content {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -55,7 +55,7 @@
       background: #f6f6f6;
     }
   }
-  .action_section {
+  .action-section {
     background: #fff;
     border-bottom: 1px solid #ececec;
     height: 128px;

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import PlaygroundItem from "../components/UI/playgroundItem";
 import animationPixelsAndBubbles from "../utils/animationPixelsAndBubbles";
+import Head from "next/head";
 
 export default function () {
   useEffect(() => {
@@ -19,6 +20,10 @@ export default function () {
   ];
 
   return (
+    <>
+    <Head>
+      <title>Playgrounds &middot; JS Container</title>
+    </Head>
     <div className="playground-section">
       <div className="jumbotron bubble-header">
         <div className="bubbles"></div>
@@ -42,5 +47,6 @@ export default function () {
         </div>
       </div>
     </div>
+    </>
   );
 }

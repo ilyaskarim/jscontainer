@@ -21,7 +21,9 @@ export default function () {
           className="btn btn-primary btn-sm custom-btn"
           onClick={() => {
             saveContainer(container).then(() => {}).catch((e) => {
-              toast.error(e.message);
+              toast.error(e.message, {
+                position: "bottom-center"
+              });
             })
           }}
         >

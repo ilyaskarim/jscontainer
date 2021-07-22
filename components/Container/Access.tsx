@@ -35,7 +35,8 @@ export default function () {
       removeAccess(item),
     )
     toast.success("User removed", {
-      duration: 2000
+      duration: 2000,
+      position: "bottom-center"
     });
   };
 

@@ -1,28 +1,27 @@
 import Container from "../../components/Container";
 import { useRouter } from "next/dist/client/router";
 import ContainerNotFound from "../../components/Container/ContainerNotFound";
+import { AppContext } from "next/app";
 
 const ContainerView = (props: any) => {
-  const router = useRouter();
-  const slug = router.query.slug;
   return props.container ? (
-    <Container slug={slug as string}></Container>
+    <Container></Container>
   ) : (
     <ContainerNotFound></ContainerNotFound>
   );
 };
 
-ContainerView.getInitialProps = async (obj: any) => {
-  const container = await obj.ctx.req.models.Container.findOne({
+ContainerView.getInitialProps = async (obj: AppContext) => {
+  const container = await (obj.ctx.req as any).models.Container.findOne({
     where: {
-      slug: obj.ctx.req.params["0"].replace("/c/", "") || "",
+      slug: (obj.ctx.req as any).params["0"].replace("/c/", "") || "",
     },
     include: [
       {
-        model: obj.ctx.req.models.ContainerInvite,
+        model: (obj.ctx.req as any).models.ContainerInvite,
       },
       {
-        model: obj.ctx.req.models.ContainerAsset,
+        model: (obj.ctx.req as any).models.ContainerAsset,
       },
     ],
   });

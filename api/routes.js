@@ -2,6 +2,14 @@ const faker = require("faker");
 const randomstring = require("randomstring");
 const sequelize = require("sequelize");
 const { has } = require("lodash");
+const {
+  SaveContainer,
+  FindContainers,
+  RemoveAsset,
+  RemoveInvite,
+  AddAsset,
+  AddInvite,
+} = require("./functions").default();
 
 exports.default = function (server) {
   return new Promise((resolve, reject) => {
@@ -35,65 +43,75 @@ exports.default = function (server) {
     });
 
     server.get("/api/containers", async (req, res) => {
-      const search = req.query.search;
-      if (!req.query.limit || !req.query.offset) {
-        res.status(405).json({
-          message: "Limit and offset required",
-        });
-      }
-      res.status(200).json({
-        containers: await req.models.Container.findAndCountAll({
-          offset: +req.query.offset,
-          limit: +req.query.limit,
-          where: search
-            ? {
-                title: {
-                  [sequelize.Op.like]: `%${search}%`,
-                },
-              }
-            : {},
+      try {
+        const search = req.query.search;
+        if (!req.query.limit || !req.query.offset) {
+          res.status(405).json({
+            message: "Limit and offset required",
+          });
+        }
+        res.status(200).json({
+          containers: await req.models.Container.findAndCountAll({
+            offset: +req.query.offset,
+            limit: +req.query.limit,
+            where: search
+              ? {
+                  title: {
+                    [sequelize.Op.like]: `%${search}%`,
+                  },
+                }
+              : {},
             include: [
               {
                 model: req.models.ContainerAsset,
-                attributes: ["id","url","name","version"]
+                attributes: ["id", "url", "name", "version"],
               },
               {
                 model: req.models.ContainerInvite,
-              }
-            ]
-        }),
-        pagination: {
-          offset: +req.query.offset,
-          limit: +req.query.limit,
-        },
-        message: "Containers",
-      });
+              },
+            ],
+          }),
+          pagination: {
+            offset: +req.query.offset,
+            limit: +req.query.limit,
+          },
+          message: "Containers",
+        });
+      } catch (e) {
+        console.log(e);
+        res.status(500).send(e.message);
+      }
     });
 
     server.get("/api/container/:slug", async (req, res) => {
-      res.status(200).json({
-        container: await req.models.Container.findOne({
-          where: {
-            slug: req.params.slug,
-          },
-          include: [
-            {
-              model: req.models.ContainerAsset,
-              attributes: ["id", "url"],
+      try {
+        res.status(200).json({
+          container: await req.models.Container.findOne({
+            where: {
+              slug: req.params.slug,
             },
-            {
-              model: req.models.ContainerInvite,
-              include: [
-                {
-                  model: req.models.User,
-                  attributes: ["id", "email"],
-                },
-              ],
-            },
-          ],
-        }),
-        message: "Container",
-      });
+            include: [
+              {
+                model: req.models.ContainerAsset,
+                attributes: ["id", "url"],
+              },
+              {
+                model: req.models.ContainerInvite,
+                include: [
+                  {
+                    model: req.models.User,
+                    attributes: ["id", "email"],
+                  },
+                ],
+              },
+            ],
+          }),
+          message: "Container",
+        });
+      } catch (e) {
+        console.log(e);
+        res.status(500).send(e.message);
+      }
     });
 
     server.get("/api/container/preview/:slug", async (req, res) => {
@@ -154,16 +172,17 @@ exports.default = function (server) {
         </html>
         `);
       } catch (e) {
+        console.log(e);
         res.status(500).send(e.message);
       }
     });
 
     server.post("/api/container/save", async (req, res) => {
-      const body = req.body;
-      let assets = [];
-      let invites = [];
-      let create;
-
+      try {
+        const body = req.body;
+        let assets = [];
+        let invites = [];
+        let create;
 
         if (body.container && body.container.slug) {
           create = await req.models.Container.findOne({
@@ -175,7 +194,7 @@ exports.default = function (server) {
               { model: req.models.ContainerInvite },
             ],
           });
-        }else {
+        } else {
           create = await req.models.Container.create({
             ...body.container,
             slug: randomstring.generate({
@@ -185,106 +204,131 @@ exports.default = function (server) {
           });
         }
 
-      for (const link of body.assets || []) {
-        let createAsset = await req.models.ContainerAsset.create({
-          url: link,
-          containerId: create.id,
-        });
-        assets.push(createAsset);
-      }
-
-      for (const link of body.assets || []) {
-        let createAsset = await req.models.ContainerAsset.create({
-          url: link,
-          containerId: create.id,
-        });
-        assets.push(createAsset);
-      }
-
-      for (const email of body.access || []) {
-        const user = await req.models.User.findOne({
-          where: {
-            email: email,
-          },
-        });
-        if (user) {
-          let createInvite = await req.models.ContainerInvite.create({
+        for (const link of body.assets || []) {
+          let createAsset = await req.models.ContainerAsset.create({
+            url: link,
             containerId: create.id,
-            userId: user.id,
           });
-          invites.push(createInvite);
+          assets.push(createAsset);
         }
-      }
 
-      res.status(200).json({
-        container: create,
-        assets: assets,
-        invites: invites,
-        message: "Container created successfully",
-      });
+        for (const link of body.assets || []) {
+          let createAsset = await req.models.ContainerAsset.create({
+            url: link,
+            containerId: create.id,
+          });
+          assets.push(createAsset);
+        }
+
+        for (const email of body.access || []) {
+          const user = await req.models.User.findOne({
+            where: {
+              email: email,
+            },
+          });
+          if (user) {
+            let createInvite = await req.models.ContainerInvite.create({
+              containerId: create.id,
+              userId: user.id,
+            });
+            invites.push(createInvite);
+          }
+        }
+
+        res.status(200).json({
+          container: create,
+          assets: assets,
+          invites: invites,
+          message: "Container created successfully",
+          isForked: false,
+        });
+      } catch (e) {
+        console.log(e);
+        res.status(500).send(e.message);
+      }
     });
 
     server.post("/api/container/:slug/invite", async (req, res) => {
-      const container = await req.models.Container.findOne({
-        where: {
-          slug: req.params.slug,
-        },
-      });
-      const body = req.body.emails.split(",");
-      for (const email of body) {
-        const user = await req.models.User.findOne({
+      try {
+        const container = await req.models.Container.findOne({
           where: {
-            email: email,
+            slug: req.params.slug,
           },
         });
-        if (user) {
-          await req.models.ContainerInvite.create({
-            containerId: container.id,
-            userId: user.id,
+        const body = req.body.emails.split(",");
+        for (const email of body) {
+          const user = await req.models.User.findOne({
+            where: {
+              email: email,
+            },
           });
+          if (user) {
+            await req.models.ContainerInvite.create({
+              containerId: container.id,
+              userId: user.id,
+            });
+          }
         }
+        res.status(200).json({
+          message: "Invited successfully",
+        });
+      } catch (e) {
+        console.log(e);
+        res.status(500).send(e.message);
       }
-      res.status(200).json({
-        message: "Invited successfully",
-      });
     });
 
     server.post("/api/container/:slug/add-asset", async (req, res) => {
-      const container = await req.models.Container.findOne({
-        where: {
-          slug: req.params.slug,
-        },
-      });
-      const asset = await req.models.ContainerAsset.create({
-        url: req.body.url,
-        containerId: container.id,
-      });
-      res.status(200).json({
-        message: "Asset successfully created.",
-        asset: asset,
-      });
+      try {
+        const container = await req.models.Container.findOne({
+          where: {
+            slug: req.params.slug,
+          },
+        });
+        const asset = await req.models.ContainerAsset.create({
+          url: req.body.url,
+          containerId: container.id,
+        });
+        res.status(200).json({
+          message: "Asset successfully created.",
+          asset: asset,
+        });
+      } catch (e) {
+        console.log(e);
+        res.status(500).send(e.message);
+      }
     });
 
     server.post("/api/container/:slug/remove-invite/:id", async (req, res) => {
-      await req.models.ContainerInvite.destroy({
-        where: {
-          id: req.params.id,
-        },
-      });
-      res.status(200).json({
-        message: "User removed",
-      });
+      try {
+        await req.models.ContainerInvite.destroy({
+          where: {
+            id: req.params.id,
+          },
+        });
+        res.status(200).json({
+          message: "User removed",
+        });
+      } catch (e) {
+        console.log(e);
+        res.status(500).send(e.message);
+      }
     });
-    
+
     server.post("/api/remove-asset/:id", async (req, res) => {
-      await req.models.ContainerAsset.destroy({
-        where: {
-          id: req.params.id,
-        },
-      });
-      res.status(200).json({
-        message: "Asset Removed",
-      });
+      try {
+        await req.models.ContainerAsset.destroy({
+          where: {
+            id: req.params.id,
+          },
+        });
+        res.status(200).json({
+          message: "Asset Removed",
+        });
+      } catch (e) {
+        console.log(e);
+        res.status(500).send(e.message);
+      }
     });
 
     resolve(true);
