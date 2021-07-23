@@ -9,7 +9,7 @@ const {
   RemoveInvite,
   AddAsset,
   AddInvite,
-} = require("./functions").default();
+} = require("./functions");
 
 exports.default = function (server) {
   return new Promise((resolve, reject) => {

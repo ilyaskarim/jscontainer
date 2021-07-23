@@ -55,21 +55,21 @@ app.prepare().then(async () => {
   handleGoogleAuth(passport, GoogleStrategy);
   handleGithubAuth(passport, GitHubStrategy);
 
-  // const sequelize = require("./api/database").default;
-  // const models = require("./api/database").models;
-  // await sequelize.authenticate();
-  // sequelize.sync({
-  //   force: false,
-  // });
-  // console.log("Connection to the database has been established successfully.");
-  // server.use((req, res, next) => {
-  //   req.models = models;
-  //   req.sequelize = sequelize;
-  //   next();
-  // });
+  const sequelize = require("./api/database").default;
+  const models = require("./api/database").models;
+  await sequelize.authenticate();
+  sequelize.sync({
+    force: true,
+  });
+  console.log("Connection to the database has been established successfully.");
+  server.use((req, res, next) => {
+    req.models = models;
+    req.sequelize = sequelize;
+    next();
+  });
 
-  // const routes = require("./api/routes").default;
-  // await routes(server);
+  const routes = require("./api/routes").default;
+  await routes(server);
 
   server.get(
     "/auth/github",
