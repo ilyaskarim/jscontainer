@@ -1,13 +1,24 @@
-const database = require("./database").default;
-
-const saveContaienr = (obj, database, models) => {};
-const addAsset = (obj, database, models) => {};
-const removeAsset = (obj, database, models) => {};
-const addInvite = (obj, database, models) => {};
-const removeInvite = (obj, database, models) => {};
-const findContainers = (obj, database, models) => {
-  console.log(database);
-  return []
+const saveContaienr = (obj, database) => {};
+const addAsset = (obj, database) => {};
+const removeAsset = (obj, database) => {};
+const addInvite = (obj, database) => {};
+const removeInvite = (obj, database) => {};
+const findContainers = async (obj, database) => {
+  console.log(obj);
+  return await database.models.container.findAndCountAll({
+    offset: +obj.offset,
+    limit: +obj.limit,
+    where: obj.where || {},
+    include: [
+      {
+        model: database.models.container_asset,
+        attributes: ["id", "url", "name", "version"],
+      },
+      {
+        model: database.models.container_invite,
+      },
+    ],
+  });
 };
 
 exports.saveContaienr = saveContaienr;

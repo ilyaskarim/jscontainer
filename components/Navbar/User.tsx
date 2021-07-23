@@ -53,8 +53,8 @@ function User (props: any) {
   ];
 
   const Userlogin = (loginMenu: any) => {
-    return loginMenu.map((item: any) => (
-      <MenuItem className="menuList">
+    return loginMenu.map((item: any, index: number) => (
+      <MenuItem className="menuList" key={index} >
         <Link href={item.path}>
           {item.user ? (
             <>
@@ -76,8 +76,8 @@ function User (props: any) {
   };
 
   const UserlogOut = (logoutMenu: any) => {
-    return logoutMenu.map((item: any) => (
-      <MenuItem className="loginmenu" onClick={() => setOpen(true)}>
+    return logoutMenu.map((item: any, index: number) => (
+      <MenuItem className="loginmenu" onClick={() => setOpen(true)} key={index} >
         <Link href={item.path}>{item.name}</Link>
       </MenuItem>
     ));

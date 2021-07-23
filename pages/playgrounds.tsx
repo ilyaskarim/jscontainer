@@ -21,32 +21,32 @@ export default function () {
 
   return (
     <>
-    <Head>
-      <title>Playgrounds &middot; JS Container</title>
-    </Head>
-    <div className="playground-section">
-      <div className="jumbotron bubble-header">
-        <div className="bubbles"></div>
-        <div className="content">
-          <h1>Playgrounds</h1>
-          <p>Playgrounds to ehance your productivty:</p>
+      <Head>
+        <title>Playgrounds &middot; JS Container</title>
+      </Head>
+      <div className="playground-section">
+        <div className="jumbotron bubble-header">
+          <div className="bubbles"></div>
+          <div className="content">
+            <h1>Playgrounds</h1>
+            <p>Playgrounds to ehance your productivty:</p>
+          </div>
+        </div>
+        <div className="cards-section">
+          <div className="row">
+            {cardsData.map((item, key: number) => {
+              return (
+                <div key={key} className="col-sm-4 col-lg-3 col-xs-12">
+                  <PlaygroundItem item={item} />
+                </div>
+              );
+            })}
+          </div>
+          <div className="loadMore">
+            <a href="#">More playgounds coming soon...</a>
+          </div>
         </div>
       </div>
-      <div className="cards-section">
-        <div className="row">
-          {cardsData.map((item) => {
-            return (
-              <div className="col-sm-4 col-lg-3 col-xs-12">
-                <PlaygroundItem item={item} />
-              </div>
-            );
-          })}
-        </div>
-        <div className="loadMore">
-          <a href="#">More playgounds coming soon...</a>
-        </div>
-      </div>
-    </div>
     </>
   );
 }

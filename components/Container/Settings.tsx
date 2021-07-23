@@ -7,7 +7,6 @@ export default function () {
   const dispatch = useDispatch();
   const containerFromRedux = useSelector(getcontainer);
   const { container } = containerFromRedux;
-  console.log({ containerFromRedux });
 
   const handleChange = (e: any) => {
     if (e.target.name === "snippet") {
