@@ -12,7 +12,7 @@ const ContainerView = (props: any) => {
 };
 
 ContainerView.getInitialProps = async (obj: AppContext) => {
-  const container = await (obj.ctx.req as any).models.Container.findOne({
+  const container = await (obj.ctx.req as any)?.models?.Container?.findOne({
     where: {
       slug: (obj.ctx.req as any).params["0"].replace("/c/", "") || "",
     },

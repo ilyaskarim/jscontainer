@@ -5,7 +5,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { addAccess, getcontainer, removeAccess, iAccess } from "../../Redux/container.reducer";
-import { useEffect } from "react";
+
 export default function () {
   const containerFromRedux = useSelector(getcontainer);
   const { access } = containerFromRedux;
