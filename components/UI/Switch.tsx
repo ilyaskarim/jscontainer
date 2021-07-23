@@ -1,5 +1,5 @@
 export default function(props: any) {
-    const {name, label, handleChange} = props;
+    const {name, label, handleChange, defaultChecked} = props;
     return(
         <>
             <div className="switch_btn">
@@ -8,7 +8,7 @@ export default function(props: any) {
                     type="checkbox"
                     name={name}
                     onChange={e => handleChange(e)}
-                    // defaultChecked={}
+                    defaultChecked={defaultChecked}
                 />
                 <span className="slider round"></span>
                 </label>

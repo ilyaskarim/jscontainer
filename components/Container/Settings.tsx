@@ -1,12 +1,16 @@
-import { useDispatch } from "react-redux";
-import { setContainer } from "../../Redux/container.reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { setContainer, getcontainer } from "../../Redux/container.reducer";
+
 import Switch from "../UI/Switch";
 
 export default function () {
   const dispatch = useDispatch();
+  const containerFromRedux = useSelector(getcontainer);
+  const { container } = containerFromRedux;
+  console.log({ containerFromRedux });
 
   const handleChange = (e: any) => {
-    if(e.target.name === 'snippet') {
+    if (e.target.name === "snippet") {
       dispatch(
         setContainer({
           html_5_snippet: e.target.checked,
@@ -20,13 +24,22 @@ export default function () {
       );
     }
   };
-
   return (
     <div>
       <div className="form-check form-switch">
-        <Switch label="Html5 snippet" name="snippet" handleChange={handleChange} />
+        <Switch
+          label="Html5 snippet"
+          name="snippet"
+          handleChange={handleChange}
+          defaultChecked={container.html_5_snippet}
+        />
       </div>
-      <Switch label="Private" name="private" handleChange={handleChange} />
+      <Switch
+        label="Private"
+        name="private"
+        defaultChecked={container.private}
+        handleChange={handleChange}
+      />
     </div>
   );
 }
