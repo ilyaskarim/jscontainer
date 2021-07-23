@@ -3,6 +3,7 @@ import animationPixelsAndBubbles from "../utils/animationPixelsAndBubbles";
 import BlogCard from "../components/UI/BlogCard";
 import Blogs from "./../utils/blogs.json";
 import classnames from "classnames";
+import Head from "next/head";
 
 export default function () {
   const [filter, setFilter] = useState("all");
@@ -21,7 +22,10 @@ export default function () {
   }
 
   return (
-    <div>
+    <>
+      <Head>
+        <title>Blog &middot; JS Container</title>
+      </Head>
       <div className="jumbotron bubble-header">
         <div className="bubbles"></div>
         <div className="content">
@@ -71,6 +75,6 @@ export default function () {
           return <BlogCard blog={blog}></BlogCard>;
         })}
       </div>
-    </div>
+    </>
   );
 }

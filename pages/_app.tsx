@@ -1,5 +1,5 @@
 import "../styles/globals.scss";
-import type { AppProps } from "next/app";
+import type { AppProps, AppContext } from "next/app";
 import "../scss/app/buttons.scss";
 import "@szhsin/react-menu/dist/index.css";
 import "../scss/app/common.scss";
@@ -50,7 +50,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         />
-        <link rel="stylesheet" href="/pb/css/main.min.css" />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -72,7 +71,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           rel="stylesheet"
         /> */}
       </Head>
-      <div>
+      <div className={''} >
         <Navbar></Navbar>
         <div
           className={`app-container ${
@@ -117,13 +116,13 @@ const AppContainer = (props: any) => {
   );
 };
 
-AppContainer.getInitialProps = async (obj: any) => {
+AppContainer.getInitialProps = async (obj: AppContext) => {
   // let pageProps=  await obj.Component.getInitialProps(obj)
   let pageProps = await get(obj,'Component.getInitialProps', () => {})(obj)
   return {
     pageProps: {
-      user: obj.ctx.req.user,
-      isAuthenticated: obj.ctx.req.isAuthenticated(),
+      user: (obj.ctx.req as any).user,
+      isAuthenticated: (obj.ctx.req as any).isAuthenticated(),
       ...pageProps
     },
   };

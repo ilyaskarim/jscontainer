@@ -1,24 +1,28 @@
 import { useEffect } from "react";
 import animationPixelsAndBubbles from "../utils/animationPixelsAndBubbles";
+import Head from "next/head";
 
 export default function () {
   useEffect(() => {
     animationPixelsAndBubbles();
   }, []);
   return (
-    <div>
+    <>
+      <Head>
+        <title>Terms and Conditions &middot; JS Container</title>
+      </Head>
       <div className="jumbotron bubble-header">
         <div className="bubbles"></div>
         <div className="content">
           <h1>Terms and Conditions</h1>
-          <p>JS container Terms and Conditions:</p>
+          <p>JS Container Terms and Conditions:</p>
         </div>
       </div>
       <div className="p-3">
 
         <p>
           These terms and conditions outline the rules and regulations for the
-          use of Js Container's Website, located at http://www.jscontainer.com.
+          use of JS Container's Website, located at http://www.jscontainer.com.
         </p>
 
         <p>
@@ -41,8 +45,8 @@ export default function () {
         <h2>Cookies</h2>
 
         <p>
-          We employ the use of cookies. By accessing Js Container, you agreed to
-          use cookies in agreement with the Js Container's Privacy Policy.
+          We employ the use of cookies. By accessing JS Container, you agreed to
+          use cookies in agreement with the JS Container's Privacy Policy.
         </p>
 
         <p>
@@ -56,8 +60,8 @@ export default function () {
         <h2>License</h2>
 
         <p>
-          Unless otherwise stated, Js Container and/or its licensors own the
-          intellectual property rights for all material on Js Container. All
+          Unless otherwise stated, JS Container and/or its licensors own the
+          intellectual property rights for all material on JS Container. All
           intellectual property rights are reserved. You may access this from Js
           Container for your own personal use subjected to restrictions set in
           these terms and conditions.
@@ -65,10 +69,10 @@ export default function () {
 
         <p>You must not:</p>
         <ul>
-          <li>Republish material from Js Container</li>
-          <li>Sell, rent or sub-license material from Js Container</li>
-          <li>Reproduce, duplicate or copy material from Js Container</li>
-          <li>Redistribute content from Js Container</li>
+          <li>Republish material from JS Container</li>
+          <li>Sell, rent or sub-license material from JS Container</li>
+          <li>Reproduce, duplicate or copy material from JS Container</li>
+          <li>Redistribute content from JS Container</li>
         </ul>
 
         <p>This Agreement shall begin on the date hereof.</p>
@@ -78,22 +82,22 @@ export default function () {
           exchange opinions and information in certain areas of the website. Js
           Container does not filter, edit, publish or review Comments prior to
           their presence on the website. Comments do not reflect the views and
-          opinions of Js Container,its agents and/or affiliates. Comments
+          opinions of JS Container,its agents and/or affiliates. Comments
           reflect the views and opinions of the person who post their views and
-          opinions. To the extent permitted by applicable laws, Js Container
+          opinions. To the extent permitted by applicable laws, JS Container
           shall not be liable for the Comments or for any liability, damages or
           expenses caused and/or suffered as a result of any use of and/or
           posting of and/or appearance of the Comments on this website.
         </p>
 
         <p>
-          Js Container reserves the right to monitor all Comments and to remove
+          JS Container reserves the right to monitor all Comments and to remove
           any Comments which can be considered inappropriate, offensive or
           causes breach of these Terms and Conditions.
         </p>
 
         <p>
-          You hereby grant Js Container a non-exclusive license to use,
+          You hereby grant JS Container a non-exclusive license to use,
           reproduce, edit and authorize others to use, reproduce and edit any of
           your Comments in any and all forms, formats or media.
         </p>
@@ -149,7 +153,7 @@ export default function () {
           that: (a) the link would not make us look unfavorably to ourselves or
           to our accredited businesses; (b) the organization does not have any
           negative records with us; (c) the benefit to us from the visibility of
-          the hyperlink compensates the absence of Js Container; and (d) the
+          the hyperlink compensates the absence of JS Container; and (d) the
           link is in the context of general resource information.
         </p>
 
@@ -163,7 +167,7 @@ export default function () {
         <p>
           If you are one of the organizations listed in paragraph 2 above and
           are interested in linking to our website, you must inform us by
-          sending an e-mail to Js Container. Please include your name, your
+          sending an e-mail to JS Container. Please include your name, your
           organization name, contact information as well as the URL of your
           site, a list of any URLs from which you intend to link to our Website,
           and a list of the URLs on our site to which you would like to link.
@@ -183,7 +187,7 @@ export default function () {
         </ul>
 
         <p>
-          No use of Js Container's logo or other artwork will be allowed for
+          No use of JS Container's logo or other artwork will be allowed for
           linking absent a trademark license agreement.
         </p>
 
@@ -277,6 +281,6 @@ export default function () {
           damage of any nature.
         </p>
       </div>
-    </div>
+    </>
   );
 }

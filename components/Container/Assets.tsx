@@ -66,12 +66,14 @@ export default function () {
     if (
       url.endsWith(".css") ||
       url.endsWith(".js") ||
-      url.includes("fonts.google")
+      url.includes("fonts.google") && url.startsWith("http")
     ) {
       dispatch(addAsset([url]));
       setOpen(false);
     } else {
-      toast.error("The link should be a CSS or Javascript link.");
+      toast.error("The link should be a CSS or Javascript link.", {
+        position: "bottom-center"
+      });
     }
   };
 
@@ -99,6 +101,7 @@ export default function () {
                 dispatch(removeAsset(item));
                 toast.success("Asset removed", {
                   duration: 2000,
+                  position: "bottom-center"
                 });
               }}
             >
