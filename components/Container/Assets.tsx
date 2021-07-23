@@ -91,7 +91,7 @@ export default function () {
   return (
     <>
       {assets.map((item: any, index: number) => (
-        <div className="url-box">
+        <div className="url-box" key={index} >
           <a className="url-link" href="#">
             {item}
           </a>
@@ -193,7 +193,7 @@ export default function () {
               hide: mode === "link",
             })}
           >
-            {links.map((item: any) => {
+            {links.map((item: any,index) => {
               return (
                 <div
                   className="cdn-link mb-2"
@@ -201,6 +201,7 @@ export default function () {
                     e.preventDefault();
                     submit(item.latest);
                   }}
+                  key={index}
                 >
                   <a title={item.latest} href="">
                     {item.filename}

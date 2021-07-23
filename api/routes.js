@@ -4,12 +4,12 @@ const sequelize = require("sequelize");
 const { has } = require("lodash");
 const {
   SaveContainer,
-  FindContainers,
+  findContainers,
   RemoveAsset,
   RemoveInvite,
   AddAsset,
   AddInvite,
-} = require("./functions").default();
+} = require("./functions");
 
 exports.default = function (server) {
   return new Promise((resolve, reject) => {
@@ -51,26 +51,20 @@ exports.default = function (server) {
           });
         }
         res.status(200).json({
-          containers: await req.models.Container.findAndCountAll({
-            offset: +req.query.offset,
-            limit: +req.query.limit,
-            where: search
-              ? {
-                  title: {
-                    [sequelize.Op.like]: `%${search}%`,
-                  },
-                }
-              : {},
-            include: [
-              {
-                model: req.models.ContainerAsset,
-                attributes: ["id", "url", "name", "version"],
-              },
-              {
-                model: req.models.ContainerInvite,
-              },
-            ],
-          }),
+          containers: await findContainers(
+            {
+              offset: +req.query.offset,
+              limit: +req.query.limit,
+              where: search
+                ? {
+                    title: {
+                      [sequelize.Op.like]: `%${search}%`,
+                    },
+                  }
+                : {},
+            },
+            req.sequelize
+          ),
           pagination: {
             offset: +req.query.offset,
             limit: +req.query.limit,

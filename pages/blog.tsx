@@ -71,8 +71,8 @@ export default function () {
         </button>
       </div>
       <div className="blog-content">
-        {filtered()?.map((blog: any) => {
-          return <BlogCard blog={blog}></BlogCard>;
+        {filtered()?.map((blog: any, key: number) => {
+          return <BlogCard key={key} blog={blog}></BlogCard>;
         })}
       </div>
     </>

@@ -1,7 +1,7 @@
-export default function Footer() {
+const Footer = function Footer() {
   return (
     <footer className="footer">
-      &copy; {new Date().getFullYear()} - &nbsp; 
+      &copy; {new Date().getFullYear()} - &nbsp;
       <span className="brand">
         Js <span>Container</span>
       </span>
@@ -9,3 +9,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;
