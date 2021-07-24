@@ -12,6 +12,8 @@ import "../scss/app/playgrounds.scss";
 import "../scss/app/inputField.scss";
 import "../scss/app/card.scss";
 import "../scss/app/blog.scss";
+import "../scss/app/profile.scss";
+import "../scss/app/containerItem.scss";
 import "../scss/app/containerNotFound.scss";
 import "monaco-editor/esm/vs/base/browser/ui/actionbar/actionbar.css";
 import Head from "next/head";

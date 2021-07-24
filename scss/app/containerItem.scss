@@ -1,0 +1,33 @@
+.container_item{
+    padding: 20px 16px 10px 20px;
+    background: #EDEDED;
+
+    h4 {
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 20px;
+        color: #000000;
+    }
+
+    p {
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        color: #838383;
+    }
+    .container-date {
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 14px;
+        color: #393939;
+        margin-bottom: 22px;
+    }
+    button {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 19px;
+        text-align: center;
+        color: #FDFDFD;
+        padding: 8px 36px;
+    }
+}

@@ -11,7 +11,20 @@ import { getCurrentUser, getIsAuthenticated } from "../../Redux/user.reducer";
 import { useSelector } from "react-redux";
 
 
-
+export const AccountInformation = ({item}) => {
+  return(
+<>
+              <img
+                src={item.userImage}
+                alt="img"
+              />
+              <div className="dropDown-content">
+                <h5 className="mb-0">{item.name}</h5>
+                <span>{item.userName}</span>
+              </div>
+            </>
+  )
+}
 function User (props: any) {
   const isAuthenticated = useSelector(getIsAuthenticated);
   const currentUser = useSelector(getCurrentUser);
@@ -57,16 +70,7 @@ function User (props: any) {
       <MenuItem className="menuList" key={index} >
         <Link href={item.path}>
           {item.user ? (
-            <>
-              <img
-                src={item.userImage}
-                alt="img"
-              />
-              <div className="dropDown-content">
-                <h5 className="mb-0">{item.name}</h5>
-                <span>{item.userName}</span>
-              </div>
-            </>
+            <AccountInformation item={item}/>
           ) : (
             <>{item.name}</>
           )}
