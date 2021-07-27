@@ -40,30 +40,8 @@
     background: #EEEEEE;
 
   }
- 
-  .menuList{
-    padding: 11.5px 24px;
 
-   img{
-    height: 40px;
-    margin-right: 12px;
-    border-radius: 50%;
-    }
-    .dropDown-content {
-      display: flex;
-      flex-direction: column;
-    }
-    h5{
-      font-size: 16px;
-      font-weight: 400;
-    }
-    span{
-      font-size: 12px;
-      line-height: 16px;
-      color: #4F4B4B;
-
-    }
-  }
+  
   .dropdown-menu {
     width: 218px;
   }
@@ -75,9 +53,9 @@
   }
   .loginmenu{
     padding: 8px 17px; 
-   a{
-    color: #000;
-    padding: 0 !important; 
+    a{
+      color: #000;
+      padding: 0 !important; 
+    }
   }
-}
 }

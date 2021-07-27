@@ -1,5 +1,6 @@
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
-import { NextPageContext } from 'next'
+import { NextPageContext } from "next";
+import { useRouter } from "next/dist/client/router";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -10,25 +11,21 @@ import Icon from "../Icons/SvgIcons";
 import { getCurrentUser, getIsAuthenticated } from "../../Redux/user.reducer";
 import { useSelector } from "react-redux";
 
+export const AccountInformation = ({ item }) => {
+  return (
+    <>
+      <img src={item.userImage} alt="img" />
+      <div className="dropDown-content">
+        <h5 className="mb-0">{item.name}</h5>
+        <span>{item.userName}</span>
+      </div>
+    </>
+  );
+};
 
-export const AccountInformation = ({item}) => {
-  return(
-<>
-              <img
-                src={item.userImage}
-                alt="img"
-              />
-              <div className="dropDown-content">
-                <h5 className="mb-0">{item.name}</h5>
-                <span>{item.userName}</span>
-              </div>
-            </>
-  )
-}
-function User (props: any) {
+function User(props: any) {
   const isAuthenticated = useSelector(getIsAuthenticated);
   const currentUser = useSelector(getCurrentUser);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [open, setOpen] = useState(false);
   const logoutMenu = [
     {
@@ -50,12 +47,12 @@ function User (props: any) {
     },
     {
       name: "Profile",
-      path: "/profiile",
+      path: "/profile",
       user: false,
     },
     {
       name: "Containers",
-      path: "/containers",
+      path: "/profile/containers",
       user: false,
     },
     {
@@ -64,25 +61,24 @@ function User (props: any) {
       user: false,
     },
   ];
-
   const Userlogin = (loginMenu: any) => {
+    const router = useRouter();
+
     return loginMenu.map((item: any, index: number) => (
-      <MenuItem className="menuList" key={index} >
-        <Link href={item.path}>
-          {item.user ? (
-            <AccountInformation item={item}/>
-          ) : (
-            <>{item.name}</>
-          )}
-        </Link>
+      <MenuItem className="menuList" key={index} onClick={()=>router.push(item.path)}>
+        {/* <Link href="/hello"> */}
+          {item.user ? <AccountInformation item={item} /> : <>{item.name}</>}
+        {/* </Link> */}
       </MenuItem>
     ));
   };
-
+  
   const UserlogOut = (logoutMenu: any) => {
     return logoutMenu.map((item: any, index: number) => (
-      <MenuItem className="loginmenu" onClick={() => setOpen(true)} key={index} >
-        <Link href={item.path}>{item.name}</Link>
+      <MenuItem className="loginmenu" onClick={() => setOpen(true)} key={index}>
+        <Link href={item.path} passHref>
+          {item.name}
+        </Link>
       </MenuItem>
     ));
   };
@@ -95,7 +91,7 @@ function User (props: any) {
             <i className="far fa-user"></i>
           </a>
         }
-      >
+        >
         {isAuthenticated ? Userlogin(loginMenu) : UserlogOut(logoutMenu)}
       </Menu>
       <Modal
@@ -131,7 +127,7 @@ function User (props: any) {
             </span>
             <button>Login with Google</button>
           </a>
-          <a className="social-btn github-btn" href="/auth/github/" >
+          <a className="social-btn github-btn" href="/auth/github/">
             <span>
               <i className="fab fa-github"></i>
             </span>
@@ -147,5 +143,4 @@ function User (props: any) {
   );
 }
 
-
-export default User
+export default User;

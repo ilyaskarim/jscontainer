@@ -13,6 +13,7 @@ import "../scss/app/inputField.scss";
 import "../scss/app/card.scss";
 import "../scss/app/blog.scss";
 import "../scss/app/profile.scss";
+import "../scss/app/dropdown.scss";
 import "../scss/app/containerItem.scss";
 import "../scss/app/containerNotFound.scss";
 import "monaco-editor/esm/vs/base/browser/ui/actionbar/actionbar.css";
@@ -124,8 +125,8 @@ AppContainer.getInitialProps = async (obj: AppContext) => {
   let pageProps = await get(obj,'Component.getInitialProps', () => {})(obj)
   return {
     pageProps: {
-      user: (obj.ctx.req as any).user,
-      isAuthenticated: (obj.ctx.req as any).isAuthenticated(),
+      user: (obj.ctx.req as any)?.user,
+      isAuthenticated: (obj.ctx.req as any)?.isAuthenticated(),
       ...pageProps
     },
   };
