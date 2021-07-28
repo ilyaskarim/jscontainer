@@ -9,12 +9,10 @@ import { AppContext } from "next/app";
 import { findContainers } from "./../../api/functions";
 import { get } from "lodash";
 
-
-
 export default function MyProfile(props: any) {
   const currentUser = useSelector(getCurrentUser);
   const containers = props.containers.containers.rows;
-console.log({props})
+  console.log({ props });
   const loginMenu = [
     {
       name: currentUser.name,
