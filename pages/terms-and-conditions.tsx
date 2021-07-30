@@ -19,7 +19,6 @@ export default function () {
         </div>
       </div>
       <div className="p-3">
-
         <p>
           These terms and conditions outline the rules and regulations for the
           use of JS Container's Website, located at http://www.jscontainer.com.

@@ -26,7 +26,7 @@ import { Toaster } from "react-hot-toast";
 import { Provider, useDispatch } from "react-redux";
 import store from "../Redux/store";
 import { setCurrentUser } from "../Redux/user.reducer";
-import {get} from "lodash"
+import { get } from "lodash";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       dispatch(
         setCurrentUser({
           user: pageProps.user,
-          isAuthenticated: pageProps.isAuthenticated
+          isAuthenticated: pageProps.isAuthenticated,
         })
       );
     }
@@ -69,22 +69,29 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;800&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;800&display=swap"
+          rel="stylesheet"
+        />
         {/*<link
           href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap"
           rel="stylesheet"
         /> */}
       </Head>
-      <div className={''} >
+      <div className={""}>
         <Navbar></Navbar>
         <div
           className={`app-container ${
             router.route === "/" ? "container-page" : ""
-            }`}
+          }`}
         >
           <Component {...pageProps} />
         </div>
-        {router.route !== "/" && router.route.startsWith("/c/") === false ? <Footer></Footer> : <></>}
+        {router.route !== "/" && router.route.startsWith("/c/") === false ? (
+          <Footer></Footer>
+        ) : (
+          <></>
+        )}
 
         {process.env.NODE_ENV === "production" && (
           <>
@@ -109,8 +116,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <Toaster></Toaster>
     </div>
   );
-}
-
+};
 
 const AppContainer = (props: any) => {
   return (
@@ -122,15 +128,14 @@ const AppContainer = (props: any) => {
 
 AppContainer.getInitialProps = async (obj: AppContext) => {
   // let pageProps=  await obj.Component.getInitialProps(obj)
-  let pageProps = await get(obj,'Component.getInitialProps', () => {})(obj)
+  let pageProps = await get(obj, "Component.getInitialProps", () => {})(obj);
   return {
     pageProps: {
       user: (obj.ctx.req as any)?.user,
       isAuthenticated: (obj.ctx.req as any)?.isAuthenticated(),
-      ...pageProps
+      ...pageProps,
     },
   };
 };
-
 
 export default AppContainer;

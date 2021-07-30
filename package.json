@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "oldstart": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write components Redux services pages components api styles scss"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.2.1",
@@ -33,6 +34,7 @@
     "passport": "^0.4.1",
     "passport-github2": "^0.1.12",
     "passport-google-oauth": "^2.0.0",
+    "prettier": "^2.3.2",
     "randomstring": "^1.2.1",
     "react": "17.0.2",
     "react-content-loader": "^6.0.3",

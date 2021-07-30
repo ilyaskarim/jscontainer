@@ -9,16 +9,15 @@ import { getcontainer, setContainer } from "../Redux/container.reducer";
 import Head from "next/head";
 
 export default function Container() {
-
   useEffect(() => {
     Tabs(".tabs-language", {
       byDefaultTab: "html",
-      onChange: () => { },
+      onChange: () => {},
     });
 
     Tabs(".tabs-menu", {
       byDefaultTab: "assets",
-      onChange: () => { },
+      onChange: () => {},
     });
   }, []);
 
@@ -44,14 +43,14 @@ export default function Container() {
         html: (e?.target as any).value,
       })
     );
-  }
+  };
   const handleCssChange = (e: any) => {
     dispatch(
       setContainer({
         css: (e?.target as any).value,
       })
     );
-  }
+  };
 
   const handleJsChange = (e: any) => {
     dispatch(
@@ -59,7 +58,7 @@ export default function Container() {
         javascript: (e?.target as any).value,
       })
     );
-  }
+  };
 
   return (
     <>
@@ -95,22 +94,25 @@ export default function Container() {
                   <li>
                     <a data-tab="html" className="tab-header-item" href="#">
                       Html
-                  </a>
+                    </a>
                   </li>
                   <li>
                     <a data-tab="css" className="tab-header-item" href="#">
                       Css
-                  </a>
+                    </a>
                   </li>
                   <li>
-                    <a data-tab="javascript" className="tab-header-item" href="#">
+                    <a
+                      data-tab="javascript"
+                      className="tab-header-item"
+                      href="#"
+                    >
                       Javascript
-                  </a>
+                    </a>
                   </li>
                 </ul>
               </div>
               <div className="tab-content">
-
                 <div className="tab-content-item" data-tab-content="html">
                   <Editor
                     name="html"
@@ -146,22 +148,25 @@ export default function Container() {
                   <li>
                     <a data-tab="assets" className="tab-header-item" href="#">
                       Assets
-                  </a>
+                    </a>
                   </li>
                   <li>
                     <a data-tab="settings" className="tab-header-item" href="#">
                       Settings
-                  </a>
+                    </a>
                   </li>
                   <li>
                     <a data-tab="access" className="tab-header-item" href="#">
                       Access
-                  </a>
+                    </a>
                   </li>
                 </ul>
               </div>
               <div className="tab-content">
-                <div className="tab-content-item scroll-bar assets-scroll" data-tab-content="assets">
+                <div
+                  className="tab-content-item scroll-bar assets-scroll"
+                  data-tab-content="assets"
+                >
                   <Assets></Assets>
                 </div>
                 <div
@@ -182,7 +187,7 @@ export default function Container() {
           <div className="code-section section-comn-pd ">
             <div className="preview-frame">
               preview will be here.
-            {/* <iframe src="/preview/x3ad793sgxz3i2" frameBorder="0"></iframe> */}
+              {/* <iframe src="/preview/x3ad793sgxz3i2" frameBorder="0"></iframe> */}
             </div>
           </div>
         </div>

@@ -46,5 +46,5 @@ export default function Icon(props: any) {
       </svg>
     );
   }
-  return <></>
+  return <></>;
 }

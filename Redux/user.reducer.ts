@@ -99,7 +99,7 @@ const initialState: iUserState = {
     google_email: "",
     google_photo: "",
 
-    source: ""
+    source: "",
   },
 };
 
@@ -109,7 +109,7 @@ export const userslice = createSlice({
   reducers: {
     setCurrentUser: (state, action) => {
       state.user = action.payload.user;
-      state.isAuthenticated = action.payload.isAuthenticated
+      state.isAuthenticated = action.payload.isAuthenticated;
     },
   },
 });

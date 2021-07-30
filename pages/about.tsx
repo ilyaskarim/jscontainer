@@ -18,16 +18,24 @@ export default function () {
           <p>About JS Container:</p>
         </div>
       </div>
-      <div className={'about-header'}  contentEditable={true}>
+      <div className={"about-header"} contentEditable={true}>
         <p>
-          JS Container is a web app to store html, css and javascript code. We call each instance as container. Features include
+          JS Container is a web app to store html, css and javascript code. We
+          call each instance as container. Features include
         </p>
         <ul>
           <li>Unlimited containers.</li>
           <li>Free unlimited private Containers.</li>
           <li>Invite your friends to Containers.</li>
-          <li>Collaboration on Containers. <code>this feature is coming soon</code></li>
-          <li>Saves your Containers to github repos and invite same invited users to github repo who have same email used in Github. <code>this feature is coming soon</code></li>
+          <li>
+            Collaboration on Containers.{" "}
+            <code>this feature is coming soon</code>
+          </li>
+          <li>
+            Saves your Containers to github repos and invite same invited users
+            to github repo who have same email used in Github.{" "}
+            <code>this feature is coming soon</code>
+          </li>
         </ul>
       </div>
     </>

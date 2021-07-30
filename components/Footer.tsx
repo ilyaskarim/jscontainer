@@ -8,6 +8,6 @@ const Footer = function Footer() {
       . All Rights Reserved
     </footer>
   );
-}
+};
 
 export default Footer;

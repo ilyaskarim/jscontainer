@@ -1,6 +1,7 @@
 export default function (props: any) {
-    return <>
-        <input {...props} />
-    </>;
-  }
-  
+  return (
+    <>
+      <input {...props} />
+    </>
+  );
+}

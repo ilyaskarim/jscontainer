@@ -1,35 +1,33 @@
-
 .profile-section {
-    display: flex;
-    min-height: 100vh;
-    padding: 50px 40px;
-    font-family: Open Sans;
-    .content-header {
-        margin-bottom: 21px;
+  display: flex;
+  min-height: 100vh;
+  padding: 50px 40px;
+  font-family: Open Sans;
+  .content-header {
+    margin-bottom: 21px;
+  }
+  .side-bar {
+    width: 21.645%;
+    background: #f4f4f4;
+    margin-right: 25px;
+    padding: 16px 0;
+    .menuList {
+      background-color: #f4f4f4;
     }
-    .side-bar {
-        width: 21.645%;
-        background: #F4F4F4;
-        margin-right: 25px;
-        padding: 16px 0;
-        .menuList {
-            background-color: #f4f4f4;
-        }
-        
+  }
+  .profile-content {
+    padding: 23px 40px;
+    width: 78.355%;
+    background: #f4f4f4;
+    h1 {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 33px;
+      color: #000000;
     }
-    .profile-content {
-        padding: 23px 40px;
-        width: 78.355%;
-        background: #F4F4F4;
-        h1{
-            font-weight: bold;
-            font-size: 24px;
-            line-height: 33px;
-            color: #000000;
-        }
-    }
+  }
 }
 
 .container-section {
-    padding: 24px 33px;
+  padding: 24px 33px;
 }

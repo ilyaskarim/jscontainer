@@ -4,7 +4,12 @@ import InputField from "../../components/UI/InputField";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { addAccess, getcontainer, removeAccess, iAccess } from "../../Redux/container.reducer";
+import {
+  addAccess,
+  getcontainer,
+  removeAccess,
+  iAccess,
+} from "../../Redux/container.reducer";
 
 export default function () {
   const containerFromRedux = useSelector(getcontainer);
@@ -12,31 +17,26 @@ export default function () {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  const [email, setEmail] = useState('');
-
+  const [email, setEmail] = useState("");
 
   const handlerChange = (e: any) => {
     let val = e.target.value;
-    setEmail(val)
-  }
+    setEmail(val);
+  };
 
   const handlerSubmit = (e: any) => {
     e.preventDefault();
-    setEmail("")
-  
-    dispatch(
-      addAccess(email),
-    )
+    setEmail("");
+
+    dispatch(addAccess(email));
     setOpen(false);
   };
 
   const handleDelete = (item: iAccess) => {
-    dispatch(
-      removeAccess(item),
-    )
+    dispatch(removeAccess(item));
     toast.success("User removed", {
       duration: 2000,
-      position: "bottom-center"
+      position: "bottom-center",
     });
   };
 
@@ -73,21 +73,32 @@ export default function () {
           content: {
             height: "314px",
             maxWidth: "366px",
-          }
+          },
         }}
       >
-        
-        <button className="closeBtn" onClick={() => setOpen(false)}><i className="fas fa-times"></i></button>
+        <button className="closeBtn" onClick={() => setOpen(false)}>
+          <i className="fas fa-times"></i>
+        </button>
         <div className="invite-content">
           <h4 className="mb-3">Invite to your container</h4>
           <p className="mb-4">
-            Inviting users to your container only works when you have a
-            private container
+            Inviting users to your container only works when you have a private
+            container
           </p>
           <form action="" onSubmit={(e: any) => handlerSubmit(e)}>
-            <InputField name="email" value={email} onChange={(e: any) => handlerChange(e)} placeholder="Enter email address"/>
+            <InputField
+              name="email"
+              value={email}
+              onChange={(e: any) => handlerChange(e)}
+              placeholder="Enter email address"
+            />
             <br />
-            <Button onSubmit={(e: any) => handlerSubmit(e)} className="invite-btn btn btn-primary btn-xs" >Invite</Button>
+            <Button
+              onSubmit={(e: any) => handlerSubmit(e)}
+              className="invite-btn btn btn-primary btn-xs"
+            >
+              Invite
+            </Button>
           </form>
         </div>
       </Modal>

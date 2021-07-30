@@ -1,23 +1,22 @@
-.menuList{
-    padding: 11.5px 24px;
+.menuList {
+  padding: 11.5px 24px;
 
-   img{
+  img {
     height: 40px;
     margin-right: 12px;
     border-radius: 50%;
-    }
-    .dropDown-content {
-      display: flex;
-      flex-direction: column;
-    }
-    h5{
-      font-size: 16px;
-      font-weight: 400;
-    }
-    span{
-      font-size: 12px;
-      line-height: 16px;
-      color: #4F4B4B;
-
-    }
   }
+  .dropDown-content {
+    display: flex;
+    flex-direction: column;
+  }
+  h5 {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  span {
+    font-size: 12px;
+    line-height: 16px;
+    color: #4f4b4b;
+  }
+}

@@ -9,17 +9,17 @@ export default function () {
   const [filter, setFilter] = useState("all");
   useEffect(() => {
     animationPixelsAndBubbles();
-  },[]);
+  }, []);
 
   const filtered = () => {
     if (filter === "all") {
       return Blogs;
     } else if (filter === "wapgee") {
-      return Blogs.filter(blog => blog.site.includes("wapgee"))
+      return Blogs.filter((blog) => blog.site.includes("wapgee"));
     } else if (filter === "css-tricks") {
-      return Blogs.filter(blog => blog.site.includes("css-tricks"))
+      return Blogs.filter((blog) => blog.site.includes("css-tricks"));
     }
-  }
+  };
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function () {
           </p>
         </div>
       </div>
-      <div className="p-3 pl-5"  >
+      <div className="p-3 pl-5">
         <button
           type="button"
           className={classnames({

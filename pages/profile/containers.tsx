@@ -8,7 +8,7 @@ const Containers = (props: any) => {
 
   return (
     <div className="container-section">
-      <div className="row">  
+      <div className="row">
         {containers?.map((item: any, index: number) => {
           return (
             <div className="col-lg-3 col-xl-3 " key={index}>

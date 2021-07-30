@@ -4,7 +4,7 @@ import containerReducer from "./container.reducer";
 
 let reducers: any = {
   user: userReducer,
-  container: containerReducer
+  container: containerReducer,
 };
 
 export default configureStore({

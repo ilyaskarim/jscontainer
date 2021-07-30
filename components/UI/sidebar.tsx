@@ -1,11 +1,10 @@
 import { MenuItem } from "@szhsin/react-menu";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import  { AccountInformation } from "../../components/Navbar/User";
+import { AccountInformation } from "../../components/Navbar/User";
 import { getCurrentUser, getIsAuthenticated } from "../../Redux/user.reducer";
 
 export default function MyProfile(props: any) {
-
   const isAuthenticated = useSelector(getIsAuthenticated);
   const currentUser = useSelector(getCurrentUser);
 
@@ -35,12 +34,13 @@ export default function MyProfile(props: any) {
   ];
   return (
     <div className="side-bar">
-        {loginMenu.map((item: any, index: number) => (
+      {loginMenu.map((item: any, index: number) => (
         <MenuItem className="menuList" key={index}>
-            <Link href={item.path}>
+          <Link href={item.path}>
             {item.user ? <AccountInformation item={item} /> : <>{item.name}</>}
-            </Link>
-        </MenuItem>))}
+          </Link>
+        </MenuItem>
+      ))}
     </div>
   );
 }

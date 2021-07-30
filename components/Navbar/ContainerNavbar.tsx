@@ -8,7 +8,7 @@ import { saveContainer } from "../../services";
 import toast from "react-hot-toast";
 
 export default function () {
-  const container = useSelector(getcontainer)
+  const container = useSelector(getcontainer);
 
   return (
     <>
@@ -20,11 +20,13 @@ export default function () {
         <Button
           className="btn btn-primary btn-sm custom-btn"
           onClick={() => {
-            saveContainer(container).then(() => {}).catch((e) => {
-              toast.error(e.message, {
-                position: "bottom-center"
+            saveContainer(container)
+              .then(() => {})
+              .catch((e) => {
+                toast.error(e.message, {
+                  position: "bottom-center",
+                });
               });
-            })
           }}
         >
           Save

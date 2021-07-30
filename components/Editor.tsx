@@ -7,7 +7,7 @@ export default (props: { [key: string]: any }) => (
     loading="Loading editor please wait."
     options={{
       minimap: {
-        enabled: false
+        enabled: false,
       },
     }}
     {...props}

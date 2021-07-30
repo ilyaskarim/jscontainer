@@ -66,13 +66,13 @@ export default function () {
     if (
       url.endsWith(".css") ||
       url.endsWith(".js") ||
-      url.includes("fonts.google") && url.startsWith("http")
+      (url.includes("fonts.google") && url.startsWith("http"))
     ) {
       dispatch(addAsset([url]));
       setOpen(false);
     } else {
       toast.error("The link should be a CSS or Javascript link.", {
-        position: "bottom-center"
+        position: "bottom-center",
       });
     }
   };
@@ -91,7 +91,7 @@ export default function () {
   return (
     <>
       {assets.map((item: any, index: number) => (
-        <div className="url-box" key={index} >
+        <div className="url-box" key={index}>
           <a className="url-link" href="#">
             {item}
           </a>
@@ -101,7 +101,7 @@ export default function () {
                 dispatch(removeAsset(item));
                 toast.success("Asset removed", {
                   duration: 2000,
-                  position: "bottom-center"
+                  position: "bottom-center",
                 });
               }}
             >
@@ -193,7 +193,7 @@ export default function () {
               hide: mode === "link",
             })}
           >
-            {links.map((item: any,index) => {
+            {links.map((item: any, index) => {
               return (
                 <div
                   className="cdn-link mb-2"

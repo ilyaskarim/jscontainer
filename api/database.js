@@ -17,7 +17,7 @@ const User = sequelize.define("user", {
   email: DataTypes.STRING,
   password: DataTypes.STRING,
   last_login_trough: DataTypes.STRING,
-  is_activated: DataTypes.BOOLEAN,  
+  is_activated: DataTypes.BOOLEAN,
   color_theme: DataTypes.STRING,
   github_photo: DataTypes.TEXT,
   github_login: DataTypes.STRING,
@@ -59,7 +59,7 @@ const User = sequelize.define("user", {
   google_email: DataTypes.STRING,
   google_photo: DataTypes.TEXT,
 
-  source: DataTypes.STRING
+  source: DataTypes.STRING,
 });
 
 const Container = sequelize.define("container", {

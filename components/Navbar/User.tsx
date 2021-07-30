@@ -11,7 +11,7 @@ import Icon from "../Icons/SvgIcons";
 import { getCurrentUser, getIsAuthenticated } from "../../Redux/user.reducer";
 import { useSelector } from "react-redux";
 
-export const AccountInformation = ({ item }) => {
+export const AccountInformation = ({ item }: any) => {
   return (
     <>
       <img src={item.userImage} alt="img" />
@@ -30,11 +30,11 @@ function User(props: any) {
   const logoutMenu = [
     {
       name: "Signup",
-      path: "/profiile",
+      path: "#",
     },
     {
       name: "Login",
-      path: "/profiile",
+      path: "#",
     },
   ];
   const loginMenu = [
@@ -65,14 +65,18 @@ function User(props: any) {
     const router = useRouter();
 
     return loginMenu.map((item: any, index: number) => (
-      <MenuItem className="menuList" key={index} onClick={()=>router.push(item.path)}>
+      <MenuItem
+        className="menuList"
+        key={index}
+        onClick={() => router.push(item.path)}
+      >
         {/* <Link href="/hello"> */}
-          {item.user ? <AccountInformation item={item} /> : <>{item.name}</>}
+        {item.user ? <AccountInformation item={item} /> : <>{item.name}</>}
         {/* </Link> */}
       </MenuItem>
     ));
   };
-  
+
   const UserlogOut = (logoutMenu: any) => {
     return logoutMenu.map((item: any, index: number) => (
       <MenuItem className="loginmenu" onClick={() => setOpen(true)} key={index}>
@@ -91,7 +95,7 @@ function User(props: any) {
             <i className="far fa-user"></i>
           </a>
         }
-        >
+      >
         {isAuthenticated ? Userlogin(loginMenu) : UserlogOut(logoutMenu)}
       </Menu>
       <Modal

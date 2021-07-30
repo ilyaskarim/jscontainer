@@ -5,7 +5,7 @@ import Head from "next/head";
 
 export default function () {
   useEffect(() => {
-    animationPixelsAndBubbles()
+    animationPixelsAndBubbles();
   });
 
   const cardsData = [

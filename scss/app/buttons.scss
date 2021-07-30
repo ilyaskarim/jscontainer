@@ -13,12 +13,12 @@
     padding-left: 34px;
     padding-right: 23px;
     transition: all 0.2s ease-in;
-    opacity: .8;
+    opacity: 0.8;
     pointer-events: none;
   }
   &.disabled {
     pointer-events: none;
-    opacity: .6;
+    opacity: 0.6;
   }
 }
 .custom-btn {
