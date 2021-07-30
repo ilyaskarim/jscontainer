@@ -1,3 +1,18 @@
+.ReactModal__Content {
+  .closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    color: #979797;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
 .invite-modal {
   display: flex;
   text-align: center;
@@ -13,18 +28,6 @@
   outline: none;
   margin: auto;
   padding: 40px 0;
-  .closeBtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: transparent;
-    border: none;
-    color: #979797;
-
-    &:focus {
-      outline: none;
-    }
-  }
   .modal-header {
     a {
       &.active,

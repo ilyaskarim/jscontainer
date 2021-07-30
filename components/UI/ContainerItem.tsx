@@ -3,17 +3,20 @@ import Link from "next/link";
 import Button from "./Button";
 
 export default function (props: any) {
-  const { title, description, updatedAt } = props.data;
+  const { title, description, updatedAt, slug } = props.data;
+  const link = `/c/${slug}`;
   return (
-    <div className="container_item mb-3">
-      <h4>{title}</h4>
-      <p className="mb-2">{description}</p>
-      <div className="container-date">
-        {moment(updatedAt).format("MM/DD/YYYY")}
+    <a href={link}>
+      <div className="container-item mb-3">
+        <h4>{title}</h4>
+        <p className="mb-2">{description}</p>
+        <div className="container-date">
+          Last updated: {moment(updatedAt).fromNow()}
+        </div>
+        <a href={link}>
+          <Button className="btn custom-btn rounded-0">View</Button>
+        </a>
       </div>
-      <Link href="/about">
-        <Button className="custom-btn rounded-0">View</Button>
-      </Link>
-    </div>
+    </a>
   );
 }

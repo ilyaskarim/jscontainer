@@ -5,6 +5,9 @@ const addInvite = (obj, database) => {};
 const removeInvite = (obj, database) => {};
 const findContainers = async (obj, database) => {
   console.log(obj);
+  if (!database || !obj) {
+    return;
+  }
   return await database.models.container.findAndCountAll({
     offset: +obj.offset,
     limit: +obj.limit,

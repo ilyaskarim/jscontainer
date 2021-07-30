@@ -47,12 +47,12 @@ function User(props: any) {
     },
     {
       name: "Profile",
-      path: "/profile",
+      path: "/profile/1?profile",
       user: false,
     },
     {
       name: "Containers",
-      path: "/profile/containers",
+      path: "/profile/1/",
       user: false,
     },
     {
@@ -68,7 +68,7 @@ function User(props: any) {
       <MenuItem
         className="menuList"
         key={index}
-        onClick={() => router.push(item.path)}
+        onClick={() => (window.location.href = item.path)}
       >
         {/* <Link href="/hello"> */}
         {item.user ? <AccountInformation item={item} /> : <>{item.name}</>}
@@ -80,9 +80,7 @@ function User(props: any) {
   const UserlogOut = (logoutMenu: any) => {
     return logoutMenu.map((item: any, index: number) => (
       <MenuItem className="loginmenu" onClick={() => setOpen(true)} key={index}>
-        <Link href={item.path} passHref>
-          {item.name}
-        </Link>
+        <a href={item.path}>{item.name}</a>
       </MenuItem>
     ));
   };
