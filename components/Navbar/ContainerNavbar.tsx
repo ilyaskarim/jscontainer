@@ -2,31 +2,31 @@ import Button from "../UI/Button";
 import User from "./User";
 import Brand from "./Brand";
 import NavLink from "./NavLinks";
-import { useDispatch, useSelector } from "react-redux";
-import { getcontainer } from "../../Redux/container.reducer";
 import { saveContainer } from "../../services";
-import toast from "react-hot-toast";
+import { useState } from "react";
+import { EventBus } from "../../utils/eventBus";
 
 export default function () {
-  const container = useSelector(getcontainer);
+  const [loading, setLoading] = useState(false);
+
+  EventBus.$on("saveContainerFinish", () => {
+    setLoading(false);
+  })
 
   return (
     <>
       <div className="list_left">
         <Brand></Brand>
-        <a className="primary-clr link" href="">
+        <a className="primary-clr link" href="#">
           Run
         </a>
         <Button
           className="btn btn-primary btn-sm custom-btn"
+          loading={loading}
           onClick={() => {
-            saveContainer(container)
-              .then(() => {})
-              .catch((e) => {
-                toast.error(e.message, {
-                  position: "bottom-center",
-                });
-              });
+            setLoading(true);
+            EventBus.$emit("saveContainer")
+
           }}
         >
           Save

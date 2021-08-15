@@ -1,14 +1,28 @@
 import { useEffect, useState } from "react";
 import Tabs from "./../utils/tabs";
-import Editor from "./Editor";
+import Editor from "@monaco-editor/react";
 import Assets from "./Container/Assets";
 import Settings from "./Container/Settings";
-import Access from "./Container/Access";
-import { useDispatch, useSelector } from "react-redux";
-import { getcontainer, setContainer } from "../Redux/container.reducer";
 import Head from "next/head";
+import { EventBus } from "../utils/eventBus";
+import { saveContainer } from "../services";
+import toast from "react-hot-toast";
 
-export default function Container() {
+export default function Container(props: any) {
+  const [containerLocal, setContainerLocal] = useState({
+    id: null,
+    html: "",
+    slug: "",
+    css: "",
+    javascript: "",
+    title: "",
+    description: "",
+    html_5_snippet: false,
+    private: false,
+    access: [],
+    assets: [],
+  });
+
   useEffect(() => {
     Tabs(".tabs-language", {
       byDefaultTab: "html",
@@ -21,14 +35,11 @@ export default function Container() {
     });
   }, []);
 
-  const dispatch = useDispatch();
-
   const handleInputChange = (e: any) => {
-    dispatch(
-      setContainer({
-        [e.target.name]: e.target.value,
-      })
-    );
+    setContainerLocal({
+      ...containerLocal,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e: any | null) => {
@@ -37,28 +48,32 @@ export default function Container() {
     }
   };
 
-  const handleHtmlChange = (e: any) => {
-    dispatch(
-      setContainer({
-        html: (e?.target as any).value,
-      })
-    );
-  };
-  const handleCssChange = (e: any) => {
-    dispatch(
-      setContainer({
-        css: (e?.target as any).value,
-      })
-    );
-  };
+  useEffect(() => {
+    if (props.container) {
+      setContainerLocal({
+        ...props.container,
+        assets: JSON.parse(props.container.assets),
+        access: JSON.parse(props.container.access),
+      });
+    }
+  }, [props]);
 
-  const handleJsChange = (e: any) => {
-    dispatch(
-      setContainer({
-        javascript: (e?.target as any).value,
-      })
-    );
-  };
+  useEffect(() => {
+    EventBus.$off("saveContainer");
+    EventBus.$on("saveContainer", ()=>{
+      saveContainer(containerLocal)
+              .then(() => {
+                toast.success("Container Saved");
+              })
+              .catch((e) => {
+                toast.error(e.message, {
+                  position: "bottom-center",
+                });
+              }).finally(() => {
+                EventBus.$emit("saveContainerFinish")
+              })
+    })
+  },[containerLocal])
 
   return (
     <>
@@ -73,14 +88,16 @@ export default function Container() {
                 type="text"
                 name="title"
                 className="bg-gray"
+                value={containerLocal.title}
                 placeholder="Untitled Container"
-                onKeyUp={(e) => handleInputChange(e)}
+                onChange={(e) => handleInputChange(e)}
               />
               <div className="form-floating">
                 <textarea
                   name="description"
                   className="form-control"
                   placeholder="description"
+                  value={containerLocal.description}
                   id="floatingTextarea"
                   onChange={(e) => handleInputChange(e)}
                 ></textarea>
@@ -115,25 +132,63 @@ export default function Container() {
               <div className="tab-content">
                 <div className="tab-content-item" data-tab-content="html">
                   <Editor
-                    name="html"
+                    key={`s` + Math.random()}
+                    height="calc(100vh - 280px)"
+                    loading="Loading editor please wait."
+                    options={{
+                      minimap: {
+                        enabled: false,
+                      },
+                    }}
                     defaultLanguage="html"
-                    defaultValue="<!-- Write HTML -->"
-                    onChange={(e: any) => handleHtmlChange(e)}
-                  ></Editor>
+                    defaultValue={containerLocal.html}
+                    onChange={(e: any) => {
+                      setContainerLocal({
+                        ...containerLocal,
+                        html: e,
+                      });
+                    }}
+                  />
                 </div>
                 <div className="tab-content-item" data-tab-content="css">
                   <Editor
+                    key={`s` + Math.random()}
+                    height="calc(100vh - 280px)"
+                    loading="Loading editor please wait."
+                    options={{
+                      minimap: {
+                        enabled: false,
+                      },
+                    }}
                     defaultLanguage="css"
-                    defaultValue="/* Write CSS */"
-                    onChange={(e: any) => handleCssChange(e)}
-                  ></Editor>
+                    defaultValue={containerLocal.css}
+                    onChange={(e: any) => {
+                      setContainerLocal({
+                        ...containerLocal,
+                        css: e,
+                      });
+                    }}
+                  />
                 </div>
                 <div className="tab-content-item" data-tab-content="javascript">
                   <Editor
+                    key={`s` + Math.random()}
+                    height="calc(100vh - 280px)"
+                    loading="Loading editor please wait."
+                    options={{
+                      minimap: {
+                        enabled: false,
+                      },
+                    }}
                     defaultLanguage="javascript"
-                    defaultValue="/* Write Javascript */"
-                    onChange={(e: any) => handleJsChange(e)}
-                  ></Editor>
+                    defaultValue={containerLocal.javascript}
+                    onChange={(e: any) => {
+                      setContainerLocal({
+                        ...containerLocal,
+                        javascript: e,
+                      });
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -155,11 +210,6 @@ export default function Container() {
                       Settings
                     </a>
                   </li>
-                  <li>
-                    <a data-tab="access" className="tab-header-item" href="#">
-                      Access
-                    </a>
-                  </li>
                 </ul>
               </div>
               <div className="tab-content">
@@ -167,27 +217,36 @@ export default function Container() {
                   className="tab-content-item scroll-bar assets-scroll"
                   data-tab-content="assets"
                 >
-                  <Assets></Assets>
+                  <Assets
+                    assets={containerLocal.assets}
+                    onChange={(links: any) => {
+                      setContainerLocal({
+                        ...containerLocal,
+                        assets: links,
+                      });
+                    }}
+                  ></Assets>
                 </div>
                 <div
                   className="tab-content-item check_settings"
                   data-tab-content="settings"
                 >
-                  <Settings></Settings>
-                </div>
-                <div
-                  className="tab-content-item scroll-bar"
-                  data-tab-content="access"
-                >
-                  <Access></Access>
+                  <Settings
+                    containerLocal={containerLocal}
+                    setContainerLocal={setContainerLocal}
+                  ></Settings>
                 </div>
               </div>
             </div>
           </div>
           <div className="code-section section-comn-pd ">
             <div className="preview-frame">
-              preview will be here.
-              {/* <iframe src="/preview/x3ad793sgxz3i2" frameBorder="0"></iframe> */}
+              {containerLocal.slug && (
+                <iframe
+                  src={`/preview/${containerLocal.slug}`}
+                  frameBorder="0"
+                ></iframe>
+              )}
             </div>
           </div>
         </div>

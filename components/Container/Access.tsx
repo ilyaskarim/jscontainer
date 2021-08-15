@@ -4,17 +4,11 @@ import InputField from "../../components/UI/InputField";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addAccess,
-  getcontainer,
-  removeAccess,
-  iAccess,
-} from "../../Redux/container.reducer";
+import { getIsAuthenticated } from "../../Redux/user.reducer";
 
 export default function () {
-  const containerFromRedux = useSelector(getcontainer);
-  const { access } = containerFromRedux;
-  const dispatch = useDispatch();
+  const isUserAuthenticated = useSelector(getIsAuthenticated);
+  const access: any = [];
   const [open, setOpen] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -28,12 +22,10 @@ export default function () {
     e.preventDefault();
     setEmail("");
 
-    dispatch(addAccess(email));
     setOpen(false);
   };
 
-  const handleDelete = (item: iAccess) => {
-    dispatch(removeAccess(item));
+  const handleDelete = (item: any) => {
     toast.success("User removed", {
       duration: 2000,
       position: "bottom-center",
@@ -57,12 +49,16 @@ export default function () {
               </div>
             );
           })}
-          <Button
-            onClick={() => setOpen(true)}
-            className="btn btn-primary btn-xs"
-          >
-            Invite
-          </Button>
+          {isUserAuthenticated ? (
+            <Button
+              onClick={() => setOpen(true)}
+              className="btn btn-primary btn-xs"
+            >
+              Invite
+            </Button>
+          ) : (
+            <div>Please login to invite</div>
+          )}
         </div>
       </div>
       <Modal

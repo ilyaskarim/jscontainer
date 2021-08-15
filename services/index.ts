@@ -1,8 +1,17 @@
 import createAxios from "../utils/axios";
-import { iContainerState } from "../Redux/container.reducer";
+import { nanoid } from "nanoid";
 
-export const saveContainer = (container: iContainerState) =>
-  createAxios().post("/api/container/save", container);
+export const saveContainer = (container: any) => {
+  const slug = container.slug ? container.slug : nanoid();
+  return createAxios().post("/api/container/save", {
+    container: {
+      ...container,
+      access: JSON.stringify(container.access),
+      assets: JSON.stringify(container.assets),
+      slug,
+    },
+  });
+};
 
 export const inviteToContainer = () =>
   createAxios().post("/api/container/:slug/invite");

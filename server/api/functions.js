@@ -1,10 +1,35 @@
-const saveContaienr = (obj, database) => {};
+const saveContainer =  async(container, database) => {
+  let item;
+  if (container.id) {
+    item = await database.models.container.findOne({
+      where: {
+        slug: container.slug
+      }
+    })
+    if (!item) {
+      return {
+        status: 404,
+        message: "No container found",
+        data: {}
+      }
+    }
+    item = await item.update({
+      ...container
+    })
+  }else {
+    item = await database.models.container.create(container);
+  }
+  return {
+    status: 200,
+    message: "Container created",
+    data: item
+  }
+};
 const addAsset = (obj, database) => {};
 const removeAsset = (obj, database) => {};
 const addInvite = (obj, database) => {};
 const removeInvite = (obj, database) => {};
 const findContainers = async (obj, database) => {
-  console.log(obj);
   if (!database || !obj) {
     return;
   }
@@ -24,7 +49,7 @@ const findContainers = async (obj, database) => {
   });
 };
 
-exports.saveContaienr = saveContaienr;
+exports.saveContainer = saveContainer;
 exports.addAsset = addAsset;
 exports.removeAsset = removeAsset;
 exports.addInvite = addInvite;

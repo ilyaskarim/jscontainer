@@ -1,33 +1,27 @@
 import Container from "../../components/Container";
-import { useRouter } from "next/dist/client/router";
 import ContainerNotFound from "../../components/Container/ContainerNotFound";
-import { AppContext } from "next/app";
 
 const ContainerView = (props: any) => {
   return props.container ? (
-    <Container></Container>
+    <Container container={props.container}></Container>
   ) : (
     <ContainerNotFound></ContainerNotFound>
   );
 };
 
-ContainerView.getInitialProps = async (obj: AppContext) => {
-  const container = await (obj.ctx.req as any)?.models?.Container?.findOne({
+export async function getServerSideProps(context: any) {
+  const container = await context.req.models.Container.findOne({
     where: {
-      slug: (obj.ctx.req as any).params["0"].replace("/c/", "") || "",
+      slug: context.params.slug,
     },
-    include: [
-      {
-        model: (obj.ctx.req as any).models.ContainerInvite,
-      },
-      {
-        model: (obj.ctx.req as any).models.ContainerAsset,
-      },
-    ],
   });
+
   return {
-    container,
+    props: {
+      container: JSON.parse(JSON.stringify(container)),
+      status: container ? 200 : 404,
+    },
   };
-};
+}
 
 export default ContainerView;

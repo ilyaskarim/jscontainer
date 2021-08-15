@@ -5,11 +5,6 @@ import toast from "react-hot-toast";
 import classNames from "classnames";
 import axios from "../../utils/axios";
 import ContentLoader from "react-content-loader";
-import {
-  addAsset,
-  getcontainer,
-  removeAsset,
-} from "../../Redux/container.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 
@@ -35,10 +30,8 @@ const LoadingBar = () => (
   </div>
 );
 
-export default function () {
-  const dispatch = useDispatch();
-  const containerFromRedux = useSelector(getcontainer);
-  const assets = containerFromRedux.assets;
+export default function (props: any) {
+  const assets = props.assets || [];
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("cdn");
@@ -68,7 +61,7 @@ export default function () {
       url.endsWith(".js") ||
       (url.includes("fonts.google") && url.startsWith("http"))
     ) {
-      dispatch(addAsset([url]));
+      props.onChange([...assets, url]);
       setOpen(false);
     } else {
       toast.error("The link should be a CSS or Javascript link.", {
@@ -98,11 +91,13 @@ export default function () {
           <div className="url_icons">
             <span
               onClick={() => {
-                dispatch(removeAsset(item));
+                let all = [...assets];
+                all.splice(index, 1);
                 toast.success("Asset removed", {
                   duration: 2000,
                   position: "bottom-center",
                 });
+                props.onChange(all);
               }}
             >
               <i className="fas fa-times"></i>

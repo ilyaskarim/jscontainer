@@ -73,6 +73,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;800&display=swap"
           rel="stylesheet"
         />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          data-name="vs/editor/editor.main"
+          href="https://cdn.jsdelivr.net/npm/monaco-editor@0.26.1/min/vs/editor/editor.main.css"
+        ></link>
         {/*<link
           href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap"
           rel="stylesheet"
