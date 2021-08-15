@@ -114,7 +114,7 @@ exports.default = function (server) {
         const assets = JSON.parse(container.assets)
         const css = [];
         const js = [];
-        assets && assets.forEach(({ url }) => {
+        assets && assets.forEach((url) => {
             if (!url) {
               return;
             }
@@ -124,6 +124,7 @@ exports.default = function (server) {
               css.push(`<link rel="stylesheet" href="${url}">`);
             }
           });
+          console.log(assets)
         res.send(`
         <!DOCTYPE html>
         <html lang="en">
@@ -144,7 +145,7 @@ exports.default = function (server) {
         ${js.join("\n")}
         <script>
             ${container.javascript}
-        <script>
+        </script>
         </html>
         `);
       } catch (e) {

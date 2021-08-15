@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tabs from "./../utils/tabs";
 import Editor from "@monaco-editor/react";
 import Assets from "./Container/Assets";
@@ -7,6 +7,9 @@ import Head from "next/head";
 import { EventBus } from "../utils/eventBus";
 import { saveContainer } from "../services";
 import toast from "react-hot-toast";
+import Preview from "./Preview";
+
+let timeout: any;
 
 export default function Container(props: any) {
   const [containerLocal, setContainerLocal] = useState({
@@ -60,20 +63,22 @@ export default function Container(props: any) {
 
   useEffect(() => {
     EventBus.$off("saveContainer");
-    EventBus.$on("saveContainer", ()=>{
+    EventBus.$on("saveContainer", () => {
       saveContainer(containerLocal)
-              .then(() => {
-                toast.success("Container Saved");
-              })
-              .catch((e) => {
-                toast.error(e.message, {
-                  position: "bottom-center",
-                });
-              }).finally(() => {
-                EventBus.$emit("saveContainerFinish")
-              })
-    })
-  },[containerLocal])
+        .then(() => {
+          toast.success("Container Saved");
+        })
+        .catch((e) => {
+          toast.error(e.message, {
+            position: "bottom-center",
+          });
+        })
+        .finally(() => {
+          EventBus.$emit("saveContainerFinish");
+          EventBus.$emit("runContainer");
+        });
+    });
+  }, [containerLocal]);
 
   return (
     <>
@@ -132,7 +137,6 @@ export default function Container(props: any) {
               <div className="tab-content">
                 <div className="tab-content-item" data-tab-content="html">
                   <Editor
-                    key={`s` + Math.random()}
                     height="calc(100vh - 280px)"
                     loading="Loading editor please wait."
                     options={{
@@ -147,12 +151,15 @@ export default function Container(props: any) {
                         ...containerLocal,
                         html: e,
                       });
+                      clearTimeout(timeout);
+                      timeout = setTimeout(() => {
+                        EventBus.$emit("saveContainer");
+                      }, 1100);
                     }}
                   />
                 </div>
                 <div className="tab-content-item" data-tab-content="css">
                   <Editor
-                    key={`s` + Math.random()}
                     height="calc(100vh - 280px)"
                     loading="Loading editor please wait."
                     options={{
@@ -167,12 +174,15 @@ export default function Container(props: any) {
                         ...containerLocal,
                         css: e,
                       });
+                      clearTimeout(timeout);
+                      timeout = setTimeout(() => {
+                        EventBus.$emit("saveContainer");
+                      }, 1100);
                     }}
                   />
                 </div>
                 <div className="tab-content-item" data-tab-content="javascript">
                   <Editor
-                    key={`s` + Math.random()}
                     height="calc(100vh - 280px)"
                     loading="Loading editor please wait."
                     options={{
@@ -187,6 +197,10 @@ export default function Container(props: any) {
                         ...containerLocal,
                         javascript: e,
                       });
+                      clearTimeout(timeout);
+                      timeout = setTimeout(() => {
+                        EventBus.$emit("saveContainer");
+                      }, 1100);
                     }}
                   />
                 </div>
@@ -241,12 +255,7 @@ export default function Container(props: any) {
           </div>
           <div className="code-section section-comn-pd ">
             <div className="preview-frame">
-              {containerLocal.slug && (
-                <iframe
-                  src={`/preview/${containerLocal.slug}`}
-                  frameBorder="0"
-                ></iframe>
-              )}
+              <Preview containerLocal={containerLocal}></Preview>
             </div>
           </div>
         </div>

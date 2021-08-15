@@ -11,13 +11,19 @@ export default function () {
 
   EventBus.$on("saveContainerFinish", () => {
     setLoading(false);
-  })
+  });
 
   return (
     <>
       <div className="list_left">
         <Brand></Brand>
-        <a className="primary-clr link" href="#">
+        <a
+          className="primary-clr link"
+          href="#"
+          onClick={() => {
+            EventBus.$emit("runContainer");
+          }}
+        >
           Run
         </a>
         <Button
@@ -25,8 +31,7 @@ export default function () {
           loading={loading}
           onClick={() => {
             setLoading(true);
-            EventBus.$emit("saveContainer")
-
+            EventBus.$emit("saveContainer");
           }}
         >
           Save
