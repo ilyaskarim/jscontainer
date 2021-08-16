@@ -1,11 +1,10 @@
 import { useSelector } from "react-redux";
-import { AccountInformation } from "../../../components/Navbar/User";
 import ContainerItem from "../../../components/UI/ContainerItem";
 import { getCurrentUser } from "../../../Redux/user.reducer";
 import Head from "next/head";
 
 import { AppContext } from "next/app";
-import { findContainers } from "../../../api/functions";
+import { findContainers } from "../../../server/api/functions";
 import { get, has } from "lodash";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/dist/client/router";
@@ -41,13 +40,13 @@ export default function MyProfile(props: any) {
   return (
     <>
       <Head>
-        <title>Ilyas Karim - JS Container</title>
+        <title>{props.user?.name} - JS Container</title>
       </Head>
       <div className="profile-section">
         <ProfileSidebar currentUser={currentUser} />
         <div className="profile-content">
           <div className="content-header">
-            <h1>Ilyas Karim Containers</h1>
+            <h1>{props.user?.name} Containers</h1>
           </div>
           <div className="content">
             <div className="row">
@@ -130,7 +129,17 @@ export default function MyProfile(props: any) {
   );
 }
 
-MyProfile.getInitialProps = async (obj: AppContext) => {
+MyProfile.getInitialProps = async (obj: any) => {
+  const user = await obj.ctx.req.models.User.findOne({
+    where: {
+      id: obj.router.query.id
+    }
+  })
+  if (!user) {
+    return {
+      status: 404
+    }
+  }
   const page = get(obj, "ctx.req.query.page", 1);
   const limit = get(obj, "ctx.req.query.limit", 20);
   let offset = limit * (page - 1);
@@ -138,11 +147,15 @@ MyProfile.getInitialProps = async (obj: AppContext) => {
     {
       limit,
       offset,
+      where: {
+        userId: user.id
+      }
     },
     get(obj, "ctx.req.sequelize", null)
   );
 
   return {
+    user,
     containers: {
       containers,
       pagination: {

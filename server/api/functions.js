@@ -1,4 +1,4 @@
-const saveContainer =  async(container, database) => {
+const saveContainer =  async(container, database, user) => {
   let item;
   if (container.id) {
     item = await database.models.container.findOne({
@@ -14,10 +14,18 @@ const saveContainer =  async(container, database) => {
       }
     }
     item = await item.update({
-      ...container
+      ...container,
+      is_private: container.is_private ? 1 : 0,
+      html_snippet: container.html_snippet ? 1 : 0
     })
   }else {
-    item = await database.models.container.create(container);
+    item = await database.models.container.create({
+      ...container,
+      is_private: container.is_private ? 1 : 0,
+      html_snippet: container.html_snippet ? 1 : 0,
+      title: container.title || `Untitled container ${user && user.name}`,
+      userId: user.id,
+    });
   }
   return {
     status: 200,
@@ -37,15 +45,7 @@ const findContainers = async (obj, database) => {
     offset: +obj.offset,
     limit: +obj.limit,
     where: obj.where || {},
-    include: [
-      {
-        model: database.models.container_asset,
-        attributes: ["id", "url", "name", "version"],
-      },
-      {
-        model: database.models.container_invite,
-      },
-    ],
+    order: [["id","desc"]]
   });
 };
 

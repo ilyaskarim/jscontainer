@@ -8,20 +8,23 @@ import { EventBus } from "../utils/eventBus";
 import { saveContainer } from "../services";
 import toast from "react-hot-toast";
 import Preview from "./Preview";
+import { Router, useRouter } from "next/dist/client/router";
 
 let timeout: any;
 
 export default function Container(props: any) {
+  const router = useRouter();
+  const [tab, setTab] = useState("html");
   const [containerLocal, setContainerLocal] = useState({
     id: null,
     html: "",
     slug: "",
     css: "",
     javascript: "",
-    title: "",
+    title: '',
     description: "",
-    html_5_snippet: false,
-    private: false,
+    html_snippet: false,
+    is_private: false,
     access: [],
     assets: [],
   });
@@ -65,8 +68,14 @@ export default function Container(props: any) {
     EventBus.$off("saveContainer");
     EventBus.$on("saveContainer", () => {
       saveContainer(containerLocal)
-        .then(() => {
-          toast.success("Container Saved");
+        .then((resp) => {
+          if (router.pathname === "/") {
+            const slug = resp.data.data.slug;
+            router.push(`/c/${slug}`);
+          }
+          toast.success("Container Saved",{
+            position: "bottom-center",
+          });
         })
         .catch((e) => {
           toast.error(e.message, {
@@ -83,7 +92,7 @@ export default function Container(props: any) {
   return (
     <>
       <Head>
-        <title>Untitled Container &middot; JS Container</title>
+        <title>{props?.container?.title || containerLocal.title || "Untitled Container"} &middot; JS Container</title>
       </Head>
       <div className="home-section">
         <div className="home-content">
@@ -114,12 +123,12 @@ export default function Container(props: any) {
               <div className="tab-header">
                 <ul>
                   <li>
-                    <a data-tab="html" className="tab-header-item" href="#">
+                    <a data-tab="html" onClick={() => setTab("html")} className="tab-header-item" href="#">
                       Html
                     </a>
                   </li>
                   <li>
-                    <a data-tab="css" className="tab-header-item" href="#">
+                    <a data-tab="css" onClick={() => setTab("css")}  className="tab-header-item" href="#">
                       Css
                     </a>
                   </li>
@@ -127,6 +136,7 @@ export default function Container(props: any) {
                     <a
                       data-tab="javascript"
                       className="tab-header-item"
+                      onClick={() => setTab("javascript")}
                       href="#"
                     >
                       Javascript
@@ -136,7 +146,7 @@ export default function Container(props: any) {
               </div>
               <div className="tab-content">
                 <div className="tab-content-item" data-tab-content="html">
-                  <Editor
+                  {tab === "html" && <Editor
                     height="calc(100vh - 280px)"
                     loading="Loading editor please wait."
                     options={{
@@ -151,15 +161,17 @@ export default function Container(props: any) {
                         ...containerLocal,
                         html: e,
                       });
-                      clearTimeout(timeout);
-                      timeout = setTimeout(() => {
-                        EventBus.$emit("saveContainer");
-                      }, 1100);
+                      if (containerLocal.id) {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                          EventBus.$emit("saveContainer");
+                        }, 1100);
+                      }
                     }}
-                  />
+                  />}
                 </div>
                 <div className="tab-content-item" data-tab-content="css">
-                  <Editor
+                  {tab === "css" && <Editor
                     height="calc(100vh - 280px)"
                     loading="Loading editor please wait."
                     options={{
@@ -174,15 +186,17 @@ export default function Container(props: any) {
                         ...containerLocal,
                         css: e,
                       });
-                      clearTimeout(timeout);
-                      timeout = setTimeout(() => {
-                        EventBus.$emit("saveContainer");
-                      }, 1100);
+                      if (containerLocal.id) {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                          EventBus.$emit("saveContainer");
+                        }, 1100);
+                      }
                     }}
-                  />
+                  />}
                 </div>
                 <div className="tab-content-item" data-tab-content="javascript">
-                  <Editor
+                  {tab ==="javascript" && <Editor
                     height="calc(100vh - 280px)"
                     loading="Loading editor please wait."
                     options={{
@@ -197,12 +211,14 @@ export default function Container(props: any) {
                         ...containerLocal,
                         javascript: e,
                       });
-                      clearTimeout(timeout);
-                      timeout = setTimeout(() => {
-                        EventBus.$emit("saveContainer");
-                      }, 1100);
+                      if (containerLocal.id) {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                          EventBus.$emit("saveContainer");
+                        }, 1100);
+                      }
                     }}
-                  />
+                  />}
                 </div>
               </div>
             </div>

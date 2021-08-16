@@ -27,6 +27,7 @@ import { Provider, useDispatch } from "react-redux";
 import store from "../Redux/store";
 import { setCurrentUser } from "../Redux/user.reducer";
 import { get } from "lodash";
+import NotFound from "./404";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       );
     }
   }, []);
+
   return (
     <div>
       <Head>
@@ -86,13 +88,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <div className={""}>
         <Navbar></Navbar>
-        <div
+        {pageProps.status === 404? <NotFound></NotFound> : <div
           className={`app-container ${
             router.route === "/" ? "container-page" : ""
           }`}
         >
           <Component {...pageProps} />
-        </div>
+        </div> }
         {router.route !== "/" && router.route.startsWith("/c/") === false ? (
           <Footer></Footer>
         ) : (

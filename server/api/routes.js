@@ -124,7 +124,6 @@ exports.default = function (server) {
               css.push(`<link rel="stylesheet" href="${url}">`);
             }
           });
-          console.log(assets)
         res.send(`
         <!DOCTYPE html>
         <html lang="en">
@@ -157,7 +156,7 @@ exports.default = function (server) {
     server.post("/api/container/save", async (req, res) => {
       try {
         const body = req.body;
-        const save= await saveContainer(req.body.container, req.sequelize)
+        const save= await saveContainer(req.body.container, req.sequelize, req.user)
         res.status(save.status).json(save);
       } catch (e) {
         console.log(e);
