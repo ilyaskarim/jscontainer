@@ -1,3 +1,4 @@
+// @ts-ignore
 import { EditText } from "react-edit-text";
 
 export default function () {

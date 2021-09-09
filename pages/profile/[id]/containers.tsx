@@ -5,12 +5,12 @@ import { getCurrentUser } from "../../../Redux/user.reducer";
 import Head from "next/head";
 
 import { AppContext } from "next/app";
-import { findContainers } from "../../../api/functions";
 import { get } from "lodash";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/dist/client/router";
 import classNames from "classnames";
 import ProfileSidebar from "../../../components/UI/ProfileSidebar";
+import { findContainers } from "../../../server/api/functions";
 
 export default function MyProfile(props: any) {
   const router = useRouter();
