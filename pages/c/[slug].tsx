@@ -18,12 +18,23 @@ export async function getServerSideProps(context: any) {
     },
   });
 
-  if (container.is_private === 1 || container.is_private === true  && userId !== container.userId ) {
+  if (!container) {
     return {
       props: {
-        status: 404
-      }
-    }
+        status: 404,
+      },
+    };
+  }
+
+  if (
+    container.is_private === 1 ||
+    (container.is_private === true && userId !== container.userId)
+  ) {
+    return {
+      props: {
+        status: 404,
+      },
+    };
   }
 
   return {

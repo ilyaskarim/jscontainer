@@ -15,13 +15,15 @@ let timeout: any;
 export default function Container(props: any) {
   const router = useRouter();
   const [tab, setTab] = useState("html");
+
+  const [hasChangedFields, setHasChangedFields] = useState(false);
   const [containerLocal, setContainerLocal] = useState({
     id: null,
     html: "",
     slug: "",
     css: "",
     javascript: "",
-    title: '',
+    title: "",
     description: "",
     html_snippet: false,
     is_private: false,
@@ -42,6 +44,7 @@ export default function Container(props: any) {
   }, []);
 
   const handleInputChange = (e: any) => {
+    setHasChangedFields(true);
     setContainerLocal({
       ...containerLocal,
       [e.target.name]: e.target.value,
@@ -67,32 +70,45 @@ export default function Container(props: any) {
   useEffect(() => {
     EventBus.$off("saveContainer");
     EventBus.$on("saveContainer", () => {
-      saveContainer(containerLocal)
-        .then((resp) => {
-          if (router.pathname === "/") {
-            const slug = resp.data.data.slug;
-            router.push(`/c/${slug}`);
-          }
-          toast.success("Container Saved",{
-            position: "bottom-center",
+      if (hasChangedFields) {
+        saveContainer(containerLocal)
+          .then((resp) => {
+            console.log(resp.data.redirect);
+            if (router.pathname === "/" || resp.data.redirect) {
+              const slug = resp.data.data.slug;
+              router.push(`/c/${slug}`);
+            }
+            toast.success("Container Saved", {
+              position: "bottom-center",
+            });
+
+            setHasChangedFields(false);
+          })
+          .catch((e) => {
+            toast.error(e.message, {
+              position: "bottom-center",
+            });
+          })
+          .finally(() => {
+            EventBus.$emit("saveContainerFinish");
+            EventBus.$emit("runContainer");
           });
-        })
-        .catch((e) => {
-          toast.error(e.message, {
-            position: "bottom-center",
-          });
-        })
-        .finally(() => {
-          EventBus.$emit("saveContainerFinish");
-          EventBus.$emit("runContainer");
-        });
+      } else {
+        toast("Please change something");
+        EventBus.$emit("saveContainerFinish");
+      }
     });
-  }, [containerLocal]);
+  }, [containerLocal, hasChangedFields]);
 
   return (
     <>
       <Head>
-        <title>{props?.container?.title || containerLocal.title || "Untitled Container"} &middot; JS Container</title>
+        <title>
+          {props?.container?.title ||
+            containerLocal.title ||
+            "Untitled Container"}{" "}
+          &middot; JS Container
+        </title>
       </Head>
       <div className="home-section">
         <div className="home-content">
@@ -123,12 +139,22 @@ export default function Container(props: any) {
               <div className="tab-header">
                 <ul>
                   <li>
-                    <a data-tab="html" onClick={() => setTab("html")} className="tab-header-item" href="#">
+                    <a
+                      data-tab="html"
+                      onClick={() => setTab("html")}
+                      className="tab-header-item"
+                      href="#"
+                    >
                       Html
                     </a>
                   </li>
                   <li>
-                    <a data-tab="css" onClick={() => setTab("css")}  className="tab-header-item" href="#">
+                    <a
+                      data-tab="css"
+                      onClick={() => setTab("css")}
+                      className="tab-header-item"
+                      href="#"
+                    >
                       Css
                     </a>
                   </li>
@@ -146,79 +172,88 @@ export default function Container(props: any) {
               </div>
               <div className="tab-content">
                 <div className="tab-content-item" data-tab-content="html">
-                  {tab === "html" && <Editor
-                    height="calc(100vh - 280px)"
-                    loading="Loading editor please wait."
-                    options={{
-                      minimap: {
-                        enabled: false,
-                      },
-                    }}
-                    defaultLanguage="html"
-                    defaultValue={containerLocal.html}
-                    onChange={(e: any) => {
-                      setContainerLocal({
-                        ...containerLocal,
-                        html: e,
-                      });
-                      if (containerLocal.id) {
-                        clearTimeout(timeout);
-                        timeout = setTimeout(() => {
-                          EventBus.$emit("saveContainer");
-                        }, 1100);
-                      }
-                    }}
-                  />}
+                  {tab === "html" && (
+                    <Editor
+                      height="calc(100vh - 280px)"
+                      loading="Loading editor please wait."
+                      options={{
+                        minimap: {
+                          enabled: false,
+                        },
+                      }}
+                      defaultLanguage="html"
+                      defaultValue={containerLocal.html}
+                      onChange={(e: any) => {
+                        setHasChangedFields(true);
+                        setContainerLocal({
+                          ...containerLocal,
+                          html: e,
+                        });
+                        if (containerLocal.id) {
+                          clearTimeout(timeout);
+                          timeout = setTimeout(() => {
+                            EventBus.$emit("saveContainer");
+                          }, 1100);
+                        }
+                      }}
+                    />
+                  )}
                 </div>
                 <div className="tab-content-item" data-tab-content="css">
-                  {tab === "css" && <Editor
-                    height="calc(100vh - 280px)"
-                    loading="Loading editor please wait."
-                    options={{
-                      minimap: {
-                        enabled: false,
-                      },
-                    }}
-                    defaultLanguage="css"
-                    defaultValue={containerLocal.css}
-                    onChange={(e: any) => {
-                      setContainerLocal({
-                        ...containerLocal,
-                        css: e,
-                      });
-                      if (containerLocal.id) {
-                        clearTimeout(timeout);
-                        timeout = setTimeout(() => {
-                          EventBus.$emit("saveContainer");
-                        }, 1100);
-                      }
-                    }}
-                  />}
+                  {tab === "css" && (
+                    <Editor
+                      height="calc(100vh - 280px)"
+                      loading="Loading editor please wait."
+                      options={{
+                        minimap: {
+                          enabled: false,
+                        },
+                      }}
+                      defaultLanguage="css"
+                      defaultValue={containerLocal.css}
+                      onChange={(e: any) => {
+                        setHasChangedFields(true);
+                        setContainerLocal({
+                          ...containerLocal,
+                          css: e,
+                        });
+                        if (containerLocal.id) {
+                          clearTimeout(timeout);
+                          timeout = setTimeout(() => {
+                            EventBus.$emit("saveContainer");
+                          }, 1100);
+                        }
+                      }}
+                    />
+                  )}
                 </div>
                 <div className="tab-content-item" data-tab-content="javascript">
-                  {tab ==="javascript" && <Editor
-                    height="calc(100vh - 280px)"
-                    loading="Loading editor please wait."
-                    options={{
-                      minimap: {
-                        enabled: false,
-                      },
-                    }}
-                    defaultLanguage="javascript"
-                    defaultValue={containerLocal.javascript}
-                    onChange={(e: any) => {
-                      setContainerLocal({
-                        ...containerLocal,
-                        javascript: e,
-                      });
-                      if (containerLocal.id) {
-                        clearTimeout(timeout);
-                        timeout = setTimeout(() => {
-                          EventBus.$emit("saveContainer");
-                        }, 1100);
-                      }
-                    }}
-                  />}
+                  {tab === "javascript" && (
+                    <Editor
+                      height="calc(100vh - 280px)"
+                      loading="Loading editor please wait."
+                      options={{
+                        minimap: {
+                          enabled: false,
+                        },
+                      }}
+                      defaultLanguage="javascript"
+                      defaultValue={containerLocal.javascript}
+                      onChange={(e: any) => {
+                        setHasChangedFields(true);
+                        setContainerLocal({
+                          ...containerLocal,
+                          javascript: e,
+                        });
+                        if (containerLocal.id) {
+                          clearTimeout(timeout);
+                          timeout = setTimeout(() => {
+                            EventBus.$emit("saveContainer");
+                          }, 1100);
+                        }
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             </div>
@@ -250,6 +285,7 @@ export default function Container(props: any) {
                   <Assets
                     assets={containerLocal.assets}
                     onChange={(links: any) => {
+                      setHasChangedFields(true);
                       setContainerLocal({
                         ...containerLocal,
                         assets: links,
@@ -264,6 +300,9 @@ export default function Container(props: any) {
                   <Settings
                     containerLocal={containerLocal}
                     setContainerLocal={setContainerLocal}
+                    onChange={() => {
+                      setHasChangedFields(true);
+                    }}
                   ></Settings>
                 </div>
               </div>

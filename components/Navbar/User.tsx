@@ -1,8 +1,5 @@
-import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
-import { NextPageContext } from "next";
+import { Menu, MenuItem } from "@szhsin/react-menu";
 import { useRouter } from "next/dist/client/router";
-
-import Link from "next/link";
 import { useState } from "react";
 
 import Modal from "../../components/UI/InviteModal";

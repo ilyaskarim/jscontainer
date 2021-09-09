@@ -99,8 +99,7 @@ exports.default = function (server) {
           where: {
             slug: req.params.slug,
           },
-          include: [
-          ],
+          include: [],
         });
         if (!container) {
           res.status(404).send("Container not found");
@@ -111,10 +110,11 @@ exports.default = function (server) {
           });
           return;
         }
-        const assets = JSON.parse(container.assets)
+        const assets = JSON.parse(container.assets);
         const css = [];
         const js = [];
-        assets && assets.forEach((url) => {
+        assets &&
+          assets.forEach((url) => {
             if (!url) {
               return;
             }
@@ -156,7 +156,11 @@ exports.default = function (server) {
     server.post("/api/container/save", async (req, res) => {
       try {
         const body = req.body;
-        const save= await saveContainer(req.body.container, req.sequelize, req.user)
+        const save = await saveContainer(
+          req.body.container,
+          req.sequelize,
+          req.user
+        );
         res.status(save.status).json(save);
       } catch (e) {
         console.log(e);

@@ -74,7 +74,7 @@ const Container = sequelize.define("container", {
   is_private: DataTypes.BOOLEAN,
   html_snippet: DataTypes.BOOLEAN,
   slug: DataTypes.STRING,
-  forkedFrom: DataTypes.INTEGER,
+  forkedFrom: DataTypes.STRING,
 });
 
 User.hasMany(Container);

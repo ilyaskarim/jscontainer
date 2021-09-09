@@ -28,6 +28,7 @@ import store from "../Redux/store";
 import { setCurrentUser } from "../Redux/user.reducer";
 import { get } from "lodash";
 import NotFound from "./404";
+import { setStatus } from "../Redux/app.reducer";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         })
       );
     }
+    dispatch(setStatus(pageProps.status || 200));
   }, []);
 
   return (
@@ -88,13 +90,17 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <div className={""}>
         <Navbar></Navbar>
-        {pageProps.status === 404? <NotFound></NotFound> : <div
-          className={`app-container ${
-            router.route === "/" ? "container-page" : ""
-          }`}
-        >
-          <Component {...pageProps} />
-        </div> }
+        {pageProps.status === 404 ? (
+          <NotFound></NotFound>
+        ) : (
+          <div
+            className={`app-container ${
+              router.route === "/" ? "container-page" : ""
+            }`}
+          >
+            <Component {...pageProps} />
+          </div>
+        )}
         {router.route !== "/" && router.route.startsWith("/c/") === false ? (
           <Footer></Footer>
         ) : (

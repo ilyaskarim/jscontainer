@@ -1,37 +1,48 @@
-const saveContainer =  async(container, database, user) => {
+const randomstring = require("randomstring");
+const { omit } = require("lodash");
+
+const saveContainer = async (container, database, user) => {
+  let redirect = true;
   let item;
-  if (container.id) {
+  if (container.id && user && container.userId === user.id) {
     item = await database.models.container.findOne({
       where: {
-        slug: container.slug
-      }
-    })
+        slug: container.slug,
+      },
+    });
     if (!item) {
       return {
         status: 404,
         message: "No container found",
-        data: {}
-      }
+        data: {},
+      };
     }
     item = await item.update({
       ...container,
       is_private: container.is_private ? 1 : 0,
-      html_snippet: container.html_snippet ? 1 : 0
-    })
-  }else {
+      html_snippet: container.html_snippet ? 1 : 0,
+    });
+    redirect = false;
+  } else {
     item = await database.models.container.create({
-      ...container,
+      ...omit(container, ["id"]),
       is_private: container.is_private ? 1 : 0,
       html_snippet: container.html_snippet ? 1 : 0,
-      title: container.title || `Untitled container ${user && user.name}`,
-      userId: user.id,
+      title: container.title || `Untitled container ${user ? user.name : ""}`,
+      userId: user && user.id,
+      forkedFrom: container.id,
+      slug: randomstring.generate({
+        length: 14,
+        charset: "asdfghzxc12345679ia89sda8d9ad89",
+      }),
     });
   }
   return {
     status: 200,
-    message: "Container created",
-    data: item
-  }
+    message: "Container saved",
+    data: item,
+    redirect: redirect,
+  };
 };
 const addAsset = (obj, database) => {};
 const removeAsset = (obj, database) => {};
@@ -45,7 +56,7 @@ const findContainers = async (obj, database) => {
     offset: +obj.offset,
     limit: +obj.limit,
     where: obj.where || {},
-    order: [["id","desc"]]
+    order: [["id", "desc"]],
   });
 };
 

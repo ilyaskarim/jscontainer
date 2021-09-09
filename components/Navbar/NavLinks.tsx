@@ -14,7 +14,7 @@ export default function NavLink() {
           Terms and Condition
         </a>
       </li>
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <a
           className={`nav-link link ${
             router.route.includes("playgrounds") ? "active" : ""
@@ -23,7 +23,7 @@ export default function NavLink() {
         >
           Playgrounds
         </a>
-      </li>
+      </li> */}
       <li className="nav-item">
         <a
           className={`nav-link link ${
