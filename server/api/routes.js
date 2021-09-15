@@ -124,6 +124,13 @@ exports.default = function (server) {
               css.push(`<link rel="stylesheet" href="${url}">`);
             }
           });
+        const byDefaultCSS = `
+            <style>
+              body {
+                margin: 0
+              }
+            </style>
+          `;
         const html_snippet = !!container.html_snippet;
 
         if (html_snippet) {
@@ -136,6 +143,7 @@ exports.default = function (server) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>${container.title}</title>
             <meta name="description" content="${container.description}">
+            ${byDefaultCSS}
             ${css.join("\n")}
         </head>
         <style>
@@ -152,6 +160,7 @@ exports.default = function (server) {
         `);
         } else {
           res.send(`
+          ${byDefaultCSS}
           ${css.join("\n")}
           <style>
           ${container.css}

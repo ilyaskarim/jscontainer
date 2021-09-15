@@ -5,8 +5,8 @@
   .home-content {
     display: flex;
     flex-direction: column;
-    width: 50%;
     border-right: 1px solid #ececec;
+    width: 100%;
   }
   .tabs {
     position: relative;
@@ -122,9 +122,12 @@
 
   .row1 {
     display: flex;
-    width: 50%;
     flex-direction: column;
+    width: 100%;
     // height: calc(100vh - 172px);
+  }
+  .preview-section {
+    padding: 0;
   }
   .code-section {
     // height: calc(100vh - 45px);

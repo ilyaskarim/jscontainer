@@ -16,7 +16,7 @@ import "../scss/app/profile.scss";
 import "../scss/app/dropdown.scss";
 import "../scss/app/containerItem.scss";
 import "../scss/app/containerNotFound.scss";
-import "monaco-editor/esm/vs/base/browser/ui/actionbar/actionbar.css";
+// import "monaco-editor/esm/vs/base/browser/ui/actionbar/actionbar.css";
 import Head from "next/head";
 import { useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";

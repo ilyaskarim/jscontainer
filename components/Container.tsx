@@ -9,6 +9,7 @@ import { saveContainer } from "../services";
 import toast from "react-hot-toast";
 import Preview from "./Preview";
 import { Router, useRouter } from "next/dist/client/router";
+import interact from "interactjs";
 
 let timeout: any;
 
@@ -31,6 +32,28 @@ export default function Container(props: any) {
     assets: [],
   });
 
+  const handleResize = () => {
+    interact(".resizable").resizable({
+      edges: { top: true, left: true, bottom: true, right: true },
+      listeners: {
+        move: function (event: any) {
+          let { x, y } = event.target.dataset;
+
+          x = (parseFloat(x) || 0) + event.deltaRect.left;
+          y = (parseFloat(y) || 0) + event.deltaRect.top;
+
+          Object.assign(event.target.style, {
+            width: `${event.rect.width}px`,
+            height: `${event.rect.height}px`,
+            transform: `translate(${x}px, ${y}px)`,
+          });
+
+          Object.assign(event.target.dataset, { x, y });
+        },
+      },
+    });
+  };
+
   useEffect(() => {
     Tabs(".tabs-language", {
       byDefaultTab: "html",
@@ -41,6 +64,8 @@ export default function Container(props: any) {
       byDefaultTab: "assets",
       onChange: () => {},
     });
+
+    handleResize();
   }, []);
 
   const handleInputChange = (e: any) => {
@@ -110,7 +135,7 @@ export default function Container(props: any) {
         </title>
       </Head>
       <div className="home-section">
-        <div className="home-content">
+        <div className="home-content resizable">
           <div className="form-section  section-comn-pd">
             <form action="" onSubmit={(e) => handleSubmit(null)}>
               <input
@@ -307,7 +332,7 @@ export default function Container(props: any) {
               </div>
             </div>
           </div>
-          <div className="code-section section-comn-pd ">
+          <div className="code-section preview-section section-comn-pd ">
             <div className="preview-frame">
               <Preview containerLocal={containerLocal}></Preview>
             </div>
