@@ -47,7 +47,10 @@ exports.handleGithubAuth = (passport, GitHubStrategy) => {
       {
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/github/callback",
+        callbackURL:
+          process.env.NODE_ENV === "local"
+            ? "http://localhost:3000/auth/github/callback"
+            : "http://jscontainer.com/auth/github/callback",
         scope: "user:email",
         passReqToCallback: true,
       },
