@@ -8,7 +8,7 @@ exports.handleGoogleAuth = (passport, GoogleStrategy) => {
         callbackURL:
           process.env.NODE_ENV === "local"
             ? "http://localhost:3000/auth/google/callback"
-            : "http://jscontainer.com/auth/google/callback",
+            : "https://jscontainer.com/auth/google/callback",
         passReqToCallback: true,
       },
       async function (req, accessToken, refreshToken, profile, done) {
@@ -52,7 +52,7 @@ exports.handleGithubAuth = (passport, GitHubStrategy) => {
         callbackURL:
           process.env.NODE_ENV === "local"
             ? "http://localhost:3000/auth/github/callback"
-            : "http://jscontainer.com/auth/github/callback",
+            : "https://jscontainer.com/auth/github/callback",
         scope: "user:email",
         passReqToCallback: true,
       },
