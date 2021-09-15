@@ -1,4 +1,5 @@
 exports.handleGoogleAuth = (passport, GoogleStrategy) => {
+  console.log("doing google login request: ", process.env.NODE_ENV);
   passport.use(
     new GoogleStrategy(
       {
@@ -42,6 +43,7 @@ exports.handleGoogleAuth = (passport, GoogleStrategy) => {
 };
 
 exports.handleGithubAuth = (passport, GitHubStrategy) => {
+  console.log("doing github login request: ", process.env.NODE_ENV);
   passport.use(
     new GitHubStrategy(
       {
