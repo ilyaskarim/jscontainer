@@ -1,3 +1,4 @@
+import { BelongsTo } from "sequelize/types";
 import Button from "../UI/Button";
 
 export default function (props: any) {
@@ -6,10 +7,7 @@ export default function (props: any) {
     <>
       <a href={blog.link} target="_blank" className={"blog-card"}>
         <div className="blog-card-img">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8-L1uiqV4WjiQ3kOa5s3DLLoNJWCN7hmwuw&usqp=CAU"
-            alt=""
-          />
+          <img src={blog.image} alt="" />
         </div>
         <div className="card-content">
           <span className="tags">

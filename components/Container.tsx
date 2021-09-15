@@ -25,7 +25,7 @@ export default function Container(props: any) {
     javascript: "",
     title: "",
     description: "",
-    html_snippet: false,
+    html_snippet: true,
     is_private: false,
     access: [],
     assets: [],
@@ -73,7 +73,6 @@ export default function Container(props: any) {
       if (hasChangedFields) {
         saveContainer(containerLocal)
           .then((resp) => {
-            console.log(resp.data.redirect);
             if (router.pathname === "/" || resp.data.redirect) {
               const slug = resp.data.data.slug;
               router.push(`/c/${slug}`);

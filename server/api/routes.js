@@ -124,7 +124,10 @@ exports.default = function (server) {
               css.push(`<link rel="stylesheet" href="${url}">`);
             }
           });
-        res.send(`
+        const html_snippet = !!container.html_snippet;
+
+        if (html_snippet) {
+          res.send(`
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -147,6 +150,21 @@ exports.default = function (server) {
         </script>
         </html>
         `);
+        } else {
+          res.send(`
+          ${css.join("\n")}
+          <style>
+          ${container.css}
+      </style>
+      <body>
+          ${container.html}
+      </body>
+      ${js.join("\n")}
+      <script>
+          ${container.javascript}
+      </script>
+          `);
+        }
       } catch (e) {
         console.log(e);
         res.status(500).send(e.message);

@@ -38,8 +38,8 @@ function User(props: any) {
     {
       name: currentUser.name,
       path: "/profiile",
-      userName: currentUser.google_displayName,
-      userImage: currentUser.google_photo,
+      userName: currentUser.name,
+      userImage: currentUser.github_photo || currentUser.google_photo,
       user: true,
     },
     {

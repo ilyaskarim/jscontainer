@@ -13,11 +13,15 @@ export default function () {
 
   const filtered = () => {
     if (filter === "all") {
-      return Blogs;
+      return Blogs.map((value) => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
     } else if (filter === "wapgee") {
       return Blogs.filter((blog) => blog.site.includes("wapgee"));
     } else if (filter === "css-tricks") {
       return Blogs.filter((blog) => blog.site.includes("css-tricks"));
+    } else if (filter === "medium") {
+      return Blogs.filter((blog) => blog.site.includes("medium"));
     }
   };
 
@@ -68,6 +72,17 @@ export default function () {
           onClick={() => setFilter("css-tricks")}
         >
           CSS Tricks
+        </button>
+        <button
+          type="button"
+          className={classnames({
+            btn: true,
+            "btn-primary": filter === "medium",
+            "btn-light": filter !== "medium",
+          })}
+          onClick={() => setFilter("medium")}
+        >
+          Medium
         </button>
       </div>
       <div className="blog-content">
