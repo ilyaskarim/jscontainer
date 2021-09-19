@@ -2,6 +2,7 @@
 node_modules
 .pnp
 .pnp.js
+migrations/node_modules
 
 # testing
 coverage
@@ -31,3 +32,4 @@ yarn-error.log*
 # vercel
 .vercel
 .env
+migrations/.env
