@@ -54,6 +54,15 @@ export default function Container(props: any) {
     });
   };
 
+  const handleSave = () => {
+    window.addEventListener("keydown", (e) => {
+      if ((e.key === "s" && e.metaKey) || e.ctrlKey) {
+        e.preventDefault();
+        EventBus.$emit("saveContainer");
+      }
+    });
+  };
+
   useEffect(() => {
     Tabs(".tabs-language", {
       byDefaultTab: "html",
@@ -65,6 +74,7 @@ export default function Container(props: any) {
       onChange: () => {},
     });
 
+    handleSave();
     handleResize();
   }, []);
 
@@ -77,9 +87,7 @@ export default function Container(props: any) {
   };
 
   const handleSubmit = (e: any | null) => {
-    if (e) {
-      e.preventDefault();
-    }
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -137,7 +145,7 @@ export default function Container(props: any) {
       <div className="home-section">
         <div className="home-content resizable">
           <div className="form-section  section-comn-pd">
-            <form action="" onSubmit={(e) => handleSubmit(null)}>
+            <form action="" onSubmit={(e) => handleSubmit(e)}>
               <input
                 type="text"
                 name="title"
@@ -334,6 +342,41 @@ export default function Container(props: any) {
           </div>
           <div className="code-section preview-section section-comn-pd ">
             <div className="preview-frame">
+              {process.browser && containerLocal.slug && (
+                <div className="preview-header">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="preview"
+                    value={`${window.location.host}/preview/${containerLocal.slug}`}
+                  />
+                  <div className="actions">
+                    <button
+                      className="btn btn-light btn-sm mr-2"
+                      title="Copy Link"
+                      onClick={() => {
+                        window.navigator.clipboard.writeText(
+                          `${window.location.host}/preview/${containerLocal.slug}`
+                        );
+                        toast.success("Link copied to clipboard", {
+                          position: "bottom-center",
+                        });
+                      }}
+                    >
+                      <i className="mdi mdi-content-copy"></i>
+                    </button>
+                    <button
+                      className="btn btn-light btn-sm"
+                      title="Run"
+                      onClick={() => {
+                        EventBus.$emit("runContainer");
+                      }}
+                    >
+                      <i className="mdi mdi-refresh"></i>
+                    </button>
+                  </div>
+                </div>
+              )}
               <Preview containerLocal={containerLocal}></Preview>
             </div>
           </div>
