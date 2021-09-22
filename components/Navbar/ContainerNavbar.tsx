@@ -21,7 +21,9 @@ export default function () {
       <div className="list_left">
         <Brand></Brand>
         {status === 200 && (
-          <>
+          <>{EventBus.$on() &&
+
+          
             <a
               className="primary-clr link"
               href="#"
@@ -30,7 +32,7 @@ export default function () {
               }}
             >
               Run
-            </a>
+            </a>}
             <Button
               className="btn btn-primary btn-sm custom-btn"
               loading={loading}

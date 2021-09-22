@@ -1,7 +1,13 @@
 .home-section {
   display: flex;
   height: calc(100vh - 45px);
+  // .margin-view-overlays {
 
+  //   background-color: #f6f6f6;
+  // }
+  // .monaco-editor, .monaco-editor-background, .monaco-editor .inputarea.ime-input {
+  //   background-color: inherit;
+  // }
   .home-content {
     display: flex;
     flex-direction: column;
@@ -138,8 +144,15 @@
         height: 95%;
       }
     }
+    ul li {
+      display: flex;
+      align-items: center;
+
+    }
   }
   .tab-header {
+    display: flex;
+    justify-content: space-between;
     ul {
       display: flex;
       padding: 0;

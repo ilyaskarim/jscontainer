@@ -3,6 +3,7 @@ import Tabs from "./../utils/tabs";
 import Editor from "@monaco-editor/react";
 import Assets from "./Container/Assets";
 import Settings from "./Container/Settings";
+import Modal from "./UI/InviteModal";
 import Head from "next/head";
 import { EventBus } from "../utils/eventBus";
 import { saveContainer } from "../services";
@@ -10,13 +11,16 @@ import toast from "react-hot-toast";
 import Preview from "./Preview";
 import { Router, useRouter } from "next/dist/client/router";
 import interact from "interactjs";
+import Icon from "./Icons/SvgIcons";
+import Brand from "./Navbar/Brand";
 
 let timeout: any;
 
 export default function Container(props: any) {
   const router = useRouter();
   const [tab, setTab] = useState("html");
-
+  const [open, setOpen] = useState(false);
+  
   const [hasChangedFields, setHasChangedFields] = useState(false);
   const [containerLocal, setContainerLocal] = useState({
     id: null,
@@ -28,7 +32,7 @@ export default function Container(props: any) {
     description: "",
     html_snippet: true,
     is_private: false,
-    access: [],
+    // access: [],
     assets: [],
   });
 
@@ -56,7 +60,7 @@ export default function Container(props: any) {
 
   const handleSave = () => {
     window.addEventListener("keydown", (e) => {
-      if ((e.key === "s" && e.metaKey) || e.ctrlKey) {
+      if ((e.key === "s" && e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         EventBus.$emit("saveContainer");
       }
@@ -66,12 +70,12 @@ export default function Container(props: any) {
   useEffect(() => {
     Tabs(".tabs-language", {
       byDefaultTab: "html",
-      onChange: () => {},
+      onChange: () => { },
     });
 
     Tabs(".tabs-menu", {
       byDefaultTab: "assets",
-      onChange: () => {},
+      onChange: () => { },
     });
 
     handleSave();
@@ -91,11 +95,12 @@ export default function Container(props: any) {
   };
 
   useEffect(() => {
+    console.log(props)
     if (props.container) {
       setContainerLocal({
         ...props.container,
         assets: JSON.parse(props.container.assets),
-        access: JSON.parse(props.container.access),
+        // access: JSON.parse(props.container.access),
       });
     }
   }, [props]);
@@ -167,7 +172,7 @@ export default function Container(props: any) {
             </form>
           </div>
           <div className="code-section section-comn-pd">
-            <div className="tabs bg-gray tabs-language">
+            <div className="tabs tabs-language">
               <div className="tab-header">
                 <ul>
                   <li>
@@ -190,6 +195,7 @@ export default function Container(props: any) {
                       Css
                     </a>
                   </li>
+
                   <li>
                     <a
                       data-tab="javascript"
@@ -201,6 +207,28 @@ export default function Container(props: any) {
                     </a>
                   </li>
                 </ul>
+                <a
+                  className="tab-header-item mr-0 border-bottom-transparent"
+                  onClick={() => setOpen(true)}
+                >
+                  <Icon settings="settings" />
+                </a>
+                <Modal
+                  className="assets-modal invite-modal"
+                  isOpen={open}
+                  onRequestClose={() => setOpen(false)}
+                  style={{
+                    content: {
+                      maxHeight: "100px",
+                      maxWidth: "335px",
+                      overflow: "hidden",
+                      display: 'flex',
+                      justifyContent: 'center',
+                    },
+                  }}
+                >
+                   <p className="h6 fw-bolder">For more please check <Brand></Brand></p>
+                </Modal>
               </div>
               <div className="tab-content">
                 <div className="tab-content-item" data-tab-content="html">
