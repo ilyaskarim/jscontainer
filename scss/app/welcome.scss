@@ -149,6 +149,9 @@
       align-items: center;
 
     }
+    .setting-icon:hover {
+      cursor: pointer;
+    }
   }
   .tab-header {
     display: flex;

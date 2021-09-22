@@ -208,7 +208,7 @@ export default function Container(props: any) {
                   </li>
                 </ul>
                 <a
-                  className="tab-header-item mr-0 border-bottom-transparent"
+                  className="tab-header-item mr-0 setting-icon border-bottom-transparent"
                   onClick={() => setOpen(true)}
                 >
                   <Icon settings="settings" />
