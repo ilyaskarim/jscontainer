@@ -2,28 +2,32 @@ import Button from "../UI/Button";
 import User from "./User";
 import Brand from "./Brand";
 import NavLink from "./NavLinks";
-import { saveContainer } from "../../services";
-import { useState } from "react";
 import { EventBus } from "../../utils/eventBus";
-import { useSelector } from "react-redux";
-import { getStatus } from "../../Redux/app.reducer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getContainerData,
+  getHasChangedFields,
+  getSavingContainer,
+  getStatus,
+  saveContainerIntoDB,
+  setHasChangedFields,
+  setSavingContainer,
+} from "../../Redux/app.reducer";
+import toast from "react-hot-toast";
 
 export default function () {
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector(getSavingContainer);
+  const containerData = useSelector(getContainerData);
   const status = useSelector(getStatus);
-
-  EventBus.$on("saveContainerFinish", () => {
-    setLoading(false);
-  });
+  const hasChangedFields = useSelector(getHasChangedFields);
+  const dispatch = useDispatch();
 
   return (
     <>
       <div className="list_left">
         <Brand></Brand>
         {status === 200 && (
-          <>{EventBus.$on() &&
-
-          
+          <>
             <a
               className="primary-clr link"
               href="#"
@@ -32,13 +36,22 @@ export default function () {
               }}
             >
               Run
-            </a>}
+            </a>
             <Button
               className="btn btn-primary btn-sm custom-btn"
               loading={loading}
               onClick={() => {
-                setLoading(true);
-                EventBus.$emit("saveContainer");
+                if (hasChangedFields) {
+                  dispatch(setSavingContainer(true));
+                  saveContainerIntoDB(containerData).finally(() => {
+                    dispatch(setSavingContainer(false));
+                    dispatch(setHasChangedFields(false));
+                  });
+                } else {
+                  toast("Please change something", {
+                    position: "bottom-center",
+                  });
+                }
               }}
             >
               Save

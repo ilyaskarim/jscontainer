@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Tabs from "./../utils/tabs";
 import Editor from "@monaco-editor/react";
 import Assets from "./Container/Assets";
@@ -6,13 +6,20 @@ import Settings from "./Container/Settings";
 import Modal from "./UI/InviteModal";
 import Head from "next/head";
 import { EventBus } from "../utils/eventBus";
-import { saveContainer } from "../services";
 import toast from "react-hot-toast";
 import Preview from "./Preview";
 import { Router, useRouter } from "next/dist/client/router";
 import interact from "interactjs";
 import Icon from "./Icons/SvgIcons";
 import Brand from "./Navbar/Brand";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getHasChangedFields,
+  saveContainerIntoDB,
+  setContainerData,
+  setHasChangedFields,
+  setSavingContainer,
+} from "../Redux/app.reducer";
 
 let timeout: any;
 
@@ -20,8 +27,9 @@ export default function Container(props: any) {
   const router = useRouter();
   const [tab, setTab] = useState("html");
   const [open, setOpen] = useState(false);
-  
-  const [hasChangedFields, setHasChangedFields] = useState(false);
+  const dispatch = useDispatch();
+  const hasChangedFields = useSelector(getHasChangedFields);
+
   const [containerLocal, setContainerLocal] = useState({
     id: null,
     html: "",
@@ -58,32 +66,48 @@ export default function Container(props: any) {
     });
   };
 
-  const handleSave = () => {
-    window.addEventListener("keydown", (e) => {
-      if ((e.key === "s" && e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        EventBus.$emit("saveContainer");
+  const handleCTRLSave = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() === "s") {
+        if (e.metaKey || e.ctrlKey) {
+          e.preventDefault();
+          clearTimeout(timeout);
+          timeout = setTimeout(() => {
+            if (hasChangedFields) {
+              dispatch(setSavingContainer(true));
+              saveContainerIntoDB(containerLocal).finally(() => {
+                dispatch(setSavingContainer(false));
+                dispatch(setHasChangedFields(false));
+              });
+            } else {
+              toast("Please change something", {
+                position: "bottom-center",
+              });
+              EventBus.$emit("saveContainerFinish");
+            }
+          }, 300);
+        }
       }
-    });
-  };
+    },
+    [containerLocal, hasChangedFields]
+  );
 
   useEffect(() => {
     Tabs(".tabs-language", {
       byDefaultTab: "html",
-      onChange: () => { },
+      onChange: () => {},
     });
 
     Tabs(".tabs-menu", {
       byDefaultTab: "assets",
-      onChange: () => { },
+      onChange: () => {},
     });
 
-    handleSave();
     handleResize();
   }, []);
 
   const handleInputChange = (e: any) => {
-    setHasChangedFields(true);
+    dispatch(setHasChangedFields(true));
     setContainerLocal({
       ...containerLocal,
       [e.target.name]: e.target.value,
@@ -95,47 +119,22 @@ export default function Container(props: any) {
   };
 
   useEffect(() => {
-    console.log(props)
     if (props.container) {
       setContainerLocal({
         ...props.container,
         assets: JSON.parse(props.container.assets),
-        // access: JSON.parse(props.container.access),
       });
     }
   }, [props]);
 
   useEffect(() => {
-    EventBus.$off("saveContainer");
-    EventBus.$on("saveContainer", () => {
-      if (hasChangedFields) {
-        saveContainer(containerLocal)
-          .then((resp) => {
-            if (router.pathname === "/" || resp.data.redirect) {
-              const slug = resp.data.data.slug;
-              router.push(`/c/${slug}`);
-            }
-            toast.success("Container Saved", {
-              position: "bottom-center",
-            });
+    dispatch(setContainerData(containerLocal));
+    window.addEventListener("keydown", handleCTRLSave);
 
-            setHasChangedFields(false);
-          })
-          .catch((e) => {
-            toast.error(e.message, {
-              position: "bottom-center",
-            });
-          })
-          .finally(() => {
-            EventBus.$emit("saveContainerFinish");
-            EventBus.$emit("runContainer");
-          });
-      } else {
-        toast("Please change something");
-        EventBus.$emit("saveContainerFinish");
-      }
-    });
-  }, [containerLocal, hasChangedFields]);
+    return () => {
+      window.removeEventListener("keydown", handleCTRLSave);
+    };
+  }, [containerLocal, hasChangedFields, hasChangedFields]);
 
   return (
     <>
@@ -222,12 +221,14 @@ export default function Container(props: any) {
                       maxHeight: "100px",
                       maxWidth: "335px",
                       overflow: "hidden",
-                      display: 'flex',
-                      justifyContent: 'center',
+                      display: "flex",
+                      justifyContent: "center",
                     },
                   }}
                 >
-                   <p className="h6 fw-bolder">For more please check <Brand></Brand></p>
+                  <p className="h6 fw-bolder">
+                    For more please check <Brand></Brand>
+                  </p>
                 </Modal>
               </div>
               <div className="tab-content">
@@ -244,7 +245,7 @@ export default function Container(props: any) {
                       defaultLanguage="html"
                       defaultValue={containerLocal.html}
                       onChange={(e: any) => {
-                        setHasChangedFields(true);
+                        dispatch(setHasChangedFields(true));
                         setContainerLocal({
                           ...containerLocal,
                           html: e,
@@ -272,7 +273,7 @@ export default function Container(props: any) {
                       defaultLanguage="css"
                       defaultValue={containerLocal.css}
                       onChange={(e: any) => {
-                        setHasChangedFields(true);
+                        dispatch(setHasChangedFields(true));
                         setContainerLocal({
                           ...containerLocal,
                           css: e,
@@ -300,7 +301,7 @@ export default function Container(props: any) {
                       defaultLanguage="javascript"
                       defaultValue={containerLocal.javascript}
                       onChange={(e: any) => {
-                        setHasChangedFields(true);
+                        dispatch(setHasChangedFields(true));
                         setContainerLocal({
                           ...containerLocal,
                           javascript: e,
@@ -345,7 +346,7 @@ export default function Container(props: any) {
                   <Assets
                     assets={containerLocal.assets}
                     onChange={(links: any) => {
-                      setHasChangedFields(true);
+                      dispatch(setHasChangedFields(true));
                       setContainerLocal({
                         ...containerLocal,
                         assets: links,
@@ -361,7 +362,7 @@ export default function Container(props: any) {
                     containerLocal={containerLocal}
                     setContainerLocal={setContainerLocal}
                     onChange={() => {
-                      setHasChangedFields(true);
+                      dispatch(setHasChangedFields(true));
                     }}
                   ></Settings>
                 </div>

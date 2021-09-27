@@ -13,35 +13,6 @@ const {
 
 exports.default = function (server) {
   return new Promise((resolve, reject) => {
-    server.get("/fake-data", async (req, res) => {
-      for (let index = 0; index < 100; index++) {
-        const id = index + 1;
-        const user = await req.models.User.create({
-          name: faker.name.findName(),
-          email: `ilyas+${id}@gmail.com`,
-          password: "passpass",
-          is_activated: true,
-          color_theme: "light",
-        });
-        for (let CID = 0; CID < 20; CID++) {
-          const Container = await req.models.Container.create({
-            title: `${user.name} Container`,
-            description: `${user.name} Container description`,
-            html: "Some html",
-            css: "Some css",
-            is_private: true,
-            javascript: "some javascript",
-            userId: user.id,
-            slug: randomstring.generate({
-              length: 14,
-              charset: "asdfghzxc12345679ia89sda8d9ad89",
-            }),
-          });
-        }
-      }
-      res.send("Fake data inserted");
-    });
-
     server.get("/api/containers", async (req, res) => {
       try {
         const search = req.query.search;

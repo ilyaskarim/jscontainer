@@ -88,13 +88,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           data-name="vs/editor/editor.main"
           href="https://cdn.jsdelivr.net/npm/monaco-editor@0.26.1/min/vs/editor/editor.main.css"
         ></link>
-        {/*<link
-          href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap"
-          rel="stylesheet"
-        /> */}
       </Head>
       <div className={""}>
         <Navbar></Navbar>
+
         {pageProps.status === 404 ? (
           <NotFound></NotFound>
         ) : (
@@ -106,6 +103,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             <Component {...pageProps} />
           </div>
         )}
+
         {router.route !== "/" && router.route.startsWith("/c/") === false ? (
           <Footer></Footer>
         ) : (
