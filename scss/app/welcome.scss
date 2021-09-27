@@ -1,13 +1,14 @@
 .home-section {
   display: flex;
   height: calc(100vh - 45px);
-  // .margin-view-overlays {
+  width: 100%;
+  .margin-view-overlays {
 
-  //   background-color: #f6f6f6;
-  // }
-  // .monaco-editor, .monaco-editor-background, .monaco-editor .inputarea.ime-input {
-  //   background-color: inherit;
-  // }
+    background-color: #f6f6f6;
+  }
+  .monaco-editor, .monaco-editor-background, .monaco-editor .inputarea.ime-input {
+    background-color: #f6f6f6;
+  }
   .home-content {
     display: flex;
     flex-direction: column;
@@ -61,10 +62,11 @@
       background: #f6f6f6;
     }
   }
+
   .action-section {
-    background: #fff;
     border-bottom: 1px solid #ececec;
     height: 128px;
+    width: 100%;
     .invited-user {
       font-size: 14px;
       background: #e0e0e0;
@@ -149,8 +151,12 @@
       align-items: center;
 
     }
-    .setting-icon:hover {
-      cursor: pointer;
+    .setting-icon{
+      padding-right: 10px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
   .tab-header {

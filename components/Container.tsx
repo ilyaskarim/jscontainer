@@ -174,66 +174,123 @@ export default function Container(props: any) {
             </form>
           </div>
           <div className="code-section section-comn-pd">
-            <div className="tabs tabs-language">
-              <div className="tab-header">
-                <ul>
-                  <li>
-                    <a
-                      data-tab="html"
-                      onClick={() => setTab("html")}
-                      className="tab-header-item"
-                      href="#"
-                    >
-                      Html
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      data-tab="css"
-                      onClick={() => setTab("css")}
-                      className="tab-header-item"
-                      href="#"
-                    >
-                      Css
-                    </a>
-                  </li>
+            <div className="tabs bg-gray tabs-language">
+              <div className="d-flex justify-content-between align-items-center">
+                <div className="tab-header pt-2">
+                  <ul>
+                    <li>
+                      <a
+                        data-tab="html"
+                        onClick={() => setTab("html")}
+                        className="tab-header-item"
+                        href="#"
+                      >
+                        Html
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        data-tab="css"
+                        onClick={() => setTab("css")}
+                        className="tab-header-item"
+                        href="#"
+                      >
+                        Css
+                      </a>
+                    </li>
 
-                  <li>
-                    <a
-                      data-tab="javascript"
-                      className="tab-header-item"
-                      onClick={() => setTab("javascript")}
-                      href="#"
-                    >
-                      Javascript
-                    </a>
-                  </li>
-                </ul>
+                    <li>
+                      <a
+                        data-tab="javascript"
+                        className="tab-header-item"
+                        onClick={() => setTab("javascript")}
+                        href="#"
+                      >
+                        Javascript
+                      </a>
+                    </li>
+                  </ul>
+                </div>
                 <a
-                  className="tab-header-item mr-0 setting-icon"
+                  className="tab-header-item mr-0 pt-2 setting-icon"
                   onClick={() => setOpen(true)}
                 >
                   <Icon settings="settings" />
                 </a>
-                <Modal
-                  className="assets-modal invite-modal"
-                  isOpen={open}
-                  onRequestClose={() => setOpen(false)}
-                  style={{
-                    content: {
-                      maxHeight: "100px",
-                      maxWidth: "335px",
-                      overflow: "hidden",
-                      display: "flex",
-                      justifyContent: "center",
-                    },
-                  }}
-                >
-                  <p className="h6 fw-bolder">
-                    For more please check <Brand></Brand>
-                  </p>
-                </Modal>
               </div>
+              <Modal
+                className="assets-modal invite-modal"
+                isOpen={open}
+                onRequestClose={() => setOpen(false)}
+                style={{
+                  content: {
+                    maxHeight: "128px",
+                    maxWidth: "335px",
+                    overflow: "hidden",
+                    display: "flex",
+                    justifyContent: "center",
+                    paddding: "8px 12px",
+                  },
+                }}
+              >
+                <div className="home-section">
+                  <div className="action-section section-comn-pd">
+                    <div className="tabs bg-gray tabs-menu">
+                      <div className="tab-header">
+                        <ul>
+                          <li>
+                            <a
+                              data-tab="assets"
+                              className="tab-header-item active"
+                              href="#"
+                            >
+                              Assets
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              data-tab="settings"
+                              className="tab-header-item"
+                              href="#"
+                            >
+                              Settings
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="tab-content">
+                        <div
+                          className="tab-content-item scroll-bar assets-scroll"
+                          data-tab-content="assets"
+                        >
+                          <Assets
+                            assets={containerLocal.assets}
+                            onChange={(links: any) => {
+                              dispatch(setHasChangedFields(true));
+                              setContainerLocal({
+                                ...containerLocal,
+                                assets: links,
+                              });
+                            }}
+                          ></Assets>
+                        </div>
+                        <div
+                          className="tab-content-item check_settings"
+                          data-tab-content="settings"
+                        >
+                          <Settings
+                            containerLocal={containerLocal}
+                            setContainerLocal={setContainerLocal}
+                            onChange={() => {
+                              dispatch(setHasChangedFields(true));
+                            }}
+                          ></Settings>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
               <div className="tab-content">
                 <div className="tab-content-item" data-tab-content="html">
                   {tab === "html" && (
@@ -325,7 +382,7 @@ export default function Container(props: any) {
         </div>
 
         <div className="row1">
-          <div className="action-section section-comn-pd">
+          {/* <div className="action-section section-comn-pd">
             <div className="tabs bg-gray tabs-menu">
               <div className="tab-header">
                 <ul>
@@ -371,7 +428,7 @@ export default function Container(props: any) {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="code-section preview-section section-comn-pd ">
             <div className="preview-frame">
               {process.browser && containerLocal.slug && (
