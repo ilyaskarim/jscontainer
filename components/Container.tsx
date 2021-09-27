@@ -66,6 +66,20 @@ export default function Container(props: any) {
     });
   };
 
+  const saveContainer = () => {
+    if (hasChangedFields) {
+      dispatch(setSavingContainer(true));
+      saveContainerIntoDB(containerLocal).finally(() => {
+        dispatch(setSavingContainer(false));
+        dispatch(setHasChangedFields(false));
+      });
+    } else {
+      toast("Please change something", {
+        position: "bottom-center",
+      });
+    }
+  };
+
   const handleCTRLSave = useCallback(
     (e: KeyboardEvent) => {
       if (e.key.toLowerCase() === "s") {
@@ -73,18 +87,7 @@ export default function Container(props: any) {
           e.preventDefault();
           clearTimeout(timeout);
           timeout = setTimeout(() => {
-            if (hasChangedFields) {
-              dispatch(setSavingContainer(true));
-              saveContainerIntoDB(containerLocal).finally(() => {
-                dispatch(setSavingContainer(false));
-                dispatch(setHasChangedFields(false));
-              });
-            } else {
-              toast("Please change something", {
-                position: "bottom-center",
-              });
-              EventBus.$emit("saveContainerFinish");
-            }
+            saveContainer();
           }, 300);
         }
       }
@@ -253,7 +256,7 @@ export default function Container(props: any) {
                         if (containerLocal.id) {
                           clearTimeout(timeout);
                           timeout = setTimeout(() => {
-                            EventBus.$emit("saveContainer");
+                            saveContainer();
                           }, 1100);
                         }
                       }}
@@ -281,7 +284,7 @@ export default function Container(props: any) {
                         if (containerLocal.id) {
                           clearTimeout(timeout);
                           timeout = setTimeout(() => {
-                            EventBus.$emit("saveContainer");
+                            saveContainer();
                           }, 1100);
                         }
                       }}
@@ -309,7 +312,7 @@ export default function Container(props: any) {
                         if (containerLocal.id) {
                           clearTimeout(timeout);
                           timeout = setTimeout(() => {
-                            EventBus.$emit("saveContainer");
+                            saveContainer();
                           }, 1100);
                         }
                       }}
