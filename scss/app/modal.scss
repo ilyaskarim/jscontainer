@@ -14,19 +14,12 @@
 }
 
 .invite-modal {
-  display: flex;
-  text-align: center;
-  align-items: center;
-  flex-direction: column;
   z-index: 111;
-  position: absolute;
   inset: 0;
-  border: 0.5px solid #e5e5e5;
   background: white;
   overflow: auto;
   border-radius: 4px;
   outline: none;
-  margin: auto;
   padding: 40px 0;
   .modal-header {
     a {
@@ -36,7 +29,6 @@
       }
     }
   }
-  .cdn-links,
   .tip {
     opacity: 1;
     transition: all 0.13s ease-in-out;
@@ -48,14 +40,8 @@
     top: -5px;
     transition: all 0.13s ease-in-out;
   }
-  .cdn-links {
-    overflow: auto;
-    height: 350px;
-  }
 }
 .invite-content {
-  max-width: 263px;
-
   h4 {
     font-size: 24px;
     line-height: 28px;
@@ -64,37 +50,7 @@
   p {
     font-size: 14px;
     line-height: 16px;
-    text-align: center;
     color: #000000;
-  }
-  input {
-    background: #f6f6f6;
-    padding: 12px 8px;
-    width: 100%;
-    border: none;
-    font-size: 19px;
-    line-height: 22px;
-    margin-bottom: 33px;
-    color: #000000;
-    &:focus {
-      outline: none;
-    }
-  }
-  input::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    color: #505050;
-  }
-  input::-moz-placeholder {
-    /* Firefox 19+ */
-    color: #505050;
-  }
-  input:-ms-input-placeholder {
-    /* IE 10+ */
-    color: #505050;
-  }
-  input:-moz-placeholder {
-    /* Firefox 18- */
-    color: #505050;
   }
   .invite-btn {
     padding: 9px 36px;
@@ -134,20 +90,14 @@
     input {
       margin-bottom: 7px;
     }
-    .cdn-link {
-      padding: 17px 14px 16px 9px;
-      background: #f8f8f8;
-      display: flex;
-      justify-content: space-between;
-    }
   }
 }
 
 .signup-modal {
-  padding: 34px 0 18px 0;
   align-items: center;
   text-align: center;
-  // .loginmenu {}
+  height: 400px;
+  padding: 40px 0;
   .signup-header {
     width: 100%;
     text-align: center;
@@ -169,6 +119,7 @@
   .signup-content {
     width: 218px;
     text-align: center;
+    margin: auto;
     p {
       font-weight: normal;
       font-size: 12px;
@@ -220,7 +171,7 @@
   }
   .signup-footer {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 0;
     span {
       color: #227de8;
@@ -236,4 +187,22 @@
       }
     }
   }
+}
+
+.cdn-links {
+  opacity: 1;
+  transition: all 0.13s ease-in-out;
+  position: relative;
+  top: 0px;
+}
+.cdn-links {
+  overflow: auto;
+  height: 350px;
+}
+
+.cdn-link {
+  padding: 17px 14px 16px 9px;
+  background: #f8f8f8;
+  display: flex;
+  justify-content: space-between;
 }

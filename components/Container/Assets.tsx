@@ -7,6 +7,7 @@ import axios from "../../utils/axios";
 import ContentLoader from "react-content-loader";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
+import ModalCharkra from "../UI/ModalCharkra";
 
 let debounce: any = null;
 
@@ -83,133 +84,121 @@ export default function (props: any) {
 
   return (
     <>
-      {assets.map((item: any, index: number) => (
-        <div className="url-box" key={index}>
-          <a className="url-link" href="#">
-            {item}
-          </a>
-          <div className="url_icons">
-            <span
-              onClick={() => {
-                let all = [...assets];
-                all.splice(index, 1);
-                toast.success("Asset removed", {
-                  duration: 2000,
-                  position: "bottom-center",
-                });
-                props.onChange(all);
-              }}
+      <div className="assets-modal">
+        {assets.map((item: any, index: number) => (
+          <div className="url-box" key={index}>
+            <a className="url-link" href="#">
+              {item}
+            </a>
+            <div className="url_icons">
+              <span
+                onClick={() => {
+                  let assetsNew = [...assets];
+                  assetsNew.splice(index, 1);
+                  toast.success("Asset removed", {
+                    duration: 2000,
+                    position: "bottom-center",
+                  });
+                  props.onChange(assetsNew);
+                }}
+              >
+                <i className="fas fa-times"></i>
+              </span>
+              <span onClick={() => setOpen(true)}>
+                <i className="fas fa-plus"></i>
+              </span>
+            </div>
+          </div>
+        ))}
+        {assets && assets.length === 0 && (
+          <Button
+            onClick={() => setOpen(true)}
+            className="btn btn-primary btn-xs"
+          >
+            Add Asset
+          </Button>
+        )}
+      </div>
+      <ModalCharkra isOpen={open} onClose={() => setOpen(false)}>
+        <div className="invite-modal">
+          <div className="pt-0 pl-0 border-0">
+            <a
+              href="#"
+              onClick={() => setMode("cdn")}
+              className={classNames({
+                active: mode === "cdn",
+              })}
             >
-              <i className="fas fa-times"></i>
-            </span>
-            <span onClick={() => setOpen(true)}>
-              <i className="fas fa-plus"></i>
-            </span>
+              CDN JS
+            </a>
+            <a
+              href="#"
+              onClick={() => setMode("link")}
+              className={classNames({
+                active: mode === "link",
+              })}
+            >
+              Link
+            </a>
           </div>
-        </div>
-      ))}
-      {assets && assets.length === 0 && (
-        <Button
-          onClick={() => setOpen(true)}
-          className="btn btn-primary btn-xs"
-        >
-          Add Asset
-        </Button>
-      )}
-      <Modal
-        className="assets-modal invite-modal"
-        isOpen={open}
-        onRequestClose={() => setOpen(false)}
-        style={{
-          content: {
-            maxHeight: "500px",
-            maxWidth: "766px",
-            overflow: "hidden",
-          },
-        }}
-      >
-        <button className="closeBtn" onClick={() => setOpen(false)}>
-          <i className="fas fa-times"></i>
-        </button>
-        <div className="modal-header pt-0 pl-0 border-0">
-          <a
-            href="#"
-            onClick={() => setMode("cdn")}
-            className={classNames({
-              "mr-3": true,
-              active: mode === "cdn",
-            })}
-          >
-            CDN JS
-          </a>
-          <a
-            href="#"
-            onClick={() => setMode("link")}
-            className={classNames({
-              "mr-3": true,
-              active: mode === "link",
-            })}
-          >
-            Link
-          </a>
-        </div>
-        <div className="assets-content invite-content">
-          <form action="" onSubmit={handlerSubmit}>
-            <InputField
-              onChange={(e: KeyboardEvent) => {
-                setQuery((e.target as HTMLInputElement).value);
-              }}
-              onKeyDown={(e: KeyboardEvent) => {
-                if (e.code === "Enter" && mode === "link") {
-                  submit((e.target as HTMLInputElement).value);
+          <div className="assets-content invite-content">
+            <form action="" onSubmit={handlerSubmit}>
+              <InputField
+                onChange={(e: KeyboardEvent) => {
+                  setQuery((e.target as HTMLInputElement).value);
+                }}
+                onKeyDown={(e: KeyboardEvent) => {
+                  if (e.code === "Enter" && mode === "link") {
+                    submit((e.target as HTMLInputElement).value);
+                  }
+                }}
+                placeholder={
+                  mode === "link"
+                    ? "Paste link and press enter"
+                    : "Search a library from cdnjs"
                 }
-              }}
-              placeholder={
-                mode === "link"
-                  ? "Paste link and press enter"
-                  : "Search a library from cdnjs"
-              }
-              className=""
-            />
-          </form>
-          <p
-            className={classNames({
-              "mb-3": true,
-              tip: true,
-              hide: mode === "link",
-            })}
-          >
-            Tip: To directly insert, enter url and press enter
-          </p>
-          {loading && <LoadingBar></LoadingBar>}
-          <div
-            className={classNames({
-              "cdn-links": true,
-              hide: mode === "link",
-            })}
-          >
-            {links.map((item: any, index) => {
-              return (
-                <div
-                  className="cdn-link mb-2"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    submit(item.latest);
-                  }}
-                  key={index}
-                >
-                  <a title={item.latest} href="">
-                    {item.filename}
-                  </a>{" "}
-                  <span>
-                    {item.name} @ {item.version}
-                  </span>
-                </div>
-              );
-            })}
+                className="form-control"
+              />
+            </form>
+            <p
+              className={classNames({
+                "mb-3": true,
+                tip: true,
+                hide: mode === "link",
+              })}
+            >
+              Tip: To directly insert, enter url and press enter
+            </p>
+            {loading && <LoadingBar></LoadingBar>}
+            <div
+              className={classNames({
+                "cdn-links": true,
+                hide: mode === "link",
+              })}
+            >
+              {links.map((item: any, index) => {
+                return (
+                  <div
+                    className="cdn-link mb-2"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      submit(item.latest);
+                    }}
+                    key={index}
+                  >
+                    <a title={item.latest} href="">
+                      {item.filename}
+                    </a>{" "}
+                    <span>
+                      {item.name}@{item.version}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </Modal>
+      </ModalCharkra>
     </>
   );
 }

@@ -7,6 +7,7 @@ import Brand from "./Brand";
 import Icon from "../Icons/SvgIcons";
 import { getCurrentUser, getIsAuthenticated } from "../../Redux/user.reducer";
 import { useSelector } from "react-redux";
+import ModalCharkra from "../UI/ModalCharkra";
 
 export const AccountInformation = ({ item }: any) => {
   return (
@@ -93,51 +94,46 @@ function User(props: any) {
       >
         {isAuthenticated ? Userlogin(loginMenu) : UserlogOut(logoutMenu)}
       </Menu>
-      <Modal
-        className="assets-modal invite-modal signup-modal"
+      <ModalCharkra
         isOpen={open}
-        onRequestClose={() => setOpen(false)}
-        style={{
-          content: {
-            height: "419px",
-            maxWidth: "331px",
-          },
-        }}
+        onClose={() => setOpen(false)}
+        size="sm"
+        isCentered={true}
       >
-        <button className="closeBtn" onClick={() => setOpen(false)}>
-          <i className="fas fa-times"></i>
-        </button>
-        <div className="signup-header pl-0 border-0">
-          <h5>
-            Continue to <Brand></Brand>
-          </h5>
-        </div>
-        <div className="signup-content">
-          <p>
-            login in to your by using your
-            <br /> Google or Github account.
+        <div className="signup-modal">
+          <div className="signup-header pl-0 border-0">
+            <h5>
+              Continue to <Brand></Brand>
+            </h5>
+          </div>
+          <div className="signup-content">
+            <p>
+              login in to your by using your
+              <br /> Google or Github account.
+              <br />
+              <br />
+              Save containers, Invite friends.
+            </p>
             <br />
-            <br />
-            Save containers, Invite friends.
-          </p>
-          <a className="social-btn google-btn " href="/auth/google/">
-            <span>
-              <Icon google width="28px" height="28px" />
-            </span>
-            <button>Login with Google</button>
-          </a>
-          <a className="social-btn github-btn" href="/auth/github/">
-            <span>
-              <i className="fab fa-github"></i>
-            </span>
-            <button>Login with Github</button>
-          </a>
-          <p className="signup-footer">
-            by continuing you are agree with our <br />
-            <span>Terms and Conditions</span>
-          </p>
+            <a className="social-btn google-btn " href="/auth/google/">
+              <span>
+                <Icon google width="28px" height="28px" />
+              </span>
+              <button>Login with Google</button>
+            </a>
+            <a className="social-btn github-btn" href="/auth/github/">
+              <span>
+                <i className="fab fa-github"></i>
+              </span>
+              <button>Login with Github</button>
+            </a>
+            <p className="signup-footer">
+              by continuing you are agree with our <br />
+              <span>Terms and Conditions</span>
+            </p>
+          </div>
         </div>
-      </Modal>
+      </ModalCharkra>
     </>
   );
 }

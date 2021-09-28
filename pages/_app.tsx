@@ -1,5 +1,7 @@
 import "../styles/globals.scss";
 import type { AppProps, AppContext } from "next/app";
+import { ChakraProvider } from "@chakra-ui/react";
+
 import "../scss/app/buttons.scss";
 import "@szhsin/react-menu/dist/index.css";
 import "../scss/app/common.scss";
@@ -52,86 +54,88 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <div>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="//cdn.jsdelivr.net/npm/@mdi/font@6.1.95/css/materialdesignicons.min.css"
-        />
+    <ChakraProvider>
+      <div>
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+            crossOrigin="anonymous"
+            referrerPolicy="no-referrer"
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            rel="stylesheet"
+            href="//cdn.jsdelivr.net/npm/@mdi/font@6.1.95/css/materialdesignicons.min.css"
+          />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;800&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          data-name="vs/editor/editor.main"
-          href="https://cdn.jsdelivr.net/npm/monaco-editor@0.26.1/min/vs/editor/editor.main.css"
-        ></link>
-      </Head>
-      <div className={""}>
-        <Navbar></Navbar>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;800&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            data-name="vs/editor/editor.main"
+            href="https://cdn.jsdelivr.net/npm/monaco-editor@0.26.1/min/vs/editor/editor.main.css"
+          ></link>
+        </Head>
+        <div className={""}>
+          <Navbar></Navbar>
 
-        {pageProps.status === 404 ? (
-          <NotFound></NotFound>
-        ) : (
-          <div
-            className={`app-container ${
-              router.route === "/" ? "container-page" : ""
-            }`}
-          >
-            <Component {...pageProps} />
-          </div>
-        )}
+          {pageProps.status === 404 ? (
+            <NotFound></NotFound>
+          ) : (
+            <div
+              className={`app-container ${
+                router.route === "/" ? "container-page" : ""
+              }`}
+            >
+              <Component {...pageProps} />
+            </div>
+          )}
 
-        {router.route !== "/" && router.route.startsWith("/c/") === false ? (
-          <Footer></Footer>
-        ) : (
-          <></>
-        )}
+          {router.route !== "/" && router.route.startsWith("/c/") === false ? (
+            <Footer></Footer>
+          ) : (
+            <></>
+          )}
 
-        {process.env.NODE_ENV === "production" && (
-          <>
-            <script
-              async
-              src="https://www.googletagmanager.com/gtag/js?id=UA-64991398-3"
-            ></script>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
+          {process.env.NODE_ENV === "production" && (
+            <>
+              <script
+                async
+                src="https://www.googletagmanager.com/gtag/js?id=UA-64991398-3"
+              ></script>
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           
           gtag('config', 'UA-64991398-3');
           `,
-              }}
-            />
-          </>
-        )}
+                }}
+              />
+            </>
+          )}
+        </div>
+        <Toaster></Toaster>
       </div>
-      <Toaster></Toaster>
-    </div>
+    </ChakraProvider>
   );
 };
 

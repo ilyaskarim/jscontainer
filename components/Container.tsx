@@ -1,18 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Tabs from "./../utils/tabs";
 import Editor from "@monaco-editor/react";
 import Assets from "./Container/Assets";
 import Settings from "./Container/Settings";
-import Modal from "./UI/InviteModal";
 import Head from "next/head";
 import { EventBus } from "../utils/eventBus";
 import toast from "react-hot-toast";
 import Preview from "./Preview";
 import { Router, useRouter } from "next/dist/client/router";
 import interact from "interactjs";
-import Icon from "./Icons/SvgIcons";
-import Brand from "./Navbar/Brand";
 import { useDispatch, useSelector } from "react-redux";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+
 import {
   getHasChangedFields,
   saveContainerIntoDB,
@@ -20,13 +18,12 @@ import {
   setHasChangedFields,
   setSavingContainer,
 } from "../Redux/app.reducer";
+import ModalCharkra from "./UI/ModalCharkra";
 
 let timeout: any;
 
 export default function Container(props: any) {
-  const router = useRouter();
-  const [tab, setTab] = useState("html");
-  const [open, setOpen] = useState(false);
+  const [settingsModalOpen, setSettingsModalOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
   const hasChangedFields = useSelector(getHasChangedFields);
 
@@ -95,20 +92,6 @@ export default function Container(props: any) {
     [containerLocal, hasChangedFields]
   );
 
-  useEffect(() => {
-    Tabs(".tabs-language", {
-      byDefaultTab: "html",
-      onChange: () => {},
-    });
-
-    Tabs(".tabs-menu", {
-      byDefaultTab: "assets",
-      onChange: () => {},
-    });
-
-    handleResize();
-  }, []);
-
   const handleInputChange = (e: any) => {
     dispatch(setHasChangedFields(true));
     setContainerLocal({
@@ -174,261 +157,104 @@ export default function Container(props: any) {
             </form>
           </div>
           <div className="code-section section-comn-pd">
-            <div className="tabs bg-gray tabs-language">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="tab-header pt-2">
-                  <ul>
-                    <li>
-                      <a
-                        data-tab="html"
-                        onClick={() => setTab("html")}
-                        className="tab-header-item"
-                        href="#"
-                      >
-                        Html
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        data-tab="css"
-                        onClick={() => setTab("css")}
-                        className="tab-header-item"
-                        href="#"
-                      >
-                        Css
-                      </a>
-                    </li>
+            <span
+              className="mdi mdi-cog"
+              onClick={() => {
+                setSettingsModalOpen(true);
+              }}
+            ></span>
+            <Tabs>
+              <TabList>
+                <Tab>Html</Tab>
+                <Tab>Css</Tab>
+                <Tab>Javascript</Tab>
+              </TabList>
 
-                    <li>
-                      <a
-                        data-tab="javascript"
-                        className="tab-header-item"
-                        onClick={() => setTab("javascript")}
-                        href="#"
-                      >
-                        Javascript
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <a
-                  className="tab-header-item mr-0 pt-2 setting-icon"
-                  onClick={() => setOpen(true)}
-                >
-                  <Icon settings="settings" />
-                </a>
-              </div>
-              <Modal
-                className="assets-modal invite-modal"
-                isOpen={open}
-                onRequestClose={() => setOpen(false)}
-                style={{
-                  content: {
-                    maxHeight: "128px",
-                    maxWidth: "335px",
-                    overflow: "hidden",
-                    display: "flex",
-                    justifyContent: "center",
-                    paddding: "8px 12px",
-                  },
-                }}
-              >
-                <div className="home-section">
-                  <div className="action-section section-comn-pd">
-                    <div className="tabs bg-gray tabs-menu">
-                      <div className="tab-header">
-                        <ul>
-                          <li>
-                            <a
-                              data-tab="assets"
-                              className="tab-header-item active"
-                              href="#"
-                            >
-                              Assets
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              data-tab="settings"
-                              className="tab-header-item"
-                              href="#"
-                            >
-                              Settings
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="tab-content">
-                        <div
-                          className="tab-content-item scroll-bar assets-scroll"
-                          data-tab-content="assets"
-                        >
-                          <Assets
-                            assets={containerLocal.assets}
-                            onChange={(links: any) => {
-                              dispatch(setHasChangedFields(true));
-                              setContainerLocal({
-                                ...containerLocal,
-                                assets: links,
-                              });
-                            }}
-                          ></Assets>
-                        </div>
-                        <div
-                          className="tab-content-item check_settings"
-                          data-tab-content="settings"
-                        >
-                          <Settings
-                            containerLocal={containerLocal}
-                            setContainerLocal={setContainerLocal}
-                            onChange={() => {
-                              dispatch(setHasChangedFields(true));
-                            }}
-                          ></Settings>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Modal>
-              <div className="tab-content">
-                <div className="tab-content-item" data-tab-content="html">
-                  {tab === "html" && (
-                    <Editor
-                      height="calc(100vh - 280px)"
-                      loading="Loading editor please wait."
-                      options={{
-                        minimap: {
-                          enabled: false,
-                        },
-                      }}
-                      defaultLanguage="html"
-                      defaultValue={containerLocal.html}
-                      onChange={(e: any) => {
-                        dispatch(setHasChangedFields(true));
-                        setContainerLocal({
-                          ...containerLocal,
-                          html: e,
-                        });
-                        if (containerLocal.id) {
-                          clearTimeout(timeout);
-                          timeout = setTimeout(() => {
-                            saveContainer();
-                          }, 1100);
-                        }
-                      }}
-                    />
-                  )}
-                </div>
-                <div className="tab-content-item" data-tab-content="css">
-                  {tab === "css" && (
-                    <Editor
-                      height="calc(100vh - 280px)"
-                      loading="Loading editor please wait."
-                      options={{
-                        minimap: {
-                          enabled: false,
-                        },
-                      }}
-                      defaultLanguage="css"
-                      defaultValue={containerLocal.css}
-                      onChange={(e: any) => {
-                        dispatch(setHasChangedFields(true));
-                        setContainerLocal({
-                          ...containerLocal,
-                          css: e,
-                        });
-                        if (containerLocal.id) {
-                          clearTimeout(timeout);
-                          timeout = setTimeout(() => {
-                            saveContainer();
-                          }, 1100);
-                        }
-                      }}
-                    />
-                  )}
-                </div>
-                <div className="tab-content-item" data-tab-content="javascript">
-                  {tab === "javascript" && (
-                    <Editor
-                      height="calc(100vh - 280px)"
-                      loading="Loading editor please wait."
-                      options={{
-                        minimap: {
-                          enabled: false,
-                        },
-                      }}
-                      defaultLanguage="javascript"
-                      defaultValue={containerLocal.javascript}
-                      onChange={(e: any) => {
-                        dispatch(setHasChangedFields(true));
-                        setContainerLocal({
-                          ...containerLocal,
-                          javascript: e,
-                        });
-                        if (containerLocal.id) {
-                          clearTimeout(timeout);
-                          timeout = setTimeout(() => {
-                            saveContainer();
-                          }, 1100);
-                        }
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
+              <TabPanels>
+                <TabPanel>
+                  <Editor
+                    height="calc(100vh - 280px)"
+                    loading="Loading editor please wait."
+                    options={{
+                      minimap: {
+                        enabled: false,
+                      },
+                    }}
+                    defaultLanguage="html"
+                    defaultValue={containerLocal.html}
+                    onChange={(e: any) => {
+                      dispatch(setHasChangedFields(true));
+                      setContainerLocal({
+                        ...containerLocal,
+                        html: e,
+                      });
+                      if (containerLocal.id) {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                          saveContainer();
+                        }, 1100);
+                      }
+                    }}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <Editor
+                    height="calc(100vh - 280px)"
+                    loading="Loading editor please wait."
+                    options={{
+                      minimap: {
+                        enabled: false,
+                      },
+                    }}
+                    defaultLanguage="css"
+                    defaultValue={containerLocal.css}
+                    onChange={(e: any) => {
+                      dispatch(setHasChangedFields(true));
+                      setContainerLocal({
+                        ...containerLocal,
+                        css: e,
+                      });
+                      if (containerLocal.id) {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                          saveContainer();
+                        }, 1100);
+                      }
+                    }}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <Editor
+                    height="calc(100vh - 280px)"
+                    loading="Loading editor please wait."
+                    options={{
+                      minimap: {
+                        enabled: false,
+                      },
+                    }}
+                    defaultLanguage="javascript"
+                    defaultValue={containerLocal.javascript}
+                    onChange={(e: any) => {
+                      dispatch(setHasChangedFields(true));
+                      setContainerLocal({
+                        ...containerLocal,
+                        javascript: e,
+                      });
+                      if (containerLocal.id) {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                          saveContainer();
+                        }, 1100);
+                      }
+                    }}
+                  />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </div>
         </div>
 
         <div className="row1">
-          {/* <div className="action-section section-comn-pd">
-            <div className="tabs bg-gray tabs-menu">
-              <div className="tab-header">
-                <ul>
-                  <li>
-                    <a data-tab="assets" className="tab-header-item" href="#">
-                      Assets
-                    </a>
-                  </li>
-                  <li>
-                    <a data-tab="settings" className="tab-header-item" href="#">
-                      Settings
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="tab-content">
-                <div
-                  className="tab-content-item scroll-bar assets-scroll"
-                  data-tab-content="assets"
-                >
-                  <Assets
-                    assets={containerLocal.assets}
-                    onChange={(links: any) => {
-                      dispatch(setHasChangedFields(true));
-                      setContainerLocal({
-                        ...containerLocal,
-                        assets: links,
-                      });
-                    }}
-                  ></Assets>
-                </div>
-                <div
-                  className="tab-content-item check_settings"
-                  data-tab-content="settings"
-                >
-                  <Settings
-                    containerLocal={containerLocal}
-                    setContainerLocal={setContainerLocal}
-                    onChange={() => {
-                      dispatch(setHasChangedFields(true));
-                    }}
-                  ></Settings>
-                </div>
-              </div>
-            </div>
-          </div> */}
           <div className="code-section preview-section section-comn-pd ">
             <div className="preview-frame">
               {process.browser && containerLocal.slug && (
@@ -471,6 +297,43 @@ export default function Container(props: any) {
           </div>
         </div>
       </div>
+      <ModalCharkra
+        isOpen={settingsModalOpen}
+        onClose={() => setSettingsModalOpen(false)}
+        footer={true}
+        title="Container Settings"
+      >
+        <Tabs>
+          <TabList>
+            <Tab>Assets</Tab>
+            <Tab>Settings</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <Assets
+                assets={containerLocal.assets}
+                onChange={(links: any) => {
+                  dispatch(setHasChangedFields(true));
+                  setContainerLocal({
+                    ...containerLocal,
+                    assets: links,
+                  });
+                }}
+              ></Assets>
+            </TabPanel>
+            <TabPanel>
+              <Settings
+                containerLocal={containerLocal}
+                setContainerLocal={setContainerLocal}
+                onChange={() => {
+                  dispatch(setHasChangedFields(true));
+                }}
+              ></Settings>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </ModalCharkra>
     </>
   );
 }

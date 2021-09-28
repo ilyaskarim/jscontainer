@@ -54,7 +54,7 @@
 }
 
 .app-container {
-  min-height: 100vh;
+  height: calc(100vh - 49px);
   &.container-page {
     min-height: auto;
   }
