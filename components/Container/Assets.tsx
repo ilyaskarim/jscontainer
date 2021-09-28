@@ -90,7 +90,7 @@ export default function (props: any) {
             <a className="url-link" href="#">
               {item}
             </a>
-            <div className="url_icons">
+            <div className="url-icons">
               <span
                 onClick={() => {
                   let assetsNew = [...assets];
