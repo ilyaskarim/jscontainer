@@ -11062,10 +11062,10 @@ websocket-extensions@>=0.1.1:
   resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.4.tgz#7f8473bc839dfd87608adb95d7eb075211578a42"
   integrity sha512-OqedPIGOfsDlo31UNwYbCFMSaO9m9G/0faIHj5/dZFDMFqPTcx6UwqyOy3COEaEOg/9VsGIpdqn62W5KhoKSpg==
 
-wertik-js@^3.0.0-beta:
-  version "3.0.0-beta"
-  resolved "https://registry.yarnpkg.com/wertik-js/-/wertik-js-3.0.0-beta.tgz#dc2c4c208f52b54560bf796c6a0382e5b0ea75c8"
-  integrity sha512-Ckykbld9IJ4e2HFZ4fqQ0FcJHZPloVItWAbDxQ9XtBYnS5shf8b1yhAUnbqWVrUvcaeNfMtOPyzmajg7yz14LQ==
+wertik-js@^3.0.2-beta:
+  version "3.0.2-beta"
+  resolved "https://registry.yarnpkg.com/wertik-js/-/wertik-js-3.0.2-beta.tgz#302bde8af4b5c9a152e5f9c3e8be7c662371dc87"
+  integrity sha512-PvUsiFNbgETYIepOX9VxmupCR49n9ole8cNgA7Dg6mvwcsLwpbjUHlQdGuNASmPXbaztLyeLwQv47YcSRS0ItQ==
   dependencies:
     apollo-server "^2.8.2"
     apollo-server-express "^2.9.4"
