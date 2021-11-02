@@ -38,6 +38,7 @@ export function Editor(props: EditorProps) {
         <Tabs
           id="TabsExample"
           onChange={(e: "javascript" | "css" | "html") => setFileName(e)}
+          className={styles.tabs}
           selectedTabId={fileName}
         >
           <Tab
@@ -45,7 +46,8 @@ export function Editor(props: EditorProps) {
             title="Html"
             panel={
               <MonacoReactEditor
-                height="100vh"
+                loading={"Loading editor please wait"}
+                height="calc(100vh - 50px)"
                 path={file.name}
                 options={{
                   lineNumbers: "off",
@@ -68,7 +70,8 @@ export function Editor(props: EditorProps) {
             title="CSS"
             panel={
               <MonacoReactEditor
-                height="100vh"
+                loading={"Loading editor please wait"}
+                height="calc(100vh - 50px)"
                 path={file.name}
                 options={{
                   lineNumbers: "off",
@@ -91,7 +94,8 @@ export function Editor(props: EditorProps) {
             title="Javascript"
             panel={
               <MonacoReactEditor
-                height="100vh"
+                loading={"Loading editor please wait"}
+                height="calc(100vh - 50px)"
                 path={file.name}
                 options={{
                   lineNumbers: "off",
