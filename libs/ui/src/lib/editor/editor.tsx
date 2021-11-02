@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-
+import { useState } from "react";
 import MonacoReactEditor from "@monaco-editor/react";
-
+import { Tab, Tabs, Icon, Dialog, InputGroup } from "@blueprintjs/core";
 const files = {
   javascript: {
     name: "javascript",
@@ -21,42 +19,127 @@ const files = {
   },
 };
 
-import "./editor.module.less";
+import styles from "./editor.module.less";
 
 /* eslint-disable-next-line */
 export interface EditorProps {}
 
 export function Editor(props: EditorProps) {
   const [fileName, setFileName] = useState<"javascript" | "css" | "html">(
-    "javascript"
+    "html"
   );
+  const [settingsDialog, setSettingsDialog] = useState<boolean>(false);
 
   const file = files[fileName];
 
   return (
-    <div>
-      <button
-        disabled={fileName === "javascript"}
-        onClick={() => setFileName("javascript")}
+    <div className={styles.editor}>
+      <div className={styles.editors}>
+        <Tabs
+          id="TabsExample"
+          onChange={(e: "javascript" | "css" | "html") => setFileName(e)}
+          selectedTabId={fileName}
+        >
+          <Tab
+            id="html"
+            title="Html"
+            panel={
+              <MonacoReactEditor
+                height="100vh"
+                path={file.name}
+                options={{
+                  lineNumbers: "off",
+                  minimap: {
+                    enabled: false,
+                  },
+                }}
+                defaultLanguage={file.language}
+                defaultValue={file.value}
+                onChange={(e: string | undefined) => {
+                  if (e) {
+                    files.html.value = e;
+                  }
+                }}
+              />
+            }
+          />
+          <Tab
+            id="css"
+            title="CSS"
+            panel={
+              <MonacoReactEditor
+                height="100vh"
+                path={file.name}
+                options={{
+                  lineNumbers: "off",
+                  minimap: {
+                    enabled: false,
+                  },
+                }}
+                defaultLanguage={file.language}
+                defaultValue={file.value}
+                onChange={(e: string | undefined) => {
+                  if (e) {
+                    files.css.value = e;
+                  }
+                }}
+              />
+            }
+          />
+          <Tab
+            id="javascript"
+            title="Javascript"
+            panel={
+              <MonacoReactEditor
+                height="100vh"
+                path={file.name}
+                options={{
+                  lineNumbers: "off",
+                  minimap: {
+                    enabled: false,
+                  },
+                }}
+                defaultLanguage={file.language}
+                defaultValue={file.value}
+                onChange={(e: string | undefined) => {
+                  if (e) {
+                    files.javascript.value = e;
+                  }
+                }}
+              />
+            }
+          />
+          <Tabs.Expander />
+          <a href="javascript:void(0)" onClick={() => setSettingsDialog(true)}>
+            <Icon icon={"cog"} />
+          </a>
+        </Tabs>
+      </div>
+      <div className={styles.preview}>
+        <div className={styles.previewHeader}>
+          <a href="javascript:void(0)" className={styles.previewURLCopy}>
+            <Icon icon="link" />
+          </a>
+          <InputGroup
+            placeholder={window.location.host}
+            size={20}
+            small={true}
+          />
+        </div>
+      </div>
+
+      {/* Dialogs */}
+      <Dialog
+        isOpen={settingsDialog}
+        onClose={() => setSettingsDialog(false)}
+        title="Container Settings"
       >
-        javascript
-      </button>
-      <button disabled={fileName === "css"} onClick={() => setFileName("css")}>
-        style.css
-      </button>
-      <button
-        disabled={fileName === "html"}
-        onClick={() => setFileName("html")}
-      >
-        index.html
-      </button>
-      <MonacoReactEditor
-        height="80vh"
-        theme="vs-dark"
-        path={file.name}
-        defaultLanguage={file.language}
-        defaultValue={file.value}
-      />
+        <Tabs id="TabsExample" selectedTabId="settings">
+          <Tab id="settings" title="Angular" panel={<div>settings</div>} />
+          <Tab id="assets" title="Angular" panel={<div>assets</div>} />
+        </Tabs>
+      </Dialog>
+      {/* Dialogs */}
     </div>
   );
 }

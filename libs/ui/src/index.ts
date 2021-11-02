@@ -1,10 +1,7 @@
+export * from "./lib/layout/layout";
 
-export * from './lib/container-card/container-card';
+export * from "./lib/container-card/container-card";
 
-export * from './lib/footer/footer';
+export * from "./lib/editor/editor";
 
-export * from './lib/navbar/navbar';
-
-export * from './lib/editor/editor';
-
-export * from './lib/ui';
+export * from "./lib/ui";
