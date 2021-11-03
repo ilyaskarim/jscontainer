@@ -1,12 +1,14 @@
 import styles from "./library-list.module.less";
-import { Button, Card, Elevation } from "@blueprintjs/core";
+import { Button, Card } from "@blueprintjs/core";
 import { useSelector } from "react-redux";
 
 /* eslint-disable-next-line */
 export interface LibraryListProps {}
 
 export function LibraryList(props: LibraryListProps) {
-  const llll = useSelector((state: any) => state.container.libraiesList);
+  const containerFromRedux = useSelector(
+    (state: any) => state.container.formData
+  );
   return (
     <div>
       <br />

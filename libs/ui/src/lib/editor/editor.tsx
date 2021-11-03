@@ -10,7 +10,7 @@ import {
   TextArea,
 } from "@blueprintjs/core";
 import { ContainerSettings, setContainerFormData } from "@jscontainer/ui";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const files = {
   javascript: {
@@ -42,6 +42,9 @@ export function Editor(props: EditorProps) {
   );
   const [settingsDialog, setSettingsDialog] = useState<boolean>(false);
   const [containerInfoDrawer, setContainerInfoDrawer] = useState(false);
+  const containerFromRedux = useSelector(
+    (state: any) => state.container.formData
+  );
 
   return (
     <div className={styles.editor}>
@@ -65,6 +68,7 @@ export function Editor(props: EditorProps) {
                     enabled: false,
                   },
                 }}
+                value={containerFromRedux.html}
                 defaultLanguage="html"
                 onChange={(e: string | undefined) => {
                   if (e) {
@@ -92,6 +96,7 @@ export function Editor(props: EditorProps) {
                     enabled: false,
                   },
                 }}
+                value={containerFromRedux.css}
                 defaultLanguage="css"
                 onChange={(e: string | undefined) => {
                   if (e) {
@@ -119,6 +124,7 @@ export function Editor(props: EditorProps) {
                     enabled: false,
                   },
                 }}
+                value={containerFromRedux.javascript}
                 defaultLanguage="javascript"
                 onChange={(e: string | undefined) => {
                   if (e) {
@@ -181,6 +187,7 @@ export function Editor(props: EditorProps) {
       >
         <div className={styles.containerInfo}>
           <InputGroup
+            value={containerFromRedux.title}
             onChange={(e) => {
               dispatch(
                 setContainerFormData({
@@ -193,6 +200,7 @@ export function Editor(props: EditorProps) {
 
           <br />
           <TextArea
+            value={containerFromRedux.description}
             onChange={(e) => {
               dispatch(
                 setContainerFormData({

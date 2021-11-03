@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const state = {
   formData: {
-    html: "",
-    css: "",
-    javascript: "",
-    html_5_snippet: "",
+    html: "wow",
+    css: "style",
+    javascript: "log",
+    html_5_snippet: true,
     assets: "[]",
     access: "[]",
-    title: "",
-    description: "",
+    title: "wow",
+    description: "desc",
     slug: "",
     parent: null,
     forkedFrom: null,
