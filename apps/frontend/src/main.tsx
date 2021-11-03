@@ -5,10 +5,13 @@ import "normalize.css/normalize.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 import App from "./app/app";
+import { StoreProvider } from "@jscontainer/ui";
 
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <StoreProvider>
+      <App />
+    </StoreProvider>
   </StrictMode>,
   document.getElementById("root")
 );

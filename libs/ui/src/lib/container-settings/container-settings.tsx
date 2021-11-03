@@ -1,13 +1,15 @@
 import styles from "./container-settings.module.less";
 import { Tab, Tabs, Checkbox, Icon } from "@blueprintjs/core";
 import { useState } from "react";
-import { ContainerAssets } from "@jscontainer/ui";
+import { ContainerAssets, setContainerFormData } from "@jscontainer/ui";
+import { useDispatch } from "react-redux";
 
 /* eslint-disable-next-line */
 export interface ContainerSettingsProps {}
 
 export function ContainerSettings(props: ContainerSettingsProps) {
   const [viewTab, setViewTab] = useState("settings");
+  const dispatch = useDispatch();
   return (
     <div className={styles.containerSettings}>
       <Tabs
@@ -25,7 +27,15 @@ export function ContainerSettings(props: ContainerSettingsProps) {
           title="Settings"
           panel={
             <div>
-              <Checkbox checked={true} onChange={() => {}}>
+              <Checkbox
+                onChange={(e) => {
+                  dispatch(
+                    setContainerFormData({
+                      html_5_snippet: (e.target as any).checked,
+                    })
+                  );
+                }}
+              >
                 Include HTML 5 Snippet
               </Checkbox>
             </div>

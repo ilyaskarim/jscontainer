@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import "./library-select.module.less";
 import "@blueprintjs/select/lib/css/blueprint-select.css";
+import "@blueprintjs/popover2/lib/css/blueprint-popover2.css";
 import { Select } from "@blueprintjs/select";
-import { Button, MenuItem } from "@blueprintjs/core";
+import { Button, MenuItem, Position } from "@blueprintjs/core";
+import { Tooltip2 } from "@blueprintjs/popover2";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 /* eslint-disable-next-line */
 export interface LibrarySelectProps {}
@@ -11,21 +15,45 @@ let timeout: any;
 
 export function LibrarySelect(props: LibrarySelectProps) {
   const [searchInput, setSearchInput] = useState("");
+  const [libraryOptions, setLibraryOptions] = useState([]);
+  const dispatch = useDispatch();
 
-  const fetchLibraries = () => {};
+  const fetchLibraries = (term: string) => {
+    axios
+      .get("https://api.cdnjs.com/libraries", {
+        params: {
+          search: term,
+          limit: 15,
+          fields: ["filename", "version"].join(","),
+        },
+      })
+      .then((resp) => {
+        setLibraryOptions(resp.data.results);
+      });
+  };
 
   useEffect(() => {
     if (searchInput) {
-      console.log("search now");
+      fetchLibraries(searchInput);
     }
   }, [searchInput]);
 
   return (
     <div>
       <Select
-        items={[{ id: 12, text: "wo" }]}
-        itemRenderer={(item) => {
-          return <>{item.text}</>;
+        items={libraryOptions}
+        itemRenderer={(item: any) => {
+          return (
+            <div>
+              <Tooltip2
+                content={item.latest}
+                position={Position.BOTTOM}
+                usePortal={true}
+              >
+                <div title={item.latest}>{item.filename}</div>{" "}
+              </Tooltip2>
+            </div>
+          );
         }}
         inputProps={{
           placeholder: "Filter from CDN",
@@ -53,15 +81,9 @@ export function LibrarySelect(props: LibrarySelectProps) {
         inputProps={{
           placeholder: "Search from local presets",
         }}
-        items={[
-          { id: 12, text: "wo" },
-          { id: 12, text: "wo" },
-          { id: 12, text: "wo" },
-          { id: 12, text: "wo" },
-          { id: 12, text: "wo" },
-        ]}
-        itemRenderer={(item) => {
-          return <>{item.text}</>;
+        items={libraryOptions}
+        itemRenderer={(item: any) => {
+          return <>{item.filename}</>;
         }}
         onQueryChange={(e) => {
           clearTimeout(timeout);
