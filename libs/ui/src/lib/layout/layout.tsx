@@ -5,28 +5,42 @@ import { Button, Icon } from "@blueprintjs/core";
 export interface LayoutProps {
   loggedIn?: boolean;
   children?: React.ReactNode;
+  showFooter?: boolean;
+  isContainerPage?: boolean;
 }
 
 export function Layout(props: LayoutProps) {
-  const loggedIn = props.loggedIn || false;
+  const loggedIn = props.loggedIn ?? false;
+  const isContainerPage = props.isContainerPage ?? true;
+  const showFooter = props.showFooter ?? true;
   return (
     <div className={styles.layout}>
       <div className={styles.header}>
         <a className={styles.headerBrand}>JSContainer</a>
         <div className={styles.headerContent}>
-          <Button>
-            <Icon icon="saved" />
-            &nbsp;&nbsp; Save
-          </Button>
-          &nbsp; &nbsp;
-          <Button intent="primary">
-            <Icon icon="play" />
-            &nbsp; Run
-          </Button>
+          {isContainerPage ? (
+            <>
+              <Button>
+                <Icon icon="saved" />
+                &nbsp;&nbsp; Save
+              </Button>
+              &nbsp; &nbsp;
+              <Button intent="primary">
+                <Icon icon="play" />
+                &nbsp; Run
+              </Button>
+            </>
+          ) : (
+            <div className={styles.headerLinks}>
+              <a>Tools</a>
+              <a>About</a>
+              <a>Blog</a>
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.content}>{props.children}</div>
-      <div className={styles.footer}>Footer</div>
+      {showFooter && <div className={styles.footer}>the app footer</div>}
     </div>
   );
 }

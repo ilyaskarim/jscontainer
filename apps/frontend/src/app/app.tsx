@@ -1,5 +1,5 @@
-import { Editor, Layout } from "@jscontainer/ui";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Editor, Layout, NotFound } from "@jscontainer/ui";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
   return (
@@ -7,16 +7,20 @@ const App = () => {
       <Router>
         <Switch>
           <Route path="/" exact>
-            <Layout>
+            <Layout showFooter={false} isContainerPage={true}>
               <Editor />
             </Layout>
           </Route>
           <Route path="/c/:slug">
-            <Layout>
+            <Layout showFooter={false}>
               <Editor />
             </Layout>
           </Route>
-          <Route path="*">Not found</Route>
+          <Route path="*">
+            <Layout isContainerPage={false}>
+              <NotFound></NotFound>
+            </Layout>
+          </Route>
         </Switch>
       </Router>
     </>

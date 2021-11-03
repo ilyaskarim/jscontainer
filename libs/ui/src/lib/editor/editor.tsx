@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MonacoReactEditor from "@monaco-editor/react";
 import { Tab, Tabs, Icon, Dialog, InputGroup } from "@blueprintjs/core";
+import { ContainerSettings } from "@jscontainer/ui";
 const files = {
   javascript: {
     name: "javascript",
@@ -130,6 +131,10 @@ export function Editor(props: EditorProps) {
             small={true}
           />
         </div>
+        <iframe
+          className={styles.previewFrame}
+          src="http://localhost:4a200/asdfasdf"
+        ></iframe>
       </div>
 
       {/* Dialogs */}
@@ -138,10 +143,7 @@ export function Editor(props: EditorProps) {
         onClose={() => setSettingsDialog(false)}
         title="Container Settings"
       >
-        <Tabs id="TabsExample" selectedTabId="settings">
-          <Tab id="settings" title="Angular" panel={<div>settings</div>} />
-          <Tab id="assets" title="Angular" panel={<div>assets</div>} />
-        </Tabs>
+        <ContainerSettings />
       </Dialog>
       {/* Dialogs */}
     </div>
