@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MonacoReactEditor from "@monaco-editor/react";
 import {
   Tab,
@@ -9,8 +9,13 @@ import {
   Drawer,
   TextArea,
 } from "@blueprintjs/core";
-import { ContainerSettings, setContainerFormData } from "@jscontainer/ui";
+import {
+  ContainerSettings,
+  setContainerFormData,
+  useContainerQuery,
+} from "@jscontainer/ui";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const files = {
   javascript: {
@@ -36,15 +41,23 @@ import styles from "./editor.module.less";
 export interface EditorProps {}
 
 export function Editor(props: EditorProps) {
+  const params: { [key: string]: any } = useParams();
   const dispatch = useDispatch();
   const [fileName, setFileName] = useState<"javascript" | "css" | "html">(
     "html"
   );
+  const a = useContainerQuery();
   const [settingsDialog, setSettingsDialog] = useState<boolean>(false);
   const [containerInfoDrawer, setContainerInfoDrawer] = useState(false);
   const containerFromRedux = useSelector(
     (state: any) => state.container.formData
   );
+
+  useEffect(() => {
+    if (params.slug) {
+      console.log(a);
+    }
+  }, []);
 
   return (
     <div className={styles.editor}>

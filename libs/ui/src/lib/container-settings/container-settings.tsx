@@ -31,12 +31,12 @@ export function ContainerSettings(props: ContainerSettingsProps) {
           panel={
             <div>
               <Checkbox
-                value={containerFromRedux.html_5_snippet}
-                defaultChecked={containerFromRedux.html_5_snippet}
+                value={containerFromRedux.html_snippet}
+                defaultChecked={containerFromRedux.html_snippet}
                 onChange={(e) => {
                   dispatch(
                     setContainerFormData({
-                      html_5_snippet: (e.target as any).checked,
+                      html_snippet: (e.target as any).checked ? 1 : 0,
                     })
                   );
                 }}

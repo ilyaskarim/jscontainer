@@ -6,14 +6,16 @@ import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import { Toaster } from "react-hot-toast";
 
 import App from "./app/app";
-import { StoreProvider } from "@jscontainer/ui";
+import { StoreProvider, QueryClientProvider } from "@jscontainer/ui";
 
 ReactDOM.render(
   <StrictMode>
-    <StoreProvider>
-      <Toaster />
-      <App />
-    </StoreProvider>
+    <QueryClientProvider>
+      <StoreProvider>
+        <Toaster />
+        <App />
+      </StoreProvider>
+    </QueryClientProvider>
   </StrictMode>,
   document.getElementById("root")
 );

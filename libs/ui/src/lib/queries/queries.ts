@@ -1,5 +1,5 @@
 export const createContainerQuery = `
-    mutation($input: createContainerInput) {
+    mutation($input: [createContainerInput!]) {
         createContainer(input: $input) {
         returning {
             id
@@ -22,6 +22,14 @@ export const updateContainerQuery = `
         }
         }
     }  
+`;
+
+export const viewContainerQuery = `
+    query ViewContainer{
+    viewContainer(where: { id: { _eq: 67 } }) {
+        id
+    }
+    }
 `;
 
 export const deleteContainerQuery = `

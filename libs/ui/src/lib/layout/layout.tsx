@@ -1,5 +1,6 @@
 import styles from "./layout.module.less";
 import { Button, Icon } from "@blueprintjs/core";
+import { ContainerNavButtons } from "@jscontainer/ui";
 
 /* eslint-disable-next-line */
 export interface LayoutProps {
@@ -20,15 +21,7 @@ export function Layout(props: LayoutProps) {
         <div className={styles.headerContent}>
           {isContainerPage ? (
             <>
-              <Button>
-                <Icon icon="saved" />
-                &nbsp;&nbsp; Save
-              </Button>
-              &nbsp; &nbsp;
-              <Button intent="primary">
-                <Icon icon="play" />
-                &nbsp; Run
-              </Button>
+              <ContainerNavButtons />
             </>
           ) : (
             <div className={styles.headerLinks}>
