@@ -12,7 +12,10 @@ export function LibraryList(props: LibraryListProps) {
     (state: any) => state.container.formData
   );
 
-  const list = [...JSON.parse(containerFromRedux.assets)] ?? [];
+  const list =
+    typeof containerFromRedux.assets === "object"
+      ? containerFromRedux.assets
+      : [...JSON.parse(containerFromRedux.assets)] ?? [];
 
   const deleteLink = (index: number) => {
     var nList = [...list];

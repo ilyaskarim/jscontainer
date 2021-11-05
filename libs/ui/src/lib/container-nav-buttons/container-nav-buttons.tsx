@@ -1,16 +1,21 @@
 import "./container-nav-buttons.module.less";
 import { Button, Icon } from "@blueprintjs/core";
-import { useContainerCreateMutation } from "@jscontainer/ui";
+import {
+  setContainerFormData,
+  useContainerCreateMutation,
+} from "@jscontainer/ui";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { get } from "lodash";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 /* eslint-disable-next-line */
 export interface ContainerNavButtonsProps {}
 
 export function ContainerNavButtons(props: ContainerNavButtonsProps) {
   const history = useHistory();
+  const dispatch = useDispatch();
   const containerFromRedux = useSelector(
     (state: any) => state.container.formData
   );
@@ -24,13 +29,14 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
 
   useEffect(() => {
     if (createContainerData) {
-      const slug = get(
+      const container = get(
         createContainerData,
-        "data.data.createContainer.returning[0].slug",
+        "data.data.createContainer.returning[0]",
         null
       );
-      if (slug) {
-        history.push(`/c/${slug}`);
+      if (container) {
+        dispatch(setContainerFormData(container));
+        history.push(`/c/${container.slug}`);
       }
     }
   }, [createContainerData]);

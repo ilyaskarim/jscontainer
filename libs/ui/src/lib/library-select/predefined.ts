@@ -2,7 +2,7 @@ const handleSelect = (name: string) => {
   console.log(handleSelect);
 };
 
-export default [
+export const predefinedAssets = [
   "Froala",
   "jQuery",
   "Bootstrap",

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./library-select.module.less";
+import styles from "./library-select.module.less";
 import "@blueprintjs/select/lib/css/blueprint-select.css";
 import "@blueprintjs/popover2/lib/css/blueprint-popover2.css";
 import { Select } from "@blueprintjs/select";
@@ -7,6 +7,7 @@ import { Button, MenuItem, Position } from "@blueprintjs/core";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { predefinedAssets } from "@jscontainer/ui";
 
 /* eslint-disable-next-line */
 export interface LibrarySelectProps {}
@@ -44,13 +45,16 @@ export function LibrarySelect(props: LibrarySelectProps) {
         items={libraryOptions}
         itemRenderer={(item: any) => {
           return (
-            <div>
+            <div className={styles.librarySelectItem}>
               <Tooltip2
                 content={item.latest}
                 position={Position.BOTTOM}
                 usePortal={true}
               >
-                <div title={item.latest}>{item.filename}</div>{" "}
+                <div title={item.latest}>
+                  <strong>{item.version}</strong>
+                  &nbsp; {item.filename}
+                </div>
               </Tooltip2>
             </div>
           );
@@ -81,9 +85,9 @@ export function LibrarySelect(props: LibrarySelectProps) {
         inputProps={{
           placeholder: "Search from local presets",
         }}
-        items={libraryOptions}
-        itemRenderer={(item: any) => {
-          return <>{item.filename}</>;
+        items={predefinedAssets}
+        itemRenderer={(item: string) => {
+          return <div className={styles.librarySelectItem}>{item}</div>;
         }}
         onQueryChange={(e) => {
           clearTimeout(timeout);

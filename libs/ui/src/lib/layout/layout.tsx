@@ -16,7 +16,9 @@ export function Layout(props: LayoutProps) {
   return (
     <div className={styles.layout}>
       <div className={styles.header}>
-        <a className={styles.headerBrand}>JSContainer</a>
+        <a className={styles.headerBrand} href="/">
+          JSContainer
+        </a>
         <div className={styles.headerContent}>
           {isContainerPage ? (
             <>

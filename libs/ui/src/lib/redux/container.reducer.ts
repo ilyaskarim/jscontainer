@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const state = {
   formData: {
-    html: "wow",
-    css: "style",
-    javascript: "log",
+    html: "",
+    css: "",
+    javascript: "",
     html_snippet: 1,
     assets: `["http://localhost:/app.js","http://localhost:/app2.js","http://localhost:/app3.js","http://localhost:/app5.js","http://localhost:/app4.js"]`,
     access: "[]",

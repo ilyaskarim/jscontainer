@@ -10,6 +10,8 @@ export * from "./lib/not-found/not-found";
 
 export * from "./lib/library-select/library-select";
 
+export * from "./lib/library-select/predefined";
+
 export * from "./lib/library-list/library-list";
 
 export * from "./lib/editor/editor";
