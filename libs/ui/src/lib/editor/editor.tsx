@@ -39,6 +39,7 @@ const files = {
 };
 
 import styles from "./editor.module.less";
+import toast from "react-hot-toast";
 
 /* eslint-disable-next-line */
 export interface EditorProps {}
@@ -178,14 +179,34 @@ export function Editor(props: EditorProps) {
       </div>
       <div className={styles.preview}>
         <div className={styles.previewHeader}>
-          <a href="javascript:void(0)" className={styles.previewURLCopy}>
+          <a
+            href="javascript:void(0)"
+            className={styles.previewURLCopy}
+            onClick={() => {
+              window.navigator.clipboard.writeText(window.location.href);
+              toast.success("Copied to clipboard!");
+            }}
+          >
             <Icon icon="link" />
           </a>
           <InputGroup
             value={`${APIURL}/preview/${containerFromRedux.slug}`}
-            size={20}
+            size={45}
             small={true}
           />
+          &nbsp; &nbsp;
+          <a
+            href="javascript:void(0)"
+            className={styles.previewURLCopy}
+            onClick={() => {
+              window.navigator.clipboard.writeText(
+                `${APIURL}/preview/${containerFromRedux.slug}`
+              );
+              toast.success("Copied preview URl to clipboard!");
+            }}
+          >
+            <Icon icon="duplicate" />
+          </a>
         </div>
         {containerFromRedux && containerFromRedux.slug && (
           <iframe

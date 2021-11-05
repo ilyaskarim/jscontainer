@@ -2,6 +2,7 @@ import {
   createContainerQuery,
   viewContainerQuery,
   axios,
+  updateContainerQuery,
 } from "@jscontainer/ui";
 import randomstring from "random-string";
 import { useQuery, useMutation } from "react-query";
@@ -22,6 +23,22 @@ export const useContainerQuery = (slug: string) => {
       enabled: false,
     }
   );
+};
+
+export const useContainerUpdateMutation = () => {
+  return useMutation("updateContainer", (containerData: any) => {
+    return axios.post("http://localhost:3333/graphql", {
+      query: updateContainerQuery,
+      variables: {
+        input: omit(containerData, ["id", "createdAt", "updatedAt", "parent"]),
+        where: {
+          id: {
+            _eq: containerData.id,
+          },
+        },
+      },
+    });
+  });
 };
 
 export const useContainerCreateMutation = () => {
