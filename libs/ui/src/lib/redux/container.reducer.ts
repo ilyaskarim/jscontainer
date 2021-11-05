@@ -6,7 +6,7 @@ const state = {
     css: "",
     javascript: "",
     html_snippet: 1,
-    assets: `["http://localhost:/app.js","http://localhost:/app2.js","http://localhost:/app3.js","http://localhost:/app5.js","http://localhost:/app4.js"]`,
+    assets: `[]`,
     access: "[]",
     title: "wow",
     description: "desc",

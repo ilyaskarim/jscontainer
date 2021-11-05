@@ -108,10 +108,14 @@ export function LibraryList(props: LibraryListProps) {
                   );
                   target.value = "";
                 } else {
-                  toast.error("Library already added.");
+                  toast.error("Library already added.", {
+                    position: "bottom-center",
+                  });
                 }
               } else {
-                toast.error("Invalid URL!");
+                toast.error("Invalid URL!", {
+                  position: "bottom-center",
+                });
               }
             }
           }}

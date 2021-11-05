@@ -69,7 +69,9 @@ export function LibrarySelect(props: LibrarySelectProps) {
                     })
                   );
                 } else {
-                  toast.error("Library already added.");
+                  toast.error("Library already added.", {
+                    position: "bottom-center",
+                  });
                 }
               }}
             >

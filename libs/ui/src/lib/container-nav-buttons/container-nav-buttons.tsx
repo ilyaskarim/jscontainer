@@ -44,6 +44,9 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
         dispatch(setContainerFormData(container));
         dispatch(resetChangedFields());
         history.push(`/c/${container.slug}`);
+        toast.success("Container Saved", {
+          position: "bottom-center",
+        });
       }
     }
   }, [createContainerData]);
@@ -54,17 +57,19 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
         disabled={notFoundContainer}
         onClick={async () => {
           if (changedFields.length === 0) {
-            toast.error("Please change something.");
+            toast.error("Please change something.", {
+              position: "bottom-center",
+            });
             return;
           }
           toast.remove();
           createContainer(containerFromRedux);
         }}
       >
-        <Icon icon="saved" />
-        &nbsp;&nbsp; Save
+        <Icon icon="saved" style={{ marginRight: "5px" }} />
+        Save
       </Button>
-      &nbsp; &nbsp;
+
       <Button
         intent="primary"
         disabled={notFoundContainer}
@@ -77,14 +82,12 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
           }
         }}
       >
-        <Icon icon="play" />
-        &nbsp; Run
+        <Icon icon="play" style={{ marginRight: "5px" }} />
+        Run
       </Button>
       {notFoundContainer && (
         <>
-          &nbsp; &nbsp;{" "}
           <a href="/">
-            {" "}
             <Button>Create new container</Button>{" "}
           </a>
         </>

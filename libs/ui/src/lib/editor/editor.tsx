@@ -209,7 +209,9 @@ export function Editor(props: EditorProps) {
               className={styles.previewURLCopy}
               onClick={() => {
                 window.navigator.clipboard.writeText(window.location.href);
-                toast.success("Copied to clipboard!");
+                toast.success("Copied to clipboard!", {
+                  position: "bottom-center",
+                });
               }}
             >
               <Icon icon="link" />
@@ -229,7 +231,9 @@ export function Editor(props: EditorProps) {
                 window.navigator.clipboard.writeText(
                   `${APIURL}/preview/${containerFromRedux.slug}`
                 );
-                toast.success("Copied preview URL to clipboard!");
+                toast.success("Copied preview URL to clipboard!", {
+                  position: "bottom-center",
+                });
               }}
             >
               <Icon icon="duplicate" />

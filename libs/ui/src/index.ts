@@ -30,4 +30,6 @@ export * from "./lib/container-nav-buttons/container-nav-buttons";
 
 export * from "./lib/graphql/query-client-provider";
 
+export * from "./lib/user-dropdown/user-dropdown";
+
 export * from "./lib/axios/axios";
