@@ -10,8 +10,11 @@ import {
   TextArea,
 } from "@blueprintjs/core";
 import {
+  APIURL,
   ContainerSettings,
+  NotFound,
   setContainerFormData,
+  setNotFoundContainer,
   useContainerQuery,
 } from "@jscontainer/ui";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,18 +49,33 @@ export function Editor(props: EditorProps) {
   const [fileName, setFileName] = useState<"javascript" | "css" | "html">(
     "html"
   );
-  const a = useContainerQuery();
+  const { refetch: fetchContainer } = useContainerQuery(params.slug);
   const [settingsDialog, setSettingsDialog] = useState<boolean>(false);
   const [containerInfoDrawer, setContainerInfoDrawer] = useState(false);
   const containerFromRedux = useSelector(
     (state: any) => state.container.formData
   );
+  const notFoundContainer = useSelector(
+    (state: any) => state.container.notFound
+  );
 
   useEffect(() => {
     if (params.slug) {
-      console.log(a);
+      fetchContainer().then((resp) => {
+        const viewContainer = resp?.data?.data?.data?.viewContainer;
+        if (viewContainer) {
+          dispatch(setContainerFormData(viewContainer));
+          dispatch(setNotFoundContainer(false));
+        } else {
+          dispatch(setNotFoundContainer(true));
+        }
+      });
     }
   }, []);
+
+  if (notFoundContainer) {
+    return <NotFound></NotFound>;
+  }
 
   return (
     <div className={styles.editor}>
@@ -175,10 +193,12 @@ export function Editor(props: EditorProps) {
             small={true}
           />
         </div>
-        <iframe
-          className={styles.previewFrame}
-          src="http://localhost:4a200/asdfasdf"
-        ></iframe>
+        {containerFromRedux && containerFromRedux.slug && (
+          <iframe
+            className={styles.previewFrame}
+            src={APIURL + "/preview/" + containerFromRedux.slug}
+          ></iframe>
+        )}
       </div>
 
       {/* Dialogs */}

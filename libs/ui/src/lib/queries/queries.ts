@@ -1,11 +1,21 @@
+const containerFields = `id
+title
+description
+html
+css
+javascript
+html_snippet
+slug
+assets
+access
+createdAt
+updatedAt`;
+
 export const createContainerQuery = `
     mutation($input: [createContainerInput!]) {
         createContainer(input: $input) {
         returning {
-            id
-            access
-            access
-            id
+            ${containerFields}
         }
         }
     }
@@ -15,19 +25,16 @@ export const updateContainerQuery = `
     mutation($input: updateContainerInput, $where: ContainerFilterInput!) {
         updateContainer(input: $input, where: $where) {
         returning {
-            id
-            access
-            access
-            id
+            ${containerFields}
         }
         }
     }  
 `;
 
 export const viewContainerQuery = `
-    query ViewContainer{
-    viewContainer(where: { id: { _eq: 67 } }) {
-        id
+    query ViewContainer($slug: String!) {
+    viewContainer(where: { slug: { _eq: $slug } }) {
+        ${containerFields}
     }
     }
 `;

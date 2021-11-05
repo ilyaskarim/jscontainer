@@ -1,4 +1,5 @@
 import axiosInstance from "axios";
+export const APIURL = "http://localhost:3333";
 export const axios = axiosInstance.create({
-  baseURL: "http://localhost:3333",
+  baseURL: APIURL,
 });

@@ -15,6 +15,7 @@ const state = {
     forkedFrom: null,
     userId: null,
   },
+  notFound: false,
   libraiesList: [],
 };
 
@@ -24,6 +25,9 @@ export default createSlice({
   reducers: {
     setContainerFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
+    },
+    setNotFoundContainer: (state, action) => {
+      state.notFound = action.payload;
     },
     setLibrariesList: (state, action) => {
       state.libraiesList = action.payload;

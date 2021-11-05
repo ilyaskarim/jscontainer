@@ -1,5 +1,4 @@
 import styles from "./layout.module.less";
-import { Button, Icon } from "@blueprintjs/core";
 import { ContainerNavButtons } from "@jscontainer/ui";
 
 /* eslint-disable-next-line */
