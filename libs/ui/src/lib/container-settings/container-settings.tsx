@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 export interface ContainerSettingsProps {}
 
 export function ContainerSettings(props: ContainerSettingsProps) {
-  const [viewTab, setViewTab] = useState("settings");
+  const [viewTab, setViewTab] = useState("assets");
   const containerFromRedux = useSelector(
     (state: any) => state.container.formData
   );

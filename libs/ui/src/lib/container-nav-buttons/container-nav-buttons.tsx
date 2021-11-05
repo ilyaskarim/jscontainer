@@ -53,7 +53,18 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
         &nbsp;&nbsp; Save
       </Button>
       &nbsp; &nbsp;
-      <Button intent="primary" disabled={notFoundContainer}>
+      <Button
+        intent="primary"
+        disabled={notFoundContainer}
+        onClick={() => {
+          const frame: HTMLIFrameElement | null = document.getElementById(
+            "previewIframe"
+          ) as HTMLIFrameElement;
+          if (frame) {
+            frame.src = frame.src;
+          }
+        }}
+      >
         <Icon icon="play" />
         &nbsp; Run
       </Button>

@@ -102,14 +102,12 @@ export function Editor(props: EditorProps) {
                 value={containerFromRedux.html}
                 defaultLanguage="html"
                 onChange={(e: string | undefined) => {
-                  if (e) {
-                    files.html.value = e;
-                    dispatch(
-                      setContainerFormData({
-                        html: e,
-                      })
-                    );
-                  }
+                  files.html.value = e ? e : "";
+                  dispatch(
+                    setContainerFormData({
+                      html: e ? e : "",
+                    })
+                  );
                 }}
               />
             }
@@ -130,14 +128,12 @@ export function Editor(props: EditorProps) {
                 value={containerFromRedux.css}
                 defaultLanguage="css"
                 onChange={(e: string | undefined) => {
-                  if (e) {
-                    files.css.value = e;
-                    dispatch(
-                      setContainerFormData({
-                        css: e,
-                      })
-                    );
-                  }
+                  files.css.value = e ? e : "";
+                  dispatch(
+                    setContainerFormData({
+                      css: e ? e : "",
+                    })
+                  );
                 }}
               />
             }
@@ -158,14 +154,12 @@ export function Editor(props: EditorProps) {
                 value={containerFromRedux.javascript}
                 defaultLanguage="javascript"
                 onChange={(e: string | undefined) => {
-                  if (e) {
-                    files.javascript.value = e;
-                    dispatch(
-                      setContainerFormData({
-                        javascript: e,
-                      })
-                    );
-                  }
+                  files.javascript.value = e ? e : "";
+                  dispatch(
+                    setContainerFormData({
+                      javascript: e ? e : "",
+                    })
+                  );
                 }}
               />
             }
@@ -188,15 +182,17 @@ export function Editor(props: EditorProps) {
             <Icon icon="link" />
           </a>
           <InputGroup
-            placeholder={window.location.host}
+            value={`${APIURL}/preview/${containerFromRedux.slug}`}
             size={20}
             small={true}
           />
         </div>
         {containerFromRedux && containerFromRedux.slug && (
           <iframe
+            key={containerFromRedux.id}
             className={styles.previewFrame}
             src={APIURL + "/preview/" + containerFromRedux.slug}
+            id="previewIframe"
           ></iframe>
         )}
       </div>
@@ -228,7 +224,7 @@ export function Editor(props: EditorProps) {
                 })
               );
             }}
-            placeholder="Title"
+            placeholder="Untitled container"
           ></InputGroup>
 
           <br />

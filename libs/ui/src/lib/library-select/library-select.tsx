@@ -6,8 +6,9 @@ import { Select } from "@blueprintjs/select";
 import { Button, MenuItem, Position } from "@blueprintjs/core";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { predefinedAssets } from "@jscontainer/ui";
+import { useDispatch, useSelector } from "react-redux";
+import { predefinedAssets, setContainerFormData } from "@jscontainer/ui";
+import toast from "react-hot-toast";
 
 /* eslint-disable-next-line */
 export interface LibrarySelectProps {}
@@ -18,6 +19,14 @@ export function LibrarySelect(props: LibrarySelectProps) {
   const [searchInput, setSearchInput] = useState("");
   const [libraryOptions, setLibraryOptions] = useState([]);
   const dispatch = useDispatch();
+  const containerFromRedux = useSelector(
+    (state: any) => state.container.formData
+  );
+
+  const list: Array<string> =
+    typeof containerFromRedux.assets === "object"
+      ? containerFromRedux.assets
+      : [...JSON.parse(containerFromRedux.assets)] ?? [];
 
   const fetchLibraries = (term: string) => {
     axios
@@ -45,13 +54,26 @@ export function LibrarySelect(props: LibrarySelectProps) {
         items={libraryOptions}
         itemRenderer={(item: any) => {
           return (
-            <div className={styles.librarySelectItem}>
+            <div
+              className={styles.librarySelectItem}
+              onClick={() => {
+                if (!list.includes(item.latest)) {
+                  dispatch(
+                    setContainerFormData({
+                      assets: JSON.stringify([...list, item.latest]),
+                    })
+                  );
+                } else {
+                  toast.error("Library already added.");
+                }
+              }}
+            >
               <Tooltip2
                 content={item.latest}
                 position={Position.BOTTOM}
                 usePortal={true}
               >
-                <div title={item.latest}>
+                <div>
                   <strong>{item.version}</strong>
                   &nbsp; {item.filename}
                 </div>
@@ -86,8 +108,8 @@ export function LibrarySelect(props: LibrarySelectProps) {
           placeholder: "Search from local presets",
         }}
         items={predefinedAssets}
-        itemRenderer={(item: string) => {
-          return <div className={styles.librarySelectItem}>{item}</div>;
+        itemRenderer={(item) => {
+          return <div className={styles.librarySelectItem}>{item.label}</div>;
         }}
         onQueryChange={(e) => {
           clearTimeout(timeout);
