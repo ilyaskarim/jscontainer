@@ -1,7 +1,11 @@
 import styles from "./library-list.module.less";
 import { Button, Card, InputGroup } from "@blueprintjs/core";
 import { useSelector, useDispatch } from "react-redux";
-import { arrayMove, setContainerFormData } from "@jscontainer/ui";
+import {
+  arrayMove,
+  setChangedFields,
+  setContainerFormData,
+} from "@jscontainer/ui";
 import toast from "react-hot-toast";
 
 /* eslint-disable-next-line */
@@ -23,6 +27,7 @@ export function LibraryList(props: LibraryListProps) {
 
     nList.splice(index, 1);
 
+    dispatch(setChangedFields("assets"));
     dispatch(
       setContainerFormData({
         assets: JSON.stringify(nList),
@@ -95,6 +100,7 @@ export function LibraryList(props: LibraryListProps) {
                   return;
                 }
                 if (!list.includes(target.value)) {
+                  dispatch(setChangedFields("assets"));
                   dispatch(
                     setContainerFormData({
                       assets: JSON.stringify([...list, target.value]),

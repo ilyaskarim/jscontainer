@@ -8,8 +8,13 @@ export const Store = configureStore({
   },
 });
 
-export const { setContainerFormData, setLibrariesList, setNotFoundContainer } =
-  containerReducer.actions;
+export const {
+  setContainerFormData,
+  setLibrariesList,
+  setNotFoundContainer,
+  setChangedFields,
+  resetChangedFields,
+} = containerReducer.actions;
 
 export const StoreProvider = (props: { children: React.ReactNode }) => (
   <Provider store={Store}>{props.children}</Provider>

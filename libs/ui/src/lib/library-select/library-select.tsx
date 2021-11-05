@@ -7,7 +7,11 @@ import { Button, MenuItem, Position } from "@blueprintjs/core";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { predefinedAssets, setContainerFormData } from "@jscontainer/ui";
+import {
+  predefinedAssets,
+  setChangedFields,
+  setContainerFormData,
+} from "@jscontainer/ui";
 import toast from "react-hot-toast";
 
 /* eslint-disable-next-line */
@@ -58,6 +62,7 @@ export function LibrarySelect(props: LibrarySelectProps) {
               className={styles.librarySelectItem}
               onClick={() => {
                 if (!list.includes(item.latest)) {
+                  dispatch(setChangedFields("assets"));
                   dispatch(
                     setContainerFormData({
                       assets: JSON.stringify([...list, item.latest]),

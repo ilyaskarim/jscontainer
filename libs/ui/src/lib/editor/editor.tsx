@@ -13,6 +13,7 @@ import {
   APIURL,
   ContainerSettings,
   NotFound,
+  setChangedFields,
   setContainerFormData,
   setNotFoundContainer,
   useContainerQuery,
@@ -40,6 +41,7 @@ const files = {
 
 import styles from "./editor.module.less";
 import toast from "react-hot-toast";
+import { Tooltip2 } from "@blueprintjs/popover2";
 
 /* eslint-disable-next-line */
 export interface EditorProps {}
@@ -59,6 +61,25 @@ export function Editor(props: EditorProps) {
   const notFoundContainer = useSelector(
     (state: any) => state.container.notFound
   );
+
+  // const handleOnKeyDown = (e: KeyboardEvent) => {
+  //   if (e.metaKey || e.ctrlKey) {
+  //     if (e.key === "s") {
+  //       if (document.activeElement?.classList.contains("inputarea")) {
+  //         e.preventDefault();
+  //         createContainer(containerFromRedux);
+  //       }
+  //     }
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   document.addEventListener("keydown", handleOnKeyDown);
+
+  //   return () => {
+  //     document.removeEventListener("keydown", handleOnKeyDown);
+  //   };
+  // }, [containerFromRedux]);
 
   useEffect(() => {
     if (params.slug) {
@@ -103,6 +124,7 @@ export function Editor(props: EditorProps) {
                 value={containerFromRedux.html}
                 defaultLanguage="html"
                 onChange={(e: string | undefined) => {
+                  dispatch(setChangedFields("html"));
                   files.html.value = e ? e : "";
                   dispatch(
                     setContainerFormData({
@@ -129,6 +151,7 @@ export function Editor(props: EditorProps) {
                 value={containerFromRedux.css}
                 defaultLanguage="css"
                 onChange={(e: string | undefined) => {
+                  dispatch(setChangedFields("css"));
                   files.css.value = e ? e : "";
                   dispatch(
                     setContainerFormData({
@@ -155,6 +178,7 @@ export function Editor(props: EditorProps) {
                 value={containerFromRedux.javascript}
                 defaultLanguage="javascript"
                 onChange={(e: string | undefined) => {
+                  dispatch(setChangedFields("javascript"));
                   files.javascript.value = e ? e : "";
                   dispatch(
                     setContainerFormData({
@@ -179,34 +203,38 @@ export function Editor(props: EditorProps) {
       </div>
       <div className={styles.preview}>
         <div className={styles.previewHeader}>
-          <a
-            href="javascript:void(0)"
-            className={styles.previewURLCopy}
-            onClick={() => {
-              window.navigator.clipboard.writeText(window.location.href);
-              toast.success("Copied to clipboard!");
-            }}
-          >
-            <Icon icon="link" />
-          </a>
+          <Tooltip2 content="Copy container link to clipboard">
+            <a
+              href="javascript:void(0)"
+              className={styles.previewURLCopy}
+              onClick={() => {
+                window.navigator.clipboard.writeText(window.location.href);
+                toast.success("Copied to clipboard!");
+              }}
+            >
+              <Icon icon="link" />
+            </a>
+          </Tooltip2>
           <InputGroup
             value={`${APIURL}/preview/${containerFromRedux.slug}`}
             size={45}
             small={true}
           />
           &nbsp; &nbsp;
-          <a
-            href="javascript:void(0)"
-            className={styles.previewURLCopy}
-            onClick={() => {
-              window.navigator.clipboard.writeText(
-                `${APIURL}/preview/${containerFromRedux.slug}`
-              );
-              toast.success("Copied preview URl to clipboard!");
-            }}
-          >
-            <Icon icon="duplicate" />
-          </a>
+          <Tooltip2 content="Copy container preview URL to clipboard">
+            <a
+              href="javascript:void(0)"
+              className={styles.previewURLCopy}
+              onClick={() => {
+                window.navigator.clipboard.writeText(
+                  `${APIURL}/preview/${containerFromRedux.slug}`
+                );
+                toast.success("Copied preview URL to clipboard!");
+              }}
+            >
+              <Icon icon="duplicate" />
+            </a>
+          </Tooltip2>
         </div>
         {containerFromRedux && containerFromRedux.slug && (
           <iframe
@@ -239,6 +267,7 @@ export function Editor(props: EditorProps) {
           <InputGroup
             value={containerFromRedux.title}
             onChange={(e) => {
+              dispatch(setChangedFields("title"));
               dispatch(
                 setContainerFormData({
                   title: e.target.value,
@@ -252,6 +281,7 @@ export function Editor(props: EditorProps) {
           <TextArea
             value={containerFromRedux.description}
             onChange={(e) => {
+              dispatch(setChangedFields("description"));
               dispatch(
                 setContainerFormData({
                   description: e.target.value,

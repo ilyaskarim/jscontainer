@@ -1,7 +1,11 @@
 import styles from "./container-settings.module.less";
 import { Tab, Tabs, Checkbox, Icon } from "@blueprintjs/core";
 import { useState } from "react";
-import { ContainerAssets, setContainerFormData } from "@jscontainer/ui";
+import {
+  ContainerAssets,
+  setChangedFields,
+  setContainerFormData,
+} from "@jscontainer/ui";
 import { useDispatch, useSelector } from "react-redux";
 
 /* eslint-disable-next-line */
@@ -34,6 +38,7 @@ export function ContainerSettings(props: ContainerSettingsProps) {
                 value={containerFromRedux.html_snippet}
                 defaultChecked={containerFromRedux.html_snippet}
                 onChange={(e) => {
+                  dispatch(setChangedFields("assets"));
                   dispatch(
                     setContainerFormData({
                       html_snippet: (e.target as any).checked ? 1 : 0,

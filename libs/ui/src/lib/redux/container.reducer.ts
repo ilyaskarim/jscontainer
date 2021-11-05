@@ -17,6 +17,7 @@ const state = {
   },
   notFound: false,
   libraiesList: [],
+  changedFields: [] as Array<string>,
 };
 
 export default createSlice({
@@ -25,6 +26,14 @@ export default createSlice({
   reducers: {
     setContainerFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
+    },
+    resetChangedFields: (state) => {
+      state.changedFields = [];
+    },
+    setChangedFields: (state, action) => {
+      if (!state.changedFields.includes(action.payload)) {
+        state.changedFields.push(action.payload as string);
+      }
     },
     setNotFoundContainer: (state, action) => {
       state.notFound = action.payload;

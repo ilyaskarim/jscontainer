@@ -1,6 +1,7 @@
 import "./container-nav-buttons.module.less";
 import { Button, Icon } from "@blueprintjs/core";
 import {
+  resetChangedFields,
   setContainerFormData,
   useContainerCreateMutation,
 } from "@jscontainer/ui";
@@ -9,6 +10,7 @@ import { useEffect } from "react";
 import { get } from "lodash";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 /* eslint-disable-next-line */
 export interface ContainerNavButtonsProps {}
@@ -18,6 +20,10 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
   const dispatch = useDispatch();
   const containerFromRedux = useSelector(
     (state: any) => state.container.formData
+  );
+
+  const changedFields = useSelector(
+    (state: any) => state.container.changedFields
   );
 
   const notFoundContainer = useSelector(
@@ -36,6 +42,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
       );
       if (container) {
         dispatch(setContainerFormData(container));
+        dispatch(resetChangedFields());
         history.push(`/c/${container.slug}`);
       }
     }
@@ -46,6 +53,11 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
       <Button
         disabled={notFoundContainer}
         onClick={async () => {
+          if (changedFields.length === 0) {
+            toast.error("Please change something.");
+            return;
+          }
+          toast.remove();
           createContainer(containerFromRedux);
         }}
       >
