@@ -19,7 +19,7 @@ setTimeout(() => {
 }, 5000);
 
 import wertik, { useGraphql, useModule, useDatabase } from "wertik-js/lib/next";
-import { handleGithubAuth, handleGoogleAuth } from "./auth";
+import { handleGithubAuth, handleGoogleAuth, AuthRoutes } from "./auth";
 import { containerPreview } from "./preview";
 
 const passport = require("passport");
@@ -87,6 +87,11 @@ wertik({
       name: "User",
       database: "jscontainer",
       table: "users",
+      on: function ({ useExpress }) {
+        useExpress((express: any) => {
+          AuthRoutes(express, passport);
+        });
+      },
     }),
     Container: useModule({
       useDatabase: true,
@@ -95,47 +100,6 @@ wertik({
       table: "containers",
       on: function ({ useExpress }) {
         useExpress((express: any) => {
-          express.get(
-            "/auth/github",
-            passport.authenticate("github", {
-              scope: ["user:email"],
-              session: true,
-              passReqToCallback: true,
-            })
-          );
-
-          express.get(
-            "/auth/github/callback",
-            passport.authenticate("github", {
-              failureRedirect: "/login",
-              session: true,
-            }),
-            function (req, res) {
-              // Successful authentication, redirect home.
-              res.redirect("/");
-            }
-          );
-
-          express.get(
-            "/auth/google",
-            passport.authenticate("google", {
-              scope: [
-                "https://www.googleapis.com/auth/userinfo.profile",
-                "https://www.googleapis.com/auth/userinfo.email",
-              ],
-            })
-          );
-
-          express.get(
-            "/auth/google/callback",
-            passport.authenticate("google", {
-              failureRedirect: "/login",
-              session: true,
-            }),
-            function (req, res) {
-              res.redirect("/");
-            }
-          );
           containerPreview(express);
         });
       },

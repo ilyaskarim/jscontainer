@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
       <QueryClientProvider>
         <StoreProvider>
           <Toaster />
-          <Component {...pageProps} />{" "}
+          <Component {...pageProps} />
         </StoreProvider>
       </QueryClientProvider>
     </>

@@ -116,3 +116,47 @@ export const handleGithubAuth = (passport, GitHubStrategy) => {
     )
   );
 };
+
+export const AuthRoutes = (express, passport) => {
+  express.get(
+    "/auth/github",
+    passport.authenticate("github", {
+      scope: ["user:email"],
+      session: true,
+      passReqToCallback: true,
+    })
+  );
+
+  express.get(
+    "/auth/github/callback",
+    passport.authenticate("github", {
+      failureRedirect: "/login",
+      session: true,
+    }),
+    function (req, res) {
+      // Successful authentication, redirect home.
+      res.redirect("/");
+    }
+  );
+
+  express.get(
+    "/auth/google",
+    passport.authenticate("google", {
+      scope: [
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/userinfo.email",
+      ],
+    })
+  );
+
+  express.get(
+    "/auth/google/callback",
+    passport.authenticate("google", {
+      failureRedirect: "/login",
+      session: true,
+    }),
+    function (req, res) {
+      res.redirect("/");
+    }
+  );
+};
