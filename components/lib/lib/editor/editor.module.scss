@@ -3,7 +3,7 @@
   .editors {
     width: 50%;
     border-right: 1px solid #eee;
-    height: 100vh;
+    height: calc(100vh - 60px);
     .tabs {
       padding: 0 16px;
     }
@@ -13,6 +13,7 @@
     .previewFrame {
       width: 100%;
       height: calc(100vh - 105px);
+      background: white;
       border: 0;
     }
     .previewURLCopy {
@@ -24,6 +25,14 @@
       background: #f5f8fa;
       display: flex;
       padding: 10px;
+    }
+  }
+  &.dark {
+    .editors {
+      border-right-color: darken($color: #1e1e1e, $amount: 4);
+    }
+    .previewHeader {
+      background-color: #1e1e1e;
     }
   }
 }

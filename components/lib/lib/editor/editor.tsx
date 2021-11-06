@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import classnames from "classnames";
 import MonacoReactEditor from "@monaco-editor/react";
 import {
   Tab,
@@ -61,6 +62,7 @@ export function Editor(props: EditorProps) {
   const containerFromRedux = useSelector(
     (state: any) => state.container.formData
   );
+  const theme = useSelector((state: any) => state.container.theme);
   const notFoundContainer = useSelector(
     (state: any) => state.container.notFound
   );
@@ -68,8 +70,8 @@ export function Editor(props: EditorProps) {
   const javascriptProps = {
     loading: "Loading editor please wait",
     height: "calc(100vh - 50px)",
+    theme: theme === "dark" ? "vs-dark" : "",
     options: {
-      lineNumbers: "off",
       minimap: {
         enabled: false,
       },
@@ -129,7 +131,12 @@ export function Editor(props: EditorProps) {
   }
 
   return (
-    <div className={styles.editor}>
+    <div
+      className={classnames({
+        [styles.editor]: true,
+        [styles.dark]: theme === "dark",
+      })}
+    >
       <div className={styles.editors}>
         <Tabs
           id="TabsExample"
@@ -147,11 +154,11 @@ export function Editor(props: EditorProps) {
                 loading={"Loading editor please wait"}
                 height="calc(100vh - 50px)"
                 options={{
-                  lineNumbers: "off",
                   minimap: {
                     enabled: false,
                   },
                 }}
+                theme={theme === "dark" ? "vs-dark" : ""}
                 value={containerFromRedux.html}
                 defaultLanguage="html"
                 onChange={(e: string | undefined) => {
@@ -174,11 +181,11 @@ export function Editor(props: EditorProps) {
                 loading={"Loading editor please wait"}
                 height="calc(100vh - 50px)"
                 options={{
-                  lineNumbers: "off",
                   minimap: {
                     enabled: false,
                   },
                 }}
+                theme={theme === "dark" ? "vs-dark" : ""}
                 value={containerFromRedux.css}
                 defaultLanguage="css"
                 onChange={(e: string | undefined) => {
@@ -283,12 +290,14 @@ export function Editor(props: EditorProps) {
       {/* Dialogs */}
       <Dialog
         isOpen={settingsDialog}
+        className={theme === "dark" && "bp3-dark"}
         onClose={() => setSettingsDialog(false)}
         title="Container Settings"
       >
         <ContainerSettings />
       </Dialog>
       <Drawer
+        className={theme === "dark" && "bp3-dark"}
         isOpen={containerInfoDrawer}
         usePortal={true}
         size={300}

@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const state = {
   formData: {
-    html: "",
-    css: "",
-    javascript: "",
+    html: "<!-- HTML -->",
+    css: "/* CSS */",
+    javascript: "// Javascript",
     html_snippet: 1,
     assets: `[]`,
     access: "[]",
@@ -17,6 +17,7 @@ const state = {
     typescript: 0,
   },
   notFound: false,
+  theme: "dark",
   libraiesList: [],
   changedFields: [] as Array<string>,
 };
@@ -25,6 +26,9 @@ export default createSlice({
   name: "Container",
   initialState: state,
   reducers: {
+    setTheme(state, action) {
+      state.theme = action.payload;
+    },
     setContainerFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
     },

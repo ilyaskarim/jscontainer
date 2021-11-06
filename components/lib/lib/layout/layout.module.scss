@@ -30,10 +30,21 @@
   }
   .content {
     background-color: white;
-    height: 100vh;
   }
   .footer {
     background-color: #eee;
     padding: 20px;
+  }
+  &.dark {
+    .content,
+    .header {
+      background-color: #1e1e1e;
+    }
+    .header {
+      border-bottom-color: darken($color: #1e1e1e, $amount: 4);
+    }
+    .headerBrand {
+      color: #c1c1c1;
+    }
   }
 }

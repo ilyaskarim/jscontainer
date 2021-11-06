@@ -1,5 +1,7 @@
 import styles from "./layout.module.scss";
 import { ContainerNavButtons, UserDropdown } from "../../index";
+import { useSelector } from "react-redux";
+import classnames from "classnames";
 
 /* eslint-disable-next-line */
 export interface LayoutProps {
@@ -13,8 +15,17 @@ export function Layout(props: LayoutProps) {
   const loggedIn = props.loggedIn ?? false;
   const isContainerPage = props.isContainerPage ?? true;
   const showFooter = props.showFooter ?? true;
+  const theme = useSelector((state: any) => state.container.theme);
+
+  console.log(styles);
+
   return (
-    <div className={styles.layout}>
+    <div
+      className={classnames({
+        [styles.layout]: true,
+        [styles.dark]: theme === "dark",
+      })}
+    >
       <div className={styles.header}>
         <a className={styles.headerBrand} href="/">
           JSContainer
