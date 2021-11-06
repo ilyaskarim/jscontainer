@@ -3,6 +3,7 @@ title
 description
 html
 css
+typescript
 javascript
 html_snippet
 slug

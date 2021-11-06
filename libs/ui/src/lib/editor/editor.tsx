@@ -8,6 +8,8 @@ import {
   InputGroup,
   Drawer,
   TextArea,
+  Overlay,
+  Spinner,
 } from "@blueprintjs/core";
 import {
   APIURL,
@@ -52,7 +54,8 @@ export function Editor(props: EditorProps) {
   const [fileName, setFileName] = useState<"javascript" | "css" | "html">(
     "html"
   );
-  const { refetch: fetchContainer } = useContainerQuery(params.slug);
+  const { refetch: fetchContainer, isLoading: isLoadingContainer } =
+    useContainerQuery(params.slug);
   const [settingsDialog, setSettingsDialog] = useState<boolean>(false);
   const [containerInfoDrawer, setContainerInfoDrawer] = useState(false);
   const containerFromRedux = useSelector(
@@ -94,6 +97,10 @@ export function Editor(props: EditorProps) {
       });
     }
   }, []);
+
+  if (isLoadingContainer) {
+    return <Spinner className={styles.loader} intent="primary"></Spinner>;
+  }
 
   if (notFoundContainer) {
     return <NotFound></NotFound>;
@@ -176,7 +183,7 @@ export function Editor(props: EditorProps) {
                   },
                 }}
                 value={containerFromRedux.javascript}
-                defaultLanguage="javascript"
+                defaultLanguage="typescript"
                 onChange={(e: string | undefined) => {
                   dispatch(setChangedFields("javascript"));
                   files.javascript.value = e ? e : "";
@@ -201,54 +208,56 @@ export function Editor(props: EditorProps) {
           </a>
         </Tabs>
       </div>
-      <div className={styles.preview}>
-        <div className={styles.previewHeader}>
-          <Tooltip2 content="Copy container link to clipboard">
-            <a
-              href="javascript:void(0)"
-              className={styles.previewURLCopy}
-              onClick={() => {
-                window.navigator.clipboard.writeText(window.location.href);
-                toast.success("Copied to clipboard!", {
-                  position: "bottom-center",
-                });
-              }}
-            >
-              <Icon icon="link" />
-            </a>
-          </Tooltip2>
-          <InputGroup
-            value={`${APIURL}/preview/${containerFromRedux.slug}`}
-            size={45}
-            small={true}
-          />
-          &nbsp; &nbsp;
-          <Tooltip2 content="Copy container preview URL to clipboard">
-            <a
-              href="javascript:void(0)"
-              className={styles.previewURLCopy}
-              onClick={() => {
-                window.navigator.clipboard.writeText(
-                  `${APIURL}/preview/${containerFromRedux.slug}`
-                );
-                toast.success("Copied preview URL to clipboard!", {
-                  position: "bottom-center",
-                });
-              }}
-            >
-              <Icon icon="duplicate" />
-            </a>
-          </Tooltip2>
+      {containerFromRedux.slug && (
+        <div className={styles.preview}>
+          <div className={styles.previewHeader}>
+            <Tooltip2 content="Copy container link to clipboard">
+              <a
+                href="javascript:void(0)"
+                className={styles.previewURLCopy}
+                onClick={() => {
+                  window.navigator.clipboard.writeText(window.location.href);
+                  toast.success("Copied to clipboard!", {
+                    position: "bottom-center",
+                  });
+                }}
+              >
+                <Icon icon="link" />
+              </a>
+            </Tooltip2>
+            <InputGroup
+              value={`${APIURL}/preview/${containerFromRedux.slug}`}
+              size={45}
+              small={true}
+            />
+            &nbsp; &nbsp;
+            <Tooltip2 content="Copy container preview URL to clipboard">
+              <a
+                href="javascript:void(0)"
+                className={styles.previewURLCopy}
+                onClick={() => {
+                  window.navigator.clipboard.writeText(
+                    `${APIURL}/preview/${containerFromRedux.slug}`
+                  );
+                  toast.success("Copied preview URL to clipboard!", {
+                    position: "bottom-center",
+                  });
+                }}
+              >
+                <Icon icon="duplicate" />
+              </a>
+            </Tooltip2>
+          </div>
+          {containerFromRedux && containerFromRedux.slug && (
+            <iframe
+              key={containerFromRedux.id}
+              className={styles.previewFrame}
+              src={APIURL + "/preview/" + containerFromRedux.slug}
+              id="previewIframe"
+            ></iframe>
+          )}
         </div>
-        {containerFromRedux && containerFromRedux.slug && (
-          <iframe
-            key={containerFromRedux.id}
-            className={styles.previewFrame}
-            src={APIURL + "/preview/" + containerFromRedux.slug}
-            id="previewIframe"
-          ></iframe>
-        )}
-      </div>
+      )}
 
       {/* Dialogs */}
       <Dialog
@@ -296,7 +305,6 @@ export function Editor(props: EditorProps) {
           ></TextArea>
         </div>
       </Drawer>
-      {/* Dialogs */}
     </div>
   );
 }

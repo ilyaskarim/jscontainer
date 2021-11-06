@@ -8,6 +8,7 @@ exports.up = function (knex) {
               css text,
               javascript text,
               parent int(11) DEFAULT NULL,
+              typescript int(11) DEFAULT NULL,
               assets json DEFAULT NULL,
               access json DEFAULT NULL,
               is_private tinyint(1) DEFAULT NULL,

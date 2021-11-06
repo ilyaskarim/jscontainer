@@ -14,6 +14,7 @@ const state = {
     parent: null,
     forkedFrom: null,
     userId: null,
+    typescript: 0,
   },
   notFound: false,
   libraiesList: [],

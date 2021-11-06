@@ -34,20 +34,38 @@ export function ContainerSettings(props: ContainerSettingsProps) {
           title="Settings"
           panel={
             <div>
-              <Checkbox
-                value={containerFromRedux.html_snippet}
-                defaultChecked={containerFromRedux.html_snippet}
-                onChange={(e) => {
-                  dispatch(setChangedFields("assets"));
-                  dispatch(
-                    setContainerFormData({
-                      html_snippet: (e.target as any).checked ? 1 : 0,
-                    })
-                  );
-                }}
-              >
-                Include HTML 5 Snippet
-              </Checkbox>
+              <div>
+                <Checkbox
+                  value={containerFromRedux.html_snippet}
+                  defaultChecked={containerFromRedux.html_snippet}
+                  onChange={(e) => {
+                    dispatch(setChangedFields("assets"));
+                    dispatch(
+                      setContainerFormData({
+                        html_snippet: (e.target as any).checked ? 1 : 0,
+                      })
+                    );
+                  }}
+                >
+                  Include HTML 5 Snippet
+                </Checkbox>
+              </div>
+              <div>
+                <Checkbox
+                  value={containerFromRedux.typescript}
+                  defaultChecked={containerFromRedux.typescript}
+                  onChange={(e) => {
+                    dispatch(setChangedFields("typescript"));
+                    dispatch(
+                      setContainerFormData({
+                        typescript: (e.target as any).checked ? 1 : 0,
+                      })
+                    );
+                  }}
+                >
+                  Typescript
+                </Checkbox>
+              </div>
             </div>
           }
         />
