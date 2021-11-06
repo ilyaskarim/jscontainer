@@ -1,9 +1,3 @@
-const presets = {};
-
-const handleSelect = (name: string) => {
-  console.log(handleSelect);
-};
-
 export const predefinedAssets = [
   {
     label: "Froala",
