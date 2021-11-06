@@ -1,4 +1,16 @@
 import { has } from "lodash";
+import * as ts from "typescript";
+
+function tsCompile(
+  source: string,
+  options: ts.TranspileOptions = null
+): string {
+  // Default options -- you could also perform a merge, or use the project tsconfig.json
+  if (null === options) {
+    options = { compilerOptions: { module: ts.ModuleKind.CommonJS } };
+  }
+  return ts.transpileModule(source, options).outputText;
+}
 
 export const containerPreview = (express) => {
   express.get("/preview/:slug", async function (req, res) {
@@ -10,6 +22,11 @@ export const containerPreview = (express) => {
           },
           include: [],
         });
+
+      if (container.typescript === 1 || container.typescript === true) {
+        container.javascript = tsCompile(container.javascript);
+      }
+
       if (!container) {
         res.status(404).send("Container not found");
       }

@@ -49,13 +49,13 @@ import { useRouter } from "next/router";
 export interface EditorProps {}
 
 export function Editor(props: EditorProps) {
-  const params: { [key: string]: any } = useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
-  const [fileName, setFileName] = useState<"javascript" | "css" | "html">(
-    "html"
-  );
+  const [fileName, setFileName] = useState<
+    "javascript" | "typescript" | "css" | "html"
+  >("html");
   const { refetch: fetchContainer, isLoading: isLoadingContainer } =
-    useContainerQuery(params.slug);
+    useContainerQuery(router.query.slug as string);
   const [settingsDialog, setSettingsDialog] = useState<boolean>(false);
   const [containerInfoDrawer, setContainerInfoDrawer] = useState(false);
   const containerFromRedux = useSelector(
@@ -64,6 +64,28 @@ export function Editor(props: EditorProps) {
   const notFoundContainer = useSelector(
     (state: any) => state.container.notFound
   );
+
+  const javascriptProps = {
+    loading: "Loading editor please wait",
+    height: "calc(100vh - 50px)",
+    options: {
+      lineNumbers: "off",
+      minimap: {
+        enabled: false,
+      },
+    },
+    value: containerFromRedux.javascript,
+
+    onChange: (e: string | undefined) => {
+      dispatch(setChangedFields("javascript"));
+      files.javascript.value = e ? e : "";
+      dispatch(
+        setContainerFormData({
+          javascript: e ? e : "",
+        })
+      );
+    },
+  };
 
   // const handleOnKeyDown = (e: KeyboardEvent) => {
   //   if (e.metaKey || e.ctrlKey) {
@@ -85,7 +107,7 @@ export function Editor(props: EditorProps) {
   // }, [containerFromRedux]);
 
   useEffect(() => {
-    if (params.slug) {
+    if (router.query.slug) {
       fetchContainer().then((resp) => {
         const viewContainer = resp?.data?.data?.data?.viewContainer;
         if (viewContainer) {
@@ -96,7 +118,7 @@ export function Editor(props: EditorProps) {
         }
       });
     }
-  }, []);
+  }, [router]);
 
   if (isLoadingContainer) {
     return <Spinner className={styles.loader} intent="primary"></Spinner>;
@@ -111,7 +133,9 @@ export function Editor(props: EditorProps) {
       <div className={styles.editors}>
         <Tabs
           id="TabsExample"
-          onChange={(e: "javascript" | "css" | "html") => setFileName(e)}
+          onChange={(e: "javascript" | "typescript" | "css" | "html") =>
+            setFileName(e)
+          }
           className={styles.tabs}
           selectedTabId={fileName}
         >
@@ -171,29 +195,22 @@ export function Editor(props: EditorProps) {
           />
           <Tab
             id="javascript"
-            title="Javascript"
+            title={containerFromRedux.typescript ? "Typescript" : "Javascript"}
             panel={
-              <MonacoReactEditor
-                loading={"Loading editor please wait"}
-                height="calc(100vh - 50px)"
-                options={{
-                  lineNumbers: "off",
-                  minimap: {
-                    enabled: false,
-                  },
-                }}
-                value={containerFromRedux.javascript}
-                defaultLanguage="typescript"
-                onChange={(e: string | undefined) => {
-                  dispatch(setChangedFields("javascript"));
-                  files.javascript.value = e ? e : "";
-                  dispatch(
-                    setContainerFormData({
-                      javascript: e ? e : "",
-                    })
-                  );
-                }}
-              />
+              containerFromRedux.typescript === 1 ||
+              containerFromRedux.typescript === true ? (
+                <>
+                  <MonacoReactEditor
+                    {...javascriptProps}
+                    defaultLanguage="typescript"
+                  />
+                </>
+              ) : (
+                <MonacoReactEditor
+                  {...javascriptProps}
+                  defaultLanguage="javascript"
+                />
+              )
             }
           />
           <Tabs.Expander />
@@ -226,7 +243,9 @@ export function Editor(props: EditorProps) {
               </a>
             </Tooltip2>
             <InputGroup
-              value={`${APIURL}/preview/${containerFromRedux.slug}`}
+              value={
+                window.location.origin + "/preview/" + containerFromRedux.slug
+              }
               size={45}
               small={true}
             />
@@ -252,7 +271,9 @@ export function Editor(props: EditorProps) {
             <iframe
               key={containerFromRedux.id}
               className={styles.previewFrame}
-              src={APIURL + "/preview/" + containerFromRedux.slug}
+              src={
+                window.location.origin + "/preview/" + containerFromRedux.slug
+              }
               id="previewIframe"
             ></iframe>
           )}

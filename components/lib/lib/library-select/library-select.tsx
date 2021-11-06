@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./library-select.module.scss";
 import "@blueprintjs/select/lib/css/blueprint-select.css";
 import "@blueprintjs/popover2/lib/css/blueprint-popover2.css";
@@ -13,6 +13,7 @@ import {
   setContainerFormData,
 } from "../../index";
 import toast from "react-hot-toast";
+import { setAssets } from "../redux/redux";
 
 /* eslint-disable-next-line */
 export interface LibrarySelectProps {}
@@ -20,7 +21,9 @@ export interface LibrarySelectProps {}
 let timeout: any;
 
 export function LibrarySelect(props: LibrarySelectProps) {
+  const selectRef = useRef();
   const [searchInput, setSearchInput] = useState("");
+  const [searchInputPredefined, setSearchInputPredefined] = useState("");
   const [libraryOptions, setLibraryOptions] = useState([]);
   const dispatch = useDispatch();
   const containerFromRedux = useSelector(
@@ -113,10 +116,38 @@ export function LibrarySelect(props: LibrarySelectProps) {
       <Select
         inputProps={{
           placeholder: "Search from local presets",
+          onKeyUp: (e) => {
+            const value = (e.target as HTMLInputElement).value;
+            setSearchInputPredefined(value);
+          },
         }}
-        items={predefinedAssets}
+        ref={selectRef}
+        items={
+          searchInputPredefined
+            ? predefinedAssets.filter((c) =>
+                c.label
+                  .toLowerCase()
+                  .includes(searchInputPredefined.toLowerCase())
+              )
+            : predefinedAssets
+        }
         itemRenderer={(item) => {
-          return <div className={styles.librarySelectItem}>{item.label}</div>;
+          return (
+            <div
+              className={styles.librarySelectItem}
+              onClick={() => {
+                dispatch(setAssets(JSON.stringify([...list, ...item.assets])));
+                toast.success("Libraries added!");
+                dispatch(setChangedFields("assets"));
+                if (selectRef.current)
+                  (selectRef.current as any).setState({
+                    isOpen: false,
+                  });
+              }}
+            >
+              {item.label}
+            </div>
+          );
         }}
         onQueryChange={(e) => {
           clearTimeout(timeout);

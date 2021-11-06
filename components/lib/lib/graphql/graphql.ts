@@ -12,7 +12,7 @@ export const useContainerQuery = (slug: string) => {
   return useQuery(
     "viewContainer",
     () => {
-      return axios.post("http://localhost:3333/graphql", {
+      return axios.post("/graphql", {
         query: viewContainerQuery,
         variables: {
           slug: slug,
@@ -27,7 +27,7 @@ export const useContainerQuery = (slug: string) => {
 
 export const useContainerUpdateMutation = () => {
   return useMutation("updateContainer", (containerData: any) => {
-    return axios.post("http://localhost:3333/graphql", {
+    return axios.post("/graphql", {
       query: updateContainerQuery,
       variables: {
         input: omit(containerData, ["id", "createdAt", "updatedAt", "parent"]),
@@ -49,7 +49,7 @@ export const useContainerCreateMutation = () => {
         length: 12,
       }),
     };
-    return axios.post("http://localhost:3333/graphql", {
+    return axios.post("/graphql", {
       query: createContainerQuery,
       variables: {
         input: [

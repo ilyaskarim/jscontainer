@@ -39,6 +39,9 @@ export default createSlice({
     setNotFoundContainer: (state, action) => {
       state.notFound = action.payload;
     },
+    setAssets: (state, action) => {
+      state.formData.assets = action.payload;
+    },
     setLibrariesList: (state, action) => {
       state.libraiesList = action.payload;
     },
