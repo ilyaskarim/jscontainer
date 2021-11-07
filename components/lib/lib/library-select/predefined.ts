@@ -28,7 +28,11 @@ export const predefinedAssets = [
   {
     label: "React",
     key: "React",
-    assets: [],
+    assets: [
+      "https://unpkg.com/babel-standalone@6/babel.min.js",
+      "https://unpkg.com/react@17/umd/react.production.min.js",
+      "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js",
+    ],
   },
   {
     label: "Lodash",

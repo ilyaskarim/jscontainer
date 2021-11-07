@@ -42,6 +42,8 @@ export const containerPreview = (express) => {
           : JSON.parse(container.assets || "[]");
       const css = [];
       const js = [];
+      var hasInludedBabel = !!assets.find((c) => c.includes("babel.min.js"));
+
       assets &&
         assets.forEach((url) => {
           if (!url) {
@@ -82,7 +84,7 @@ export const containerPreview = (express) => {
             ${container.html}
         </body>
         ${js.join("\n")}
-        <script>
+        <script ${hasInludedBabel ? 'type="text/babel"' : ""}  >
             ${container.javascript}
         </script>
         </html>
@@ -98,7 +100,7 @@ export const containerPreview = (express) => {
           ${container.html}
       </body>
       ${js.join("\n")}
-      <script>
+      <script ${hasInludedBabel ? 'type="text/babel"' : ""}  >
           ${container.javascript}
       </script>
           `);
