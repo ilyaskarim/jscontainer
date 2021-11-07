@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "ts-node-dev --ignore-watch .next --watch server --respawn -P tsconfig_server.json server/server.ts",
-    "build": "next build && ts-node",
+    "build": "next build && tsc -P tsconfig_server.json",
     "start": "next start",
     "lint": "next lint"
   },
