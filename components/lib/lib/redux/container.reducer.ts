@@ -20,12 +20,16 @@ const state = {
   theme: "dark",
   libraiesList: [],
   changedFields: [] as Array<string>,
+  onRequestSaveContainer: null,
 };
 
 export default createSlice({
   name: "Container",
   initialState: state,
   reducers: {
+    requestSaveContainer(state) {
+      state.onRequestSaveContainer = Math.floor(Math.random() * 10000);
+    },
     setTheme(state, action) {
       state.theme = action.payload;
     },

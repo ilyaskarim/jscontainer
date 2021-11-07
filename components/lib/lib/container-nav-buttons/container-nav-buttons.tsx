@@ -22,6 +22,10 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     (state: any) => state.container.formData
   );
 
+  const onRequestSaveContainer = useSelector(
+    (state: any) => state.container.onRequestSaveContainer
+  );
+
   const changedFields = useSelector(
     (state: any) => state.container.changedFields
   );
@@ -29,6 +33,17 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
   const notFoundContainer = useSelector(
     (state: any) => state.container.notFound
   );
+
+  const handleSaveContainer = () => {
+    if (changedFields.length === 0) {
+      toast.error("Please change something.", {
+        position: "bottom-center",
+      });
+      return;
+    }
+    toast.remove();
+    createContainer(containerFromRedux);
+  };
 
   const { mutate: createContainer, data: createContainerData } =
     useContainerCreateMutation();
@@ -51,19 +66,18 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     }
   }, [createContainerData]);
 
+  useEffect(() => {
+    if (onRequestSaveContainer) {
+      handleSaveContainer();
+    }
+  }, [onRequestSaveContainer]);
+
   return (
     <>
       <Button
         disabled={notFoundContainer}
         onClick={async () => {
-          if (changedFields.length === 0) {
-            toast.error("Please change something.", {
-              position: "bottom-center",
-            });
-            return;
-          }
-          toast.remove();
-          createContainer(containerFromRedux);
+          handleSaveContainer();
         }}
       >
         <Icon icon="saved" style={{ marginRight: "5px" }} />

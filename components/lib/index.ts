@@ -33,3 +33,5 @@ export * from "./lib/user-dropdown/user-dropdown";
 export * from "./lib/axios/axios";
 
 export * from "./lib/custom-head/custom-head";
+
+export * from "./lib/trim-large-sentences/trim-large-sentences";

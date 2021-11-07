@@ -45,6 +45,7 @@ import styles from "./editor.module.scss";
 import toast from "react-hot-toast";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { useRouter } from "next/router";
+import { requestSaveContainer } from "../redux/redux";
 
 /* eslint-disable-next-line */
 export interface EditorProps {}
@@ -89,24 +90,24 @@ export function Editor(props: EditorProps) {
     },
   };
 
-  // const handleOnKeyDown = (e: KeyboardEvent) => {
-  //   if (e.metaKey || e.ctrlKey) {
-  //     if (e.key === "s") {
-  //       if (document.activeElement?.classList.contains("inputarea")) {
-  //         e.preventDefault();
-  //         createContainer(containerFromRedux);
-  //       }
-  //     }
-  //   }
-  // };
+  const handleOnKeyDown = (e: KeyboardEvent) => {
+    if (e.metaKey || e.ctrlKey) {
+      if (e.key === "s") {
+        if (document.activeElement?.classList.contains("inputarea")) {
+          e.preventDefault();
+          dispatch(requestSaveContainer());
+        }
+      }
+    }
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener("keydown", handleOnKeyDown);
+  useEffect(() => {
+    document.addEventListener("keydown", handleOnKeyDown);
 
-  //   return () => {
-  //     document.removeEventListener("keydown", handleOnKeyDown);
-  //   };
-  // }, [containerFromRedux]);
+    return () => {
+      document.removeEventListener("keydown", handleOnKeyDown);
+    };
+  }, [containerFromRedux]);
 
   useEffect(() => {
     if (router.query.slug) {
@@ -263,7 +264,7 @@ export function Editor(props: EditorProps) {
                 className={styles.previewURLCopy}
                 onClick={() => {
                   window.navigator.clipboard.writeText(
-                    `${APIURL}/preview/${containerFromRedux.slug}`
+                    `${window.location.origin}/preview/${containerFromRedux.slug}`
                   );
                   toast.success("Copied preview URL to clipboard!", {
                     position: "bottom-center",

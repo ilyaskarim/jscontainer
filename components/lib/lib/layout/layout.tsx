@@ -12,12 +12,9 @@ export interface LayoutProps {
 }
 
 export function Layout(props: LayoutProps) {
-  const loggedIn = props.loggedIn ?? false;
   const isContainerPage = props.isContainerPage ?? true;
   const showFooter = props.showFooter ?? true;
   const theme = useSelector((state: any) => state.container.theme);
-
-  console.log(styles);
 
   return (
     <div

@@ -1,9 +1,21 @@
 .librarySelectItem {
   padding: 7px 5px;
   cursor: pointer;
+  transition: all 0.2s;
   &:hover,
   &:active,
   &:focus {
     background: #ebf1f5;
+    transition: all 0.2s;
+  }
+}
+
+.librarySelectItemDark {
+  transition: all 0.2s;
+  &:hover,
+  &:active,
+  &:focus {
+    background: rgba(16, 22, 26, 0.3);
+    transition: all 0.2s;
   }
 }

@@ -1,7 +1,12 @@
 import styles from "./library-list.module.scss";
-import { Button, Card, InputGroup } from "@blueprintjs/core";
+import { Button, Card, InputGroup, Icon } from "@blueprintjs/core";
 import { useSelector, useDispatch } from "react-redux";
-import { arrayMove, setChangedFields, setContainerFormData } from "../../index";
+import {
+  arrayMove,
+  setChangedFields,
+  setContainerFormData,
+  TrimLargeSentences,
+} from "../../index";
 import toast from "react-hot-toast";
 
 /* eslint-disable-next-line */
@@ -40,7 +45,19 @@ export function LibraryList(props: LibraryListProps) {
       {list.map((link: string, index: number) => {
         return (
           <Card key={index} className={styles.libraryItem}>
-            <label>{link}</label>
+            <Button
+              className={styles.copyLink}
+              small
+              onClick={() => {
+                window.navigator.clipboard.writeText(link);
+                toast.success("Link copied to clipboard");
+              }}
+            >
+              <Icon size={10} icon="duplicate"></Icon>
+            </Button>
+            <span className={styles.link}>
+              <TrimLargeSentences text={link}></TrimLargeSentences>
+            </span>
             <div className={styles.actions}>
               <Button
                 disabled={index === list.length - 1}

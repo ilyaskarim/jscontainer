@@ -14,6 +14,7 @@ import {
 } from "../../index";
 import toast from "react-hot-toast";
 import { setAssets } from "../redux/redux";
+import classNames from "classnames";
 
 /* eslint-disable-next-line */
 export interface LibrarySelectProps {}
@@ -22,9 +23,11 @@ let timeout: any;
 
 export function LibrarySelect(props: LibrarySelectProps) {
   const selectRef = useRef();
+  const selectCDNJSRef = useRef();
   const [searchInput, setSearchInput] = useState("");
   const [searchInputPredefined, setSearchInputPredefined] = useState("");
   const [libraryOptions, setLibraryOptions] = useState([]);
+  const theme = useSelector((state: any) => state.container.theme);
   const dispatch = useDispatch();
   const containerFromRedux = useSelector(
     (state: any) => state.container.formData
@@ -58,11 +61,15 @@ export function LibrarySelect(props: LibrarySelectProps) {
   return (
     <div>
       <Select
+        ref={selectCDNJSRef}
         items={libraryOptions}
         itemRenderer={(item: any) => {
           return (
             <div
-              className={styles.librarySelectItem}
+              className={classNames({
+                [styles.librarySelectItem]: true,
+                [styles.librarySelectItemDark]: theme === "dark",
+              })}
               onClick={() => {
                 if (!list.includes(item.latest)) {
                   dispatch(setChangedFields("assets"));
@@ -71,6 +78,10 @@ export function LibrarySelect(props: LibrarySelectProps) {
                       assets: JSON.stringify([...list, item.latest]),
                     })
                   );
+                  if (selectCDNJSRef.current)
+                    (selectCDNJSRef.current as any).setState({
+                      isOpen: false,
+                    });
                 } else {
                   toast.error("Library already added.", {
                     position: "bottom-center",
@@ -134,7 +145,10 @@ export function LibrarySelect(props: LibrarySelectProps) {
         itemRenderer={(item) => {
           return (
             <div
-              className={styles.librarySelectItem}
+              className={classNames({
+                [styles.librarySelectItem]: true,
+                [styles.librarySelectItemDark]: theme === "dark",
+              })}
               onClick={() => {
                 dispatch(setAssets(JSON.stringify([...list, ...item.assets])));
                 toast.success("Libraries added!");
