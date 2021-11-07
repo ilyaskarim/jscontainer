@@ -11,6 +11,7 @@ import {
   TextArea,
   Overlay,
   Spinner,
+  Position,
 } from "@blueprintjs/core";
 import {
   APIURL,
@@ -222,13 +223,10 @@ export function Editor(props: EditorProps) {
             }
           />
           <Tabs.Expander />
-          <a
-            href="javascript:void(0)"
-            onClick={() => setContainerInfoDrawer(true)}
-          >
+          <a onClick={() => setContainerInfoDrawer(true)}>
             <Icon icon={"info-sign"} />
           </a>
-          <a href="javascript:void(0)" onClick={() => setSettingsDialog(true)}>
+          <a onClick={() => setSettingsDialog(true)}>
             <Icon icon={"cog"} />
           </a>
         </Tabs>
@@ -236,9 +234,11 @@ export function Editor(props: EditorProps) {
       {containerFromRedux.slug && (
         <div className={styles.preview}>
           <div className={styles.previewHeader}>
-            <Tooltip2 content="Copy container link to clipboard">
+            <Tooltip2
+              content="Copy container link to clipboard"
+              position={Position.BOTTOM}
+            >
               <a
-                href="javascript:void(0)"
                 className={styles.previewURLCopy}
                 onClick={() => {
                   window.navigator.clipboard.writeText(window.location.href);
@@ -258,9 +258,11 @@ export function Editor(props: EditorProps) {
               small={true}
             />
             &nbsp; &nbsp;
-            <Tooltip2 content="Copy container preview URL to clipboard">
+            <Tooltip2
+              content="Copy container preview URL to clipboard"
+              position={Position.BOTTOM}
+            >
               <a
-                href="javascript:void(0)"
                 className={styles.previewURLCopy}
                 onClick={() => {
                   window.navigator.clipboard.writeText(
