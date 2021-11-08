@@ -2,6 +2,7 @@ import { loadEnvConfig } from "@next/env";
 loadEnvConfig("./", process.env.NODE_ENV !== "production");
 import express, { Request, Response } from "express";
 import next from "next";
+import { containerPreview } from "./preview";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -20,7 +21,6 @@ setTimeout(() => {
 
 import wertik, { useGraphql, useModule, useDatabase } from "wertik-js/lib/next";
 import { handleGithubAuth, handleGoogleAuth, AuthRoutes } from "./auth";
-import { containerPreview } from "./preview";
 
 const passport = require("passport");
 const GitHubStrategy = require("passport-github2");
@@ -69,7 +69,7 @@ expressApp.use(passport.initialize());
 expressApp.use(passport.session());
 
 wertik({
-  port: process.env.port || 3000,
+  port: port,
   graphql: useGraphql(),
   express: expressApp,
   database: {

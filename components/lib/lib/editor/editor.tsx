@@ -220,10 +220,12 @@ export function Editor(props: EditorProps) {
             }
           />
           <Tabs.Expander />
-          <Tooltip2 content={`Copies current opened tab code.`}>
+          <Tooltip2 content={`Copy ${fileName} code`}>
             <a
               onClick={() => {
-                window.navigator.clipboard.writeText(containerFromRedux.html);
+                window.navigator.clipboard.writeText(
+                  containerFromRedux[fileName]
+                );
                 toast.success("Copied HTML to Clipboard.");
               }}
             >
