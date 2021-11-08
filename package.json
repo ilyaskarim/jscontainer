@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch .next --watch server --respawn -P tsconfig_server.json server/server.ts",
     "build": "next build && tsc -P tsconfig_server.json",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production node distNode/index.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -47,6 +47,7 @@
   "devDependencies": {
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.3",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "cross-env": "^7.0.3"
   }
 }

@@ -2,6 +2,7 @@ import styles from "./layout.module.scss";
 import { ContainerNavButtons, UserDropdown } from "../../index";
 import { useSelector } from "react-redux";
 import classnames from "classnames";
+import Link from "next/link";
 
 /* eslint-disable-next-line */
 export interface LayoutProps {
@@ -24,9 +25,9 @@ export function Layout(props: LayoutProps) {
       })}
     >
       <div className={styles.header}>
-        <a className={styles.headerBrand} href="/">
-          JSContainer
-        </a>
+        <Link href="/">
+          <a className={styles.headerBrand}>JSContainer</a>
+        </Link>
         <div className={styles.headerContent}>
           {isContainerPage ? (
             <>

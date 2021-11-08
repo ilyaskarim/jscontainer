@@ -1,12 +1,13 @@
 import "./container-nav-buttons.module.scss";
 import { Button, Icon } from "@blueprintjs/core";
+import Link from "next/link";
 import {
   resetChangedFields,
   setContainerFormData,
   useContainerCreateMutation,
 } from "../../index";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { get } from "lodash";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
@@ -34,7 +35,10 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     (state: any) => state.container.notFound
   );
 
-  const handleSaveContainer = () => {
+  const { mutate: createContainer, data: createContainerData } =
+    useContainerCreateMutation();
+
+  const handleSaveContainer = useCallback(() => {
     if (changedFields.length === 0) {
       toast.error("Please change something.", {
         position: "bottom-center",
@@ -43,10 +47,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     }
     toast.remove();
     createContainer(containerFromRedux);
-  };
-
-  const { mutate: createContainer, data: createContainerData } =
-    useContainerCreateMutation();
+  }, [changedFields, containerFromRedux, createContainer]);
 
   useEffect(() => {
     if (createContainerData) {
@@ -64,13 +65,13 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
         });
       }
     }
-  }, [createContainerData]);
+  }, [createContainerData, dispatch, router]);
 
   useEffect(() => {
     if (onRequestSaveContainer) {
       handleSaveContainer();
     }
-  }, [onRequestSaveContainer]);
+  }, [onRequestSaveContainer, handleSaveContainer]);
 
   return (
     <>
@@ -101,9 +102,9 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
       </Button>
       {notFoundContainer && (
         <>
-          <a href="/">
+          <Link href="/">
             <Button>Create new container</Button>{" "}
-          </a>
+          </Link>
         </>
       )}
     </>

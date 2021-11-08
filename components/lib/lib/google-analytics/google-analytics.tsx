@@ -1,13 +1,16 @@
+import Script from "next/script";
 export const GoogleAnalytics = () => {
   return (
     <>
       {process.env.NODE_ENV === "production" && (
         <>
-          <script
+          <Script
+            id="128390asd"
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-64991398-3"
-          ></script>
-          <script
+          ></Script>
+          <Script
+            id="asdasdasd"
             dangerouslySetInnerHTML={{
               __html: `window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
