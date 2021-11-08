@@ -36,3 +36,4 @@ yarn-error.log*
 
 
 /distNode
+/migrations/node_modules

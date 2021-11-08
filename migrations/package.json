@@ -1,0 +1,22 @@
+{
+  "name": "migrations",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "npx knex migrate:latest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "knex": "^0.21.6",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
+  },
+  "description": ""
+}
+

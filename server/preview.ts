@@ -12,7 +12,7 @@ function tsCompile(
 }
 
 export const containerPreview = (express) => {
-  console.log("preview express");
+  console.log("preview express", express);
   express.get("/preview/:slug", async function (req, res) {
     try {
       const container =

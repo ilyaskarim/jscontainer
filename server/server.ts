@@ -74,11 +74,11 @@ wertik({
   express: expressApp,
   database: {
     jscontainer: useDatabase({
-      name: "jscontainer",
-      password: "pass",
-      username: "root",
-      host: "localhost",
-      port: 3306,
+      name: process.env.DB_DATABASE,
+      password: process.env.DB_PASSWORD,
+      username: process.env.DB_USERNAME,
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
     }),
   },
   modules: {

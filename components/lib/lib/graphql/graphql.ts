@@ -45,6 +45,7 @@ export const useContainerCreateMutation = () => {
   return useMutation("createContainer", (containerData: any) => {
     containerData = {
       ...containerData,
+      parent: containerData.id,
       slug: randomstring({
         length: 12,
       }),
@@ -52,9 +53,7 @@ export const useContainerCreateMutation = () => {
     return axios.post("/graphql", {
       query: createContainerQuery,
       variables: {
-        input: [
-          omit(containerData, ["id", "createdAt", "updatedAt", "parent"]),
-        ],
+        input: [omit(containerData, ["id", "createdAt", "updatedAt"])],
       },
     });
   });

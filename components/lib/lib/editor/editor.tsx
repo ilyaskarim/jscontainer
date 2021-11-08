@@ -211,18 +211,25 @@ export function Editor(props: EditorProps) {
                 <>
                   <MonacoReactEditor
                     {...javascriptProps}
-                    defaultLanguage="typescript"
+                    language="typescript"
                   />
                 </>
               ) : (
-                <MonacoReactEditor
-                  {...javascriptProps}
-                  defaultLanguage="javascript"
-                />
+                <MonacoReactEditor {...javascriptProps} language="javascript" />
               )
             }
           />
           <Tabs.Expander />
+          <Tooltip2 content={`Copies current opened tab code.`}>
+            <a
+              onClick={() => {
+                window.navigator.clipboard.writeText(containerFromRedux.html);
+                toast.success("Copied HTML to Clipboard.");
+              }}
+            >
+              <Icon icon={"duplicate"} />
+            </a>
+          </Tooltip2>
           <a onClick={() => setContainerInfoDrawer(true)}>
             <Icon icon={"info-sign"} />
           </a>
