@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch .next --watch server --respawn -P tsconfig_server.json server/server.ts",
     "build": "next build && tsc -P tsconfig_server.json",
-    "start": "cross-env NODE_ENV=production node distNode/index.js",
+    "start": "cross-env NODE_ENV=production node distNode/server.js",
     "lint": "next lint"
   },
   "dependencies": {
