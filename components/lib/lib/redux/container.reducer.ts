@@ -22,7 +22,8 @@ const state = {
   theme: "dark",
   libraiesList: [],
   changedFields: [] as Array<string>,
-  onRequestSaveContainer: null,
+  onRequestCreateContainer: null,
+  onRequestUpdateContainer: null,
 };
 
 export default createSlice({
@@ -32,8 +33,11 @@ export default createSlice({
     resetFormData(state) {
       state.formData = JSON.parse(JSON.stringify(formData));
     },
-    requestSaveContainer(state) {
-      state.onRequestSaveContainer = Math.floor(Math.random() * 10000);
+    requestCreateContainer(state) {
+      state.onRequestCreateContainer = Math.floor(Math.random() * 10000);
+    },
+    requestUpdateContainer(state) {
+      state.onRequestUpdateContainer = Math.floor(Math.random() * 10000);
     },
     setTheme(state, action) {
       state.theme = action.payload;
@@ -43,7 +47,7 @@ export default createSlice({
     },
     resetChangedFields: (state) => {
       state.changedFields = [];
-      state.onRequestSaveContainer = null;
+      state.onRequestCreateContainer = null;
     },
     setChangedFields: (state, action) => {
       if (!state.changedFields.includes(action.payload)) {

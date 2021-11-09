@@ -1,52 +1,27 @@
 import { useState, useEffect } from "react";
 import classnames from "classnames";
-import MonacoReactEditor from "@monaco-editor/react";
+import { Tab, Tabs, Icon, Dialog, Drawer, Spinner } from "@blueprintjs/core";
 import {
-  Tab,
-  Tabs,
-  Icon,
-  Dialog,
-  InputGroup,
-  Drawer,
-  TextArea,
-  Overlay,
-  Spinner,
-  Position,
-} from "@blueprintjs/core";
-import {
-  APIURL,
+  ContainerInfo,
+  ContainerPreview,
   ContainerSettings,
   NotFound,
-  setChangedFields,
   setContainerFormData,
   setNotFoundContainer,
   useContainerQuery,
+  MonacoEditor,
 } from "../../index";
 import { useDispatch, useSelector } from "react-redux";
-
-const files = {
-  javascript: {
-    name: "javascript",
-    language: "javascript",
-    value: "",
-  },
-  css: {
-    name: "style.css",
-    language: "css",
-    value: "",
-  },
-  html: {
-    name: "index.html",
-    language: "html",
-    value: "",
-  },
-};
 
 import styles from "./editor.module.scss";
 import toast from "react-hot-toast";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { useRouter } from "next/router";
-import { requestSaveContainer, resetFormData } from "../redux/redux";
+import {
+  requestCreateContainer,
+  requestUpdateContainer,
+  resetFormData,
+} from "../redux/redux";
 
 /* eslint-disable-next-line */
 export interface EditorProps {}
@@ -69,34 +44,16 @@ export function Editor(props: EditorProps) {
     (state: any) => state.container.notFound
   );
 
-  const javascriptProps = {
-    loading: "Loading editor please wait",
-    height: "calc(100vh - 130px)",
-    theme: theme === "dark" ? "vs-dark" : "",
-    options: {
-      minimap: {
-        enabled: false,
-      },
-    },
-    value: containerFromRedux.javascript,
-
-    onChange: (e: string | undefined) => {
-      dispatch(setChangedFields("javascript"));
-      files.javascript.value = e ? e : "";
-      dispatch(
-        setContainerFormData({
-          javascript: e ? e : "",
-        })
-      );
-    },
-  };
-
   const handleOnKeyDown = (e: KeyboardEvent) => {
     if (e.metaKey || e.ctrlKey) {
       if (e.key === "s") {
         if (document.activeElement?.classList.contains("inputarea")) {
           e.preventDefault();
-          dispatch(requestSaveContainer());
+          if (e.shiftKey) {
+            dispatch(requestUpdateContainer());
+          } else {
+            dispatch(requestCreateContainer());
+          }
         }
       }
     }
@@ -155,27 +112,9 @@ export function Editor(props: EditorProps) {
             title="Html"
             panel={
               fileName === "html" && (
-                <MonacoReactEditor
-                  loading={"Loading editor please wait"}
-                  height="calc(100vh - 130px)"
-                  options={{
-                    minimap: {
-                      enabled: false,
-                    },
-                  }}
-                  theme={theme === "dark" ? "vs-dark" : ""}
-                  value={containerFromRedux.html}
-                  defaultLanguage="html"
-                  onChange={(e: string | undefined) => {
-                    dispatch(setChangedFields("html"));
-                    files.html.value = e ? e : "";
-                    dispatch(
-                      setContainerFormData({
-                        html: e ? e : "",
-                      })
-                    );
-                  }}
-                />
+                <>
+                  <MonacoEditor language="html" name={"html"}></MonacoEditor>
+                </>
               )
             }
           />
@@ -184,27 +123,7 @@ export function Editor(props: EditorProps) {
             title="CSS"
             panel={
               fileName === "css" && (
-                <MonacoReactEditor
-                  loading={"Loading editor please wait"}
-                  height="calc(100vh - 130px)"
-                  options={{
-                    minimap: {
-                      enabled: false,
-                    },
-                  }}
-                  theme={theme === "dark" ? "vs-dark" : ""}
-                  value={containerFromRedux.css}
-                  defaultLanguage="css"
-                  onChange={(e: string | undefined) => {
-                    dispatch(setChangedFields("css"));
-                    files.css.value = e ? e : "";
-                    dispatch(
-                      setContainerFormData({
-                        css: e ? e : "",
-                      })
-                    );
-                  }}
-                />
+                <MonacoEditor language="css" name={"css"}></MonacoEditor>
               )
             }
           />
@@ -215,13 +134,16 @@ export function Editor(props: EditorProps) {
               containerFromRedux.typescript === 1 ||
               containerFromRedux.typescript === true ? (
                 <>
-                  <MonacoReactEditor
-                    {...javascriptProps}
-                    language="typescript"
-                  />
+                  <MonacoEditor
+                    language="javscript"
+                    name={"javscript"}
+                  ></MonacoEditor>
                 </>
               ) : (
-                <MonacoReactEditor {...javascriptProps} language="javascript" />
+                <MonacoEditor
+                  language="typescript"
+                  name={"javascript"}
+                ></MonacoEditor>
               )
             }
           />
@@ -246,64 +168,7 @@ export function Editor(props: EditorProps) {
           </a>
         </Tabs>
       </div>
-      {containerFromRedux.slug && (
-        <div className={styles.preview}>
-          <div className={styles.previewHeader}>
-            <Tooltip2
-              content="Copy container link to clipboard"
-              position={Position.BOTTOM}
-            >
-              <a
-                className={styles.previewURLCopy}
-                onClick={() => {
-                  window.navigator.clipboard.writeText(window.location.href);
-                  toast.success("Copied to clipboard!", {
-                    position: "bottom-center",
-                  });
-                }}
-              >
-                <Icon icon="link" />
-              </a>
-            </Tooltip2>
-            <InputGroup
-              value={
-                window.location.origin + "/preview/" + containerFromRedux.slug
-              }
-              size={45}
-              small={true}
-            />
-            &nbsp; &nbsp;
-            <Tooltip2
-              content="Copy container preview URL to clipboard"
-              position={Position.BOTTOM}
-            >
-              <a
-                className={styles.previewURLCopy}
-                onClick={() => {
-                  window.navigator.clipboard.writeText(
-                    `${window.location.origin}/preview/${containerFromRedux.slug}`
-                  );
-                  toast.success("Copied preview URL to clipboard!", {
-                    position: "bottom-center",
-                  });
-                }}
-              >
-                <Icon icon="duplicate" />
-              </a>
-            </Tooltip2>
-          </div>
-          {containerFromRedux && containerFromRedux.slug && (
-            <iframe
-              key={containerFromRedux.id}
-              className={styles.previewFrame}
-              src={
-                window.location.origin + "/preview/" + containerFromRedux.slug
-              }
-              id="previewIframe"
-            ></iframe>
-          )}
-        </div>
-      )}
+      <ContainerPreview></ContainerPreview>
 
       {/* Dialogs */}
       <Dialog
@@ -324,34 +189,7 @@ export function Editor(props: EditorProps) {
         title="Container Info"
         canEscapeKeyClose={true}
       >
-        <div className={styles.containerInfo}>
-          <InputGroup
-            value={containerFromRedux.title}
-            onChange={(e) => {
-              dispatch(setChangedFields("title"));
-              dispatch(
-                setContainerFormData({
-                  title: e.target.value,
-                })
-              );
-            }}
-            placeholder="Untitled container"
-          ></InputGroup>
-
-          <br />
-          <TextArea
-            value={containerFromRedux.description}
-            onChange={(e) => {
-              dispatch(setChangedFields("description"));
-              dispatch(
-                setContainerFormData({
-                  description: e.target.value,
-                })
-              );
-            }}
-            placeholder="Description"
-          ></TextArea>
-        </div>
+        <ContainerInfo></ContainerInfo>
       </Drawer>
     </div>
   );

@@ -12,6 +12,7 @@ import { get } from "lodash";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useContainerUpdateMutation } from "../graphql/graphql";
 
 /* eslint-disable-next-line */
 export interface ContainerNavButtonsProps {}
@@ -23,8 +24,12 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     (state: any) => state.container.formData
   );
 
-  const onRequestSaveContainer = useSelector(
-    (state: any) => state.container.onRequestSaveContainer
+  const onRequestCreateContainer = useSelector(
+    (state: any) => state.container.onRequestCreateContainer
+  );
+
+  const onRequestUpdateContainer = useSelector(
+    (state: any) => state.container.onRequestUpdateContainer
   );
 
   const changedFields = useSelector(
@@ -41,7 +46,10 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     isLoading: isCreatingContainer,
   } = useContainerCreateMutation();
 
-  const handleSaveContainer = () => {
+  const { mutate: updateContainer, data: updateContainerData } =
+    useContainerUpdateMutation();
+
+  const handleSaveContainer = (update = false) => {
     if (isCreatingContainer) {
       return;
     }
@@ -53,7 +61,9 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
       });
       return;
     }
-    createContainer(containerFromRedux);
+    update
+      ? updateContainer(containerFromRedux)
+      : createContainer(containerFromRedux);
   };
 
   useEffect(() => {
@@ -78,10 +88,31 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
   }, [createContainerData]);
 
   useEffect(() => {
-    if (onRequestSaveContainer) {
+    if (
+      updateContainerData &&
+      get(
+        updateContainerData,
+        "data.data.updateContainer.returning[0].id",
+        null
+      )
+    ) {
+      toast.success("Container updated.", {
+        position: "bottom-center",
+      });
+    }
+  }, [updateContainerData]);
+
+  useEffect(() => {
+    if (onRequestCreateContainer) {
       handleSaveContainer();
     }
-  }, [onRequestSaveContainer]);
+  }, [onRequestCreateContainer]);
+
+  useEffect(() => {
+    if (onRequestUpdateContainer) {
+      handleSaveContainer(true);
+    }
+  }, [onRequestUpdateContainer]);
 
   return (
     <>

@@ -1,0 +1,25 @@
+.preview {
+  width: 50%;
+  .previewFrame {
+    width: 100%;
+    height: calc(100vh - 105px);
+    background: white;
+    border: 0;
+  }
+  .previewURLCopy {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 2px;
+  }
+  .previewHeader {
+    background: #f5f8fa;
+    display: flex;
+    padding: 10px;
+  }
+}
+
+.previewDark {
+  .previewHeader {
+    background-color: #1e1e1e;
+  }
+}
