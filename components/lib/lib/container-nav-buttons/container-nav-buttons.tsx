@@ -77,30 +77,38 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
   return (
     <>
       <Button
+        intent="primary"
+        small
+        disabled={notFoundContainer}
+        onClick={() => {
+          if (changedFields.length > 0) {
+            handleSaveContainer();
+          } else {
+            const frame: HTMLIFrameElement | null = document.getElementById(
+              "previewIframe"
+            ) as HTMLIFrameElement;
+            if (frame) {
+              frame.src = frame.src;
+            }
+          }
+        }}
+      >
+        &nbsp;
+        <Icon size={15} icon="play" style={{ marginRight: "5px" }} />
+        Run
+      </Button>
+      <Button
+        small
         disabled={notFoundContainer}
         onClick={async () => {
           handleSaveContainer();
         }}
       >
-        <Icon icon="saved" style={{ marginRight: "5px" }} />
+        &nbsp;
+        <Icon size={15} icon="saved" style={{ marginRight: "5px" }} />
         Save
       </Button>
 
-      <Button
-        intent="primary"
-        disabled={notFoundContainer}
-        onClick={() => {
-          const frame: HTMLIFrameElement | null = document.getElementById(
-            "previewIframe"
-          ) as HTMLIFrameElement;
-          if (frame) {
-            frame.src = frame.src;
-          }
-        }}
-      >
-        <Icon icon="play" style={{ marginRight: "5px" }} />
-        Run
-      </Button>
       {notFoundContainer && (
         <>
           <Link href="/">
