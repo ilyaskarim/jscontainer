@@ -4,6 +4,7 @@ import { Tooltip2 } from "@blueprintjs/popover2";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import classNames from "classnames";
+import { useEffect } from "react";
 
 /* eslint-disable-next-line */
 export interface ContainerPreviewProps {}
@@ -13,7 +14,26 @@ export function ContainerPreview(props: ContainerPreviewProps) {
     (state: any) => state.container.formData
   );
 
+  const onRequestRefreshContainer = useSelector((state: any) => {
+    return state.container.onRequestRefreshContainer;
+  });
+
   const theme = useSelector((state: any) => state.container.theme);
+
+  const handleIframeRefresh = () => {
+    const frame: HTMLIFrameElement | null = document.getElementById(
+      "previewIframe"
+    ) as HTMLIFrameElement;
+    if (frame) {
+      frame.src = frame.src;
+    }
+  };
+
+  useEffect(() => {
+    if (onRequestRefreshContainer) {
+      handleIframeRefresh();
+    }
+  }, [onRequestRefreshContainer]);
 
   if (!process.browser) {
     return <></>;

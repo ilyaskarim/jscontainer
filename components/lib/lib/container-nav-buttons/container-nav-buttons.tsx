@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useContainerUpdateMutation } from "../graphql/graphql";
+import { requestContainerRefresh } from "../redux/redux";
 
 /* eslint-disable-next-line */
 export interface ContainerNavButtonsProps {}
@@ -53,7 +54,6 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     if (isCreatingContainer) {
       return;
     }
-    console.log("handle save contaienr");
     toast.remove();
     if (changedFields.length === 0) {
       toast.error("Please change something.", {
@@ -76,6 +76,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
       if (container) {
         dispatch(setContainerFormData(container));
         dispatch(resetChangedFields());
+        dispatch(requestContainerRefresh());
 
         toast.success("Container Saved", {
           position: "bottom-center",
@@ -124,12 +125,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
           if (changedFields.length > 0) {
             handleSaveContainer();
           } else {
-            const frame: HTMLIFrameElement | null = document.getElementById(
-              "previewIframe"
-            ) as HTMLIFrameElement;
-            if (frame) {
-              frame.src = frame.src;
-            }
+            dispatch(requestContainerRefresh());
           }
         }}
       >

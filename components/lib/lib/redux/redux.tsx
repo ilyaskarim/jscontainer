@@ -17,6 +17,7 @@ export const {
   setAssets,
   requestCreateContainer,
   requestUpdateContainer,
+  requestContainerRefresh,
   resetFormData,
 } = containerReducer.actions;
 

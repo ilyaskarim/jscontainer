@@ -24,6 +24,7 @@ const state = {
   changedFields: [] as Array<string>,
   onRequestCreateContainer: null,
   onRequestUpdateContainer: null,
+  onRequestRefreshContainer: null,
 };
 
 export default createSlice({
@@ -35,6 +36,9 @@ export default createSlice({
     },
     requestCreateContainer(state) {
       state.onRequestCreateContainer = Math.floor(Math.random() * 10000);
+    },
+    requestContainerRefresh(state) {
+      state.onRequestRefreshContainer = Math.floor(Math.random() * 10000);
     },
     requestUpdateContainer(state) {
       state.onRequestUpdateContainer = Math.floor(Math.random() * 10000);

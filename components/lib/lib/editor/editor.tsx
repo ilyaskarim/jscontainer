@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import classnames from "classnames";
-import { Tab, Tabs, Icon, Dialog, Drawer, Spinner } from "@blueprintjs/core";
+import {
+  Tab,
+  Tabs,
+  Icon,
+  Dialog,
+  Drawer,
+  Spinner,
+  Classes,
+  Button,
+} from "@blueprintjs/core";
 import {
   ContainerInfo,
   ContainerPreview,
@@ -178,6 +187,19 @@ export function Editor(props: EditorProps) {
         title="Container Settings"
       >
         <ContainerSettings />
+        <br />
+        <div className={Classes.DIALOG_FOOTER}>
+          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+            <Button
+              onClick={() => {
+                dispatch(requestUpdateContainer());
+                setSettingsDialog(false);
+              }}
+            >
+              Close
+            </Button>
+          </div>
+        </div>
       </Dialog>
       <Drawer
         className={theme === "dark" && "bp3-dark"}
