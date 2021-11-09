@@ -111,7 +111,7 @@ export function Editor(props: EditorProps) {
   }, [containerFromRedux]);
 
   useEffect(() => {
-    if (router.query.slug) {
+    if (router.query.slug && isLoadingContainer === false) {
       fetchContainer().then((resp) => {
         const viewContainer = resp?.data?.data?.data?.viewContainer;
         if (viewContainer) {

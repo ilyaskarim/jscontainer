@@ -35,20 +35,26 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     (state: any) => state.container.notFound
   );
 
-  const { mutate: createContainer, data: createContainerData } =
-    useContainerCreateMutation();
+  const {
+    mutate: createContainer,
+    data: createContainerData,
+    isLoading: isCreatingContainer,
+  } = useContainerCreateMutation();
 
-  const handleSaveContainer = useCallback(() => {
+  const handleSaveContainer = () => {
+    if (isCreatingContainer) {
+      return;
+    }
+    console.log("handle save contaienr");
+    toast.remove();
     if (changedFields.length === 0) {
-      toast.remove();
       toast.error("Please change something.", {
         position: "bottom-center",
       });
       return;
     }
-    toast.remove();
     createContainer(containerFromRedux);
-  }, [changedFields, containerFromRedux, createContainer]);
+  };
 
   useEffect(() => {
     if (createContainerData) {
@@ -60,19 +66,22 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
       if (container) {
         dispatch(setContainerFormData(container));
         dispatch(resetChangedFields());
-        router.push(`/c/${container.slug}`);
+
         toast.success("Container Saved", {
           position: "bottom-center",
         });
+        setTimeout(() => {
+          router.push(`/c/${container.slug}`);
+        }, 250);
       }
     }
-  }, [createContainerData, dispatch, router]);
+  }, [createContainerData]);
 
   useEffect(() => {
     if (onRequestSaveContainer) {
       handleSaveContainer();
     }
-  }, [onRequestSaveContainer, handleSaveContainer]);
+  }, [onRequestSaveContainer]);
 
   return (
     <>
@@ -112,7 +121,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
       {notFoundContainer && (
         <>
           <Link href="/">
-            <Button>Create new container</Button>{" "}
+            <Button>Create new container</Button>
           </Link>
         </>
       )}

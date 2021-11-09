@@ -43,6 +43,7 @@ export default createSlice({
     },
     resetChangedFields: (state) => {
       state.changedFields = [];
+      state.onRequestSaveContainer = null;
     },
     setChangedFields: (state, action) => {
       if (!state.changedFields.includes(action.payload)) {
