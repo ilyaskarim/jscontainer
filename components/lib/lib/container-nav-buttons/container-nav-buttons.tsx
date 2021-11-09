@@ -40,6 +40,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
 
   const handleSaveContainer = useCallback(() => {
     if (changedFields.length === 0) {
+      toast.remove();
       toast.error("Please change something.", {
         position: "bottom-center",
       });

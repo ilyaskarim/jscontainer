@@ -46,7 +46,7 @@ import styles from "./editor.module.scss";
 import toast from "react-hot-toast";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { useRouter } from "next/router";
-import { requestSaveContainer } from "../redux/redux";
+import { requestSaveContainer, resetFormData } from "../redux/redux";
 
 /* eslint-disable-next-line */
 export interface EditorProps {}
@@ -71,7 +71,7 @@ export function Editor(props: EditorProps) {
 
   const javascriptProps = {
     loading: "Loading editor please wait",
-    height: "calc(100vh - 50px)",
+    height: "calc(100vh - 130px)",
     theme: theme === "dark" ? "vs-dark" : "",
     options: {
       minimap: {
@@ -121,6 +121,8 @@ export function Editor(props: EditorProps) {
           dispatch(setNotFoundContainer(true));
         }
       });
+    } else {
+      dispatch(resetFormData());
     }
   }, [router]);
 
@@ -152,54 +154,58 @@ export function Editor(props: EditorProps) {
             id="html"
             title="Html"
             panel={
-              <MonacoReactEditor
-                loading={"Loading editor please wait"}
-                height="calc(100vh - 50px)"
-                options={{
-                  minimap: {
-                    enabled: false,
-                  },
-                }}
-                theme={theme === "dark" ? "vs-dark" : ""}
-                value={containerFromRedux.html}
-                defaultLanguage="html"
-                onChange={(e: string | undefined) => {
-                  dispatch(setChangedFields("html"));
-                  files.html.value = e ? e : "";
-                  dispatch(
-                    setContainerFormData({
-                      html: e ? e : "",
-                    })
-                  );
-                }}
-              />
+              fileName === "html" && (
+                <MonacoReactEditor
+                  loading={"Loading editor please wait"}
+                  height="calc(100vh - 130px)"
+                  options={{
+                    minimap: {
+                      enabled: false,
+                    },
+                  }}
+                  theme={theme === "dark" ? "vs-dark" : ""}
+                  value={containerFromRedux.html}
+                  defaultLanguage="html"
+                  onChange={(e: string | undefined) => {
+                    dispatch(setChangedFields("html"));
+                    files.html.value = e ? e : "";
+                    dispatch(
+                      setContainerFormData({
+                        html: e ? e : "",
+                      })
+                    );
+                  }}
+                />
+              )
             }
           />
           <Tab
             id="css"
             title="CSS"
             panel={
-              <MonacoReactEditor
-                loading={"Loading editor please wait"}
-                height="calc(100vh - 50px)"
-                options={{
-                  minimap: {
-                    enabled: false,
-                  },
-                }}
-                theme={theme === "dark" ? "vs-dark" : ""}
-                value={containerFromRedux.css}
-                defaultLanguage="css"
-                onChange={(e: string | undefined) => {
-                  dispatch(setChangedFields("css"));
-                  files.css.value = e ? e : "";
-                  dispatch(
-                    setContainerFormData({
-                      css: e ? e : "",
-                    })
-                  );
-                }}
-              />
+              fileName === "css" && (
+                <MonacoReactEditor
+                  loading={"Loading editor please wait"}
+                  height="calc(100vh - 130px)"
+                  options={{
+                    minimap: {
+                      enabled: false,
+                    },
+                  }}
+                  theme={theme === "dark" ? "vs-dark" : ""}
+                  value={containerFromRedux.css}
+                  defaultLanguage="css"
+                  onChange={(e: string | undefined) => {
+                    dispatch(setChangedFields("css"));
+                    files.css.value = e ? e : "";
+                    dispatch(
+                      setContainerFormData({
+                        css: e ? e : "",
+                      })
+                    );
+                  }}
+                />
+              )
             }
           />
           <Tab

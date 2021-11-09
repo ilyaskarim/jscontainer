@@ -1,21 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const formData = {
+  html: "<!-- HTML -->",
+  css: "/* CSS */",
+  javascript: "// Javascript",
+  html_snippet: 1,
+  assets: `[]`,
+  access: "[]",
+  title: "wow",
+  description: "desc",
+  slug: "",
+  parent: null,
+  forkedFrom: null,
+  userId: null,
+  typescript: 0,
+};
+
 const state = {
-  formData: {
-    html: "<!-- HTML -->",
-    css: "/* CSS */",
-    javascript: "// Javascript",
-    html_snippet: 1,
-    assets: `[]`,
-    access: "[]",
-    title: "wow",
-    description: "desc",
-    slug: "",
-    parent: null,
-    forkedFrom: null,
-    userId: null,
-    typescript: 0,
-  },
+  formData: JSON.parse(JSON.stringify(formData)),
   notFound: false,
   theme: "dark",
   libraiesList: [],
@@ -27,6 +29,9 @@ export default createSlice({
   name: "Container",
   initialState: state,
   reducers: {
+    resetFormData(state) {
+      state.formData = JSON.parse(JSON.stringify(formData));
+    },
     requestSaveContainer(state) {
       state.onRequestSaveContainer = Math.floor(Math.random() * 10000);
     },
