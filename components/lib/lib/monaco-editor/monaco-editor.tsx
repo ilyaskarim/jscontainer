@@ -35,7 +35,7 @@ export const MonacoEditor = (props: MonacoEditorProps) => {
 
   return (
     <MonacoReactEditor
-      onMount={(editor) => {
+      onMount={(editor: any) => {
         editor.onDidBlurEditorText(() => {
           if (props.name === "css") {
             dispatch(
