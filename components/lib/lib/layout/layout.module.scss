@@ -10,6 +10,17 @@
       text-decoration: none;
       color: #464646;
       padding: 20px;
+      display: flex;
+      margin-right: 20px;
+      img {
+        height: 20px;
+        width: 20px;
+        margin-right: 5px;
+      }
+      span {
+        display: inline-block;
+        margin-top: 1px;
+      }
     }
     .headerContent {
       padding: 0 10px;
