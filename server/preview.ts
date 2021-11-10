@@ -1,6 +1,17 @@
 import { has } from "lodash";
 import * as ts from "typescript";
 
+const analyticsString = `
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-64991398-3 />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'UA-64991398-3');
+    </script>
+`;
+
 function tsCompile(
   source: string,
   options: ts.TranspileOptions = null
@@ -87,6 +98,7 @@ export const containerPreview = (express) => {
         <script ${hasInludedBabel ? 'type="text/babel"' : ""}  >
             ${container.javascript}
         </script>
+        ${analyticsString}
         </html>
         `);
       } else {
@@ -103,6 +115,7 @@ export const containerPreview = (express) => {
       <script ${hasInludedBabel ? 'type="text/babel"' : ""}  >
           ${container.javascript}
       </script>
+      ${analyticsString}
           `);
       }
     } catch (e) {
