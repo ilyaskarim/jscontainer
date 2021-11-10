@@ -147,9 +147,16 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
 
       {notFoundContainer && (
         <>
-          <a href="/" style={{ textDecoration: "none" }}>
-            <Button>Create new container</Button>
-          </a>
+          <Link href="/">
+            <a
+              style={{ textDecoration: "none" }}
+              onClick={() => {
+                window.location.href = "/";
+              }}
+            >
+              <Button>Create new container</Button>
+            </a>
+          </Link>
         </>
       )}
     </>
