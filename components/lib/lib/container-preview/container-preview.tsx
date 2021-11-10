@@ -39,6 +39,10 @@ export function ContainerPreview(props: ContainerPreviewProps) {
     return <></>;
   }
 
+  if (!containerFromRedux.id) {
+    return <></>;
+  }
+
   return (
     <div
       className={classNames({

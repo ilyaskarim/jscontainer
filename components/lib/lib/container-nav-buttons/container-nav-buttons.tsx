@@ -147,9 +147,9 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
 
       {notFoundContainer && (
         <>
-          <Link href="/">
+          <a href="/" style={{ textDecoration: "none" }}>
             <Button>Create new container</Button>
-          </Link>
+          </a>
         </>
       )}
     </>

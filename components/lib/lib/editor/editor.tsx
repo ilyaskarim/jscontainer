@@ -9,6 +9,7 @@ import {
   Spinner,
   Classes,
   Button,
+  Overlay,
 } from "@blueprintjs/core";
 import {
   ContainerInfo,
@@ -59,7 +60,7 @@ export function Editor(props: EditorProps) {
         if (document.activeElement?.classList.contains("inputarea")) {
           e.preventDefault();
           if (e.shiftKey) {
-            dispatch(requestUpdateContainer());
+            dispatch(requestCreateContainer());
           } else {
             dispatch(requestCreateContainer());
           }
@@ -93,7 +94,7 @@ export function Editor(props: EditorProps) {
   }, [router]);
 
   if (isLoadingContainer) {
-    return <Spinner className={styles.loader} intent="primary"></Spinner>;
+    return <div className={styles.loader}>Loading...</div>;
   }
 
   if (notFoundContainer) {
