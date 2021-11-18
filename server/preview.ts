@@ -35,13 +35,14 @@ export const containerPreview = (express) => {
           include: [],
         });
 
+      if (!container) {
+        res.status(404).send("Container not found");
+      }
+
       if (container.typescript === 1 || container.typescript === true) {
         container.javascript = tsCompile(container.javascript);
       }
 
-      if (!container) {
-        res.status(404).send("Container not found");
-      }
       if (has(req.query, "json")) {
         res.status(200).json({
           container: container,
