@@ -59,11 +59,7 @@ export function Editor(props: EditorProps) {
       if (e.key === "s") {
         if (document.activeElement?.classList.contains("inputarea")) {
           e.preventDefault();
-          if (e.shiftKey) {
-            dispatch(requestCreateContainer());
-          } else {
-            dispatch(requestCreateContainer());
-          }
+          dispatch(requestCreateContainer());
         }
       }
     }

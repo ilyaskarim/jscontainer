@@ -7,6 +7,7 @@ import {
 import randomstring from "random-string";
 import { useQuery, useMutation } from "react-query";
 import { omit } from "lodash";
+import { iContainer } from "../../../../types/container";
 
 export const useContainerQuery = (slug: string) => {
   return useQuery(
@@ -26,7 +27,7 @@ export const useContainerQuery = (slug: string) => {
 };
 
 export const useContainerUpdateMutation = () => {
-  return useMutation("updateContainer", (containerData: any) => {
+  return useMutation("updateContainer", (containerData: iContainer) => {
     return axios.post("/graphql", {
       query: updateContainerQuery,
       variables: {
@@ -42,7 +43,7 @@ export const useContainerUpdateMutation = () => {
 };
 
 export const useContainerCreateMutation = () => {
-  return useMutation("createContainer", (containerData: any) => {
+  return useMutation("createContainer", (containerData: iContainer) => {
     containerData = {
       ...containerData,
       parent: containerData.id,
@@ -50,6 +51,7 @@ export const useContainerCreateMutation = () => {
         length: 12,
       }),
     };
+    delete containerData["id"];
     return axios.post("/graphql", {
       query: createContainerQuery,
       variables: {
