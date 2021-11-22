@@ -23,7 +23,6 @@ const state = {
   libraiesList: [],
   changedFields: [] as Array<string>,
   onRequestCreateContainer: null,
-  onRequestUpdateContainer: null,
   onRequestRefreshContainer: null,
 };
 
@@ -39,9 +38,6 @@ export default createSlice({
     },
     requestContainerRefresh(state) {
       state.onRequestRefreshContainer = Math.floor(Math.random() * 10000);
-    },
-    requestUpdateContainer(state) {
-      state.onRequestUpdateContainer = Math.floor(Math.random() * 10000);
     },
     setTheme(state, action) {
       state.theme = action.payload;

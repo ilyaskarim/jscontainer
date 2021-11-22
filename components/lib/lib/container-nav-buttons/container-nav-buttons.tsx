@@ -29,10 +29,6 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     (state: any) => state.container.onRequestCreateContainer
   );
 
-  const onRequestUpdateContainer = useSelector(
-    (state: any) => state.container.onRequestUpdateContainer
-  );
-
   const changedFields = useSelector(
     (state: any) => state.container.changedFields
   );
@@ -47,10 +43,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     isLoading: isCreatingContainer,
   } = useContainerCreateMutation();
 
-  const { mutate: updateContainer, data: updateContainerData } =
-    useContainerUpdateMutation();
-
-  const handleSaveContainer = (update = false) => {
+  const handleSaveContainer = () => {
     if (isCreatingContainer) {
       return;
     }
@@ -61,9 +54,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
       });
       return;
     }
-    update
-      ? updateContainer(containerFromRedux)
-      : createContainer(containerFromRedux);
+    createContainer(containerFromRedux);
   };
 
   useEffect(() => {
@@ -89,31 +80,10 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
   }, [createContainerData]);
 
   useEffect(() => {
-    if (
-      updateContainerData &&
-      get(
-        updateContainerData,
-        "data.data.updateContainer.returning[0].id",
-        null
-      )
-    ) {
-      toast.success("Container updated.", {
-        position: "bottom-center",
-      });
-    }
-  }, [updateContainerData]);
-
-  useEffect(() => {
     if (onRequestCreateContainer) {
       handleSaveContainer();
     }
   }, [onRequestCreateContainer]);
-
-  useEffect(() => {
-    if (onRequestUpdateContainer) {
-      handleSaveContainer(true);
-    }
-  }, [onRequestUpdateContainer]);
 
   return (
     <>

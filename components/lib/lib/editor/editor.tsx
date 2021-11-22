@@ -27,11 +27,7 @@ import styles from "./editor.module.scss";
 import toast from "react-hot-toast";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { useRouter } from "next/router";
-import {
-  requestCreateContainer,
-  requestUpdateContainer,
-  resetFormData,
-} from "../redux/redux";
+import { requestCreateContainer, resetFormData } from "../redux/redux";
 
 /* eslint-disable-next-line */
 export interface EditorProps {}
@@ -189,7 +185,7 @@ export function Editor(props: EditorProps) {
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
             <Button
               onClick={() => {
-                dispatch(requestUpdateContainer());
+                dispatch(requestCreateContainer());
                 setSettingsDialog(false);
               }}
             >

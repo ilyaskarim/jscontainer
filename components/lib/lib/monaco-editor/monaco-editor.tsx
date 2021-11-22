@@ -1,8 +1,7 @@
 import MonacoReactEditor from "@monaco-editor/react";
-import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  requestUpdateContainer,
+  requestCreateContainer,
   setChangedFields,
   setContainerFormData,
 } from "../..";
@@ -63,7 +62,7 @@ export const MonacoEditor = (props: MonacoEditorProps) => {
         clearTimeout(timeout);
         timeout = setTimeout(() => {
           if (containerFromRedux.id) {
-            dispatch(requestUpdateContainer());
+            dispatch(requestCreateContainer());
           }
         }, 1500);
         dispatch(setChangedFields(props.name));
