@@ -50,7 +50,7 @@
       background-color: #1e1e1e;
     }
     .header {
-      border-bottom-color: darken($color: #1e1e1e, $amount: 4);
+      border-bottom-color: lighten($color: #1e1e1e, $amount: 5);
     }
     .headerBrand {
       color: #c1c1c1;

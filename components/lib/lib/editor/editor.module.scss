@@ -11,7 +11,7 @@
 
   &.dark {
     .editors {
-      border-right-color: darken($color: #1e1e1e, $amount: 4);
+      border-right-color: lighten($color: #1e1e1e, $amount: 5);
     }
   }
 }
