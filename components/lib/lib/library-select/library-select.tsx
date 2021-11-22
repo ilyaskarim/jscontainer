@@ -163,12 +163,6 @@ export function LibrarySelect(props: LibrarySelectProps) {
             </div>
           );
         }}
-        onQueryChange={(e) => {
-          clearTimeout(timeout);
-          timeout = setTimeout(() => {
-            setSearchInput(e);
-          }, 600);
-        }}
         popoverProps={{
           usePortal: true,
         }}
