@@ -1,19 +1,18 @@
-import "./container-nav-buttons.module.scss";
 import { Button, Icon } from "@blueprintjs/core";
 import Link from "next/link";
+import { useEffect } from "react";
+import { get } from "lodash";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
+import { requestContainerRefresh } from "../redux/redux";
 import {
   resetChangedFields,
   setContainerFormData,
   useContainerCreateMutation,
 } from "../../index";
-import { useSelector } from "react-redux";
-import { useCallback, useEffect } from "react";
-import { get } from "lodash";
-import { useDispatch } from "react-redux";
-import toast from "react-hot-toast";
-import { useRouter } from "next/router";
-import { useContainerUpdateMutation } from "../graphql/graphql";
-import { requestContainerRefresh } from "../redux/redux";
+
+import "./container-nav-buttons.module.scss";
 
 /* eslint-disable-next-line */
 export interface ContainerNavButtonsProps {}
