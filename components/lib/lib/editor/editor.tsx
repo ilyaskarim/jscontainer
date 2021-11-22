@@ -28,6 +28,7 @@ import toast from "react-hot-toast";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { useRouter } from "next/router";
 import { requestCreateContainer, resetFormData } from "../redux/redux";
+import interact from "interactjs";
 
 /* eslint-disable-next-line */
 export interface EditorProps {}
@@ -85,6 +86,39 @@ export function Editor(props: EditorProps) {
     }
   }, [router]);
 
+  useEffect(() => {
+    if (
+      !document
+        .querySelector(".editors")
+        .classList.contains("resize-initialize")
+    ) {
+      console.log(1);
+      interact(".editors").resizable({
+        edges: { top: false, left: false, bottom: false, right: true },
+        listeners: {
+          move: function (event) {
+            if (event.buttons === 0) {
+              return;
+            }
+            let { x, y } = event.target.dataset;
+
+            x = (parseFloat(x) || 0) + event.deltaRect.left;
+            y = (parseFloat(y) || 0) + event.deltaRect.top;
+
+            Object.assign(event.target.style, {
+              width: `${event.rect.width}px`,
+              height: `${event.rect.height}px`,
+              transform: `translate(${x}px, ${y}px)`,
+            });
+
+            Object.assign(event.target.dataset, { x, y });
+          },
+        },
+      });
+      document.querySelector(".editors").classList.add("resize-initialize");
+    }
+  }, []);
+
   if (isLoadingContainer) {
     return <div className={styles.loader}>Loading...</div>;
   }
@@ -94,119 +128,130 @@ export function Editor(props: EditorProps) {
   }
 
   return (
-    <div
-      className={classnames({
-        [styles.editor]: true,
-        [styles.dark]: theme === "dark",
-      })}
-    >
-      <div className={styles.editors}>
-        <Tabs
-          id="TabsExample"
-          onChange={(e: "javascript" | "typescript" | "css" | "html") =>
-            setFileName(e)
-          }
-          className={styles.tabs}
-          selectedTabId={fileName}
+    <>
+      <div
+        className={classnames({
+          [styles.editor]: true,
+          editor: true,
+          [styles.dark]: theme === "dark",
+        })}
+      >
+        <div
+          className={classnames({
+            [styles.editors]: true,
+            editors: true,
+          })}
         >
-          <Tab
-            id="html"
-            title="Html"
-            panel={
-              fileName === "html" && (
-                <>
-                  <MonacoEditor language="html" name={"html"}></MonacoEditor>
-                </>
-              )
+          <Tabs
+            id="TabsExample"
+            onChange={(e: "javascript" | "typescript" | "css" | "html") =>
+              setFileName(e)
             }
-          />
-          <Tab
-            id="css"
-            title="CSS"
-            panel={
-              fileName === "css" && (
-                <MonacoEditor language="css" name={"css"}></MonacoEditor>
-              )
-            }
-          />
-          <Tab
-            id="javascript"
-            title={containerFromRedux.typescript ? "Typescript" : "Javascript"}
-            panel={
-              containerFromRedux.typescript === 1 ||
-              containerFromRedux.typescript === true ? (
-                <>
+            className={styles.tabs}
+            selectedTabId={fileName}
+          >
+            <Tab
+              id="html"
+              title="Html"
+              panel={
+                fileName === "html" && (
+                  <>
+                    <MonacoEditor language="html" name={"html"}></MonacoEditor>
+                  </>
+                )
+              }
+            />
+            <Tab
+              id="css"
+              title="CSS"
+              panel={
+                fileName === "css" && (
+                  <MonacoEditor language="css" name={"css"}></MonacoEditor>
+                )
+              }
+            />
+            <Tab
+              id="javascript"
+              title={
+                containerFromRedux.typescript ? "Typescript" : "Javascript"
+              }
+              panel={
+                containerFromRedux.typescript === 1 ||
+                containerFromRedux.typescript === true ? (
+                  <>
+                    <MonacoEditor
+                      language="javscript"
+                      name={"javscript"}
+                    ></MonacoEditor>
+                  </>
+                ) : (
                   <MonacoEditor
-                    language="javscript"
-                    name={"javscript"}
+                    language="typescript"
+                    name={"javascript"}
                   ></MonacoEditor>
-                </>
-              ) : (
-                <MonacoEditor
-                  language="typescript"
-                  name={"javascript"}
-                ></MonacoEditor>
-              )
-            }
-          />
-          <Tabs.Expander />
-          <Tooltip2 content={`Copy ${fileName} code`}>
-            <a
-              onClick={() => {
-                window.navigator.clipboard.writeText(
-                  containerFromRedux[fileName]
-                );
-                toast.success("Copied HTML to Clipboard.");
-              }}
-            >
-              <Icon icon={"duplicate"} />
+                )
+              }
+            />
+            <Tabs.Expander />
+            <Tooltip2 content={`Copy ${fileName} code`}>
+              <a
+                onClick={() => {
+                  window.navigator.clipboard.writeText(
+                    containerFromRedux[fileName]
+                  );
+                  toast.success("Copied HTML to Clipboard.");
+                }}
+              >
+                <Icon icon={"duplicate"} />
+              </a>
+            </Tooltip2>
+            <a onClick={() => setContainerInfoDrawer(true)}>
+              <Icon icon={"info-sign"} />
             </a>
-          </Tooltip2>
-          <a onClick={() => setContainerInfoDrawer(true)}>
-            <Icon icon={"info-sign"} />
-          </a>
-          <a onClick={() => setSettingsDialog(true)}>
-            <Icon icon={"cog"} />
-          </a>
-        </Tabs>
-      </div>
-      <ContainerPreview></ContainerPreview>
-
-      {/* Dialogs */}
-      <Dialog
-        isOpen={settingsDialog}
-        className={theme === "dark" && "bp3-dark"}
-        onClose={() => setSettingsDialog(false)}
-        title="Container Settings"
-      >
-        <ContainerSettings />
-        <br />
-        <div className={Classes.DIALOG_FOOTER}>
-          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <Button
-              onClick={() => {
-                dispatch(requestCreateContainer());
-                setSettingsDialog(false);
-              }}
-            >
-              Close
-            </Button>
-          </div>
+            <a onClick={() => setSettingsDialog(true)}>
+              <Icon icon={"cog"} />
+            </a>
+          </Tabs>
         </div>
-      </Dialog>
-      <Drawer
-        className={theme === "dark" && "bp3-dark"}
-        isOpen={containerInfoDrawer}
-        usePortal={true}
-        size={300}
-        onClose={() => setContainerInfoDrawer(false)}
-        position="left"
-        title="Container Info"
-        canEscapeKeyClose={true}
-      >
-        <ContainerInfo></ContainerInfo>
-      </Drawer>
-    </div>
+        <ContainerPreview></ContainerPreview>
+      </div>
+      <>
+        {/* Dialogs */}
+        <Dialog
+          isOpen={settingsDialog}
+          className={theme === "dark" && "bp3-dark"}
+          onClose={() => setSettingsDialog(false)}
+          title="Container Settings"
+        >
+          <ContainerSettings />
+          <br />
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <Button
+                onClick={() => {
+                  dispatch(requestCreateContainer());
+                  setSettingsDialog(false);
+                }}
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </Dialog>
+        <Drawer
+          className={theme === "dark" && "bp3-dark"}
+          isOpen={containerInfoDrawer}
+          usePortal={true}
+          size={300}
+          onClose={() => setContainerInfoDrawer(false)}
+          position="left"
+          title="Container Info"
+          canEscapeKeyClose={true}
+        >
+          <ContainerInfo></ContainerInfo>
+        </Drawer>
+      </>
+    </>
   );
 }
 

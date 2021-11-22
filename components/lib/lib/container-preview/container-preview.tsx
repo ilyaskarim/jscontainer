@@ -47,6 +47,7 @@ export function ContainerPreview(props: ContainerPreviewProps) {
     <div
       className={classNames({
         [styles.preview]: true,
+        preview: true,
         [styles.previewDark]: theme === "dark",
       })}
     >

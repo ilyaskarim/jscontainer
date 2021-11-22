@@ -23,6 +23,7 @@
     "core-js": "^3.6.5",
     "express": "4.17.1",
     "express-session": "^1.17.2",
+    "interactjs": "^1.10.11",
     "lodash": "^4.17.21",
     "next": "12.0.3",
     "normalize.css": "^8.0.1",
@@ -45,9 +46,9 @@
     "wertik-js": "^3.0.8-beta"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.3",
-    "typescript": "^4.4.4",
-    "cross-env": "^7.0.3"
+    "typescript": "^4.4.4"
   }
 }
