@@ -92,7 +92,6 @@ export function Editor(props: EditorProps) {
         .querySelector(".editors")
         .classList.contains("resize-initialize")
     ) {
-      console.log(1);
       interact(".editors").resizable({
         edges: { top: false, left: false, bottom: false, right: true },
         listeners: {
@@ -100,14 +99,21 @@ export function Editor(props: EditorProps) {
             if (event.buttons === 0) {
               return;
             }
+
             let { x, y } = event.target.dataset;
 
             x = (parseFloat(x) || 0) + event.deltaRect.left;
             y = (parseFloat(y) || 0) + event.deltaRect.top;
 
+            document
+              .querySelector(".preview")
+              .setAttribute(
+                "style",
+                `width: ${window.outerWidth - event.rect.right}px`
+              );
+
             Object.assign(event.target.style, {
-              width: `${event.rect.width}px`,
-              height: `${event.rect.height}px`,
+              width: `${event.rect.right}px`,
               transform: `translate(${x}px, ${y}px)`,
             });
 
