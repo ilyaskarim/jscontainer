@@ -36,13 +36,12 @@ export function Layout(props: LayoutProps) {
           {isContainerPage ? (
             <>
               <ContainerNavButtons />
+              {/* <div className={styles.headerContentLinks}>
+                <a href="/tools">Tools</a>
+              </div> */}
             </>
           ) : (
-            <div className={styles.headerLinks}>
-              <a>Tools</a>
-              <a>About</a>
-              <a>Blog</a>
-            </div>
+            <></>
           )}
         </div>
       </div>

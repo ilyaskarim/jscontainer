@@ -44,4 +44,6 @@ export * from "./lib/container-preview/container-preview";
 
 export * from "./lib/monaco-editor/monaco-editor";
 
+export * from "./lib/tools-landing/tools-landing";
+
 export * from "./lib/logo/logo";

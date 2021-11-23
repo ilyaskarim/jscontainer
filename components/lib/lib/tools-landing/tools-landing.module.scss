@@ -1,0 +1,56 @@
+.toolsLanding {
+  height: 100vh;
+  .header {
+    background: #eee;
+    height: 200px;
+    width: 100%;
+    text-align: center;
+    h1 {
+      margin: 0;
+      line-height: 200px;
+      font-size: 50px;
+      color: #444343;
+    }
+  }
+  &.dark {
+    h1 {
+      color: #444343;
+    }
+  }
+}
+
+.toolsList {
+  margin-top: 30px;
+  .toolsListItem {
+    display: inline-block;
+    width: 250px;
+    color: black;
+    cursor: pointer;
+    margin-bottom: 80px;
+
+    .toolsListItemContent {
+      height: 175px;
+      margin-top: -230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      position: relative;
+      h3,
+      p {
+        color: white;
+      }
+    }
+    svg {
+      transition: all 0.2s;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      svg {
+        filter: drop-shadow(0px 0px 3px #b9b9b9);
+        transition: all 0.2s;
+      }
+    }
+  }
+}
