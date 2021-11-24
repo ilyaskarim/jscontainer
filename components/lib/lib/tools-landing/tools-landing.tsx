@@ -16,9 +16,9 @@ export function ToolsLanding(props: ToolsLandingProps) {
         <h1>Tools</h1>
       </div>
       <div className={styles.toolsList}>
-        {[1, 2].map((c) => {
+        {[1].map((c, index) => {
           return (
-            <a>
+            <a key={index} href="/tools/javasript-performance-test">
               <div className={styles.toolsListItem}>
                 <svg
                   id="sw-js-blob-svg"
@@ -52,8 +52,8 @@ export function ToolsLanding(props: ToolsLandingProps) {
                 </svg>
                 <div className={styles.toolsListItemContent}>
                   <div>
-                    <h3>Svg Generator</h3>
-                    <p>Generate svg</p>
+                    <h3>Javascript Performance Test</h3>
+                    <p>Test your javasript code speed</p>
                   </div>
                 </div>
               </div>
