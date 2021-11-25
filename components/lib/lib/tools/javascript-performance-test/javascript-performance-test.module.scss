@@ -1,0 +1,57 @@
+.JavascriptPerformanceTestPage {
+  background: #18191a;
+  height: auto;
+  min-height: 100vh;
+  padding-bottom: 20px;
+}
+.JavascriptPerformanceTestPageLayout {
+  display: flex;
+  .JavascriptPerformanceTestPageCodeSnippets {
+    width: 70%;
+    padding: 22px;
+    margin: auto;
+    .JavascriptPerformanceTestPageCodeSnippetsHeaderErrorsMessage {
+      margin-bottom: 10px;
+      margin-top: 10px;
+      border-left: 2px solid red;
+      padding-left: 10px;
+      background: #440808;
+      padding: 10px;
+    }
+    .JavascriptPerformanceTestPageCodeSnippetsHeader {
+      display: flex;
+      .JavascriptPerformanceTestPageCodeSnippetsHeaderCount {
+        background: #4c4c4c;
+        display: inline-block;
+        height: 27px;
+        width: 28px;
+        text-align: center;
+        border-radius: 50%;
+        font-size: 16px;
+        line-height: 25px;
+        margin-right: 8px;
+      }
+      .JavascriptPerformanceTestPageCodeSnippetsHeaderCountWinner {
+        background: #0ca90c;
+      }
+      .JavascriptPerformanceTestPageCodeSnippetsHeaderCountLoser {
+        background: #d92020;
+      }
+      .JavascriptPerformanceTestPageCodeSnippetsHeaderActions {
+        margin-left: auto;
+        padding-top: 10px;
+      }
+      &.JavascriptPerformanceTestPageCodeSnippetsHeaderErrors {
+        h3 {
+          color: red;
+        }
+      }
+    }
+  }
+  .JavascriptPerformanceTestPageLayoutFooter {
+    display: flex;
+    .JavascriptPerformanceTestPageLayoutFooterActions {
+      margin-left: auto;
+    }
+  }
+}
