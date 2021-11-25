@@ -3,9 +3,10 @@ import { ToolsHeader } from "./../../../index";
 import MonacoReactEditor from "@monaco-editor/react";
 import { Button, ProgressBar } from "@blueprintjs/core";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import moment from "moment";
+import { orderBy } from "lodash";
 
 const sourceOfTruth = {
   id: 0,
@@ -18,9 +19,7 @@ const sourceOfTruth = {
   diff: 0,
 };
 
-const randomId = () => {
-  return Math.floor(Math.random() * 1280);
-};
+let timeout: any;
 
 export interface JavascriptPerformanceTestProps {}
 
@@ -30,43 +29,38 @@ export const JavascriptPerformanceTest = (
   const theme = useSelector((state: any) => state.container.theme);
   const [isTestRunning, setIsTestRunning] = useState(false);
   const [snippets, setSnippets] = useState([
-    { ...sourceOfTruth, id: randomId() },
-    { ...sourceOfTruth, id: randomId() },
+    { ...sourceOfTruth, id: 1 },
+    { ...sourceOfTruth, id: 2 },
   ]);
 
   const handleRunTest = () => {
     setIsTestRunning(true);
 
-    setTimeout(() => {
-      snippets.forEach((snippet, index) => {
-        var list = [...snippets];
-        setTimeout(() => {
-          try {
-            snippet.startTime = performance.now();
-            eval(snippet.code);
-            snippet.endTime = performance.now();
-            snippet.hasErrors = false;
-            snippet.hasErrorMessage = "";
-          } catch (e) {
-            snippet.endTime = performance.now();
-            snippet.hasErrors = true;
-            snippet.hasErrorMessage = e.message;
-          }
+    return snippets.map((snippet, index) => {
+      var list = [...snippets];
+      try {
+        snippet.startTime = performance.now();
+        eval(snippet.code);
+        snippet.endTime = performance.now();
+        snippet.hasErrors = false;
+        snippet.hasErrorMessage = "";
+      } catch (e) {
+        snippet.endTime = performance.now();
+        snippet.hasErrors = true;
+        snippet.hasErrorMessage = e.message;
+      }
 
-          snippet.diff = snippet.startTime - snippet.endTime;
+      snippet.diff = Math.abs(snippet.startTime - snippet.endTime);
 
-          console.log(snippet.diff);
+      list[index] = snippet;
 
-          list[index] = snippet;
+      setSnippets(list);
 
-          setSnippets(list);
-
-          if (snippets.length - 1 === index) {
-            setIsTestRunning(false);
-          }
-        }, 500);
-      });
-    }, 500);
+      if (snippets.length - 1 === index) {
+        setIsTestRunning(false);
+      }
+      return snippet;
+    });
   };
 
   return (
@@ -92,8 +86,8 @@ export const JavascriptPerformanceTest = (
                           className={classNames({
                             [styles.JavascriptPerformanceTestPageCodeSnippetsHeaderCount]:
                               true,
-                            [styles.JavascriptPerformanceTestPageCodeSnippetsHeaderCountLoser]:
-                              true,
+                            [styles.JavascriptPerformanceTestPageCodeSnippetsHeaderCountWinner]:
+                              snippet.rank === 1,
                           })}
                         >
                           {snippet.rank}
@@ -123,6 +117,11 @@ export const JavascriptPerformanceTest = (
                   </div>
                 </div>
                 <MonacoReactEditor
+                  className={classNames({
+                    [styles.JavascriptPerformanceTestEditor]: true,
+                    [styles.JavascriptPerformanceTestEditorWinnner]:
+                      snippet.rank === 1,
+                  })}
                   language="javascript"
                   options={{
                     minimap: {
@@ -163,7 +162,7 @@ export const JavascriptPerformanceTest = (
                 onClick={() =>
                   setSnippets([
                     ...snippets,
-                    { ...sourceOfTruth, id: randomId() },
+                    { ...sourceOfTruth, id: snippets.length + 1 },
                   ])
                 }
               >
@@ -179,7 +178,20 @@ export const JavascriptPerformanceTest = (
                 intent="success"
                 loading={isTestRunning}
                 disabled={snippets.length === 1}
-                onClick={() => handleRunTest()}
+                onClick={() => {
+                  var list = [...handleRunTest()];
+                  console.log(orderBy(list, ["diff"], "asc"));
+                  orderBy(list, ["diff"], "asc").forEach((element, index) => {
+                    element.rank = index + 1;
+                    const findIndex = snippets.findIndex(
+                      (c) => c.id === element.id
+                    );
+                    if (findIndex > -1) {
+                      list[findIndex] = element;
+                    }
+                    setSnippets(list);
+                  });
+                }}
               >
                 Run Test
               </Button>
