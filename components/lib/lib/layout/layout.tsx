@@ -3,7 +3,7 @@ import { ContainerNavButtons, Logo } from "../../index";
 import { useSelector } from "react-redux";
 import classnames from "classnames";
 import Link from "next/link";
-import { useEffect } from "react";
+import Image from "next/image";
 
 /* eslint-disable-next-line */
 export interface LayoutProps {
@@ -28,7 +28,7 @@ export function Layout(props: LayoutProps) {
       <div className={styles.header}>
         <Link href="/">
           <a className={styles.headerBrand}>
-            <img src="/logo.png" />
+            <Image alt="JS Container Logo" src="/logo.png" />
             <span>JSContainer</span>
           </a>
         </Link>
@@ -37,7 +37,7 @@ export function Layout(props: LayoutProps) {
             <>
               <ContainerNavButtons />
               <div className={styles.headerContentLinks}>
-                <a href="/tools">Tools</a>
+                <Link href="/tools">Tools</Link>
               </div>
             </>
           ) : (
@@ -46,7 +46,11 @@ export function Layout(props: LayoutProps) {
         </div>
       </div>
       <div className={styles.content}>{props.children}</div>
-      {showFooter && <div className={styles.footer}>the app footer</div>}
+      {showFooter && (
+        <div className={styles.footer}>
+          © 2021 JSContainer. All Rights Reserved
+        </div>
+      )}
     </div>
   );
 }

@@ -82,7 +82,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     if (onRequestCreateContainer) {
       handleSaveContainer();
     }
-  }, [onRequestCreateContainer]);
+  }, [onRequestCreateContainer, handleSaveContainer]);
 
   return (
     <>

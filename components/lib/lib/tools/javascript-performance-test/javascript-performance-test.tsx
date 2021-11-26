@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import moment from "moment";
+import Link from "next/link";
 import { orderBy } from "lodash";
 
 const sourceOfTruth = {
@@ -65,7 +66,7 @@ export const JavascriptPerformanceTest = (
 
   return (
     <div className={styles.JavascriptPerformanceTestPage}>
-      <ToolsHeader link={<a href="/tools/">Go Back to tools</a>}>
+      <ToolsHeader link={<Link href="/tools/">Go Back to tools</Link>}>
         Javascript Performance Test
       </ToolsHeader>
       <div className={styles.JavascriptPerformanceTestPageLayout}>
