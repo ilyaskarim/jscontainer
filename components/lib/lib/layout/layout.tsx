@@ -28,7 +28,11 @@ export function Layout(props: LayoutProps) {
       <div className={styles.header}>
         <Link href="/">
           <a className={styles.headerBrand}>
-            <Image alt="JS Container Logo" src="/logo.png" />
+            <img
+              className={styles.headerBrandImage}
+              alt="JS Container Logo"
+              src="/logo.png"
+            />
             <span>JSContainer</span>
           </a>
         </Link>
