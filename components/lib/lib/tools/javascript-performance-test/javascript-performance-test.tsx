@@ -65,7 +65,9 @@ export const JavascriptPerformanceTest = (
 
   return (
     <div className={styles.JavascriptPerformanceTestPage}>
-      <ToolsHeader>Javascript Performance Test</ToolsHeader>
+      <ToolsHeader link={<a href="/tools/">Go Back to tools</a>}>
+        Javascript Performance Test
+      </ToolsHeader>
       <div className={styles.JavascriptPerformanceTestPageLayout}>
         <div className={styles.JavascriptPerformanceTestPageCodeSnippets}>
           {snippets.map((snippet, index) => {

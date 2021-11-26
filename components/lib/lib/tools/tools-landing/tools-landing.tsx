@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import styles from "./tools-landing.module.scss";
+import { ToolsHeader } from "../../../index";
 
 /* eslint-disable-next-line */
 export interface ToolsLandingProps {}
@@ -12,13 +13,11 @@ export function ToolsLanding(props: ToolsLandingProps) {
         [styles.dark]: true,
       })}
     >
-      <div className={styles.header}>
-        <h1>Tools</h1>
-      </div>
+      <ToolsHeader link={<a href="/">Home</a>}>Tools</ToolsHeader>
       <div className={styles.toolsList}>
-        {[1, 2].map((c) => {
+        {[1].map((c, index) => {
           return (
-            <a>
+            <a key={index} href="/tools/javascript-performance-test">
               <div className={styles.toolsListItem}>
                 <svg
                   id="sw-js-blob-svg"
@@ -52,8 +51,8 @@ export function ToolsLanding(props: ToolsLandingProps) {
                 </svg>
                 <div className={styles.toolsListItemContent}>
                   <div>
-                    <h3>Svg Generator</h3>
-                    <p>Generate svg</p>
+                    <h3>Javascript Performance Test</h3>
+                    <p>Test your javasript code speed</p>
                   </div>
                 </div>
               </div>
