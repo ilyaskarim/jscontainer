@@ -50,7 +50,7 @@ export const MonacoEditor = (props: MonacoEditorProps) => {
       }}
       height="calc(100vh - 130px)"
       loading={"Loading editor please wait"}
-      value={containerFromRedux[props.name]}
+      defaultValue={containerFromRedux[props.name]}
       defaultLanguage={props.language}
       language={props.language}
       options={{

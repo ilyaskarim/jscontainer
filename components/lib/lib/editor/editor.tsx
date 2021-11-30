@@ -15,9 +15,6 @@ import {
   ContainerPreview,
   ContainerSettings,
   NotFound,
-  setContainerFormData,
-  setNotFoundContainer,
-  useContainerQuery,
   MonacoEditor,
 } from "../../index";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +26,6 @@ import { useRouter } from "next/router";
 import {
   cancelRequestCreateContainer,
   requestCreateContainer,
-  resetFormData,
 } from "../redux/redux";
 import interact from "interactjs";
 
@@ -42,8 +38,6 @@ export function Editor(props: EditorProps) {
   const [fileName, setFileName] = useState<
     "javascript" | "typescript" | "css" | "html"
   >("html");
-  const { refetch: fetchContainer, isLoading: isLoadingContainer } =
-    useContainerQuery(router.query.slug as string);
   const [settingsDialog, setSettingsDialog] = useState<boolean>(false);
   const [containerInfoDrawer, setContainerInfoDrawer] = useState(false);
   const containerFromRedux = useSelector(
@@ -73,22 +67,6 @@ export function Editor(props: EditorProps) {
       document.removeEventListener("keydown", handleOnKeyDown);
     };
   }, [containerFromRedux]);
-
-  useEffect(() => {
-    if (router.query.slug && isLoadingContainer === false) {
-      fetchContainer().then((resp) => {
-        const viewContainer = resp?.data?.data?.data?.viewContainer;
-        if (viewContainer) {
-          dispatch(setContainerFormData(viewContainer));
-          dispatch(setNotFoundContainer(false));
-        } else {
-          dispatch(setNotFoundContainer(true));
-        }
-      });
-    } else {
-      dispatch(resetFormData());
-    }
-  }, [router]);
 
   useEffect(() => {
     if (
@@ -128,10 +106,6 @@ export function Editor(props: EditorProps) {
       document.querySelector(".editors").classList.add("resize-initialize");
     }
   }, []);
-
-  if (isLoadingContainer) {
-    return <div className={styles.loader}>Loading...</div>;
-  }
 
   if (notFoundContainer) {
     return <NotFound></NotFound>;
