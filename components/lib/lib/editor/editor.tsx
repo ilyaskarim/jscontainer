@@ -8,7 +8,6 @@ import {
   Drawer,
   Classes,
   Button,
-  Overlay,
 } from "@blueprintjs/core";
 import {
   ContainerInfo,
@@ -22,7 +21,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./editor.module.scss";
 import toast from "react-hot-toast";
 import { Tooltip2 } from "@blueprintjs/popover2";
-import { useRouter } from "next/router";
 import {
   cancelRequestCreateContainer,
   requestCreateContainer,
@@ -33,7 +31,6 @@ import interact from "interactjs";
 export interface EditorProps {}
 
 export function Editor(props: EditorProps) {
-  const router = useRouter();
   const dispatch = useDispatch();
   const [fileName, setFileName] = useState<
     "javascript" | "typescript" | "css" | "html"
