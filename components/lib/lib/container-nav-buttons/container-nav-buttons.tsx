@@ -5,7 +5,10 @@ import { get } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { requestContainerRefresh } from "../redux/redux";
+import {
+  requestContainerRefresh,
+  setCreateContainerLoading,
+} from "../redux/redux";
 import {
   resetChangedFields,
   setContainerFormData,
@@ -22,6 +25,9 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
   const dispatch = useDispatch();
   const containerFromRedux = useSelector(
     (state: any) => state.container.formData
+  );
+  const isCreatingContainerFromRedux = useSelector(
+    (state: any) => state.container.createContainerLoading
   );
 
   const onRequestCreateContainer = useSelector(
@@ -42,15 +48,19 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
     isLoading: isCreatingContainer,
   } = useContainerCreateMutation();
 
+  useEffect(() => {
+    dispatch(setCreateContainerLoading(isCreatingContainer));
+  }, [isCreatingContainer]);
+
   const handleSaveContainer = () => {
-    if (isCreatingContainer) {
+    if (isCreatingContainer || isCreatingContainerFromRedux) {
       return;
     }
-    toast.remove();
     if (changedFields.length === 0) {
-      toast.error("Please change something.", {
-        position: "bottom-center",
-      });
+      // toast.remove();
+      // toast.error("Please change something.", {
+      //   position: "bottom-center",
+      // });
       return;
     }
     createContainer(containerFromRedux);

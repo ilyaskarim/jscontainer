@@ -1,6 +1,7 @@
 import MonacoReactEditor from "@monaco-editor/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  cancelRequestCreateContainer,
   requestCreateContainer,
   setChangedFields,
   setContainerFormData,
@@ -60,11 +61,12 @@ export const MonacoEditor = (props: MonacoEditorProps) => {
       theme={theme === "dark" ? "vs-dark" : ""}
       onChange={(e: string | undefined) => {
         clearTimeout(timeout);
+        dispatch(cancelRequestCreateContainer());
         timeout = setTimeout(() => {
           if (containerFromRedux.id) {
             dispatch(requestCreateContainer());
           }
-        }, 1500);
+        }, 500);
         dispatch(setChangedFields(props.name));
         dispatch(
           setContainerFormData({

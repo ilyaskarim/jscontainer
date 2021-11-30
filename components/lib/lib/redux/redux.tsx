@@ -16,8 +16,10 @@ export const {
   resetChangedFields,
   setAssets,
   requestCreateContainer,
+  cancelRequestCreateContainer,
   requestContainerRefresh,
   resetFormData,
+  setCreateContainerLoading,
 } = containerReducer.actions;
 
 export const StoreProvider = (props: { children: React.ReactNode }) => (

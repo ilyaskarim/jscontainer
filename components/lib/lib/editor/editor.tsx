@@ -6,7 +6,6 @@ import {
   Icon,
   Dialog,
   Drawer,
-  Spinner,
   Classes,
   Button,
   Overlay,
@@ -27,7 +26,11 @@ import styles from "./editor.module.scss";
 import toast from "react-hot-toast";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { useRouter } from "next/router";
-import { requestCreateContainer, resetFormData } from "../redux/redux";
+import {
+  cancelRequestCreateContainer,
+  requestCreateContainer,
+  resetFormData,
+} from "../redux/redux";
 import interact from "interactjs";
 
 /* eslint-disable-next-line */
@@ -56,6 +59,7 @@ export function Editor(props: EditorProps) {
       if (e.key === "s") {
         if (document.activeElement?.classList.contains("inputarea")) {
           e.preventDefault();
+          dispatch(cancelRequestCreateContainer());
           dispatch(requestCreateContainer());
         }
       }
