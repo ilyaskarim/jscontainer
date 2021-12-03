@@ -66,7 +66,7 @@ export const MonacoEditor = (props: MonacoEditorProps) => {
           if (containerFromRedux.id) {
             dispatch(requestCreateContainer());
           }
-        }, 500);
+        }, 2000);
         dispatch(setChangedFields(props.name));
         dispatch(
           setContainerFormData({
