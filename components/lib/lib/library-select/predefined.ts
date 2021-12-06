@@ -3,8 +3,8 @@ export const predefinedAssets = [
     label: "Froala",
     key: "Froala",
     assets: [
-      "https://cdn.jsdelivr.net/npm/froala-editor@4.0.6/js/froala_editor.pkgd.min.js",
-      "https://cdn.jsdelivr.net/npm/froala-editor@4.0.6/css/froala_editor.pkgd.min.css",
+      "https://cdn.jsdelivr.net/npm/froala-editor@4.0.7/js/froala_editor.pkgd.min.js",
+      "https://cdn.jsdelivr.net/npm/froala-editor@4.0.7/css/froala_editor.pkgd.min.css",
     ],
   },
   {

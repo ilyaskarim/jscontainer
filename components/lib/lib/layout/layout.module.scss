@@ -31,7 +31,11 @@
       }
       .headerContentLinks {
         margin-left: auto;
-
+        display: flex;
+        .headerContentLinksAutoSave {
+          margin-top: 19px;
+          margin-right: 10px;
+        }
         a {
           padding: 0 10px;
           line-height: 4;

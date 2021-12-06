@@ -25,6 +25,7 @@ const state = {
   onRequestCreateContainer: null,
   onRequestRefreshContainer: null,
   createContainerLoading: false,
+  autoSave: true,
 };
 
 export default createSlice({
@@ -33,6 +34,9 @@ export default createSlice({
   reducers: {
     resetFormData(state) {
       state.formData = JSON.parse(JSON.stringify(formData));
+    },
+    setAutoSave(state, action) {
+      state.autoSave = action.payload;
     },
     setCreateContainerLoading(state, action) {
       state.createContainerLoading = action.payload;

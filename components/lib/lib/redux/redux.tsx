@@ -20,6 +20,7 @@ export const {
   requestContainerRefresh,
   resetFormData,
   setCreateContainerLoading,
+  setAutoSave,
 } = containerReducer.actions;
 
 export const StoreProvider = (props: { children: React.ReactNode }) => (

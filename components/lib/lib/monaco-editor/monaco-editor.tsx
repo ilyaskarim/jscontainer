@@ -23,6 +23,10 @@ export const MonacoEditor = (props: MonacoEditorProps) => {
   );
   const theme = useSelector((state: any) => state.container.theme);
 
+  const autoSave: boolean = useSelector(
+    (state: any) => state.container.autoSave
+  );
+
   const cssFormat = (s: string) => {
     s = s.replace(/\s*([\{\}\:\;\,])\s*/g, "$1");
     s = s.replace(/;\s*;/g, ";");
@@ -63,7 +67,7 @@ export const MonacoEditor = (props: MonacoEditorProps) => {
         clearTimeout(timeout);
         dispatch(cancelRequestCreateContainer());
         timeout = setTimeout(() => {
-          if (containerFromRedux.id) {
+          if (containerFromRedux.id && autoSave === true) {
             dispatch(requestCreateContainer());
           }
         }, 2000);

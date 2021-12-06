@@ -1,9 +1,10 @@
 import styles from "./layout.module.scss";
 import { ContainerNavButtons, Logo } from "../../index";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classnames from "classnames";
 import Link from "next/link";
-import Image from "next/image";
+import { Switch } from "@blueprintjs/core";
+import { setAutoSave } from "../redux/redux";
 
 /* eslint-disable-next-line */
 export interface LayoutProps {
@@ -15,8 +16,12 @@ export interface LayoutProps {
 
 export function Layout(props: LayoutProps) {
   const isContainerPage = props.isContainerPage ?? true;
+  const dispatch = useDispatch();
   const showFooter = props.showFooter ?? true;
   const theme = useSelector((state: any) => state.container.theme);
+  const autoSave: boolean = useSelector(
+    (state: any) => state.container.autoSave
+  );
 
   return (
     <div
@@ -41,6 +46,14 @@ export function Layout(props: LayoutProps) {
             <>
               <ContainerNavButtons />
               <div className={styles.headerContentLinks}>
+                <Switch
+                  checked={autoSave}
+                  label={`Autosave: ${autoSave ? "On" : "Off"}`}
+                  className={styles.headerContentLinksAutoSave}
+                  onChange={() => {
+                    dispatch(setAutoSave(!autoSave));
+                  }}
+                />
                 <Link href="/tools">Tools</Link>
               </div>
             </>
