@@ -1,0 +1,25 @@
+.tableStyles {
+  border: 1px solid rgb(141, 135, 135);
+  width: 100%;
+  border-spacing: 0px;
+  min-height: 300px;
+  border-collapse: collapse;
+  .trStyles {
+    height: 45px;
+    .thStyles {
+      border-right: 1px solid rgb(141, 135, 135);
+      border-bottom: 1px solid rgb(141, 135, 135);
+    }
+  }
+  .tableContent {
+    height: 20px;
+    td {
+      text-align: center;
+      border-right: 1px solid rgb(141, 135, 135);
+      border-bottom: 1px solid rgb(141, 135, 135);
+    }
+  }
+  .th4Styles {
+    text-align: center;
+  }
+}

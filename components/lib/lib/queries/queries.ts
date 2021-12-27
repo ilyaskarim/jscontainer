@@ -1,4 +1,4 @@
-const containerFields = `id
+export const containerFields = `id
 title
 description
 html
