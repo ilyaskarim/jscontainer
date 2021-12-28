@@ -58,6 +58,8 @@ export const listContainersQuery = `
                 css
                 javascript
                 title
+                description
+                createdAt
             }
         }
     }
