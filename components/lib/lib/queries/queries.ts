@@ -47,3 +47,18 @@ export const deleteContainerQuery = `
         }
     }
 `;
+
+
+export const listContainersQuery = `
+    query listContainers {
+        listContainer {
+            list {
+                id
+                html
+                css
+                javascript
+                title
+            }
+        }
+    }
+`

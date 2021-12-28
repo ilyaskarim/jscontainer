@@ -3,6 +3,7 @@ import {
   viewContainerQuery,
   axios,
   updateContainerQuery,
+  listContainersQuery
 } from "../../index";
 import randomstring from "random-string";
 import { useQuery, useMutation } from "react-query";
@@ -25,6 +26,18 @@ export const useContainerQuery = (slug: string) => {
     }
   );
 };
+
+
+export const useContainersListQuery = () => {
+  return useQuery(
+    "listContainers",
+    () => {
+      return axios.post("/graphql", {
+        query: listContainersQuery
+      })
+    }
+  )
+}
 
 export const useContainerUpdateMutation = () => {
   return useMutation("updateContainer", (containerData: iContainer) => {

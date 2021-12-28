@@ -1,64 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./admin-containers-list.module.scss";
 import TableComponent from "../tableComponent/table-component";
 import classnames from "classnames";
 import { useSelector } from "react-redux";
-// import axios from "axios";
-// import { containerFields } from "../../../index";
+import { useContainersListQuery } from "../../..";
 
 /* eslint-disable-next-line */
 export interface AdminContainersListProps {}
 
 export function AdminContainersList(props: AdminContainersListProps) {
   const theme = useSelector((state: any) => state.container.theme);
+  const { data: containersListQueryData } = useContainersListQuery();
+  const [data, setData] = useState();
 
-  // useEffect(()=>{
-  //   const getContainerList = async ()=> {
-  //     await axios.get(`http://localhost:3000/graphql` , {
-  //       //@ts-ignore
-  //       query : containerFields
-  //     })
-  //   }
-  //   console.log({getContainerList})
-  // })
-
-  const data = [
-    {
-      title: "item1",
-      description: "1",
-      url: "somewhere",
-      createdAt: "12:30",
-      action: "some functions",
-    },
-    {
-      title: "item1",
-      description: "1",
-      url: "somewhere",
-      createdAt: "12:30",
-      action: "some functions",
-    },
-    {
-      title: "item1",
-      description: "1",
-      url: "somewhere",
-      createdAt: "12:30",
-      action: "some functions",
-    },
-    {
-      title: "item1",
-      description: "1",
-      url: "somewhere",
-      createdAt: "12:30",
-      action: "some functions",
-    },
-    {
-      title: "item1",
-      description: "1",
-      url: "somewhere",
-      createdAt: "12:30",
-      action: "some functions",
-    },
-  ];
+  useEffect(() => {
+    setData(containersListQueryData?.data?.data?.listContainer?.list ?? []);
+  }, [containersListQueryData]);
 
   return (
     <div
@@ -69,7 +26,16 @@ export function AdminContainersList(props: AdminContainersListProps) {
       })}
     >
       <h1 className={styles.header}>Containers</h1>
-      <TableComponent tableData={data} />
+      <TableComponent
+        columns={[
+          { title: "Title" },
+          { title: "Description" },
+          { title: "URL" },
+          { title: "Created At" },
+          { title: "Actions(Delete)" },
+        ]}
+        tableData={data}
+      />
     </div>
   );
 }
