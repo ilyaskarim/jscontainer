@@ -1,5 +1,5 @@
+import React from 'react';
 import { Button, Icon } from '@blueprintjs/core';
-import React, { useState } from 'react';
 import styles from './paginations-styles.module.scss';
 
 /* eslint-disable-next-line */
@@ -16,7 +16,7 @@ export function Pagination(props: PaginationProps) {
   return (
     <div className={styles.paginationContainer}>
       <p>
-        Showing {renderData?.length} items out of {data?.length}{' '}
+        Showing {data?.length} items out of {data?.length}{' '}
       </p>
       <div className={styles.paginationButtonStyles}>
         <Button

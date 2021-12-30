@@ -53,3 +53,7 @@ export * from "./lib/tools/javascript-performance-test/javascript-performance-te
 export * from "./lib/logo/logo";
 
 export * from "./lib/admin/admin-containers-list/admin-containers-list";
+
+export * from './lib/admin/tableComponent/table-component';
+
+export * from './lib/admin/pagination/pagination';

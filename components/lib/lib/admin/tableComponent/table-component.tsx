@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./table-component-styles.module.scss";
-import Pagination from "../pagination/pagination";
 import { Button } from "@blueprintjs/core";
 
 /* eslint-disable-next-line */
