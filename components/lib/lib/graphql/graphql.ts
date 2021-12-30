@@ -3,7 +3,7 @@ import {
   viewContainerQuery,
   axios,
   updateContainerQuery,
-  listContainersQuery
+  listContainersQuery,
 } from "../../index";
 import randomstring from "random-string";
 import { useQuery, useMutation } from "react-query";
@@ -27,17 +27,17 @@ export const useContainerQuery = (slug: string) => {
   );
 };
 
-
 export const useContainersListQuery = () => {
-  return useQuery(
-    "listContainers",
-    () => {
-      return axios.post("/graphql", {
-        query: listContainersQuery
-      })
-    }
-  )
-}
+  return useQuery("listContainers", () => {
+    return axios.post("/graphql", {
+      query: listContainersQuery,
+      variables: {
+        page: 1,
+        limit: 15,
+      },
+    });
+  });
+};
 
 export const useContainerUpdateMutation = () => {
   return useMutation("updateContainer", (containerData: iContainer) => {

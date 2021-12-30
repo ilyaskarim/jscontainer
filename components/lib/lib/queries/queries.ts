@@ -48,19 +48,18 @@ export const deleteContainerQuery = `
     }
 `;
 
-
 export const listContainersQuery = `
-    query listContainers {
-        listContainer {
-            list {
-                id
-                html
-                css
-                javascript
-                title
-                description
-                createdAt
-            }
+    query listContainer($page: Int!, $limit: Int!) {
+        listContainer(pagination: { page: $page, limit: $limit }) {
+        list {
+            id
         }
-    }
-`
+        paginationProperties {
+            total
+            pages
+            nextPage
+            previousPage
+        }
+        }
+    }  
+`;

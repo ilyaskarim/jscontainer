@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import styles from './admin-containers-list.module.scss';
-import { TableComponent, Pagination } from '../../..';
-import classnames from 'classnames';
-import { useSelector } from 'react-redux';
-import { iContainer } from '../../../../../types/container';
-import { useContainersListQuery } from '../../..';
+import React, { useEffect, useState } from "react";
+import styles from "./admin-containers-list.module.scss";
+import { TableComponent, Pagination } from "../../..";
+import classnames from "classnames";
+import { useSelector } from "react-redux";
+import { iContainer } from "../../../../../types/container";
+import { useContainersListQuery } from "../../..";
 
 /* eslint-disable-next-line */
 export interface AdminContainersListProps {}
@@ -20,30 +20,22 @@ export function AdminContainersList(props: AdminContainersListProps) {
     }
   }, [containersListQueryData]);
 
-  // const handlePagination = (buttonClick: string) => {
-  //   if (buttonClick === 'decrease') {
-  //     return setPageNumber(pageNumber - 1);
-  //   } else if (buttonClick === 'increase') {
-  //     return setPageNumber(pageNumber + 1);
-  //   }
-  // };
-
   return (
     <div
       className={classnames({
         [styles.editor]: true,
         editor: true,
-        [styles.dark]: theme === 'dark',
+        [styles.dark]: theme === "dark",
       })}
     >
       <h1 className={styles.header}>Containers</h1>
       <TableComponent
         columns={[
-          { title: 'Title' },
-          { title: 'Description' },
-          { title: 'URL' },
-          { title: 'Created At' },
-          { title: 'Actions(Delete)' },
+          { title: "Title" },
+          { title: "Description" },
+          { title: "URL" },
+          { title: "Created At" },
+          { title: "Actions(Delete)" },
         ]}
         tableData={data}
       />
