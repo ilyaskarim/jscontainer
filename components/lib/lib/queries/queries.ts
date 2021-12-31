@@ -52,7 +52,7 @@ export const listContainersQuery = `
     query listContainer($page: Int!, $limit: Int!) {
         listContainer(pagination: { page: $page, limit: $limit }) {
         list {
-            id
+            ${containerFields}
         }
         paginationProperties {
             total

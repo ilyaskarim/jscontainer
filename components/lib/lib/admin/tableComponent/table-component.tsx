@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import styles from "./table-component-styles.module.scss";
 import { Button } from "@blueprintjs/core";
+import { iContainer } from "../../..";
 
 /* eslint-disable-next-line */
 export interface TableComponentProps {
   tableData?: any[];
   columns?: {
-    key?: string;
+    key: string;
     title: string;
+    render?: (item: iContainer) => React.ReactNode;
   }[];
   onDelete?: Function;
 }
@@ -23,17 +25,21 @@ export function TableComponent(props: TableComponentProps) {
             {columns.map((item, index) => {
               return <th key={index}>{item.title}</th>;
             })}
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody className={styles.tbody}>
           {tableData?.length > 0 ? (
-            tableData.map((items, index) => {
+            tableData.map((item, index) => {
               return (
                 <tr key={index}>
-                  <td>{items?.title}</td>
-                  <td>{items?.description}</td>
-                  <td>{items?.url}</td>
-                  <td>{items?.createdAt}</td>
+                  {columns.map((column, index) => {
+                    return (
+                      <td key={index}>
+                        {column.render ? column.render(item) : item[column.key]}{" "}
+                      </td>
+                    );
+                  })}
                   <td>
                     <Button>Delete</Button>
                   </td>

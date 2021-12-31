@@ -9,11 +9,13 @@
       color: #aeaeae;
       th {
         padding: 8px 1px;
+        text-align: left;
       }
     }
     .tbody {
       tr {
         td {
+          color: darken($color: #aeaeae, $amount: 2);
           padding: 9px 0;
         }
       }

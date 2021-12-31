@@ -40,11 +40,17 @@ export function AdminContainersList(props: AdminContainersListProps) {
       <h1 className={styles.header}>Containers</h1>
       <TableComponent
         columns={[
-          { title: "Title" },
-          { title: "Description" },
-          { title: "URL" },
-          { title: "Created At" },
-          { title: "Actions(Delete)" },
+          { title: "Title", key: "title" },
+          { title: "Description", key: "" },
+          {
+            title: "URL",
+            key: "",
+            render: (container) => {
+              console.log(container);
+              return <span>wow</span>;
+            },
+          },
+          { title: "Created At", key: "" },
         ]}
         tableData={data}
       />
