@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styles from "./admin-containers-list.module.scss";
-import { TableComponent, Pagination } from "../../..";
 import classnames from "classnames";
 import { useSelector } from "react-redux";
-import { iContainer } from "../../../../../types/container";
-import { useContainersListQuery } from "../../..";
+import {
+  TableComponent,
+  Pagination,
+  useContainersListQuery,
+  iContainer,
+  PaginationProperties,
+} from "../../../index";
 
 /* eslint-disable-next-line */
 export interface AdminContainersListProps {}
@@ -12,11 +16,16 @@ export interface AdminContainersListProps {}
 export function AdminContainersList(props: AdminContainersListProps) {
   const theme = useSelector((state: any) => state.container.theme);
   const { data: containersListQueryData, isLoading } = useContainersListQuery();
-  const [data, setData] = useState();
+  const [pagination, setPagination] = useState<PaginationProperties>({});
+  const [data, setData] = useState<iContainer[]>([]);
 
   useEffect(() => {
     if (!isLoading) {
       setData(containersListQueryData?.data?.data?.listContainer?.list ?? []);
+      setPagination(
+        containersListQueryData?.data?.data?.listContainer
+          ?.paginationProperties ?? {}
+      );
     }
   }, [containersListQueryData]);
 
@@ -39,10 +48,7 @@ export function AdminContainersList(props: AdminContainersListProps) {
         ]}
         tableData={data}
       />
-      <Pagination
-        // handlePagination={handlePagination}
-        data={data}
-      />
+      <Pagination paginationInformation={pagination} />
     </div>
   );
 }

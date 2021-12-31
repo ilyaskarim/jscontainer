@@ -17,23 +17,19 @@ export function TableComponent(props: TableComponentProps) {
   const { tableData, columns } = props;
   return (
     <div className={styles.tableDiv}>
-      <table className={styles.tableStyles}>
-        <thead>
-          <tr className={styles.trStyles}>
+      <table className={styles.table}>
+        <thead className={styles.thead}>
+          <tr>
             {columns.map((item, index) => {
-              return (
-                <th key={index} className={styles.thStyles}>
-                  {item.title}
-                </th>
-              );
+              return <th key={index}>{item.title}</th>;
             })}
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tbody}>
           {tableData?.length > 0 ? (
             tableData.map((items, index) => {
               return (
-                <tr key={index} className={styles.tableContent}>
+                <tr key={index}>
                   <td>{items?.title}</td>
                   <td>{items?.description}</td>
                   <td>{items?.url}</td>
@@ -46,11 +42,7 @@ export function TableComponent(props: TableComponentProps) {
             })
           ) : (
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>No Data</td>
-              <td></td>
+              <td rowSpan={50}>No Data</td>
             </tr>
           )}
         </tbody>

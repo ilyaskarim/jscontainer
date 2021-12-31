@@ -1,27 +1,22 @@
 .tableDiv {
-  border: 1px solid rgb(141, 135, 135);
   min-height: calc(100vh - 70vh);
-  .tableStyles {
+  .table {
     width: 100%;
     border-spacing: 0px;
     border-collapse: collapse;
-    .trStyles {
-      height: 45px;
-      .thStyles {
-        border-right: 1px solid rgb(141, 135, 135);
-        border-bottom: 1px solid rgb(141, 135, 135);
+    .thead {
+      background: #1b1a1a;
+      color: #aeaeae;
+      th {
+        padding: 8px 1px;
       }
     }
-    .tableContent {
-      height: 70px;
-      td {
-        text-align: center;
-        border-right: 1px solid rgb(141, 135, 135);
-        border-bottom: 1px solid rgb(141, 135, 135);
+    .tbody {
+      tr {
+        td {
+          padding: 9px 0;
+        }
       }
-    }
-    .th4Styles {
-      text-align: center;
     }
   }
 }
