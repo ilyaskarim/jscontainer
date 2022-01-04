@@ -27,15 +27,14 @@ export const useContainerQuery = (slug: string) => {
   );
 };
 
-export const useContainersListQuery = () => {
-  return useQuery("listContainers", () => {
-    return axios.post("/graphql", {
-      query: listContainersQuery,
-      variables: {
-        page: 1,
-        limit: 15,
-      },
-    });
+export const fetchContainers = (params) => {
+  const page = params.queryKey[1].page;
+  return axios.post("/graphql", {
+    query: listContainersQuery,
+    variables: {
+      page: page ?? 1,
+      limit: 15,
+    },
   });
 };
 

@@ -70,7 +70,11 @@ expressApp.use(passport.session());
 
 wertik({
   port: port,
-  graphql: useGraphql({}),
+  graphql: useGraphql({
+    applyMiddlewareOptions: {
+      path: "/graphql",
+    },
+  }),
   express: expressApp,
   database: {
     jscontainer: useDatabase({

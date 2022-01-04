@@ -1,32 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import styles from './admin-containers-list.module.scss';
-import classnames from 'classnames';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import styles from "./admin-containers-list.module.scss";
+import classnames from "classnames";
+import { useSelector } from "react-redux";
 import {
   TableComponent,
   Pagination,
-  useContainersListQuery,
   iContainer,
   PaginationProperties,
-} from '../../../index';
-import Moment from 'moment'
+} from "../../../index";
+import Moment from "moment";
+import { fetchContainers } from "../../graphql/graphql";
 
 /* eslint-disable-next-line */
 export interface AdminContainersListProps {}
 
 export function AdminContainersList(props: AdminContainersListProps) {
   const theme = useSelector((state: any) => state.container.theme);
-  const { data: containersListQueryData, isLoading } = useContainersListQuery();
-  const [pagination, setPagination] = useState<PaginationProperties>({});
+
+  const [pagination, setPagination] = useState<PaginationProperties>({
+    page: 1,
+  });
   const [data, setData] = useState<iContainer[]>([]);
+  const { data: containersListQueryData, isLoading } = useQuery(
+    ["fetchContainers", pagination],
+    fetchContainers
+  );
 
   useEffect(() => {
     if (!isLoading) {
       setData(containersListQueryData?.data?.data?.listContainer?.list ?? []);
-      setPagination(
-        containersListQueryData?.data?.data?.listContainer
-          ?.paginationProperties ?? {}
-      );
     }
   }, [containersListQueryData]);
 
@@ -35,32 +38,58 @@ export function AdminContainersList(props: AdminContainersListProps) {
       className={classnames({
         [styles.editor]: true,
         editor: true,
-        [styles.dark]: theme === 'dark',
+        [styles.dark]: theme === "dark",
       })}
     >
       <h1 className={styles.header}>Containers</h1>
       <TableComponent
         columns={[
-          { title: 'Title', key: 'title' },
-          { title: 'Description', key: 'description' },
+          { title: "Title", key: "title" },
+          { title: "Description", key: "description" },
           {
-            title: 'URL',
-            key: '',
+            title: "URL",
+            key: "",
             render: (container) => {
-              return <span>{container.description}</span>;
+              const url = window.location.origin + "/c/" + container.slug;
+              return (
+                <a href={url} target="_blank">
+                  {url}
+                </a>
+              );
             },
           },
           {
-            title: 'Created At',
-            key: 'createdAt',
+            title: "Created At",
+            key: "createdAt",
             render: (container) => {
-              return <p>{Moment().format('DD mm YYYY')}</p>;
+              return <p>{Moment(+container.createdAt).fromNow()}</p>;
             },
           },
         ]}
         tableData={data}
       />
-      <Pagination paginationInformation={pagination} />
+      <Pagination
+        handlePagination={(nav) => {
+          switch (nav) {
+            case "increase":
+              console.log(pagination);
+              setPagination({
+                page: pagination.page + 1,
+              });
+              break;
+
+            case "decrease":
+              setPagination({
+                page: pagination.page - 1,
+              });
+              break;
+
+            default:
+              break;
+          }
+        }}
+        paginationInformation={pagination}
+      />
     </div>
   );
 }
