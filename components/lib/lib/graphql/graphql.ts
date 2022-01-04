@@ -56,20 +56,26 @@ export const useContainerUpdateMutation = () => {
 };
 
 export const useContainerCreateMutation = () => {
-  return useMutation("createContainer", (containerData: iContainer) => {
-    containerData = {
-      ...containerData,
-      parent: containerData.id,
-      slug: randomstring({
-        length: 12,
-      }),
-    };
-    delete containerData["id"];
-    return axios.post("/graphql", {
-      query: createContainerQuery,
-      variables: {
-        input: [omit(containerData, ["id", "createdAt", "updatedAt"])],
-      },
-    });
-  });
+  return useMutation(
+    "createContainer",
+    (containerData: iContainer) => {
+      containerData = {
+        ...containerData,
+        parent: containerData.id,
+        slug: randomstring({
+          length: 12,
+        }),
+      };
+      delete containerData["id"];
+      return axios.post("/graphql", {
+        query: createContainerQuery,
+        variables: {
+          input: [omit(containerData, ["id", "createdAt", "updatedAt"])],
+        },
+      });
+    },
+    {
+      retry: false,
+    }
+  );
 };

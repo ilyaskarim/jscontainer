@@ -7,7 +7,7 @@ import { containerPreview } from "./preview";
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
-const port = process.env.PORT || 3000;
+const port: number = +process.env.PORT || 3000;
 
 app.prepare();
 const expressApp = express();
@@ -70,7 +70,7 @@ expressApp.use(passport.session());
 
 wertik({
   port: port,
-  graphql: useGraphql(),
+  graphql: useGraphql({}),
   express: expressApp,
   database: {
     jscontainer: useDatabase({
@@ -78,7 +78,7 @@ wertik({
       password: process.env.DB_PASSWORD,
       username: process.env.DB_USERNAME,
       host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
+      port: +process.env.DB_PORT,
     }),
   },
   modules: {
