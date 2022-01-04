@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styles from "./table-component-styles.module.scss";
-import { Button } from "@blueprintjs/core";
-import { iContainer } from "../../..";
+import React, { useState } from 'react';
+import styles from './table-component-styles.module.scss';
+import { Button } from '@blueprintjs/core';
+import { iContainer } from '../../..';
 
 /* eslint-disable-next-line */
 export interface TableComponentProps {
@@ -36,7 +36,7 @@ export function TableComponent(props: TableComponentProps) {
                   {columns.map((column, index) => {
                     return (
                       <td key={index}>
-                        {column.render ? column.render(item) : item[column.key]}{" "}
+                        {column.render ? column.render(item) : item[column.key]}{' '}
                       </td>
                     );
                   })}

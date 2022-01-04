@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import styles from "./admin-containers-list.module.scss";
-import classnames from "classnames";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import styles from './admin-containers-list.module.scss';
+import classnames from 'classnames';
+import { useSelector } from 'react-redux';
 import {
   TableComponent,
   Pagination,
   useContainersListQuery,
   iContainer,
   PaginationProperties,
-} from "../../../index";
+} from '../../../index';
+import Moment from 'moment'
 
 /* eslint-disable-next-line */
 export interface AdminContainersListProps {}
@@ -34,23 +35,28 @@ export function AdminContainersList(props: AdminContainersListProps) {
       className={classnames({
         [styles.editor]: true,
         editor: true,
-        [styles.dark]: theme === "dark",
+        [styles.dark]: theme === 'dark',
       })}
     >
       <h1 className={styles.header}>Containers</h1>
       <TableComponent
         columns={[
-          { title: "Title", key: "title" },
-          { title: "Description", key: "" },
+          { title: 'Title', key: 'title' },
+          { title: 'Description', key: 'description' },
           {
-            title: "URL",
-            key: "",
+            title: 'URL',
+            key: '',
             render: (container) => {
-              console.log(container);
-              return <span>wow</span>;
+              return <span>{container.description}</span>;
             },
           },
-          { title: "Created At", key: "" },
+          {
+            title: 'Created At',
+            key: 'createdAt',
+            render: (container) => {
+              return <p>{Moment().format('DD mm YYYY')}</p>;
+            },
+          },
         ]}
         tableData={data}
       />
