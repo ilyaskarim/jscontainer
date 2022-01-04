@@ -5574,10 +5574,10 @@ webidl-conversions@^4.0.2:
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
   integrity sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==
 
-wertik-js@^3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/wertik-js/-/wertik-js-3.1.3.tgz#fa47941b7fb90cfb13af201b3f218fac3b656ce6"
-  integrity sha512-6MGdj0wBgCaKo3/fjNGeghN8CFlcdfEzVQv0tw3yhZrVtjpIO7ZDJi66Gvow7XSAilNX5pinJEPp8jswehurhQ==
+wertik-js@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/wertik-js/-/wertik-js-3.1.4.tgz#5ba06a321ed896e26a8223a9bc34a6498c180195"
+  integrity sha512-AZNAJSku6A1p3yw0Iqz/SKlAge8Q6VunHCxXXHsSpjZPWGWO7S+qiA7LptFFQVkK+qbW6mI0jxsw7ErtuUe3Fw==
   dependencies:
     apollo-server "^3.5.0"
     apollo-server-express "^2.9.4"
