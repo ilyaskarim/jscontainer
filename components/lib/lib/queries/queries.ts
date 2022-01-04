@@ -41,8 +41,8 @@ export const viewContainerQuery = `
 `;
 
 export const deleteContainerQuery = `
-    mutation($where: ContainerFilterInput!) {
-        deleteContainer(where: $where) {
+    mutation($id: Int!) {
+        deleteContainer(where: { id: { _eq: $id } }) {
         message
         }
     }
