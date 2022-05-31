@@ -54,7 +54,6 @@ export function Layout(props: LayoutProps) {
                     dispatch(setAutoSave(!autoSave));
                   }}
                 />
-                <Link href="/tools">Tools</Link>
               </div>
             </>
           ) : (

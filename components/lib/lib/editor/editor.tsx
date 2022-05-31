@@ -197,7 +197,6 @@ export function Editor(props: EditorProps) {
         <ContainerPreview></ContainerPreview>
       </div>
       <>
-        {/* Dialogs */}
         <Dialog
           isOpen={settingsDialog}
           className={theme === "dark" && "bp3-dark"}

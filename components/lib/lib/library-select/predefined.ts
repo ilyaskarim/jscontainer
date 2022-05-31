@@ -3,15 +3,15 @@ export const predefinedAssets = [
     label: "Froala",
     key: "Froala",
     assets: [
-      "https://cdn.jsdelivr.net/npm/froala-editor@4.0.7/js/froala_editor.pkgd.min.js",
-      "https://cdn.jsdelivr.net/npm/froala-editor@4.0.7/css/froala_editor.pkgd.min.css",
+      "https://cdn.jsdelivr.net/npm/froala-editor@4.0.11/js/froala_editor.pkgd.min.js",
+      "https://cdn.jsdelivr.net/npm/froala-editor@4.0.11/css/froala_editor.pkgd.min.css",
     ],
   },
   {
     label: "jQuery",
     key: "jQuery",
     assets: ["https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"],
-  },
+  },  
   {
     label: "Bootstrap",
     key: "Bootstrap",
@@ -71,8 +71,8 @@ export const predefinedAssets = [
     label: "Quill JS",
     key: "Quill JS",
     assets: [
-      "https://cdn.quilljs.com/1.3.6/quill.js",
-      "https://cdn.quilljs.com/1.3.6/quill.min.js",
+      "https://cdn.quilljs.com/1.3.7/quill.js",
+      "https://cdn.quilljs.com/1.3.7/quill.min.js",
     ],
   },
   {
@@ -93,7 +93,7 @@ export const predefinedAssets = [
   {
     label: "D3",
     key: "D3",
-    assets: ["https://cdn.jsdelivr.net/npm/d3@7.1.1/dist/d3.min.js"],
+    assets: ["https://cdn.jsdelivr.net/npm/d3@7.4.4/dist/d3.min.js"],
   },
   {
     label: "Svg.JS",
