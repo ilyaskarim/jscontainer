@@ -1,4 +1,3 @@
-import "./user-dropdown.module.scss";
 import { Menu, MenuItem, Position } from "@blueprintjs/core";
 import { Popover2 } from "@blueprintjs/popover2";
 

@@ -1,4 +1,3 @@
-import styles from "./container-settings.module.scss";
 import { Tab, Tabs, Checkbox } from "@blueprintjs/core";
 import { useState } from "react";
 import {
@@ -18,7 +17,7 @@ export function ContainerSettings(props: ContainerSettingsProps) {
   );
   const dispatch = useDispatch();
   return (
-    <div className={styles.containerSettings}>
+    <div className="py-1 px-5">
       <Tabs
         id="TabsExample"
         selectedTabId={viewTab}

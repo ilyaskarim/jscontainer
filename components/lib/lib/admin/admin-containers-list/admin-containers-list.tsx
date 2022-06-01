@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import styles from "./admin-containers-list.module.scss";
-import classnames from "classnames";
 import { useSelector } from "react-redux";
 import {
   TableComponent,
@@ -35,13 +33,9 @@ export function AdminContainersList(props: AdminContainersListProps) {
 
   return (
     <div
-      className={classnames({
-        [styles.editor]: true,
-        editor: true,
-        [styles.dark]: theme === "dark",
-      })}
+      className="p-5 h-screen bg-secondary"
     >
-      <h1 className={styles.header}>Containers</h1>
+      <h1>Containers</h1>
       <TableComponent
         columns={[
           { title: "Title", key: "title" },

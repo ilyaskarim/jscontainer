@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import classnames from "classnames";
 import {
   Tab,
   Tabs,
@@ -17,8 +16,6 @@ import {
   MonacoEditor,
 } from "../../index";
 import { useDispatch, useSelector } from "react-redux";
-
-import styles from "./editor.module.scss";
 import toast from "react-hot-toast";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import {
@@ -65,44 +62,44 @@ export function Editor(props: EditorProps) {
     };
   }, [containerFromRedux]);
 
-  useEffect(() => {
-    if (
-      !document
-        .querySelector(".editors")
-        .classList.contains("resize-initialize")
-    ) {
-      interact(".editors").resizable({
-        edges: { top: false, left: false, bottom: false, right: true },
-        listeners: {
-          move: function (event) {
-            if (event.buttons === 0) {
-              return;
-            }
+  // useEffect(() => {
+  //   if (
+  //     !document
+  //       .querySelector(".editors")
+  //       .classList.contains("resize-initialize")
+  //   ) {
+  //     interact(".editors").resizable({
+  //       edges: { top: false, left: false, bottom: false, right: true },
+  //       listeners: {
+  //         move: function (event) {
+  //           if (event.buttons === 0) {
+  //             return;
+  //           }
 
-            let { x, y } = event.target.dataset;
+  //           let { x, y } = event.target.dataset;
 
-            x = (parseFloat(x) || 0) + event.deltaRect.left;
-            y = (parseFloat(y) || 0) + event.deltaRect.top;
+  //           x = (parseFloat(x) || 0) + event.deltaRect.left;
+  //           y = (parseFloat(y) || 0) + event.deltaRect.top;
 
-            document
-              .querySelector(".preview")
-              .setAttribute(
-                "style",
-                `width: ${window.outerWidth - event.rect.right}px`
-              );
+  //           document
+  //             .querySelector(".preview")
+  //             .setAttribute(
+  //               "style",e
+  //               `width: ${window.outerWidth - event.rect.right}px`
+  //             );
 
-            Object.assign(event.target.style, {
-              width: `${event.rect.right}px`,
-              transform: `translate(${x}px, ${y}px)`,
-            });
+  //           Object.assign(event.target.style, {
+  //             width: `${event.rect.right}px`,
+  //             transform: `translate(${x}px, ${y}px)`,
+  //           });
 
-            Object.assign(event.target.dataset, { x, y });
-          },
-        },
-      });
-      document.querySelector(".editors").classList.add("resize-initialize");
-    }
-  }, []);
+  //           Object.assign(event.target.dataset, { x, y });
+  //         },
+  //       },
+  //     });
+  //     document.querySelector(".editors").classList.add("resize-initialize");
+  //   }
+  // }, []);
 
   if (notFoundContainer) {
     return <NotFound></NotFound>;
@@ -111,24 +108,22 @@ export function Editor(props: EditorProps) {
   return (
     <>
       <div
-        className={classnames({
-          [styles.editor]: true,
-          editor: true,
-          [styles.dark]: theme === "dark",
-        })}
+      className="flex"
+        // className={classnames({
+        //   [styles.editor]: true,
+        //   editor: true,
+        //   [styles.dark]: theme === "dark",
+        // })}
       >
         <div
-          className={classnames({
-            [styles.editors]: true,
-            editors: true,
-          })}
+         className="w-full rounded-r"
         >
           <Tabs
             id="TabsExample"
             onChange={(e: "javascript" | "typescript" | "css" | "html") =>
               setFileName(e)
             }
-            className={styles.tabs}
+            className="px-7"
             selectedTabId={fileName}
           >
             <Tab
@@ -176,6 +171,7 @@ export function Editor(props: EditorProps) {
             <Tabs.Expander />
             <Tooltip2 content={`Copy ${fileName} code`}>
               <a
+               className=""
                 onClick={() => {
                   window.navigator.clipboard.writeText(
                     containerFromRedux[fileName]

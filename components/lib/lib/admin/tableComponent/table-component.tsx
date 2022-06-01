@@ -19,11 +19,11 @@ export function TableComponent(props: TableComponentProps) {
   const { tableData, columns } = props;
   return (
     <div className={styles.tableDiv}>
-      <table className={styles.table}>
-        <thead className={styles.thead}>
+      <table className="w-full border-collapse">
+        <thead className="bg-tertiary text-gray">
           <tr>
             {columns.map((item, index) => {
-              return <th key={index}>{item.title}</th>;
+              return <th className="py-3 px-px text-left" key={index}>{item.title}</th>;
             })}
             <th>Actions</th>
           </tr>
@@ -35,7 +35,7 @@ export function TableComponent(props: TableComponentProps) {
                 <tr key={index}>
                   {columns.map((column, index) => {
                     return (
-                      <td key={index}>
+                      <td key={index} className="py-4 px-0 text-gray">
                         {column.render ? column.render(item) : item[column.key]}{' '}
                       </td>
                     );

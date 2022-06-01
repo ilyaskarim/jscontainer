@@ -46,9 +46,12 @@
     "wertik-js": "^3.1.4"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.7",
     "cross-env": "^7.0.3",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.3",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.0.24",
     "typescript": "^4.4.4"
   }
 }

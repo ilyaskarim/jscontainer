@@ -7,6 +7,7 @@ import {
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "normalize.css/normalize.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+import "../styles/global.css";
 import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {

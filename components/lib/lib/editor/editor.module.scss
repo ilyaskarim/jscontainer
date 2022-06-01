@@ -1,25 +1,25 @@
-.editor {
-  display: flex;
-  .editors {
-    width: 100%;
-    border-right: 1px solid #eee;
-    height: calc(100vh - 60px);
-    .tabs {
-      padding: 0 16px;
-    }
-  }
+// .editor {
+//   display: flex;
+//   .editors {
+//     width: 100%;
+//     border-right: 1px solid #eee;
+//     height: calc(100vh - 60px);
+//     .tabs {
+//       padding: 0 16px;
+//     }
+//   }
 
-  &.dark {
-    .editors {
-      border-right-color: lighten($color: #1e1e1e, $amount: 5);
-    }
-  }
-}
+//   &.dark {
+//     .editors {
+//       border-right-color: lighten($color: #1e1e1e, $amount: 5);
+//     }
+//   }
+// }
 
-.loader {
-  height: calc(100vh - 60px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
+// .loader {
+//   height: calc(100vh - 60px);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;  
+//   width: 100%;
+// }

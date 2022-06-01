@@ -1,4 +1,3 @@
-import styles from "./container-info.module.scss";
 import { InputGroup, TextArea } from "@blueprintjs/core";
 import { useDispatch, useSelector } from "react-redux";
 import { setChangedFields, setContainerFormData } from "../..";
@@ -14,7 +13,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
   );
 
   return (
-    <div className={styles.containerInfo}>
+    <div className="p-3">
       <InputGroup
         value={containerFromRedux.title}
         onChange={(e) => {

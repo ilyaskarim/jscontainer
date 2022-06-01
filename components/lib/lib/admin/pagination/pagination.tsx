@@ -13,10 +13,11 @@ export function Pagination(props: PaginationProps) {
   const { handlePagination, paginationInformation } = props;
 
   return (
-    <div className={styles.paginationContainer}>
+    <div className="flex justify-between mt-16 align-center">
       <p>Showing 20 items out of {paginationInformation.total}</p>
-      <div className={styles.paginationButtonStyles}>
+      <div className="w-2 flex justify-evenly">
         <Button
+          className="bg-transparent"
           onClick={() => handlePagination("decrease")}
           disabled={paginationInformation.page === 1}
         >
