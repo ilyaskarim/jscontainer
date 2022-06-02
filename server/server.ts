@@ -10,14 +10,7 @@ const handle = app.getRequestHandler();
 const port: number = +process.env.PORT || 3000;
 
 app.prepare();
-const expressApp = express();
-
-setTimeout(() => {
-  expressApp.all("*", (req: Request, res: Response) => {
-    return handle(req, res);
-  });
-  console.log("Next Running");
-}, 5000);
+const expressApp = express()
 
 import wertik, { useGraphql, useModule, useDatabase } from "wertik-js/lib/next";
 import { handleGithubAuth, handleGoogleAuth, AuthRoutes } from "./auth";
@@ -105,4 +98,11 @@ wertik({
       },
     }),
   },
-});
+}).then((app) => {
+  setTimeout(() => {
+    app.express.all("*", (req: Request, res: Response) => {
+      return handle(req, res);
+    });
+    console.log("Next Running");
+  }, 5000);
+})

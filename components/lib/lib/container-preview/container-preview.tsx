@@ -1,9 +1,7 @@
-import styles from "./container-preview.module.scss";
 import { InputGroup, Icon, Position } from "@blueprintjs/core";
 import { Tooltip2 } from "@blueprintjs/popover2";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import classNames from "classnames";
 import { useEffect } from "react";
 
 /* eslint-disable-next-line */
@@ -45,19 +43,15 @@ export function ContainerPreview(props: ContainerPreviewProps) {
 
   return (
     <div
-      className={classNames({
-        [styles.preview]: true,
-        preview: true,
-        [styles.previewDark]: theme === "dark",
-      })}
+      className="w-100 border-0 bg-white"
     >
-      <div className={styles.previewHeader}>
+      <div className="flex py-2 px-3 bg-black">
         <Tooltip2
           content="Copy container link to clipboard"
           position={Position.BOTTOM}
         >
           <a
-            className={styles.previewURLCopy}
+            
             onClick={() => {
               window.navigator.clipboard.writeText(window.location.href);
               toast.success("Copied to clipboard!", {
@@ -79,7 +73,7 @@ export function ContainerPreview(props: ContainerPreviewProps) {
           position={Position.BOTTOM}
         >
           <a
-            className={styles.previewURLCopy}
+            className="inline-block mr-1 mt-1"
             onClick={() => {
               window.navigator.clipboard.writeText(
                 `${window.location.origin}/preview/${containerFromRedux.slug}`
@@ -96,7 +90,6 @@ export function ContainerPreview(props: ContainerPreviewProps) {
       {containerFromRedux && containerFromRedux.slug && (
         <iframe
           key={containerFromRedux.id}
-          className={styles.previewFrame}
           src={window.location.origin + "/preview/" + containerFromRedux.slug}
           id="previewIframe"
         ></iframe>
