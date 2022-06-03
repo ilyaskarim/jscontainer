@@ -30,7 +30,7 @@ export function Layout(props: LayoutProps) {
         [styles.dark]: theme === "dark",
       })}
     >
-      <div className="flex px-4 border-b-solid h-15 bg-black border-b-2">
+      <div className="flex px-4 border-b-neutral-800 h-15 bg-black border-b-2">
         <Link href="/">
           <a className="flex font-bold color-header mr-5 px-2 py-5 leading-1">
             <img
@@ -41,7 +41,7 @@ export function Layout(props: LayoutProps) {
             <span className="inline-block mt-1">JSContainer</span>
           </a>
         </Link>
-        <div className="w-100 flex h-7 mt-5 mr-4 realtive ">
+        <div className="w-100 flex justify-between   h-7 mt-5 mr-4 realtive ">
           {isContainerPage ? (
             <>
               <ContainerNavButtons />

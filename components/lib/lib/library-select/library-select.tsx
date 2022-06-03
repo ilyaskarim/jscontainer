@@ -66,10 +66,7 @@ export function LibrarySelect(props: LibrarySelectProps) {
         itemRenderer={(item: any) => {
           return (
             <div
-              className={classNames({
-                [styles.librarySelectItem]: true,
-                [styles.librarySelectItemDark]: theme === "dark",
-              })}
+              className="py-2 px-1 cursor-pointer transition ease-in-out hover:bg-darkwhite hover:transition ease-in-out"
               onClick={() => {
                 if (!list.includes(item.latest)) {
                   dispatch(setChangedFields("assets"));
@@ -145,10 +142,7 @@ export function LibrarySelect(props: LibrarySelectProps) {
         itemRenderer={(item) => {
           return (
             <div
-              className={classNames({
-                [styles.librarySelectItem]: true,
-                [styles.librarySelectItemDark]: theme === "dark",
-              })}
+              className="transition ease-in-out hover:transition ease-in-out bg-custom"
               onClick={() => {
                 dispatch(setAssets(JSON.stringify([...list, ...item.assets])));
                 toast.success("Libraries added!");

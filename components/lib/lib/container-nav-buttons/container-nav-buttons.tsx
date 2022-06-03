@@ -97,6 +97,7 @@ export function ContainerNavButtons(props: ContainerNavButtonsProps) {
   return (
     <>
       <Button
+        className="mr-3"
         intent="primary"
         small
         disabled={notFoundContainer}
