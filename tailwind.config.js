@@ -14,7 +14,8 @@ module.exports = {
         "black":"#1e1e1e",
         "header":"#464646",
         "darkwhite":"#ebf1f5",
-        "custom":"#10161a"
+        "custom":"#10161a",
+        "grayish":"#8a8787"
       }
     },
   },

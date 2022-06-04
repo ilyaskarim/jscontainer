@@ -13,7 +13,7 @@ export function Pagination(props: PaginationProps) {
   const { handlePagination, paginationInformation } = props;
 
   return (
-    <div className="flex justify-between mt-16 align-center">
+    <div className="flex justify-between mt-10 align-center">
       <p>Showing 20 items out of {paginationInformation.total}</p>
       <div className="w-2 flex justify-evenly">
         <Button

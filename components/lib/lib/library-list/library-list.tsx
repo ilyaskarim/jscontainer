@@ -1,4 +1,3 @@
-import styles from "./library-list.module.scss";
 import { Button, Card, InputGroup, Icon } from "@blueprintjs/core";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -40,13 +39,13 @@ export function LibraryList(props: LibraryListProps) {
     <div>
       <br />
       {list.length === 0 && (
-        <Card className={styles.noAssetsMessage}>No assets added</Card>
+        <Card className="p-2 text-grayisht text-sm">No assets added</Card>
       )}
       {list.map((link: string, index: number) => {
         return (
-          <Card key={index} className={styles.libraryItem}>
+          <Card key={index} className="p-2 flex">
             <Button
-              className={styles.copyLink}
+              className="mr-1 text-center leading-1"
               small
               onClick={() => {
                 window.navigator.clipboard.writeText(link);
@@ -55,11 +54,12 @@ export function LibraryList(props: LibraryListProps) {
             >
               <Icon size={10} icon="duplicate"></Icon>
             </Button>
-            <span className={styles.link}>
+            <span className="inline-block mt-1">
               <TrimLargeSentences text={link}></TrimLargeSentences>
             </span>
-            <div className={styles.actions}>
+            <div className="ml-auto">
               <Button
+                className="ml-1"
                 disabled={index === list.length - 1}
                 icon="arrow-down"
                 onClick={() => {
@@ -99,7 +99,7 @@ export function LibraryList(props: LibraryListProps) {
           </Card>
         );
       })}
-      <Card className={styles.libraryItem + " " + styles.libraryItemInput}>
+      <Card className="w-100">
         <InputGroup
           onKeyPress={(e) => {
             if (e.key === "Enter") {
